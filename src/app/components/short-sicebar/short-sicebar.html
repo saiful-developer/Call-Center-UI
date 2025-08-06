@@ -1,0 +1,24 @@
+<nav class="short-sidebar">
+
+  <ul class="nav flex-column">
+    @for (item of shorBartlist; track $index) {
+      <li class="nav-item hover-group" [title]="item.icon" id="{{$index}}">
+        <a class="nav-link" [routerLink]="item.link || '#'">
+          <i class="mdi {{item.icon}} menu-icon"></i>
+        </a>
+
+        <!-- Hover menu -->
+        <ul class="nav hover-menu">
+          @for (hoverItem of item.hoverItems; track $index) {
+            <li>
+              <a href="#">
+                <i class="bi bi-arrow-right custom-arrow"></i>
+                {{ hoverItem }}
+              </a>
+            </li>
+          }
+        </ul>
+      </li>
+    }
+  </ul>
+</nav>

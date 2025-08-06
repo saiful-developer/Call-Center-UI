@@ -1,0 +1,31 @@
+<div class="custom">
+  <h2 class="text-center mb-5 custom-color">Admin Dashboard</h2>
+
+  <!-- Card Grid -->
+  <div class="row g-4 justify-content-center">
+    <div class="col-12 col-sm-6 col-md-4" *ngFor="let user of userCounts">
+      <div class="card modern-card text-white shadow-lg border-0" [ngClass]="user.bgClass">
+        <div class="card-body text-center">
+          <div class="icon-wrapper mb-3">
+            <i class="bi" [ngClass]="user.icon + ' display-4'"></i>
+          </div>
+          <h5 class="card-title text-uppercase fw-semibold">{{ user.type }}</h5>
+          <h2 class="fw-bold">{{ user.count }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom Vibrant Buttons -->
+  <div class="text-center mt-5">
+    <button class="btn vibrant-btn btn-add me-2 px-4 py-2" routerLink="/admin/add-user">
+      <i class="bi bi-person-plus-fill me-1"></i> Add User
+    </button>
+    <button class="btn vibrant-btn btn-list me-2 px-4 py-2" routerLink="/admin/user-list">
+      <i class="bi bi-card-list me-1"></i> User List
+    </button>
+    <button class="btn vibrant-btn btn-message px-4 py-2" routerLink="/admin/all-message">
+      <i class="bi bi-chat-dots-fill me-1"></i> See Messages
+    </button>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.card .card-body {
+    padding: 1.5rem !important;
+}
+
+    .card-body h4 {
+        font-size: 1rem; /* Smaller heading */
+    }
+
+    .card-body h2 {
+        font-size: 1.25rem; /* Smaller number */
+    }
+
+    .card-body h6 {
+        font-size: 0.85rem; /* Smaller subtext */
+    }

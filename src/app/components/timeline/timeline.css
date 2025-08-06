@@ -1,0 +1,129 @@
+.timeline {
+    position: relative;
+    margin: 0;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: white;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* WRAPPER */
+.timeline-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+    width: 50%;
+    padding-right: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-wrapper:not(.timeline-inverted) {
+    left: 0;
+    text-align: right;
+}
+
+.timeline-wrapper.timeline-inverted {
+    left: 50%;
+    padding-left: 1rem;
+    padding-right: 0;
+    text-align: left;
+}
+
+/* PANEL */
+.timeline-panel {
+    position: relative;
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+/* BADGE ON CENTER LINE */
+.timeline-badge {
+    position: absolute;
+    /* left: 50%; */
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    z-index: 100;
+}
+
+.timeline-wrapper:nth-child(odd) .timeline-badge {
+    left: 0% ;
+
+}
+
+.timeline-wrapper:nth-child(even) .timeline-badge {
+    left: 100% ;
+
+}
+
+/* TEXT STYLING */
+.timeline-title {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.timeline-footer {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+/* COLOR THEMES */
+.timeline-wrapper-warning .timeline-panel {
+    border-left: 4px solid #ffc107;
+}
+
+.timeline-wrapper-danger .timeline-panel {
+    border-left: 4px solid #dc3545;
+}
+
+.timeline-wrapper-success .timeline-panel {
+    border-left: 4px solid #28a745;
+}
+
+.timeline-wrapper-info .timeline-panel {
+    border-left: 4px solid #17a2b8;
+}
+
+.timeline-wrapper-primary .timeline-panel {
+    border-left: 4px solid #007bff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 10px;
+    }
+
+    .timeline-wrapper,
+    .timeline-wrapper.timeline-inverted {
+        width: 100%;
+        padding-left: 2.5rem;
+        padding-right: 0;
+        left: 0 !important;
+        text-align: left;
+        margin-bottom: 1rem;
+    }
+
+    .timeline-badge {
+        left: 1px !important;
+        transform: translateY(-100%);
+    }
+
+    .timeline-title {
+        text-align: left;
+    }
+}

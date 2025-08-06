@@ -1,0 +1,56 @@
+<div class="fab-container">
+    <div class="fab-button-group">
+        <button class="fab-btn" data-bs-toggle="offcanvas" data-bs-target="#settingsPanel">
+            <i class="mdi mdi-palette"></i>
+        </button>
+        <button class="fab-btn">
+            <i class="mdi mdi-message-text"></i>
+        </button>
+        <button class="fab-btn">
+            <i class="mdi mdi-file-document"></i>
+        </button>
+        <button class="fab-btn">
+            <i class="mdi mdi-cart"></i>
+        </button>
+    </div>
+</div>
+
+
+
+<!-- Offcanvas Panel -->
+<div class="offcanvas offcanvas-end" tabindex="-1" id="settingsPanel" aria-labelledby="settingsLabel" style="width: 10rem;">
+    <div class="offcanvas-header">
+        <h5 id="settingsLabel">Customize</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Sidebar Skins -->
+        <h6>SIDEBAR SKINS</h6>
+        <div class="d-flex flex-column mb-4">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sidebarSkin" id="lightSkin" checked>
+                <label class="form-check-label" for="lightSkin">
+                    Light
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sidebarSkin" id="darkSkin">
+                <label class="form-check-label" for="darkSkin">
+                    Dark
+                </label>
+            </div>
+        </div>
+
+        <!-- Header Skins -->
+        <h6>HEADER SKINS</h6>
+        <div class="d-flex gap-3 flex-wrap">
+            <button class="skin-btn bg-success" title="Teal"></button>
+            <button class="skin-btn bg-warning" title="Yellow"></button>
+            <button class="skin-btn bg-pink" title="Pink"></button>
+            <button class="skin-btn bg-primary active" title="Blue"></button>
+            <button class="skin-btn bg-dark" title="Dark"></button>
+            <button class="skin-btn" style="background: linear-gradient(45deg, #a18cd1, #fbc2eb);"
+                title="Purple"></button>
+        </div>
+    </div>
+</div>

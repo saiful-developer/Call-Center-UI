@@ -1,0 +1,40 @@
+.chart-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.chart-container {
+  flex: 1 1 300px;
+  max-width: 400px;
+  min-width: 250px;
+}
+
+.piegraph-custom {
+  width: auto !important;
+  height: 20rem !important;
+}
+
+@media (max-width: 1250px) {
+  .piegraph-custom {
+    height: 17rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .chart-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .chart-container {
+    width: 90%;
+    max-width: none;
+  }
+
+  .piegraph-custom {
+    width: auto !important;
+    height: 20rem !important;
+  }
+}

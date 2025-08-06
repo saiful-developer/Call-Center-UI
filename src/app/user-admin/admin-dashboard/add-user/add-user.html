@@ -1,0 +1,93 @@
+<div class="container mt-2" style="max-width: 800px;">
+    <div class="card shadow rounded-4">
+        <div class="card-body p-4">
+            <h4 class="card-title mb-4 text-center mb-4 text-danger">Add New User</h4>
+
+            <form>
+                <!-- Profile Image Upload -->
+                <div class="row mb-3 align-items-center">
+                    <label for="profileImage" class="col-sm-3 col-form-label fw-semibold">Profile Image <span class="text-muted" style="font-size: 12px;">(Max: 1MB)</span></label>
+                    <div class="col-sm-9">
+                        <input type="file" class="form-control" id="profileImage" accept="image/*" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="name" class="col-sm-3 col-form-label fw-semibold">Full Name</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="name" placeholder="Enter full name" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="email" class="col-sm-3 col-form-label fw-semibold">Email address</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="password" class="col-sm-3 col-form-label fw-semibold">Password</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="password" placeholder="Enter password" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="confirmPassword" class="col-sm-3 col-form-label fw-semibold">Confirm Password</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Retype password" />
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="contact" class="col-sm-3 col-form-label fw-semibold">Contact Number</label>
+                    <div class="col-sm-9">
+                        <input type="tel" class="form-control" id="contact" placeholder="Enter contact number" />
+                    </div>
+                </div>
+                <!-- @for (item of items; track $index) {} -->
+                
+
+                <div class="row mb-3 align-items-center">
+                    <label for="address" class="col-sm-3 col-form-label fw-semibold">Address</label>
+                    <div class="col-sm-9">
+                        <textarea class="form-control" id="address" rows="2" placeholder="Enter address"></textarea>
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <label for="type" class="col-sm-3 col-form-label fw-semibold">Type</label>
+                    <div class="col-sm-9">
+                        <select class="form-select" id="type">
+                            <option selected disabled>Select user type</option>
+                            <option>Admin</option>
+                            <option>Supervisor</option>
+                            <option>Agent</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                    <label for="status" class="col-sm-3 col-form-label fw-semibold">Status</label>
+                    <div class="col-sm-9">
+                        <select class="form-select" id="status">
+                            <option selected disabled>Select status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="offset-sm-3 col-sm-9">
+                        <button type="submit" class="btn w-100 fw-semibold"
+                            style="background-color: #770035;color: white;">
+                            Register User
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

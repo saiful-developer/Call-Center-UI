@@ -1,0 +1,23 @@
+.text-purple {
+  color: #6a1b9a;
+}
+
+.custom {
+    /* height: 100vh; */
+    /* padding-top: 7rem; */
+        height: 61.5vh;
+}
+
+@media (max-width: 767px) {
+    .custom {
+        padding-top: 2rem;
+        height: 64vh;
+    }
+}
+
+@media (max-width: 1000) {
+    .custom {
+        height: 61.5vh;
+    }
+}
+

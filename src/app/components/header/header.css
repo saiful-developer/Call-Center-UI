@@ -1,0 +1,7 @@
+.navbar {
+  height: 56px;
+  transition: margin-left 0.3s ease;
+}
+.custom-height {
+  height: 43px;
+}

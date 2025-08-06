@@ -1,0 +1,87 @@
+
+
+.custom-color {
+    color:rgb(255, 70, 106)
+}
+
+.modern-card {
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modern-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.icon-wrapper {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+/* Custom background themes */
+.bg-agent {
+    background: #833AB4;
+    background: linear-gradient(90deg, #d999ff 0%, #ea8aff 50%, #ff49ec 100%);
+  }
+
+.bg-supervisor {
+    background: #2A7B9B;
+    background: linear-gradient(90deg, #8ee9ff 0%, #99ffbb 50%, #fff5b6 100%);
+}
+
+.bg-admin {
+    background: linear-gradient(90deg, #e5a0ff 0%, #ffb1c3 50%, #ffd496 100%);
+}
+
+/* Custom Button Base */
+.vibrant-btn {
+  color: white;
+  border: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+/* Hover Effect */
+.vibrant-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* Specific Button Colors */
+.btn-add {
+  background: linear-gradient(90deg, #00b09b 0%, #96c93d 100%);
+}
+
+.btn-list {
+  background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+}
+
+.btn-message {
+  background: linear-gradient(90deg, #4568dc 0%, #b06ab3 100%);
+}
+
+/* Media Query for Small Devices */
+@media (max-width: 576px) {
+  .vibrant-btn {
+    display: block;
+    width: 100%;
+    margin: 10px auto !important;
+    font-size: 1rem;
+    padding: 12px 0;
+  }
+
+  .text-center.mt-5 {
+    text-align: center;
+    padding: 0 15px;
+    margin-bottom: 3rem !important;
+  }
+}

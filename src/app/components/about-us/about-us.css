@@ -1,0 +1,53 @@
+.hero-section {
+  /* background: linear-gradient(135deg, #6f42c1, #6610f2); */
+  /* color: white; */
+  /* padding: 1rem; */
+  /* text-align: center; */
+}
+.hero-section h1 {
+  font-weight: 700;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.hero-section p {
+  /* font-size: 1.25rem; */
+  /* max-width: 600px; */
+  margin: auto;
+}
+.team-member img {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 180px;
+  width: 180px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+.team-member img:hover {
+  transform: scale(1.05);
+}
+.mission-section {
+  background: #f8f9fa;
+  padding: 3rem 1rem;
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 3rem;
+}
+.mission-section h2 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.mission-section p {
+  max-width: 700px;
+  margin: auto;
+  font-size: 1.1rem;
+  color: #555;
+}
+.social-icons i {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.social-icons i:hover {
+  filter: grayscale(0%);
+}

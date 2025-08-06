@@ -1,0 +1,23 @@
+.custom {
+    /* height: 100vh; */
+    padding-top: 7rem !important;
+    height: 88.5vh;
+}
+
+.custom .card>div>div {
+    gap: 0.5rem;
+}
+
+@media (max-width: 1200px) {
+    .custom {
+        margin-top: auto;
+        height: auto;
+    }
+
+    .flex-md-row {
+        flex-direction: column !important;
+    }
+    .text-center{
+        margin: auto;
+    }
+}

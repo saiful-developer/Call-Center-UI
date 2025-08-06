@@ -1,0 +1,41 @@
+.user-list-container {
+  /* max-width: 1200px; */
+  /* padding: 0 15px; */
+}
+
+/* Make table horizontally scrollable on small screens instead of breaking layout */
+@media (max-width: 767px) {
+  .user-list-container table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Hover highlight with soft red */
+.table-hover tbody tr:hover {
+  background-color: #ffe6e6;
+}
+
+/* Customize badge colors */
+.badge.bg-danger {
+  background-color: #d93025; /* Google Red */
+}
+
+.badge.bg-secondary {
+  background-color: #6c757d;
+}
+
+/* Buttons */
+.btn-link.text-danger:hover,
+.btn-link.text-danger:focus {
+  color: #a6211c;
+  text-decoration: none;
+}
+
+/* Table header with red text */
+.table-light th {
+  color: #b71c1c; /* Dark Red */
+  border-bottom: 2px solid #b71c1c;
+}

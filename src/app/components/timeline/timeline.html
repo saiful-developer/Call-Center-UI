@@ -1,0 +1,42 @@
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title">
+            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                <i class="bi bi-clock-history"></i>
+            </span> Timeline
+        </h3>
+        <nav aria-label="breadcrumb">
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span></span>breadcumbs <i
+                        class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="mt-5">
+        <div class="timeline">
+            @for (timeline of timelineList; track $index) {
+            <div class="timeline-wrapper {{ timeline.className }}">
+                <div class="timeline-badge"></div>
+                <div class="timeline-panel bg-white">
+                    <div class="timeline-heading">
+                        <h6 class="timeline-title">{{ timeline.cardHead }}</h6>
+                    </div>
+                    <div class="timeline-body">
+                        <p>{{ timeline.cardBody }}</p>
+                    </div>
+                    <div class="timeline-footer d-flex align-items-center">
+                        <i class="mdi mdi-heart-outline text-muted me-1"></i>
+                        <span>{{ timeline.count }}</span>
+                        <span class="ms-auto font-weight-bold">{{ timeline.date }}</span>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+
+</div>
