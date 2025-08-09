@@ -114,3 +114,12 @@ nav.navbar.default-layout-navbar.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row 
   background-color: #a46cf9 !important;
   border-radius: 8px !important;
 }
+
+.content-wrapper {
+  padding: 1rem !important;
+}
+
+
+li.breadcrumb-item.active {
+  margin-right: 3rem;
+}

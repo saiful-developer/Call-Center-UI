@@ -28,9 +28,9 @@ nav {
 
   /* WebKit browsers (Chrome, Safari, Edge) */
   ::-webkit-scrollbar {
-    width: 4px;
+    width: 1px !important;
     /* vertical scrollbar */
-    height: 4px;
+    height: 1px !important;
     /* horizontal scrollbar */
   }
 
@@ -52,6 +52,13 @@ nav {
   }
 
 }
+
+  @media (max-width: 400px) {
+
+    nav#sidebar {
+      padding: 1.2rem;
+    }
+  }
 
 
 

@@ -29,9 +29,9 @@
                     <label class="col-md-3 col-form-label fw-semibold">Full Name <span>*</span></label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" placeholder="Enter your name"
-                            formControlName="fullName">
-                        @if (agentProjectForm.get('fullName')?.invalid && agentProjectForm.get('fullName')?.touched &&
-                        agentProjectForm.get('fullName')?.dirty) {
+                            formControlName="name">
+                        @if (agentProjectForm.get('name')?.invalid && agentProjectForm.get('name')?.touched &&
+                        agentProjectForm.get('name')?.dirty) {
                         <small>Invalid Name</small>
                         }
                     </div>
@@ -41,13 +41,11 @@
                     <label class="col-md-3 col-form-label fw-semibold">ID<span>*</span></label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" placeholder="Enter your ID" formControlName="id">
-                        @if (agentProjectForm.get('id')?.dirty && agentProjectForm.get('id')?.touched &&
-                        agentProjectForm.get('id')?.dirty) {
+                        @if (agentProjectForm.get('id')?.touched && agentProjectForm.get('id')?.invalid) {
                         <small>Invalid Id</small>
                         }
                     </div>
                 </div>
-
                 <div class="row g-3 align-items-center mb-3">
                     <label class="col-md-3 col-form-label fw-semibold">Role<span>*</span></label>
                     <div class="col-md-9">
@@ -78,10 +76,10 @@
                     <label class="col-md-3 col-form-label fw-semibold">Project Title<span>*</span></label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" placeholder="Enter project title"
-                            formControlName="projectTitle">
-                        @if (agentProjectForm.get('projectTitle')?.invalid &&
-                        agentProjectForm.get('projectTitle')?.touched &&
-                        agentProjectForm.get('projectTitle')?.dirty) {
+                            formControlName="project_title">
+                        @if (agentProjectForm.get('project_title')?.invalid &&
+                        agentProjectForm.get('project_title')?.touched &&
+                        agentProjectForm.get('project_title')?.dirty) {
                         <small>Invalid Project Title</small>
                         }
                     </div>
@@ -90,15 +88,15 @@
                 <div class="row g-3 align-items-center mb-3">
                     <label class="col-md-3 col-form-label fw-semibold">Project Type<span>*</span></label>
                     <div class="col-md-9">
-                        <select class="form-select" formControlName="projectType">
+                        <select class="form-select" formControlName="project_type">
                             <option value="">Select project type</option>
                             @for (type of projectTypes; track $index) {
                             <option [value]="type">{{ type }}</option>
                             }
                         </select>
-                        @if (agentProjectForm.get('projectType')?.invalid &&
-                        agentProjectForm.get('projectType')?.touched &&
-                        agentProjectForm.get('projectType')?.dirty) {
+                        @if (agentProjectForm.get('project_type')?.invalid &&
+                        agentProjectForm.get('project_type')?.touched &&
+                        agentProjectForm.get('project_type')?.dirty) {
                         <small>Invalid Project Type</small>
                         }
                     </div>
@@ -108,10 +106,10 @@
                     <label class="col-md-3 col-form-label fw-semibold">Assigned By<span>*</span></label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" placeholder="Enter assigner's name"
-                            formControlName="assignedBy">
-                        @if (agentProjectForm.get('assignedBy')?.invalid && agentProjectForm.get('assignedBy')?.touched
+                            formControlName="assigned_by">
+                        @if (agentProjectForm.get('assigned_by')?.invalid && agentProjectForm.get('assigned_by')?.touched
                         &&
-                        agentProjectForm.get('assignedBy')?.dirty) {
+                        agentProjectForm.get('assigned_by')?.dirty) {
                         <small>Invalid Name</small>
                         }
                     </div>
@@ -120,14 +118,14 @@
                 <div class="row g-3 align-items-center mb-3">
                     <label class="col-md-3 col-form-label fw-semibold">Start Time<span>*</span></label>
                     <div class="col-md-9">
-                        <input type="datetime-local" class="form-control" formControlName="startTime">
-                        @if (agentProjectForm.get('startTime')?.invalid && agentProjectForm.get('startTime')?.touched &&
-                        agentProjectForm.get('startTime')?.dirty) {
+                        <input type="datetime-local" class="form-control" formControlName="start_time">
+                        @if (agentProjectForm.get('start_time')?.invalid && agentProjectForm.get('start_time')?.touched &&
+                        agentProjectForm.get('start_time')?.dirty) {
                         <small>Invalid Time</small>
                         }
                     </div>
                 </div>
-
+                <!-- 
                 <div class="row g-3 align-items-center mb-3">
                     <label class="col-md-3 col-form-label fw-semibold">Currently Working?</label>
                     <div class="col-md-9">
@@ -137,13 +135,18 @@
                             <option value=0>No</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="row g-3 align-items-center mb-3">
-                    <label class="col-md-3 col-form-label fw-semibold">End Time</label>
+                    <label class="col-md-3 col-form-label fw-semibold">End Time<span>*</span></label>
                     <div class="col-md-9">
-                        <input type="datetime-local" class="form-control" formControlName="endTime">
-                    </div>  
+                        <input type="datetime-local" class="form-control" formControlName="end_time">
+                        @if (agentProjectForm.get('end_time')?.invalid &&
+                        agentProjectForm.get('end_time')?.touched &&
+                        agentProjectForm.get('end_time')?.dirty) {
+                        <small>Please Enter Project Description</small>
+                        }
+                    </div>
                 </div>
 
                 <div class="row g-3 align-items-start mb-3">
@@ -151,7 +154,8 @@
                     <div class="col-md-9">
                         <textarea class="form-control" rows="4" placeholder="Enter project details"
                             formControlName="description"></textarea>
-                        @if (agentProjectForm.get('description')?.invalid && agentProjectForm.get('description')?.touched &&
+                        @if (agentProjectForm.get('description')?.invalid &&
+                        agentProjectForm.get('description')?.touched &&
                         agentProjectForm.get('description')?.dirty) {
                         <small>Please Enter Project Description</small>
                         }

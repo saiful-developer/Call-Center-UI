@@ -2,7 +2,7 @@
 
   <ul class="nav flex-column">
     @for (item of shorBartlist; track $index) {
-      <li class="nav-item hover-group" [title]="item.icon" id="{{$index}}">
+      <li class="nav-item hover-group" id="{{$index}}">
         <a class="nav-link" [routerLink]="item.link || '#'">
           <i class="mdi {{item.icon}} menu-icon"></i>
         </a>
@@ -11,7 +11,7 @@
         <ul class="nav hover-menu">
           @for (hoverItem of item.hoverItems; track $index) {
             <li>
-              <a href="#">
+              <a [routerLink]="item.hoverItemsRouterLinks[$index] || '#'">
                 <i class="bi bi-arrow-right custom-arrow"></i>
                 {{ hoverItem }}
               </a>

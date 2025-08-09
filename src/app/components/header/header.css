@@ -2,6 +2,40 @@
   height: 56px;
   transition: margin-left 0.3s ease;
 }
+
 .custom-height {
   height: 43px;
+  /* width: 7% !important; */
+}
+
+.remove-width {
+  width: 5%;
+}
+
+.add-width {
+  width: 95%;
+}
+
+.remove-big-logo {
+  opacity: 0;
+  display: none;
+}
+
+.add-small-logo {
+  display: block !important;
+  opacity: 1 !important;
+  width: 100px !important;
+
+}
+
+@media (max-width: 1000px) {
+
+  .remove-width {
+    width: auto;
+  }
+
+  .add-width {
+    width: auto;
+  }
+
 }

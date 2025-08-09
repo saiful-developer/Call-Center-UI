@@ -1,0 +1,35 @@
+.agent-inbox-container {
+  display: flex;
+  gap: 20px;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* On smaller screens stack vertically */
+@media (max-width: 767px) {
+  .agent-inbox-container {
+    flex-direction: column;
+    height: auto; /* Let content grow naturally */
+    padding: 10px;
+  }
+
+  .message-list,
+  .message-details {
+    flex: none;
+    width: 100%;
+    height: auto;
+    border: none;
+    padding: 0;
+  }
+
+  .message-list {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+    overflow-y: visible;
+  }
+
+  .message-details {
+    padding-left: 0;
+    overflow-y: visible;
+  }
+}

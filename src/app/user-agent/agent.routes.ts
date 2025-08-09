@@ -9,6 +9,8 @@ import { AgentTimeline } from "../components/timeline/timeline";
 import { AboutUs } from "../components/about-us/about-us";
 import { ChartJs } from "../components/chart-js/chart-js";
 import { AddProject } from "./add-project/add-project";
+import { Projectlist } from "../components/projectlist/projectlist";
+import { AgentInbox } from "./agent-inbox/agent-inbox";
 
 export const AGENT_ROUTES : Routes= [
     {
@@ -21,8 +23,9 @@ export const AGENT_ROUTES : Routes= [
             { path: 'timeline', component: AgentTimeline},
             { path: 'aboutus', component: AboutUs },
             { path: 'chartjs', component: ChartJs },
-            { path: 'add-project', component: AddProject }
-
+            { path: 'add-project', component: AddProject },
+            { path: 'project-list', component: Projectlist },
+            { path: 'inbox', component: AgentInbox }
         ]
     }
 ];

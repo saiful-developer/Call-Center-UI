@@ -8,7 +8,7 @@
     <nav aria-label="breadcrumb">
       <ul class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page">
-          <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+          <span>{{ houres | number:'2.0' }}h : {{ minutes | number:'2.0' }}m : {{ seconds | number:'2.0' }}s</span><i class="bi bi-clock" style="margin-left: 5px;"></i>
         </li>
       </ul>
     </nav>

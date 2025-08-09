@@ -14,38 +14,71 @@ export class ShortSicebar {
     {
       icon: 'mdi-home',
       link: '/agent/dashboard',
-      hoverItems: ['Dashboard']
+      hoverItems: ['Dashboard'],
+      hoverItemsRouterLinks: ['/agent/dashboard']
     },
     {
       icon: 'mdi mdi-account',
       link: '/agent/profile',
-      hoverItems: ['View Profile', 'Edit Profile']
+      hoverItems: ['View Profile', 'Edit Profile'],
+      hoverItemsRouterLinks: ['/agent/profile', '/agent/profile-edit']
     },
     {
       icon: 'mdi-message-text',
       link: '/agent/message',
-      hoverItems: ['Send Message', 'Inbox']
+      hoverItems: ['Send Message', 'Inbox'],
+      hoverItemsRouterLinks: ['/agent/message', '/agent/inbox']
+    },
+    // /mdi mdi-format-list-bulleted menu-icon
+    {
+      icon: 'mdi-format-list-bulleted',
+      link: '/agent/add-project',
+      hoverItems: ['Add Projects', 'Multiple Forms'],
+      hoverItemsRouterLinks: ['/agent/add-project', '/agent/forms']
     },
     {
       icon: 'mdi-chart-bar',
-      link: '/agent/chart ',
-      hoverItems: ['Charts']
+      link: '/agent/chartjs',
+      hoverItems: ['Charts'],
+      hoverItemsRouterLinks: ['/agent/chartjs']
     },
     {
       icon: 'mdi-table-large',
-      link: '/agent/table ',
-      hoverItems: ['Table']
+      link: 'agent/project-list',
+      hoverItems: ['Project List', 'Multiple Tables'],
+      hoverItemsRouterLinks: ['agent/project-list', '/agent/tables']
+    },
+    {
+      icon: 'bi-person-lines-fill',
+      link: 'agent/aboutus',
+      hoverItems: ['About Us', 'Timeline'],
+      hoverItemsRouterLinks: ['agent/aboutus', 'agent/timeline']
+    },
+    {
+      icon: 'mdi-alert-circle-outline',
+      link: 'agent/faq',
+      hoverItems: ['FAQ'],
+      hoverItemsRouterLinks: ['agent/faq']
+    },
+    {
+      icon: 'mdi-plus',
+      link: 'agent/add-project',
+      hoverItems: ['Add Project'],
+      hoverItemsRouterLinks: ['agent/add-project']
     },
     {
       icon: 'bi-gear',
-      link: '/agent/settings ',
-      hoverItems: ['Settings']
+      link: '/agent/settings',
+      hoverItems: ['Settings'],
+      hoverItemsRouterLinks: ['']
     },
     {
       icon: 'bi-box-arrow-right',
       link: '/agent/settings ',
-      hoverItems: ['Logout']
+      hoverItems: ['Logout'],
+      hoverItemsRouterLinks: ['']
     }
   ]
 
 }
+// /mdi-alert-circle-outline

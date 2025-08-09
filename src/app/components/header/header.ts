@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, Output, signal } from '@angular/core';
 import { SidebarService } from '../../services/sidebar-service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
@@ -35,7 +36,15 @@ export class Header implements OnInit {
 
   @Output() toggleSidebar = new EventEmitter<void>();
 
+  sidebaropen: boolean = true;
+
   onToggleSidebar() {
+
+    this.sidebaropen = !this.sidebaropen;
+
+    // if(this.sidebaropen) {
+    //   document.getElementById('bigLogo')?.classList.add('removeLogo');
+    // }
 
     console.log('Toggle clicked'); // Debug log
     this.sidebarService.toggleSidebar()
@@ -44,3 +53,5 @@ export class Header implements OnInit {
 
 
 }
+
+

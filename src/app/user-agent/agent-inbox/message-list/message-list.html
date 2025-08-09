@@ -1,0 +1,11 @@
+
+
+<ul class="message-list nav d-block">
+    @for (msg of messages; track $index) {
+    <li (click)="select(msg)"
+        style="cursor:pointer; padding: 10px; border-bottom: 1px solid #ddd;">
+        <strong>{{ msg.subject }}</strong><br />
+        <small>From: {{ msg.from }}</small>
+    </li>
+    }
+</ul>

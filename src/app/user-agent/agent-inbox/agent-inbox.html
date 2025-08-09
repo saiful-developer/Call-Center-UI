@@ -1,0 +1,28 @@
+<div class="content-wrapper">
+  <div class="page-header">
+    <h3 class="page-title">
+      <span class="page-title-icon bg-gradient-primary text-white me-2">
+        <i class="mdi mdi-message-text menu-icon"></i>
+      </span> Inbox
+    </h3>
+    <nav aria-label="breadcrumb">
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">
+          <span></span>breadcumbs will be added here <i
+            class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+        </li>
+      </ul>
+    </nav>
+
+  </div>
+
+  <div class="agent-inbox-container" style="display: flex; gap: 20px;">
+    <div class="message-list" style="flex: 1; border-right: 1px solid #ccc; overflow-y: auto;">
+      <app-message-list (selectMessage)="onMessageSelected($event)"></app-message-list>
+    </div>
+
+    <div class="message-details" style="flex: 2; padding-left: 20px; overflow-y: auto;">
+      <app-message-details [message]="selectedMessage"></app-message-details>
+    </div>
+  </div>
+</div>

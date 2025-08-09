@@ -1,0 +1,14 @@
+@if (message) {
+<div style="padding: 20px; border: 1px solid #ccc; border-radius: 5px;">
+    <h3>{{ message.subject }}</h3>
+    <p><strong>From:</strong> {{ message.from }}</p>
+    <p>{{ message.body }}</p>
+</div>
+}
+@else {
+
+<ng-template>
+    <p>Please select a message from the list.</p>
+</ng-template>
+
+}

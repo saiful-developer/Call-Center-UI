@@ -75,6 +75,7 @@
   .sidebar-closed {
     width: 5.5%;
   }
+
   .sidebar .nav .nav-item {
     padding: 0px !important;
   }
@@ -92,7 +93,7 @@
 }
 
 @media (max-width: 900px) {
-  
+
   .sidebar-closed {
     width: 6.5%;
   }
@@ -104,7 +105,7 @@
 
   /* Sidebar container covers full screen width when open */
   .sidebar-container {
-    width: 70%;
+    width: 30%;
     transition: transform 0.3s ease, opacity 0.3s ease;
     transform: translateX(-100%);
     position: fixed;
@@ -113,6 +114,27 @@
     height: 100vh;
     background-color: #fff;
     z-index: 9999;
+  }
+
+  @media (max-width: 800px) {
+    .sidebar-container {
+      width: 50% !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .sidebar-container {
+      width: 60% !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .sidebar-container {
+      width: 70% !important;
+    }
+    nav#sidebar {
+      padding: 1.5rem;
+    }
   }
 
 

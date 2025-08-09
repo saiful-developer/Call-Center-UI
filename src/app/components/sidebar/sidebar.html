@@ -53,7 +53,7 @@
             <a class="nav-link" routerLink="/agent/message" (click)="onToggleSidebar()">Sent Message</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" (click)="onToggleSidebar()">Inbox</a>
+            <a class="nav-link" routerLink="/agent/inbox" (click)="onToggleSidebar()">Inbox</a>
           </li>
         </ul>
       </div>
@@ -67,7 +67,7 @@
       <div class="collapse" id="forms">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item">
-            <a class="nav-link" href="pages/forms/basic_elements.html">Form Elements</a>
+            <a class="nav-link" routerLink="/agent/add-project">Form Element</a>
           </li>
         </ul>
       </div>
@@ -94,6 +94,9 @@
       </a>
       <div class="collapse" id="tables">
         <ul class="nav flex-column sub-menu">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/agent/project-list">Project List</a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a>
           </li>
@@ -155,7 +158,8 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/agent/faq">
         <span class="menu-title">FAQ</span>
-        <i class="mdi mdi-file-document-box menu-icon"></i>
+        <i class="mdi mdi-alert-circle-outline menu-icon"></i>
+        <!-- <i class="mdi mdi-file-document-box menu-icon"></i> -->
       </a>
     </li>
     <!-- <li class="nav-item">
@@ -170,7 +174,8 @@
           <h6 class="font-weight-normal mb-3">Projects</h6>
         </div>
         <div class="d-grid gap-2">
-          <button class="btn btn-block btn-lg btn-gradient-primary mt-4" routerLink="/agent/add-project"> + Add a project </button>
+          <button class="btn btn-block btn-lg btn-gradient-primary mt-4" routerLink="/agent/add-project"> + Add a
+            project </button>
         </div>
       </span>
     </li>
