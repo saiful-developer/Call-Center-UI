@@ -104,3 +104,19 @@ nav {
 .logout {
   color: rgb(255, 54, 54);
 }
+
+.submenu-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+
+.submenu-container.open {
+  max-height: 500px; /* large enough to fit contents */
+  opacity: 1;
+}
+.sub-menu {
+  overflow: hidden;
+  padding-left: 15px;
+}

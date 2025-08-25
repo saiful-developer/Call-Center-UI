@@ -1,11 +1,15 @@
-
-
 <ul class="message-list nav d-block">
-    @for (msg of messages; track $index) {
-    <li (click)="select(msg)"
-        style="cursor:pointer; padding: 10px; border-bottom: 1px solid #ddd;">
+  @for (msg of messages; track $index) {
+    <li 
+      (click)="select(msg)"
+      [class.active]="msg.id === selectedMessageId"
+      style="cursor:pointer; padding: 10px; border-bottom: 1px solid #ddd; display: flex; align-items: center; gap: 10px;"
+    >
+      <img [src]="msg.avatar" alt="avatar" style="width: 40px; height: 40px; border-radius: 50%;" />
+      <div>
         <strong>{{ msg.subject }}</strong><br />
         <small>From: {{ msg.from }}</small>
+      </div>
     </li>
-    }
+  }
 </ul>

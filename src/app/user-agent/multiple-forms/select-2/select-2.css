@@ -1,0 +1,57 @@
+/* Modern input style */
+input.form-control,
+select.form-select,
+textarea.form-control {
+  border: 1.5px solid #ced4da;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: none;
+  background-color: #fff;
+}
+
+/* Focus state */
+input.form-control:focus,
+select.form-select:focus,
+textarea.form-control:focus {
+  border-color: #9a55ff !important;
+  box-shadow: 0 0 0 0.25rem rgba(154, 85, 255, 0.25);
+  outline: none;
+  background-color: #fff;
+}
+
+/* Hover state */
+input.form-control:hover,
+select.form-select:hover,
+textarea.form-control:hover {
+  border-color: #9a55ff !important;
+}
+
+/* Selected option in select dropdown */
+select.form-select option:checked {
+  background-color: #9a55ff !important;
+  color: white;
+}
+
+/* Placeholder color */
+input.form-control::placeholder,
+textarea.form-control::placeholder {
+  color: #adb5bd;
+  opacity: 1;
+}
+
+/* Disabled inputs */
+input.form-control:disabled,
+select.form-select:disabled,
+textarea.form-control:disabled {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+/* Remove default focus outline for better modern look */
+input.form-control:focus-visible,
+select.form-select:focus-visible,
+textarea.form-control:focus-visible {
+  outline-offset: 0;
+}

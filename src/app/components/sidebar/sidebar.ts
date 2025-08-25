@@ -1,29 +1,37 @@
-import { Component, HostListener, OnInit, signal } from '@angular/core';
-import { Signal } from '@angular/core';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { Component, OnInit, signal } from '@angular/core';
+import { RouterModule, RouterLink } from '@angular/router';
 import { SidebarService } from '../../services/sidebar-service';
-import { AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
-declare var bootstrap: any;
+import { trigger, style, animate,transition } from '@angular/animations';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   imports: [RouterModule, CommonModule, RouterLink],
   templateUrl: './sidebar.html',
-  styleUrls: ['./sidebar.css']
+  styleUrls: ['./sidebar.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ height: '0', opacity: 0 }),
+        animate('300ms ease-out', style({ height: '*', opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in', style({ height: '0', opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
-
 export class SidebarComponent implements OnInit {
+  openMenu: string | null = null; // currently open menu
 
   name = signal('Saiful Islam');
   role = signal('Agent');
 
   isSidebarVisible = true;
 
-  constructor(private sidebarService: SidebarService) { }
+  constructor(private sidebarService: SidebarService) {}
 
   ngOnInit(): void {
     this.sidebarService.sidebarVisible$.subscribe((isSidebarVisible) => {
@@ -33,12 +41,13 @@ export class SidebarComponent implements OnInit {
   }
 
   onToggleSidebar() {
-
     if (window.innerWidth <= 1000) {
       console.log('Toggle clicked'); // Debug log
       this.sidebarService.toggleSidebar();
     }
   }
 
-
+  toggleMenu(menu: string) {
+    this.openMenu = this.openMenu === menu ? null : menu;
+  }
 }

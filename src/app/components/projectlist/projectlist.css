@@ -33,7 +33,7 @@
   padding-bottom: 0.5rem;
 }
 
-    /* @media (max-width: 991.98px) {
+/* @media (max-width: 991.98px) {
     .modern-input {
         width: 100%;
         height: 2.5rem;
@@ -55,9 +55,11 @@
     width: 100%;
     height: 2.5rem;
   }
+
   .visible-inputs {
     display: flex;
   }
+
   .custom-layout {
     display: flex;
   }
@@ -80,8 +82,9 @@
   padding: 0.75rem;
   vertical-align: middle;
 }
+
 .custom-bg {
-    background-color: red !important;
+  background-color: red !important;
 }
 
 .modern-table thead tr {
@@ -89,12 +92,12 @@
 }
 
 .modern-table tbody tr:hover {
-  background-color: #f0f4ff;
+  background-color: #7a00f5;
   transition: background-color 0.2s ease;
 }
 
 .modern-table tbody tr:nth-child(even) {
-  background-color: #fafafa;
+  background-color: #fb0cff !important;
 }
 
 .badge {
@@ -120,10 +123,20 @@
   white-space: nowrap;
   vertical-align: middle;
   padding: 0.75rem;
- 
+
 }
+
+th {
+  background-color: #b46bff !important;
+  /* linear-gradient(135deg, #d98bff,#9f59ff) ; */
+  color: white;
+}
+td {
+  /* background-color: ; */
+}
+
 tbody {
- background-color: #faf5ff !important;
+  background-color: #faf5ff !important;
 }
 
 .description {
@@ -135,6 +148,7 @@ tbody {
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+
   .table th,
   .table td {
     font-size: 0.8rem;
@@ -144,6 +158,7 @@ tbody {
   .description {
     max-width: 120px;
   }
+
   button.btn.modern-btn {
     margin-top: 6px;
   }
@@ -152,6 +167,7 @@ tbody {
 
 /* Make description wrap nicely on small screens */
 @media (max-width: 768px) {
+
   .modern-table td,
   .modern-table th {
     white-space: nowrap;
@@ -161,6 +177,7 @@ tbody {
     white-space: normal !important;
   }
 }
+
 .table-container {
   width: 100%;
   overflow-x: auto;
@@ -189,6 +206,7 @@ tbody {
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+
   .table th,
   .table td {
     font-size: 0.8rem;

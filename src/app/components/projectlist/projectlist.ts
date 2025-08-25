@@ -4,16 +4,23 @@ import { Component } from '@angular/core';
 import { OnInit, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { errorContext } from 'rxjs/internal/util/errorContext';
+import { PageHeader } from '../page-header/page-header';
+import { Paginator } from '../paginator/paginator';
+import { ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-projectlist',
-  imports: [DatePipe, HttpClientModule, ReactiveFormsModule],
+  imports: [DatePipe, HttpClientModule, ReactiveFormsModule, PageHeader, Paginator, CommonModule],
   templateUrl: './projectlist.html',
   styleUrl: './projectlist.css'
 })
 export class Projectlist implements OnInit {
+  // [x: string]: any;
 
   // searchResultProjectList: any[] = [];
+  sl = 0;
 
   projects = [
     {
@@ -44,17 +51,23 @@ export class Projectlist implements OnInit {
 
   });
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
 
   getProjectData(): void {
     this.http.get<any[]>('http://localhost:3000/call-center/agent/all-projects').subscribe({
-      next: data => this.projects = data,
+      next: data => {
+        this.projects = data;
+        this.cdr.detectChanges();
+      }
+
+      ,
       error: err => console.error('Error fetching project data:', err)
     });
   }
 
   ngOnInit() {
     this.getProjectData()
+
   }
 
   getSearchedResult() {
@@ -84,9 +97,20 @@ export class Projectlist implements OnInit {
 
   }
 
+  pagedListFromChild: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 5;  // default page size, should match your paginator's pageSize
+
+  handlePageChange(event: { pagedList: any[], currentPage: number, pageSize: number }) {
+    this.pagedListFromChild = event.pagedList;
+    this.currentPage = event.currentPage;
+    this.pageSize = event.pageSize;
+  }
 
 
-  
+
+
+
 
 
 

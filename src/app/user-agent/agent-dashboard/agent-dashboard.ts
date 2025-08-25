@@ -8,10 +8,11 @@ import { AgentDashboardRow2 } from './agent-dashboard-row2/agent-dashboard-row2'
 import { AgentDashboardRow3 } from './agent-dashboard-row3/agent-dashboard-row3';
 // import { Footer } from '../../components/footer/footer';
 import { AgentDeshboardRow0 } from './agent-deshboard-row0/agent-deshboard-row0';
+import { PageHeader } from '../../components/page-header/page-header';
 
 @Component({
   selector: 'app-agent-dashboard',
-  imports: [AgentDashboardRow1, AgentDashboardRow2, AgentDashboardRow3, AgentDeshboardRow0, DecimalPipe],
+  imports: [AgentDashboardRow1, AgentDashboardRow2, AgentDashboardRow3, AgentDeshboardRow0, DecimalPipe, PageHeader],
   templateUrl: './agent-dashboard.html',
   styleUrl: './agent-dashboard.css'
 })

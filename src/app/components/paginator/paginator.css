@@ -1,0 +1,31 @@
+.purple-pagination .page-item .page-link {
+  color: #9a55ff;
+  border-color: #9a55ff;
+}
+.page-link {
+  cursor: pointer !important;
+}
+.custom-previous-btn {
+  border: 1px solid #9a55ff !important;
+  background-color: white !important;
+
+}
+
+.purple-pagination .page-item.active .page-link {
+  background-color: #9a55ff;
+  border-color: #9a55ff;
+  color: white;
+}
+
+.purple-pagination .page-item:hover:not(.active) .page-link {
+  background-color: #d6b8ff;
+  border-color: #9a55ff;
+  color: #6a2cff;
+}
+
+.purple-pagination .page-item.disabled .page-link {
+  color: #c8a9ff;
+  pointer-events: none;
+  background-color: transparent;
+  border-color: transparent;
+}

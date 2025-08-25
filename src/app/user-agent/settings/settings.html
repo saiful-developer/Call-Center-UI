@@ -1,0 +1,129 @@
+<div class="content-wrapper">
+    <app-page-header title="Settings" iconClass="mdi-cog-outline"></app-page-header>
+
+    <div class="container my-5">
+        <h2 class="mb-4">Admin Settings</h2>
+
+        <form>
+            <!-- Profile Information -->
+            <section class="mb-5">
+                <h4 class="mb-3">Profile Information</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="adminName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="adminName" placeholder="John Doe" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="adminUsername" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="adminUsername" placeholder="johndoe" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="adminEmail" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="adminEmail" placeholder="name@example.com" />
+                        <div class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="adminPhone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="adminPhone" placeholder="+1 555 123 4567" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="adminAvatar" class="form-label">Profile Picture</label>
+                        <input class="form-control" type="file" id="adminAvatar" />
+                    </div>
+                </div>
+            </section>
+
+            <!-- Security Settings -->
+            <section class="mb-5">
+                <h4 class="mb-3">Security Settings</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="currentPassword" class="form-label">Current Password</label>
+                        <input type="password" class="form-control" id="currentPassword" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" />
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="twoFactorAuth" />
+                            <label class="form-check-label" for="twoFactorAuth">
+                                Enable Two-Factor Authentication (2FA)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notification Preferences -->
+            <section class="mb-5">
+                <h4 class="mb-3">Notification Preferences</h4>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="emailNotifications" checked />
+                    <label class="form-check-label" for="emailNotifications">Email Notifications</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="smsNotifications" />
+                    <label class="form-check-label" for="smsNotifications">SMS Notifications</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="pushNotifications" checked />
+                    <label class="form-check-label" for="pushNotifications">Push Notifications</label>
+                </div>
+            </section>
+
+            <!-- Preferences -->
+            <section class="mb-5">
+                <h4 class="mb-3">Preferences</h4>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="timezone" class="form-label">Timezone</label>
+                        <select class="form-select" id="timezone">
+                            <option selected>UTC</option>
+                            <option>GMT</option>
+                            <option>EST</option>
+                            <option>PST</option>
+                            <option>CST</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="language" class="form-label">Language</label>
+                        <select class="form-select" id="language">
+                            <option selected>English</option>
+                            <option>Spanish</option>
+                            <option>French</option>
+                            <option>German</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Privacy Settings -->
+            <section class="mb-5">
+                <h4 class="mb-3">Privacy Settings</h4>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="profileVisibility" checked />
+                    <label class="form-check-label" for="profileVisibility">Make my profile visible to others</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="searchEngineIndex" />
+                    <label class="form-check-label" for="searchEngineIndex">Allow search engines to index my
+                        profile</label>
+                </div>
+            </section>
+
+            <!-- Save Changes Button -->
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-gradient-primary">Save Changes</button>
+            </div>
+        </form>
+    </div>
+
+
+
+</div>

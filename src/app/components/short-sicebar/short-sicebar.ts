@@ -21,7 +21,7 @@ export class ShortSicebar {
       icon: 'mdi mdi-account',
       link: '/agent/profile',
       hoverItems: ['View Profile', 'Edit Profile'],
-      hoverItemsRouterLinks: ['/agent/profile', '/agent/profile-edit']
+      hoverItemsRouterLinks: ['/agent/profile', '/agent/edit-profile']
     },
     {
       icon: 'mdi-message-text',
@@ -34,7 +34,7 @@ export class ShortSicebar {
       icon: 'mdi-format-list-bulleted',
       link: '/agent/add-project',
       hoverItems: ['Add Projects', 'Multiple Forms'],
-      hoverItemsRouterLinks: ['/agent/add-project', '/agent/forms']
+      hoverItemsRouterLinks: ['/agent/add-project', '/agent/multiple-forms']
     },
     {
       icon: 'mdi-chart-bar',
@@ -70,13 +70,13 @@ export class ShortSicebar {
       icon: 'bi-gear',
       link: '/agent/settings',
       hoverItems: ['Settings'],
-      hoverItemsRouterLinks: ['']
+      hoverItemsRouterLinks: ['/agent/settings']
     },
     {
       icon: 'bi-box-arrow-right',
-      link: '/agent/settings ',
+      link: '/agent/logout ',
       hoverItems: ['Logout'],
-      hoverItemsRouterLinks: ['']
+      hoverItemsRouterLinks: ['/agent/logout']  
     }
   ]
 

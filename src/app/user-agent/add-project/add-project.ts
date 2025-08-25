@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
+import { PageHeader } from '../../components/page-header/page-header';
+
 @Component({
   selector: 'app-add-project',
-  imports: [FormsModule, ReactiveFormsModule, HttpClientModule],
+  imports: [FormsModule, ReactiveFormsModule, HttpClientModule, PageHeader],
   templateUrl: './add-project.html',
   styleUrl: './add-project.css'
 })

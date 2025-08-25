@@ -1,0 +1,109 @@
+/* Modern checkbox & radio styling */
+.modern-check {
+  position: relative;
+  padding-left: 2.2rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.modern-check input.form-check-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Custom checkmark */
+.modern-check input.form-check-input + label::before,
+.modern-check input.form-check-input + label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0.4rem;
+  transform: translateY(-50%);
+  height: 1.2rem;
+  width: 1.2rem;
+  border-radius: 0.25rem;
+  border: 2px solid #ddd;
+  background: white;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+/* For radios make the before a circle */
+.modern-check input.form-check-input[type="radio"] + label::before {
+  border-radius: 50%;
+}
+
+/* Checked state */
+.modern-check input.form-check-input:checked + label::before {
+  border-color: #0d6efd;
+  background: #0d6efd;
+}
+
+/* Checkmark icon */
+.modern-check input.form-check-input:checked + label::after {
+  content: '';
+  position: absolute;
+  left: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 0.4rem;
+  height: 0.8rem;
+  border: solid white;
+  border-width: 0 0.2rem 0.2rem 0;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+/* For radio, show dot */
+.modern-check input.form-check-input[type="radio"]:checked + label::after {
+  width: 0.6rem;
+  height: 0.6rem;
+  border: none;
+  background: white;
+  border-radius: 50%;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Disabled styling */
+.modern-check input.form-check-input:disabled + label {
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.modern-check input.form-check-input:disabled + label::before {
+  background: #f5f5f5;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Theme colors override (you can adjust colors) */
+.form-check-primary input.form-check-input:checked + label::before {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+
+.form-check-success input.form-check-input:checked + label::before {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+.form-check-info input.form-check-input:checked + label::before {
+  background-color: #0dcaf0;
+  border-color: #0dcaf0;
+}
+
+.form-check-danger input.form-check-input:checked + label::before {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.form-check-warning input.form-check-input:checked + label::before {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}

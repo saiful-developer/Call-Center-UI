@@ -1,0 +1,60 @@
+<div class="content-wrapper">
+
+    <app-page-header title="About" iconClass="mdi-information-outline"></app-page-header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>About Us</h1>
+        <p>
+            We are passionate innovators dedicated to creating impactful digital solutions that empower our clients
+            worldwide.We are passionate innovators dedicated to creating impactful digital solutions that empower our
+            clients
+            worldwide.We are passionate innovators dedicated to creating impactful digital solutions that empower our
+            clients
+            worldwide.We are passionate innovators dedicated to creating impactful digital solutions that empower our
+            clients
+            worldwide.We are passionate innovators dedicated to creating impactful digital solutions that empower our
+            clients
+            worldwide.
+        </p>
+    </section>
+
+    <!-- Team Section -->
+    <section class="container my-5">
+        <h2 class="text-center mb-4">Meet Our Team</h2>
+        <div class="row justify-content-center g-4">
+
+            @for (member of teamMembers; track $index) {
+            <div class="col-sm-6 col-md-4 col-lg-3 text-center team-member">
+                <img [src]="member.img" [alt]="member.name" />
+                <h5>{{ member.name }}</h5>
+                <p class="text-muted">{{ member.role }}</p>
+                <!-- Social Icons -->
+                <div class="d-flex justify-content-center gap-3">
+                    <a [href]="member.linkedin" target="_blank" class="text-primary" aria-label="LinkedIn">
+                        <i class="bi bi-linkedin "></i>
+                    </a>
+                    <a [href]="member.twitter" target="_blank" class="text-info" aria-label="Twitter">
+                        <i class="bi bi-twitter "></i>
+                    </a>
+                    <a [href]="member.facebook" target="_blank" class="text-primary" aria-label="Facebook">
+                        <i class="bi bi-facebook "></i>
+                    </a>
+                </div>
+            </div>
+            }
+
+        </div>
+    </section>
+
+    <!-- Mission Statement -->
+    <section class="container mission-section">
+        <h2>Our Mission</h2>
+        <p>
+            To revolutionize the digital landscape by delivering innovative, user-centric solutions that drive business
+            success and enrich everyday lives.
+        </p>
+    </section>
+
+
+</div>

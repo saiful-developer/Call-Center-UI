@@ -1,0 +1,15 @@
+.message-list li {
+    background-color: #f0f0f0;
+    /* light gray background for inactive */
+    transition: background-color 0.3s ease;
+}
+
+.message-list li.active {
+    background-color: #d4edda;
+    /* light green background for active */
+}
+
+.message-list li:hover {
+    background-color: #e2e6ea;
+    /* slightly darker gray on hover */
+}

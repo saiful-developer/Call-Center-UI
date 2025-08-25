@@ -1,9 +1,10 @@
 import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Chart } from 'chart.js';
+import { PageHeader } from '../page-header/page-header';
 
 @Component({
   selector: 'app-chart-js',
-  imports: [],
+  imports: [PageHeader],
   templateUrl: './chart-js.html',
   styleUrl: './chart-js.css'
 })

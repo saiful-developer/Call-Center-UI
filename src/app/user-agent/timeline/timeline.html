@@ -1,0 +1,29 @@
+<div class="content-wrapper">
+
+    <app-page-header title="Timeline" iconClass="mdi-timeline-text-outline"></app-page-header>
+
+    <div class="mt-5">
+        <div class="timeline">
+            @for (timeline of timelineList; track $index) {
+            <div class="timeline-wrapper {{ timeline.className }}">
+                <div class="timeline-badge"></div>
+                <div class="timeline-panel bg-white">
+                    <div class="timeline-heading">
+                        <h6 class="timeline-title">{{ timeline.cardHead }}</h6>
+                    </div>
+                    <div class="timeline-body">
+                        <p>{{ timeline.cardBody }}</p>
+                    </div>
+                    <div class="timeline-footer d-flex align-items-center">
+                        <i class="mdi mdi-heart-outline text-muted me-1"></i>
+                        <span>{{ timeline.count }}</span>
+                        <span class="ms-auto font-weight-bold">{{ timeline.date }}</span>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+
+
+</div>

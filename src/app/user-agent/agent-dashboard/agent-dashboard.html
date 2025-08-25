@@ -1,18 +1,23 @@
 <div class="content-wrapper">
+
+
+  <!-- <app-page-header title="{{ houres | number:'2.0' }}h : {{ minutes | number:'2.0' }}m : {{ seconds | number:'2.0' }}s" iconClass="mdi-home"></app-page-header> -->
+  
   <div class="page-header">
     <h3 class="page-title">
-      <span class="page-title-icon bg-gradient-primary text-white me-2">
-        <i class="mdi mdi-home"></i>
-      </span> Dashboard
+        <span class="page-title-icon bg-gradient-primary text-white me-2">
+            <i class="mdi mdi-home"></i>
+        </span> Dashboard
     </h3>
     <nav aria-label="breadcrumb">
-      <ul class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">
-          <span>{{ houres | number:'2.0' }}h : {{ minutes | number:'2.0' }}m : {{ seconds | number:'2.0' }}s</span><i class="bi bi-clock" style="margin-left: 5px;"></i>
-        </li>
-      </ul>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                <span> {{ houres | number:'2.0' }}h : {{ minutes | number:'2.0' }}m : {{ seconds | number:'2.0' }}s</span>
+            </li>
+        </ul>
     </nav>
-  </div>
+
+</div>
 
   <app-agent-deshboard-row0></app-agent-deshboard-row0>
 

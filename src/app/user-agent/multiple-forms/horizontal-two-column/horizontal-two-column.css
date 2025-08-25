@@ -1,0 +1,64 @@
+.modern-radio {
+  position: relative;
+  padding-left: 1.8rem;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #343a40;
+}
+
+.modern-radio input.form-check-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Custom radio circle */
+.modern-radio input.form-check-input + label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.2rem;
+  width: 1.2rem;
+  border: 2px solid #9a55ff;
+  border-radius: 50%;
+  background: white;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Checked state */
+.modern-radio input.form-check-input:checked + label::before {
+  /* border-color: #0d6efd;
+  background: #0d6efd; */
+  background: linear-gradient(to right, #da8cff, #9a55ff);
+  border: linear-gradient(to right, #da8cff, #9a55ff);
+}
+
+/* Inner dot */
+.modern-radio input.form-check-input:checked + label::after {
+  content: "";
+  position: absolute;
+  left: 0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 50%;
+  background: white;
+  transition: background 0.3s ease;
+}
+
+/* Hover and focus */
+.modern-radio:hover input.form-check-input + label::before,
+.modern-radio input.form-check-input:focus + label::before {
+  border-color: #9a55ff;
+}
+.form-check-label {
+    margin: 0px !important;
+}

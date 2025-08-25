@@ -1,0 +1,75 @@
+<div class="content-wrapper">
+
+    <app-page-header title="Edit" iconClass="bi-pencil-square"></app-page-header>
+
+    <div class="container mt-4 custom-bg" style="max-width: 700px;">
+        <h2>Edit Profile</h2>
+        <form>
+            <div class="row mb-3 align-items-center">
+                <label for="name" class="col-sm-3 col-form-label">Name</label>
+                <div class="col-sm-9">
+                    <input id="name" type="text" class="form-control" placeholder="Enter your full name" />
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <label for="type" class="col-sm-3 col-form-label">Type</label>
+                <div class="col-sm-9">
+                    <select id="type" class="form-select">
+                        <option value="">Select type</option>
+                        <option value="agent">Agent</option>
+                        <option value="supervisor">Supervisor</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <label for="email" class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input id="email" type="email" class="form-control" placeholder="Enter email address" />
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <label for="phone" class="col-sm-3 col-form-label">Phone</label>
+                <div class="col-sm-9">
+                    <input id="phone" type="tel" class="form-control" placeholder="Enter phone number" />
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <label for="department" class="col-sm-3 col-form-label">Department</label>
+                <div class="col-sm-9">
+                    <input id="department" type="text" class="form-control" placeholder="Enter your department" />
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <label for="address" class="col-sm-3 col-form-label">Address</label>
+                <div class="col-sm-9">
+                    <textarea id="address" rows="3" class="form-control" placeholder="Enter your address"></textarea>
+                </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+                <label for="status" class="col-sm-3 col-form-label">Status</label>
+                <div class="col-sm-9">
+                    <select id="status" class="form-select">
+                        <option value="">Select status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="offset-sm-3 col-sm-9">
+                    <button type="submit" class="btn btn-block btn-lg btn-gradient-primary ">Save Changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</div>
