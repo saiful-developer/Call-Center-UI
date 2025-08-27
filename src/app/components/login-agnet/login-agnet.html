@@ -1,13 +1,14 @@
 <div class="login-container">
+    <img src="assets/images/logo.png" alt="">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <h2>Agent Login</h2>
+
 
         <!-- User ID Field -->
         <div class="form-group">
-            <label for="userId">User ID</label>
+            <label for="userId">Login ID</label>
             <input id="userId" formControlName="userId" type="text" placeholder="Enter User ID" />
             <div *ngIf="submitted && loginForm.get('userId')?.invalid" class="error">
-                User ID is required.
+                User ID is required.fasdsfas
             </div>
         </div>
 
@@ -27,7 +28,7 @@
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" [disabled]="loading">Login</button>
+        <button type="submit" [disabled]="loginForm.invalid">Login</button>
 
         <!-- Error Message -->
         <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>

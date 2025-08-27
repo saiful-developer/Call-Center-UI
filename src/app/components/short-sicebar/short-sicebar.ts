@@ -44,9 +44,9 @@ export class ShortSicebar {
     },
     {
       icon: 'mdi-table-large',
-      link: 'agent/project-list',
-      hoverItems: ['Project List', 'Multiple Tables'],
-      hoverItemsRouterLinks: ['agent/project-list', '/agent/tables']
+      link: 'agent/reporsts/incoming',
+      hoverItems: ['Incoming Report', 'Outgoing Report', 'Break', 'Login', 'Abandon', 'Ring No Answer'],
+      hoverItemsRouterLinks: ['agent/reporsts/incoming', 'agent/reporsts/outgoing']//need to add path respectivly
     },
     {
       icon: 'bi-person-lines-fill',
@@ -76,7 +76,7 @@ export class ShortSicebar {
       icon: 'bi-box-arrow-right',
       link: '/agent/logout ',
       hoverItems: ['Logout'],
-      hoverItemsRouterLinks: ['/agent/logout']  
+      hoverItemsRouterLinks: ['/logout']  
     }
   ]
 

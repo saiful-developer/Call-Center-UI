@@ -15,7 +15,6 @@ import { UserService } from '../../services/user.service';
 export class LoginAgnet {
   loginForm: FormGroup;
   submitted = false;
-  loading = false;
   errorMessage = '';
 
   constructor(
@@ -37,26 +36,21 @@ export class LoginAgnet {
 
     if (this.loginForm.invalid) return;
 
-    this.loading = true;
     const { userId, extension, password } = this.loginForm.value;
 
+    //getting data
     this.apiService.loginAgent(userId, password, extension).subscribe({
       next: (res: any) => {
-
         const parseedToken = JSON.parse(res.data)
-        console.log(parseedToken.token)
-        sessionStorage.setItem('jwt',parseedToken.token)
-        // store token
-        this.router.navigateByUrl('/agent/dashboard');
-        this.loading = false;
-
+        console.log(parseedToken.token);
+        console.log(parseedToken);
         
-
+        sessionStorage.setItem('jwt', parseedToken.token)
+        this.router.navigateByUrl('/agent/dashboard');
       },
       error: (err) => {
         console.error(err);
         this.errorMessage = 'Login failed. Please check credentials.';
-        this.loading = false;
       }
     });
   }

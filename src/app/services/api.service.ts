@@ -21,7 +21,13 @@ export class ApiService {
     });
   }
 
-  reporstsAgent() {
-    // return this.http.post<any>(`${this.baseUrl}/api/v1/agent/incoming/getIncomingOnLimit`);
+
+  incomingReport (agent: string, limit: number, offset: number) {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/incoming/getIncomingOnLimit`, {
+      agent: agent,
+      limit: limit,
+      offset: offset
+    });
   }
+
 }

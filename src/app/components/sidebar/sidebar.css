@@ -8,6 +8,9 @@ nav {
   position: relative;
   top: 4px
 }
+.nav-item {
+  cursor: pointer;
+}
 
 
 @media (max-width: 1200px) {

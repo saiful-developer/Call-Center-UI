@@ -5,8 +5,10 @@ import { SupervisorDashbord } from './user-supervisor/supervisor-dashbord/superv
 import { SupervisorProfile } from './user-supervisor/supervisor-profile/supervisor-profile';
 import { SupervisorMessage } from './user-supervisor/supervisor-message/supervisor-message';
 import { LoginAgnet } from './components/login-agnet/login-agnet';
+import { Logout } from './components/logout/logout';
 
-import { authGuard } from './auth-guard';
+import { authGuard } from './guard/auth-guard';
+import { guestGuardGuard } from './guard/guest-guard-guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -32,11 +34,15 @@ export const routes: Routes = [
         loadChildren: () => import('./user-supervisor/supervisor.routes').then(m => m.Supervisor_ROUTES),
         canActivate: [authGuard]
     },
-    //login
+    
     {
         path: 'login',
         component: LoginAgnet,
+        canActivate: [guestGuardGuard]
+    }, 
+    {
+        path: 'logout',
+        component: Logout,
+        canActivate: [authGuard]
     }
-
-
 ];

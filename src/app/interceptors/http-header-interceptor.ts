@@ -8,7 +8,7 @@ export const httpHeaderInterceptor: HttpInterceptorFn = (req, next) => {
   // debugger
 
   //save token after login
-  const token = localStorage.getItem('auth_token');
+  const token = sessionStorage.getItem('jwt');
 
   //requred values for http hea
   const apiKey = "fba2cda8265247f2f4dd9de8e4db35c5";

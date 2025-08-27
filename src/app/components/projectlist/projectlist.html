@@ -1,6 +1,6 @@
 <div class="content-wrapper">
 
-  <app-page-header title="Project List" iconClass="mdi-format-list-checkbox"></app-page-header>
+  <app-page-header title="Incoming" iconClass="mdi-format-list-checkbox"></app-page-header>
 
 
   <div class="container-fluid">
@@ -8,9 +8,23 @@
       <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchForm"
         (ngSubmit)="getSearchedResult()">
         <!-- Always visible inputs -->
-        <input type="text" class="form-control modern-input" placeholder="Name" formControlName="search_name" />
-        <input type="text" class="form-control modern-input" placeholder="ID" formControlName="search_id" />
-        <input type="text" class="form-control modern-input" placeholder="Role" formControlName="search_role" />
+        <div>
+          <label for="caller-naem">Caller Name</label>
+          <input type="text" class="form-control modern-input" placeholder="Caller Name" formControlName="search_name"
+            id="caller-naem" />
+        </div>
+        <div>
+          <label for="form-date">From Date</label>
+          <input type="date" class="form-control modern-input" placeholder="ID" formControlName="search_id"
+            id="form-date" />
+        </div>
+        <div>
+          <label for="form-date">To Date</label>
+          <input type="date" class="form-control modern-input" placeholder="Role" formControlName="search_role"
+            id="to-date" />
+        </div>
+
+
 
         <!-- Toggle Button for dropdown inputs (only on small screens) -->
         <button id="filterToggleBtn" class="btn  d-lg-none small-toggle" type="button" data-bs-toggle="collapse"
@@ -20,13 +34,36 @@
 
         <!-- Collapsible Search Inputs -->
         <div class="collapse d-lg-flex gap-2 align-items-center" id="moreSearchFields">
-          <input type="email" class="form-control modern-input" placeholder="Email" formControlName="search_email" />
-          <input type="text" class="form-control modern-input" placeholder="Title"
+          <div>
+            <label for="">Campain</label>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Select Campaign</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <!-- <input type="email" class="form-control modern-input" placeholder="Email" formControlName="search_email" /> -->
+          </div>
+
+          <div>
+            <label for="">Status</label>
+            <select class="form-select" aria-label="Default select example">
+              <option selected>Select Status</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+            <!-- <input type="email" class="form-control modern-input" placeholder="Email" formControlName="search_email" /> -->
+          </div>
+
+
+          <!-- <input type="text" class="form-control modern-input" placeholder="Title"
             formControlName="search_project_title" />
           <input type="text" class="form-control modern-input" placeholder="Type"
             formControlName="search_prject_type" />
           <input type="text" class="form-control modern-input" placeholder="Assigned"
-            formControlName="search_assigned_by" />
+            formControlName="search_assigned_by" /> -->
+
         </div>
 
         <!-- Search Button -->
@@ -47,45 +84,43 @@
       <thead class="">
         <tr>
           <th>#</th>
-          <th>User Name</th>
-          <th>User ID</th>
-          <th>User Role</th>
-          <th>Email</th>
-          <th>Project Title</th>
-          <th>Project Type</th>
-          <th>Assigned By</th>
-          <th>Start Time</th>
-          <th>End Time</th>
-          <th>Description</th>
-          <!-- <th>Created At</th> -->
+          <th>UniqueID</th>
+          <th>Calldate</th>
+          <th>Caller</th>
+          <th>Hunting</th>
+          <th>Campaign</th>
+          <th>Queue Time</th>
+          <th>Ring Time</th>
+          <th>Talk Time</th>
+          <th>Transfer To</th>
+          <th>Finished By</th>
+          <th>Disposition</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let project of pagedListFromChild; let i = index">
+        <tr *ngFor="let report of incomingReportsData; let i = index">
           <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
-          <td>{{ project.user_name }}</td>
-          <td>{{ project.user_id }}</td>
-          <td>{{ project.user_role }}</td>
-          <td class="text-break">{{ project.email }}</td>
-          <td>{{ project.project_title }}</td>
-          <td>{{ project.project_type }}</td>
-          <td>{{ project.assigned_by }}</td>
-          <td>{{ project.start_time }}</td>
-          <td>
-            <span *ngIf="project.end_time; else ongoing">{{ project.end_time }}</span>
-            <ng-template #ongoing><span class="badge bg-success">Working</span></ng-template>
-          </td>
-          <td class="text-truncate" style="max-width: 200px;" [title]="project.project_description">
-            {{ project.project_description }}
-          </td>
+          <td>{{ report.uniqueid }}</td>
+          <td>{{ report.calldate ?? '-' }}</td>
+          <td>{{ report.src }}</td>
+          <td>{{ report.dst ?? '-' }}</td>
+          <td>{{ report.campaign ?? '-' }}</td>
+          <td>{{ report.caller_queue_time ?? '-' }}</td>
+          <td>{{ report.connect_ring_time ?? '-' }}</td>
+          <td>{{ report.caller_agent_talk_time ?? '-' }}</td>
+          <td>{{ report.transfer_to ? 'Yes' : 'No' }}</td>
+          <td>{{ report.finished_by ?? '-' }}</td>
+          <td>{{ report.disposition ?? '-' }}</td>
         </tr>
+
+
       </tbody>
 
     </table>
   </div>
 
   <!-- Mobile Card View -->
-  <div class="d-md-none">
+  <!-- <div class="d-md-none">
     <div *ngFor="let project of pagedListFromChild; let i = index" class="card shadow-sm mb-3">
       <div class="card-body">
         <h5 class="card-title">{{ project.project_title }}</h5>
@@ -104,10 +139,10 @@
         <p class="mb-0"><strong>Created:</strong> {{ project.created_at | date:'short' }}</p>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
-  <app-paginator [projectList]="projects" (pageChanged)="handlePageChange($event)"></app-paginator>
+  <app-paginator [projectList]="incomingReportsData" (pageChanged)="handlePageChange($event)"></app-paginator>
 
 
 </div>

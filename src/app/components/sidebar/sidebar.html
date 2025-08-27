@@ -17,13 +17,7 @@
       </a>
     </li>
 
-        <!-- test api -->
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/agent/saiful" (click)="onToggleSidebar()">
-        <span class="menu-title">test api</span>
-        <i class="mdi mdi-home menu-icon"></i>
-      </a>
-    </li>
+
 
     <!-- Dashboard -->
     <li class="nav-item">
@@ -100,14 +94,29 @@
 
     <!-- Tables Dropdown -->
     <li class="nav-item">
-      <a class="nav-link" (click)="toggleMenu('tables')">
-        <span class="menu-title">Tables</span>
+      <a class="nav-link" (click)="toggleMenu('reports')">
+        <span class="menu-title">Reports</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-table-large menu-icon"></i>
       </a>
-      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'tables'" [@slideInOut]>
+      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'reports'" [@slideInOut]>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/project-list">Project List</a>
+          <a class="nav-link" routerLink="/agent/reporsts/incoming">Incoming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="">Outgoing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="">Break</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="">Abandon</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="">Ring No Answer</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a>

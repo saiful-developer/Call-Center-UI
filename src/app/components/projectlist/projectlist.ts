@@ -8,6 +8,23 @@ import { PageHeader } from '../page-header/page-header';
 import { Paginator } from '../paginator/paginator';
 import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ApiService } from '../../services/api.service';
+
+export interface IncomingReportAPI {
+  uniqueid: string;
+  calldate?: string;
+  src: string;
+  dst?: string;
+  campaign?: string;
+  caller_queue_time?: number;
+  connect_ring_time?: number;
+  caller_agent_talk_time?: string;
+  transfer_to?: string;
+  finished_by?: string;
+  disposition?: string;
+}
+
+
 
 
 @Component({
@@ -22,21 +39,8 @@ export class Projectlist implements OnInit {
   // searchResultProjectList: any[] = [];
   sl = 0;
 
-  projects = [
-    {
-      user_name: "Saiful",
-      user_id: "A101",
-      user_role: "Agent",
-      email: "saiful@example.com",
-      project_title: "Call Center App",
-      project_type: "Client",
-      assigned_by: "Manager",
-      start_time: "2025-08-07 10:00:00",
-      end_time: "2025-08-07 18:00:00",
-      project_description: "Dashboard development",
-      created_at: new Date()
-    }
-  ];
+  incomingReportsData: IncomingReportAPI[] = [];
+
 
 
   //reactive form
@@ -51,49 +55,68 @@ export class Projectlist implements OnInit {
 
   });
 
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
+  constructor(private http: HttpClient,
+    private cdr: ChangeDetectorRef,
+    private apiService: ApiService
+  ) { }
 
-  getProjectData(): void {
-    this.http.get<any[]>('http://localhost:3000/call-center/agent/all-projects').subscribe({
-      next: data => {
-        this.projects = data;
+  getIncomingReport(): void {
+    this.apiService.incomingReport('hridoy', 10, 0).subscribe({
+      next: (res) => {
+        if (res.success === 'YES' && Array.isArray(res.data)) {
+          this.incomingReportsData = res.data.map((item: IncomingReportAPI) => ({
+            uniqueid: item.uniqueid ,
+            calldate: item.calldate || '',
+            caller: item.src,
+            hunting: item.dst?.toString() || '',
+            campaign: item.campaign || '',
+            caller_queue_time: item.caller_queue_time || '',
+            connect_ring_time: item.connect_ring_time || '',
+            caller_agent_talk_time: item.caller_agent_talk_time || '',
+            transfer_to: item.transfer_to ? 'Yes' : 'No',
+            finishedBy: item.finished_by || '',
+            disposition: item.disposition || ''
+          }));
+        } else {
+          this.incomingReportsData = [];
+        }
+
+        console.log(res)
         this.cdr.detectChanges();
-      }
-
-      ,
+      },
       error: err => console.error('Error fetching project data:', err)
     });
   }
 
   ngOnInit() {
-    this.getProjectData()
+    this.getIncomingReport()
 
   }
 
   getSearchedResult() {
-    console.log(this.searchForm.value)
-    const { search_name, search_id, search_role, search_email, search_project_title, search_prject_type, search_assigned_by } = this.searchForm.value;
+    // console.log(this.searchForm.value)
+    // const { search_name, search_id, search_role, search_email, search_project_title, search_prject_type, search_assigned_by } = this.searchForm.value;
 
-    this.http.get<any[]>('http://localhost:3000/call-center/agent/search-result', {
-      params: {
-        search_name: search_name ?? '',
-        search_id: search_id ?? '',
-        search_role: search_role ?? '',
-        search_email: search_email ?? '',
-        search_project_title: search_project_title ?? '',
-        search_prject_type: search_prject_type ?? '',
-        search_assigned_by: search_assigned_by ?? ''
+    // this.http.get<any[]>('http://localhost:3000/call-center/agent/search-result', {
+    //   params: {
+    //     search_name: search_name ?? '',
+    //     search_id: search_id ?? '',
+    //     search_role: search_role ?? '',
+    //     search_email: search_email ?? '',
+    //     search_project_title: search_project_title ?? '',
+    //     search_prject_type: search_prject_type ?? '',
+    //     search_assigned_by: search_assigned_by ?? ''
 
-      }
-    }).subscribe({
-      next: (response) => {
-        this.projects = Array.isArray(response) ? response : [response];
-        console.log(this.projects);
-      },
-      error: (error) => {
-        console.log(error)
-      }
-    })
+    //   }
+    // }).subscribe({
+    //   next: (response) => {
+    //     this.projects = Array.isArray(response) ? response : [response];
+    //     console.log(this.projects);
+    //   },
+    //   error: (error) => {
+    //     console.log(error)
+    //   }
+    // })
 
   }
 

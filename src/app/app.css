@@ -171,3 +171,12 @@
     z-index: 9998;
   }
 }
+
+.auth-layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+}

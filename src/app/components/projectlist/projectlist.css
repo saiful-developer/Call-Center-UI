@@ -1,7 +1,7 @@
 /* search option  */
 
 .modern-input {
-  width: 90px;
+  /* width: 90px; */
   border-radius: 0.5rem;
   border: 1px solid #ced4da;
   transition: 0.3s;
@@ -23,6 +23,7 @@
   box-shadow: 0 4px 12px rgba(78, 115, 223, 0.3);
   transition: background 0.3s ease, transform 0.2s ease;
   padding: 0.5rem 1.2rem;
+  margin-top: 22px;
 }
 
 .modern-btn:hover {
@@ -131,6 +132,7 @@ th {
   /* linear-gradient(135deg, #d98bff,#9f59ff) ; */
   color: white;
 }
+
 td {
   /* background-color: ; */
 }
@@ -216,4 +218,32 @@ tbody {
   .description {
     max-width: 120px;
   }
+}
+
+
+/* Fix select text overlapping with the dropdown arrow */
+.form-select {
+  padding-right: 2.5rem;
+  /* make space for the arrow */
+  min-height: 38px;
+  /* optional, keep height consistent with inputs */
+  font-size: 0.95rem;
+  /* optional, slightly smaller text */
+}
+
+/* Optional: prevent overlapping on small screens */
+@media (max-width: 576px) {
+  .form-select {
+    padding-right: 2.5rem;
+  }
+}
+
+/* Remove focus border and outline for inputs and selects */
+input.form-control:focus,
+select.form-select:focus,
+textarea.form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #ced4da;
+  /* optional: keep the normal border color */
 }

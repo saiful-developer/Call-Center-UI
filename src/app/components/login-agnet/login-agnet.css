@@ -1,11 +1,15 @@
 .login-container {
   max-width: 400px;
-  margin: 50px auto;
+  margin: 130px auto;
   padding: 25px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  background-color: #f7f7f7;
+  background-color: #fdfdfd;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  /* margin-bottom: 1rem !important; */
+}
+.login-container img {
+  margin-bottom: 1.5rem;
 }
 
 h2 {

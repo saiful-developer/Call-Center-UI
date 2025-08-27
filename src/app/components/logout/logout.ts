@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { PageHeader } from '../../components/page-header/page-header';
+import { PageHeader } from '../page-header/page-header';
 import { Router } from '@angular/router';
 
 @Component({
@@ -20,10 +20,7 @@ export class Logout {
   }
 
   logout() {
-    // Clear local storage and any other session data
-    sessionStorage.removeItem('auth_token');
-    localStorage.removeItem('currentAgent'); // if you store agent info
-    // Navigate to login page
+    sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 
