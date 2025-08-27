@@ -1,0 +1,35 @@
+<div class="login-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h2>Agent Login</h2>
+
+        <!-- User ID Field -->
+        <div class="form-group">
+            <label for="userId">User ID</label>
+            <input id="userId" formControlName="userId" type="text" placeholder="Enter User ID" />
+            <div *ngIf="submitted && loginForm.get('userId')?.invalid" class="error">
+                User ID is required.
+            </div>
+        </div>
+
+        <!-- Extension Field -->
+        <div class="form-group">
+            <label for="extension">Extension</label>
+            <input id="extension" formControlName="extension" type="number" placeholder="Enter Extension" />
+            <div *ngIf="loginForm.get('extension')?.invalid">Extension is required.</div>
+
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" formControlName="password" type="password" placeholder="Enter Password" />
+            <div *ngIf="loginForm.get('password')?.invalid">Password is required.</div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" [disabled]="loading">Login</button>
+
+        <!-- Error Message -->
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </form>
+</div>

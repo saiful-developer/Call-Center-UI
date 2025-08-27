@@ -8,12 +8,20 @@
           <span class="login-status online"></span>
         </div>
         <div class="nav-profile-text d-flex flex-column">
-          <span class="font-weight-bold mb-2">{{ name() }}</span>
+          <span class="font-weight-bold mb-2">{{ decodedToken?.name }}</span>
           <span class="text-secondary text-small">
-            {{ role() }}
+            {{ decodedToken?.usertype }}
             <i class="mdi mdi-bookmark-check text-success nav-profile-badge custom-margin"></i>
           </span>
         </div>
+      </a>
+    </li>
+
+        <!-- test api -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/agent/saiful" (click)="onToggleSidebar()">
+        <span class="menu-title">test api</span>
+        <i class="mdi mdi-home menu-icon"></i>
       </a>
     </li>
 

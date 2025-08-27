@@ -33,7 +33,7 @@ export const AGENT_ROUTES : Routes= [
             { path: 'multiple-forms', component: MultipleForms, data: { breadcrumb: 'agent/project/multiple-forms' } },
             { path: 'project-list', component: Projectlist, data: { breadcrumb: 'agent/project/project list' } },
             { path: 'settings', component: Settings, data: { breadcrumb: 'agent/settings' } },
-            { path: 'logout', component: Logout, data: { breadcrumb: 'agent/logout' } }
+            { path: 'logout', component: Logout, data: { breadcrumb: 'agent/logout' } },
         ]
     }
 ];

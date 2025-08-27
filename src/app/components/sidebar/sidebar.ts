@@ -3,7 +3,10 @@ import { RouterModule, RouterLink } from '@angular/router';
 import { SidebarService } from '../../services/sidebar-service';
 import { CommonModule } from '@angular/common';
 
-import { trigger, style, animate,transition } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
+import { Observable } from 'rxjs';
+import { AgentData, JwtPayload } from '../../models/agent.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,19 +28,25 @@ import { trigger, style, animate,transition } from '@angular/animations';
 })
 export class SidebarComponent implements OnInit {
   openMenu: string | null = null; // currently open menu
+  decodedToken: JwtPayload | null = null;
 
-  name = signal('Saiful Islam');
-  role = signal('Agent');
 
   isSidebarVisible = true;
 
-  constructor(private sidebarService: SidebarService) {}
+  constructor(
+    private sidebarService: SidebarService,
+    private userService: UserService
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.sidebarService.sidebarVisible$.subscribe((isSidebarVisible) => {
       console.log('Sidebar visibility:', isSidebarVisible); // Debug log
       this.isSidebarVisible = !isSidebarVisible;
     });
+
+    this.decodedToken = this.userService.decodeToken(sessionStorage.getItem('jwt'));
   }
 
   onToggleSidebar() {
