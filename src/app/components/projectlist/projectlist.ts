@@ -20,7 +20,7 @@ export interface IncomingReportAPI {
   connect_ring_time?: number;
   caller_agent_talk_time?: string;
   transfer_to?: string;
-  finished_by?: string;
+  completecaller?: number;
   disposition?: string;
 }
 
@@ -29,7 +29,7 @@ export interface IncomingReportAPI {
 
 @Component({
   selector: 'app-projectlist',
-  imports: [DatePipe, HttpClientModule, ReactiveFormsModule, PageHeader, Paginator, CommonModule],
+  imports: [HttpClientModule, ReactiveFormsModule, PageHeader, Paginator, CommonModule],
   templateUrl: './projectlist.html',
   styleUrl: './projectlist.css'
 })
@@ -55,26 +55,36 @@ export class Projectlist implements OnInit {
 
   });
 
-  constructor(private http: HttpClient,
+  constructor(
     private cdr: ChangeDetectorRef,
     private apiService: ApiService
   ) { }
 
+
   getIncomingReport(): void {
-    this.apiService.incomingReport('hridoy', 10, 0).subscribe({
+    //get loginid form the sesson storage
+
+    let user = '';
+    const userInfo = sessionStorage.getItem('user')
+    if (userInfo) {
+      const parsedUserInfo = JSON.parse(userInfo)
+      user = parsedUserInfo.loginid;
+    }
+
+    this.apiService.incomingReport(user, this.limit, this.offset).subscribe({
       next: (res) => {
         if (res.success === 'YES' && Array.isArray(res.data)) {
           this.incomingReportsData = res.data.map((item: IncomingReportAPI) => ({
-            uniqueid: item.uniqueid ,
+            uniqueid: item.uniqueid,
             calldate: item.calldate || '',
-            caller: item.src,
-            hunting: item.dst?.toString() || '',
+            src: item.src,
+            dst: item.dst || '',
             campaign: item.campaign || '',
             caller_queue_time: item.caller_queue_time || '',
             connect_ring_time: item.connect_ring_time || '',
             caller_agent_talk_time: item.caller_agent_talk_time || '',
             transfer_to: item.transfer_to ? 'Yes' : 'No',
-            finishedBy: item.finished_by || '',
+            completecaller: item.completecaller || '',
             disposition: item.disposition || ''
           }));
         } else {
@@ -88,11 +98,26 @@ export class Projectlist implements OnInit {
     });
   }
 
+
+  offset = 0;
+  limit = 15;
+  hasMore = true;
   ngOnInit() {
     this.getIncomingReport()
 
   }
 
+  nextPage() {
+    this.offset += this.limit;
+    this.getIncomingReport();
+  }
+
+  prevPage() {
+    if (this.offset >= this.limit) {
+      this.offset -= this.limit;
+      this.getIncomingReport();
+    }
+  }
   getSearchedResult() {
     // console.log(this.searchForm.value)
     // const { search_name, search_id, search_role, search_email, search_project_title, search_prject_type, search_assigned_by } = this.searchForm.value;

@@ -1,31 +1,13 @@
-.purple-pagination .page-item .page-link {
-  color: #9a55ff;
-  border-color: #9a55ff;
-}
-.page-link {
-  cursor: pointer !important;
-}
-.custom-previous-btn {
-  border: 1px solid #9a55ff !important;
-  background-color: white !important;
-
-}
-
-.purple-pagination .page-item.active .page-link {
-  background-color: #9a55ff;
-  border-color: #9a55ff;
+.paginatior-btn {
+  margin-right: 10px;
+  white-space: nowrap;
+  background: linear-gradient(135deg, #d98bff, #9f59ff);
+  border: none;
   color: white;
-}
-
-.purple-pagination .page-item:hover:not(.active) .page-link {
-  background-color: #d6b8ff;
-  border-color: #9a55ff;
-  color: #6a2cff;
-}
-
-.purple-pagination .page-item.disabled .page-link {
-  color: #c8a9ff;
-  pointer-events: none;
-  background-color: transparent;
-  border-color: transparent;
+  font-weight: 500;
+  border-radius: 0.5rem 8px;
+  box-shadow: 0 4px 12px rgba(78, 115, 223, 0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+  padding: 0.5rem 1.2rem;
+  margin-top: 22px;
 }

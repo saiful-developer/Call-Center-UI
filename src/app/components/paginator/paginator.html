@@ -1,19 +1,4 @@
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center purple-pagination">
-
-    <li class="page-item" [class.disabled]="currentPage === 1">
-      <button class="page-link" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
-    </li>
-
-    <li *ngFor="let _ of totalPagesArray; let i = index" 
-        class="page-item" 
-        [class.active]="currentPage === (i + 1)">
-      <button class="page-link" (click)="goToPage(i + 1)">{{ i + 1 }}</button>
-    </li>
-
-    <li class="page-item" [class.disabled]="currentPage === totalPages">
-      <button class="page-link" (click)="goToNextPage()" [disabled]="currentPage === totalPages">Next</button>
-    </li>
-
-  </ul>
-</nav>
+<div class="pagination-controls">
+  <button (click)="prev.emit()" [disabled]="offset === 0" class="btn paginatior-btn">Previous</button>
+  <button (click)="next.emit()" [disabled]="!hasMore" class="btn paginatior-btn">Next</button>
+</div>

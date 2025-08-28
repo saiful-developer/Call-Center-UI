@@ -44,7 +44,7 @@ export class LoginAgnet {
         const parseedToken = JSON.parse(res.data)
         console.log(parseedToken.token);
         console.log(parseedToken);
-        
+        sessionStorage.setItem('user', JSON.stringify(parseedToken))
         sessionStorage.setItem('jwt', parseedToken.token)
         this.router.navigateByUrl('/agent/dashboard');
       },

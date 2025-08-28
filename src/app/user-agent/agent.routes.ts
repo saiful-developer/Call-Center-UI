@@ -15,6 +15,7 @@ import { Settings } from "./settings/settings";
 import { Logout } from "../components/logout/logout";
 import { AgentProfileEdit } from "./agent-profile-edit/agent-profile-edit";
 import { MultipleForms } from "./multiple-forms/multiple-forms";
+import { OutgoingReports } from "../components/outgoing-reports/outgoing-reports";
 
 export const AGENT_ROUTES : Routes= [
     {
@@ -31,8 +32,9 @@ export const AGENT_ROUTES : Routes= [
             { path: 'chartjs', component: ChartJs, data: { breadcrumb: 'agent/charts/chartjs' } },
             { path: 'add-project', component: AddProject, data: { breadcrumb: 'agent/project/add project' } },
             { path: 'multiple-forms', component: MultipleForms, data: { breadcrumb: 'agent/project/multiple-forms' } },
-            { path: 'reporsts/incoming', component: Projectlist, data: { breadcrumb: 'agent/reporsts/incoming' } },//projectlist is incomming reports
-            { path: 'settings', component: Settings, data: { breadcrumb: 'agent/settings' } }
+            { path: 'reports/incoming', component: Projectlist, data: { breadcrumb: 'agent/reports/incoming' } },//projectlist is incomming reports
+            { path: 'settings', component: Settings, data: { breadcrumb: 'agent/settings' } },
+            { path: 'reports/outgoing', component:  OutgoingReports, data: { breadcrumb: 'agent/reports/outgoing' }}
         ]
     }
 ];

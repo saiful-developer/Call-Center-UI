@@ -107,9 +107,10 @@ nav.navbar.default-layout-navbar.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row 
 }
 
 /* Optional: Rotate arrow icon if desired when open */
-.accordion .collapse.show ~ .card-header .menu-arrow {
+.accordion .collapse.show~.card-header .menu-arrow {
   transform: rotate(90deg);
 }
+
 .custom-bg {
   background-color: #a46cf9 !important;
   border-radius: 8px !important;
@@ -123,5 +124,294 @@ nav.navbar.default-layout-navbar.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row 
 li.breadcrumb-item.active {
   margin-right: 3rem;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* table desgin */
+/* search option  */
+
+.modern-input {
+  /* width: 90px; */
+  border-radius: 0.5rem;
+  border: 1px solid #ced4da;
+  transition: 0.3s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.modern-input:focus {
+  border-color: #4e73df;
+  /* box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25); */
+}
+
+.modern-btn {
+  white-space: nowrap;
+  background: linear-gradient(135deg, #d98bff, #9f59ff);
+  border: none;
+  color: white !important;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(78, 115, 223, 0.3);
+  transition: background 0.3s ease, transform 0.2s ease;
+  padding: 0.5rem 1.2rem;
+  margin-top: 22px;
+}
+
+.modern-btn:hover {
+  transform: translateY(-1px);
+}
+
+.search-bar-wrapper {
+  padding-bottom: 0.5rem;
+}
+
+/* @media (max-width: 991.98px) {
+    .modern-input {
+        width: 100%;
+        height: 2.5rem;
+    }
+
+    .search-project {   
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #moreSearchFields .modern-input {
+        width: 100%;
+    }
+    } */
+
+
+@media (max-width: 991.98px) {
+  .modern-input {
+    width: 100%;
+    height: 2.5rem;
+  }
+
+  .visible-inputs {
+    display: flex;
+  }
+
+  .custom-layout {
+    display: flex;
+  }
+
+  .search-project {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #moreSearchFields .modern-input {
+    width: 100%;
+  }
+}
+
+
+/* ********************************************************************for table */
+/* Modern Table Styling */
+.modern-table th,
+.modern-table td {
+  padding: 0.75rem;
+  vertical-align: middle;
+}
+
+.custom-bg {
+  background-color: red !important;
+}
+
+.modern-table thead tr {
+  background-color: #f8f9fa;
+}
+
+.modern-table tbody tr:hover {
+  background-color: #7a00f5;
+  transition: background-color 0.2s ease;
+}
+
+.modern-table tbody tr:nth-child(even) {
+  background-color: #fb0cff !important;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.4em 0.6em;
+  border-radius: 0.4rem;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-wrapper {
+  border-radius: 0.5rem;
+  background-color: #fff;
+  padding: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.table th,
+.table td {
+  white-space: nowrap;
+  vertical-align: middle;
+  padding: 0.75rem;
+
+}
+
+th {
+  background-color: #b46bff !important;
+  /* linear-gradient(135deg, #d98bff,#9f59ff) ; */
+  color: white !important;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2 !important;
+}
+
+td {
+  /* background-color: ; */
+}
+
+tbody {
+  background-color: #faf5ff ;
+}
+
+.description {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+
+  .table th,
+  .table td {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .description {
+    max-width: 120px;
+  }
+
+  button.btn.modern-btn {
+    margin-top: 6px;
+  }
+}
+
+
+/* Make description wrap nicely on small screens */
+@media (max-width: 768px) {
+
+  .modern-table td,
+  .modern-table th {
+    white-space: nowrap;
+  }
+
+  .text-truncate {
+    white-space: normal !important;
+  }
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-wrapper {
+  border-radius: 0.5rem;
+  background-color: #fff;
+  padding: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.table th,
+.table td {
+  white-space: nowrap;
+  vertical-align: middle;
+  padding: 0.75rem;
+}
+
+.description {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+
+  .table th,
+  .table td {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .description {
+    max-width: 120px;
+  }
+}
+
+
+/* Fix select text overlapping with the dropdown arrow */
+.form-select {
+  padding-right: 2.5rem !important;
+  /* make space for the arrow */
+  min-height: 38px !important;
+  /* optional, keep height consistent with inputs */
+  font-size: 0.95rem !important;
+  /* optional, slightly smaller text */
+}
+
+/* Optional: prevent overlapping on small screens */
+@media (max-width: 576px) {
+  .form-select {
+    padding-right: 2.5rem;
+  }
+}
+
+/* Remove focus border and outline for inputs and selects */
+input.form-control:focus,
+select.form-select:focus,
+textarea.form-control:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: #ced4da;
+  /* optional: keep the normal border color */
+}
+
+.reset-btn {
+  background: linear-gradient(135deg, #dc3545, #fe7c96);
+}
+
+.red-bg {
+  background: linear-gradient(135deg, #fe7c96, #b66dff);
+  color: white;
+  text-align: center;
+}
+
+.green-bg {
+  background-color: linear-gradient(135deg,
+      #d98bff,
+      #9f59ff);
+}
+
+@media (max-width: 1000px) {
+
+
+  .table-container {
+    overflow: scroll;
+  }
+
+}

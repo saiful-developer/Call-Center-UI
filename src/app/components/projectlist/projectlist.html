@@ -1,8 +1,9 @@
 <div class="content-wrapper">
 
-  <app-page-header title="Incoming" iconClass="mdi-format-list-checkbox"></app-page-header>
+  <app-page-header title="Incoming Report" iconClass="mdi-format-list-checkbox"></app-page-header>
 
 
+  <!-- search option -->
   <div class="container-fluid">
     <div class="search-bar-wrapper">
       <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchForm"
@@ -70,16 +71,15 @@
         <button type="submit" class="btn modern-btn">
           <i class="bi bi-search me-1"></i> Search
         </button>
+        <button type="reset" class="btn modern-btn reset-btn">
+          <i class="bi bi-arrow-counterclockwise"></i>
+          Reset
+        </button>
       </form>
     </div>
   </div>
 
-
-
-
-
-
-  <div class="d-none d-md-block">
+  <div class="d-md-block table-container">
     <table class="table  table-hover  shadow-sm rounded">
       <thead class="">
         <tr>
@@ -108,8 +108,9 @@
           <td>{{ report.caller_queue_time ?? '-' }}</td>
           <td>{{ report.connect_ring_time ?? '-' }}</td>
           <td>{{ report.caller_agent_talk_time ?? '-' }}</td>
-          <td>{{ report.transfer_to ? 'Yes' : 'No' }}</td>
-          <td>{{ report.finished_by ?? '-' }}</td>
+          <td>{{ report.transfer_to ?? '-' }}</td>
+          <td class="" [ngClass]="{'green-bg' : report.completecaller}">{{ report.completecaller? 'Caller Finished' :
+            'Agent Finished' }}</td>
           <td>{{ report.disposition ?? '-' }}</td>
         </tr>
 
@@ -119,30 +120,7 @@
     </table>
   </div>
 
-  <!-- Mobile Card View -->
-  <!-- <div class="d-md-none">
-    <div *ngFor="let project of pagedListFromChild; let i = index" class="card shadow-sm mb-3">
-      <div class="card-body">
-        <h5 class="card-title">{{ project.project_title }}</h5>
-        <p class="mb-1"><strong>#{{ (currentPage - 1) * pageSize + i + 1 }}</strong></p>
-        <p class="mb-1"><strong>User:</strong> {{ project.user_name }} ({{ project.user_id }})</p>
-        <p class="mb-1"><strong>Role:</strong> {{ project.user_role }}</p>
-        <p class="mb-1"><strong>Email:</strong> {{ project.email }}</p>
-        <p class="mb-1"><strong>Type:</strong> {{ project.project_type }}</p>
-        <p class="mb-1"><strong>Assigned By:</strong> {{ project.assigned_by }}</p>
-        <p class="mb-1"><strong>Start:</strong> {{ project.start_time }}</p>
-        <p class="mb-1"><strong>End:</strong>
-          <span *ngIf="project.end_time; else ongoingMobile">{{ project.end_time }}</span>
-          <ng-template #ongoingMobile><span class="badge bg-success">Working</span></ng-template>
-        </p>
-        <p class="mb-1"><strong>Description:</strong> {{ project.project_description }}</p>
-        <p class="mb-0"><strong>Created:</strong> {{ project.created_at | date:'short' }}</p>
-      </div>
-    </div>
-  </div> -->
-
-
-  <app-paginator [projectList]="incomingReportsData" (pageChanged)="handlePageChange($event)"></app-paginator>
+  <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()" (prev)="prevPage()"></app-paginator>
 
 
 </div>

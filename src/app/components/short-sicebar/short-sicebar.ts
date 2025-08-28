@@ -46,7 +46,7 @@ export class ShortSicebar {
       icon: 'mdi-table-large',
       link: 'agent/reporsts/incoming',
       hoverItems: ['Incoming Report', 'Outgoing Report', 'Break', 'Login', 'Abandon', 'Ring No Answer'],
-      hoverItemsRouterLinks: ['agent/reporsts/incoming', 'agent/reporsts/outgoing']//need to add path respectivly
+      hoverItemsRouterLinks: ['agent/reports/incoming', 'agent/reports/outgoing']//need to add path respectivly
     },
     {
       icon: 'bi-person-lines-fill',
