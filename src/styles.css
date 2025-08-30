@@ -1,7 +1,7 @@
 /* Full page scrollbar customization */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 3px !important;
+  height: 3px !important;
 }
 
 ::-webkit-scrollbar-track {
@@ -10,11 +10,11 @@
 
 ::-webkit-scrollbar-thumb {
   background: #888;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: hsl(279, 90%, 63%);
 }
 
 /* For Firefox */

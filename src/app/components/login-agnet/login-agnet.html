@@ -1,36 +1,50 @@
-<div class="login-container">
-    <img src="assets/images/logo.png" alt="">
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<div class="login-container d-flex flex-column align-items-center justify-content-center">
+    <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 400px;">
+        <div class="text-center mb-4">
+            <img src="assets/images/logo.png" alt="Logo" class="img-fluid" style="max-height: 80px;">
+        </div>
 
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-        <!-- User ID Field -->
-        <div class="form-group">
-            <label for="userId">Login ID</label>
-            <input id="userId" formControlName="userId" type="text" placeholder="Enter User ID" />
-            <div *ngIf="submitted && loginForm.get('userId')?.invalid" class="error">
-                User ID is required.fasdsfas
+            <!-- User ID Field -->
+            <div class="mb-3">
+                <label for="userId" class="form-label">Login ID</label>
+                <input id="userId" formControlName="userId" type="text" placeholder="Enter User ID"
+                    class="form-control" />
+                <div *ngIf="submitted && loginForm.get('userId')?.invalid" class="text-danger mt-1">
+                    User ID is required.fasdsfas
+                </div>
             </div>
-        </div>
 
-        <!-- Extension Field -->
-        <div class="form-group">
-            <label for="extension">Extension</label>
-            <input id="extension" formControlName="extension" type="number" placeholder="Enter Extension" />
-            <div *ngIf="loginForm.get('extension')?.invalid">Extension is required.</div>
+            <!-- Extension Field -->
+            <div class="mb-3">
+                <label for="extension" class="form-label">Extension</label>
+                <input id="extension" formControlName="extension" type="number" placeholder="Enter Extension"
+                    class="form-control" />
+                <div *ngIf="loginForm.get('extension')?.invalid && loginForm.get('extension')?.touched" class="text-danger mt-1">
+                    Extension is required.
+                </div>
+            </div>
 
-        </div>
+            <!-- Password Field -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" formControlName="password" type="password" placeholder="Enter Password"
+                    class="form-control" />
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger mt-1">
+                    Password is required.
+                </div>
+            </div>
 
-        <!-- Password Field -->
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input id="password" formControlName="password" type="password" placeholder="Enter Password" />
-            <div *ngIf="loginForm.get('password')?.invalid">Password is required.</div>
-        </div>
+            <!-- Submit Button -->
+            <button type="submit" [disabled]="loginForm.invalid" class="btn w-100 py-2 fw-bold modern-btn">
+                Login
+            </button>
 
-        <!-- Submit Button -->
-        <button type="submit" [disabled]="loginForm.invalid">Login</button>
-
-        <!-- Error Message -->
-        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-    </form>
+            <!-- Error Message -->
+            <div *ngIf="errorMessage" class="text-danger text-center mt-3">
+                {{ errorMessage }}
+            </div>
+        </form>
+    </div>
 </div>
