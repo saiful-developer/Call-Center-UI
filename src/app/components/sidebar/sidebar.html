@@ -92,7 +92,7 @@
       </ul>
     </li>
 
-    <!-- Tables Dropdown -->
+    <!-- Reports Dropdown -->
     <li class="nav-item">
       <a class="nav-link" (click)="toggleMenu('reports')">
         <span class="menu-title">Reports</span>
@@ -107,20 +107,46 @@
           <a class="nav-link" routerLink="/agent/reports/outgoing">Outgoing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="">Break</a>
+          <a class="nav-link" routerLink="agent/reports/break">Break</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="">Login</a>
+          <a class="nav-link" routerLink="agent/reports/login">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="">Abandon</a>
+          <a class="nav-link" routerLink="agent/reports/abandon">Abandon</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="">Ring No Answer</a>
+          <a class="nav-link" routerLink="agent/reports/rna">Ring No Answer</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a>
         </li> -->
+      </ul>
+    </li>
+
+    <!-- Live Dropdown -->
+         <li class="nav-item">
+      <a class="nav-link" (click)="toggleMenu('live')">
+        <span class="menu-title">Live</span>
+        <i class="menu-arrow"></i>
+        <i class="bi bi-broadcast me-1 menu-icon"></i>
+      </a>
+      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'live'" [@slideInOut]>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/live/abandon-call">Abandon Calls</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/live/agent-status">Agent Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="agent/live/extension-status">Extension Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="agent/live/trunk-status">Trunk Status</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="agent/live/waiting-calls">Waiting Calls</a>
+        </li>
       </ul>
     </li>
 

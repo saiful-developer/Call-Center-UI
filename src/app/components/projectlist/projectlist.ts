@@ -9,7 +9,6 @@ import { Paginator } from '../paginator/paginator';
 import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
-
 export interface IncomingReportAPI {
   uniqueid: string;
   calldate?: string;
@@ -22,6 +21,7 @@ export interface IncomingReportAPI {
   transfer_to?: string;
   completecaller?: number;
   disposition?: string;
+  status: number
 }
 
 
@@ -34,32 +34,19 @@ export interface IncomingReportAPI {
   styleUrl: './projectlist.css'
 })
 export class Projectlist implements OnInit {
-  // [x: string]: any;
-
-  // searchResultProjectList: any[] = [];
+  isSearchMode = false;
   sl = 0;
-
   incomingReportsData: IncomingReportAPI[] = [];
+  campains: any[] = [];
 
-
-
-  //reactive form
-  searchForm = new FormGroup({
-    search_name: new FormControl(''),
-    search_id: new FormControl(''),
-    search_role: new FormControl(''),
-    search_email: new FormControl(''),
-    search_project_title: new FormControl(''),
-    search_prject_type: new FormControl(''),
-    search_assigned_by: new FormControl(''),
-
-  });
+  offset = 0;
+  limit = 30;
+  hasMore = true;
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private apiService: ApiService
+    private apiService: ApiService,
   ) { }
-
 
   getIncomingReport(): void {
     //get loginid form the sesson storage
@@ -73,77 +60,105 @@ export class Projectlist implements OnInit {
 
     this.apiService.incomingReport(user, this.limit, this.offset).subscribe({
       next: (res) => {
-        if (res.success === 'YES' && Array.isArray(res.data)) {
-          this.incomingReportsData = res.data.map((item: IncomingReportAPI) => ({
-            uniqueid: item.uniqueid,
-            calldate: item.calldate || '',
-            src: item.src,
-            dst: item.dst || '',
-            campaign: item.campaign || '',
-            caller_queue_time: item.caller_queue_time || '',
-            connect_ring_time: item.connect_ring_time || '',
-            caller_agent_talk_time: item.caller_agent_talk_time || '',
-            transfer_to: item.transfer_to ? 'Yes' : 'No',
-            completecaller: item.completecaller || '',
-            disposition: item.disposition || ''
-          }));
-        } else {
-          this.incomingReportsData = [];
-        }
-
-        console.log(res)
-        this.cdr.detectChanges();
+        this.formatIncomingReportsData(res);
       },
       error: err => console.error('Error fetching project data:', err)
     });
   }
 
+  loadCampainList() {
+    this.apiService.loadCampaigns().subscribe({
+      next: (res: any) => {
 
-  offset = 0;
-  limit = 15;
-  hasMore = true;
+        const parseCampainData = JSON.parse(res.data);
+        this.campains = parseCampainData.rows;
+      },
+      error: (err) => {
+
+      }
+    })
+  }
+
+
+
   ngOnInit() {
     this.getIncomingReport()
-
+    this.loadCampainList()
+    this.getIncomingBySearch()
   }
 
   nextPage() {
     this.offset += this.limit;
-    this.getIncomingReport();
+    this.sl += this.limit;
+    if (this.isSearchMode) {
+      this.getIncomingBySearch(); // fetch next page of search results
+    } else {
+      this.getIncomingReport(); // fetch next page of default list
+    }
   }
 
   prevPage() {
     if (this.offset >= this.limit) {
       this.offset -= this.limit;
-      this.getIncomingReport();
+      this.sl -= this.limit;
+      if (this.isSearchMode) {
+        this.getIncomingBySearch(); // fetch next page of search results
+      } else {
+        this.getIncomingReport(); // fetch next page of default list
+      }
     }
   }
-  getSearchedResult() {
-    // console.log(this.searchForm.value)
-    // const { search_name, search_id, search_role, search_email, search_project_title, search_prject_type, search_assigned_by } = this.searchForm.value;
 
-    // this.http.get<any[]>('http://localhost:3000/call-center/agent/search-result', {
-    //   params: {
-    //     search_name: search_name ?? '',
-    //     search_id: search_id ?? '',
-    //     search_role: search_role ?? '',
-    //     search_email: search_email ?? '',
-    //     search_project_title: search_project_title ?? '',
-    //     search_prject_type: search_prject_type ?? '',
-    //     search_assigned_by: search_assigned_by ?? ''
-
-    //   }
-    // }).subscribe({
-    //   next: (response) => {
-    //     this.projects = Array.isArray(response) ? response : [response];
-    //     console.log(this.projects);
-    //   },
-    //   error: (error) => {
-    //     console.log(error)
-    //   }
-    // })
-
+  resetSearch() {
+    this.searchFormIncoming.reset();
+    this.offset = 0;
+    this.sl = 0;
+    this.isSearchMode = false;
+    this.getIncomingReport();
   }
+
+  //reactive form
+  searchFormIncoming = new FormGroup({
+    caller: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+    campain: new FormControl(''),
+    status: new FormControl('')
+  });
+
+  getIncomingBySearch() {
+
+    // this.sl = 0;
+    // this.offset = 0
+    this.isSearchMode = true
+
+    let agent = '';
+    const campain = this.searchFormIncoming.value.campain || '';
+    const fromDate = this.searchFormIncoming.value.fromDate || '';
+    const toDate = this.searchFormIncoming.value.toDate || '';
+    const srcNameber = this.searchFormIncoming.value.caller || '';
+    const status = this.searchFormIncoming.value.status || '';
+
+    const userInfo = sessionStorage.getItem('user')
+    if (userInfo) {
+      const parsedUserInfo = JSON.parse(userInfo)
+      agent = parsedUserInfo.loginid;
+    }
+
+    this.apiService.incomingBySearch(agent, campain, fromDate, toDate, srcNameber, status, this.limit, this.offset, 1).subscribe({
+      next: (res) => {
+        this.formatIncomingReportsData(res);
+        console.log(res);
+        
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+
+
 
   pagedListFromChild: any[] = [];
   currentPage: number = 1;
@@ -155,11 +170,29 @@ export class Projectlist implements OnInit {
     this.pageSize = event.pageSize;
   }
 
+  //for initial load and search result
+  formatIncomingReportsData(res: any) {
+    if (res.success === 'YES' && Array.isArray(res.data)) {
+      this.incomingReportsData = res.data.map((item: IncomingReportAPI, index: number) => ({
+        sl: this.offset + index + 1,
+        uniqueid: item.uniqueid,
+        calldate: item.calldate || '',
+        src: item.src,
+        dst: item.dst || '',
+        campaign: item.campaign || '',
+        caller_queue_time: item.caller_queue_time || '',
+        connect_ring_time: item.connect_ring_time || '',
+        caller_agent_talk_time: item.caller_agent_talk_time || '',
+        transfer_to: item.transfer_to ? 'Yes' : 'No',
+        completecaller: item.completecaller || '',
+        disposition: item.disposition || '',
+        status: item.status || ''
+      }));
+    } else {
+      this.incomingReportsData = [];
+    }
 
-
-
-
-
-
+    this.cdr.detectChanges();
+  }
 
 }

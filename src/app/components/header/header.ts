@@ -2,14 +2,14 @@ import { Component, EventEmitter, OnInit, Output, signal } from '@angular/core';
 import { SidebarService } from '../../services/sidebar-service';
 import { CommonModule, NgClass } from '@angular/common';
 import { AgentData, JwtPayload } from '../../models/agent.model';
-
+//components
 import { UserService } from '../../services/user.service';
-// import { NgIf } from "../../../../node_modules/@angular/common/common_module.d";
+import { LogoutModal } from '../logout-modal/logout-modal';
 
 
 @Component({
   selector: 'app-header',
-  imports: [NgClass, CommonModule],
+  imports: [NgClass, CommonModule, LogoutModal],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })

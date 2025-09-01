@@ -42,11 +42,17 @@ export class ShortSicebar {
       hoverItems: ['Charts'],
       hoverItemsRouterLinks: ['/agent/chartjs']
     },
-    {
+    { 
       icon: 'mdi-table-large',
-      link: 'agent/reporsts/incoming',
+      link: 'agent/reports/incoming',
       hoverItems: ['Incoming Report', 'Outgoing Report', 'Break', 'Login', 'Abandon', 'Ring No Answer'],
-      hoverItemsRouterLinks: ['agent/reports/incoming', 'agent/reports/outgoing']//need to add path respectivly
+      hoverItemsRouterLinks: ['agent/reports/incoming', 'agent/reports/outgoing', 'agent/reports/break', 'agent/reports/login', 'agent/reports/abandon', 'agent/reports/rna']//need to add path respectivly
+    },
+    {
+      icon: 'bi bi-broadcast me-1',
+      link: 'agent/live/abandon',
+      hoverItems: ['Abandon Calls', 'Agent Status', 'Extension Status', 'Trunk Status', 'Waiting Calls'],
+      hoverItemsRouterLinks: ['agent/live/abandon-call', 'agent/live/agent-status', 'agent/live/extension-status', 'agent/live/trunk-status', 'agent/live/waiting-calls']
     },
     {
       icon: 'bi-person-lines-fill',
@@ -72,13 +78,15 @@ export class ShortSicebar {
       hoverItems: ['Settings'],
       hoverItemsRouterLinks: ['/agent/settings']
     },
-    {
-      icon: 'bi-box-arrow-right',
-      link: '/agent/logout ',
-      hoverItems: ['Logout'],
-      hoverItemsRouterLinks: ['/logout']  
-    }
+    // {
+    //   icon: 'bi-box-arrow-right',
+    //   link: '/agent/logout ',
+    //   hoverItems: ['Logout'],
+    //   hoverItemsRouterLinks: ['/']  
+    // }
   ]
+
+
 
 }
 // /mdi-alert-circle-outline

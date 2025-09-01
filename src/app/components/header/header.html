@@ -1,10 +1,14 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-  <div class="text-center navbar-brand-wrapper d-flex align-items-center custom-height" [ngClass]="{'remove-width' : sidebaropen}" >
-    <a id="bigLogo" [ngClass]="{ 'remove-big-logo': sidebaropen }" class="navbar-brand brand-logo" href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
-    <a class="navbar-brand brand-logo-mini" [ngClass]="{ 'add-small-logo': sidebaropen }" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" class="small-logo-img"/></a>
+  <div class="text-center navbar-brand-wrapper d-flex align-items-center custom-height"
+    [ngClass]="{'remove-width' : sidebaropen}">
+    <a id="bigLogo" [ngClass]="{ 'remove-big-logo': sidebaropen }" class="navbar-brand brand-logo"
+      href="index.html"><img src="assets/images/logo.svg" alt="logo" /></a>
+    <a class="navbar-brand brand-logo-mini" [ngClass]="{ 'add-small-logo': sidebaropen }" href="index.html"><img
+        src="assets/images/logo-mini.svg" alt="logo" class="small-logo-img" /></a>
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-stretch" [ngClass]="{'add-width' : sidebaropen}">
-    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize" (click)="onToggleSidebar()">
+    <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize"
+      (click)="onToggleSidebar()">
       <span class="mdi mdi-menu"></span>
     </button>
     <div class="search-field d-none d-md-block">
@@ -25,7 +29,7 @@
             <img src="assets/images/faces/face1.jpg" alt="image">
             <span class="availability-status online"></span>
           </div>
-          <div class="nav-profile-text" >
+          <div class="nav-profile-text">
             <p class="mb-1 text-black">{{ decodedToken?.name }}</p>
           </div>
         </a>
@@ -33,7 +37,7 @@
           <a class="dropdown-item" href="#">
             <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" (click)="logoutModal.open()">
             <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
         </div>
       </li>
@@ -144,8 +148,11 @@
         </a>
       </li> -->
     </ul>
-    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas" (click)="onToggleSidebar()">
+    <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+      data-toggle="offcanvas" (click)="onToggleSidebar()">
       <span class="mdi mdi-menu"></span>
     </button>
   </div>
 </nav>
+
+<app-logout-modal #logoutModal></app-logout-modal>

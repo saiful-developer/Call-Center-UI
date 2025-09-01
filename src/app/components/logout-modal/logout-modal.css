@@ -1,0 +1,14 @@
+.modal {
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 2001;
+    /* black shadow */
+}
+
+.modal-dialog {
+    
+    margin: 0;
+    position: fixed;
+    top: 34%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}

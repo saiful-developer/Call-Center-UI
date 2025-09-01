@@ -3,8 +3,6 @@ import { HttpInterceptorFn } from '@angular/common/http';
 export const httpHeaderInterceptor: HttpInterceptorFn = (req, next) => {
 
 
-  console.log('interceptor:', req.url);
-
   // debugger
 
   //save token after login

@@ -12,6 +12,6 @@
       <router-outlet></router-outlet>
       <app-footer *ngIf="!isAuthRoute"></app-footer>
     </div>
-    <app-floating-action-btn></app-floating-action-btn>
+    <app-floating-action-btn *ngIf="!isAuthRoute"></app-floating-action-btn>
   </div>
 </div>

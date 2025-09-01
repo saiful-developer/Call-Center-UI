@@ -1,0 +1,40 @@
+<div class="content-wrapper">
+    <app-page-header title="Abandon Calls" iconClass="bi bi-telephone-x-fill"></app-page-header>
+
+    <!-- outgoing table -->
+    <div class="d-md-block table-container">
+        <table class="table  table-hover  shadow-sm rounded">
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th>UniqueID</th>
+                    <th>Enterqueue Time</th>
+                    <th>Caller</th>
+                    <th>Hunting</th>
+                    <th>Campaign</th>
+                    <th>Queue Time</th>
+                    <th>Hangup Time</th>
+                    <th>Callback</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of abandonCallData; let i = index">
+                    <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.uniqueid }}</td>
+                    <td>{{ report.enterqueue_time }}</td>
+                    <td>{{ report.src }}</td>
+                    <td>{{ report.dst }}</td>
+                    <td>{{ report.campaign }}</td>
+                    <td>{{ report.queue_duration }}</td>
+                    <td>{{ report.hangup_time }}</td>
+                    <td>{{ report.callback }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
+        (prev)="prevPage()"></app-paginator>
+
+</div>

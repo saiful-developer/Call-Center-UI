@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 
 // components
@@ -30,36 +30,40 @@ export interface OutgoingReportsData {
 })
 export class OutgoingReports implements OnInit {
 
-  //reactive form
-  searchForm = new FormGroup({
-    search_name: new FormControl(''),
-    search_id: new FormControl(''),
-    search_role: new FormControl(''),
-    search_email: new FormControl(''),
-    search_project_title: new FormControl(''),
-    search_prject_type: new FormControl(''),
-    search_assigned_by: new FormControl(''),
+  campains: any[] = [];
+  isSearchMode = false;
 
-  });
-  getSearchedResult() {
-    let searchFildData = this.searchForm.value;
-    console.log(searchFildData)
-   }
+
+  loadCampainList() {
+    this.apiService.loadCampaigns().subscribe({
+      next: (res: any) => {
+
+        const parseCampainData = JSON.parse(res.data);
+        this.campains = parseCampainData.rows;
+
+      },
+      error: (err) => {
+
+      }
+    })
+  }
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private cdr: ChangeDetectorRef,
   ) {
 
   }
 
   ngOnInit(): void {
     this.loadOutgoingData();
+    this.loadCampainList()
   }
 
   outgoingReportsData: OutgoingReportsData[] = [];
-
+  sl = 0;
   offset = 0;
-  limit = 15;
+  limit = 30;
   hasMore = true;
   loadOutgoingData() {
     //get user id
@@ -72,24 +76,8 @@ export class OutgoingReports implements OnInit {
 
     this.apiService.outgoingReport(user, this.limit, this.offset).subscribe({
       next: (res) => {
+        this.formatOutgoingReportsData(res)
         console.log(res)
-
-        if (res.success === 'YES' && Array.isArray(res.data)) {
-          this.outgoingReportsData = res.data.map((item: OutgoingReportsData) => ({
-            uniqueid: item.uniqueid,
-            calldate: item.calldate || '',
-            extension: item.extension,
-            phone: item.phone || '',
-            campaign: item.campaign || '',
-            ring_time: item.ring_time || '',
-            duration: item.duration || '',
-            status: item.status || '',
-            transfer: item.transfer ? 'Yes' : 'No',
-            disposition: item.disposition || ''
-          }));
-        } else {
-          this.outgoingReportsData = [];
-        }
       },
 
       error: (err) => {
@@ -99,15 +87,68 @@ export class OutgoingReports implements OnInit {
     })
   }
 
+  searchFormOutgoing = new FormGroup({
+    extension: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+    campain: new FormControl(''),
+    status: new FormControl('')
+  });
+
+  getOutgoingSearch() {
+    this.isSearchMode = true;
+
+    let agent = '';
+    const campain = this.searchFormOutgoing.value.campain || '';
+    const fromDate = this.searchFormOutgoing.value.fromDate || '';
+    const toDate = this.searchFormOutgoing.value.toDate || '';
+    const extension = this.searchFormOutgoing.value.extension || '';
+    const status = this.searchFormOutgoing.value.status || '';
+
+    const userInfo = sessionStorage.getItem('user')
+    if (userInfo) {
+      const parsedUserInfo = JSON.parse(userInfo)
+      agent = parsedUserInfo.loginid;
+    }
+
+    this.apiService.outgoingBySearch(agent, campain, fromDate, toDate, extension, status, this.limit, this.offset, 1).subscribe({
+      next: (res) => {
+        this.formatOutgoingReportsData(res);
+        console.log(res)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  resetSearch() {
+    this.searchFormOutgoing.reset();
+    this.offset = 0;
+    this.sl = 0;
+    this.isSearchMode = false;
+    this.loadOutgoingData();
+  }
+
   nextPage() {
     this.offset += this.limit;
-    this.loadOutgoingData();
+    this.sl += this.limit;
+    if (this.isSearchMode) {
+      this.getOutgoingSearch(); // fetch next page of search results
+    } else {
+      this.loadOutgoingData(); // fetch next page of default list
+    }
   }
 
   prevPage() {
     if (this.offset >= this.limit) {
       this.offset -= this.limit;
-      this.loadOutgoingData ();
+      this.sl -= this.limit;
+      if (this.isSearchMode) {
+        this.getOutgoingSearch(); // fetch next page of search results
+      } else {
+        this.loadOutgoingData(); // fetch next page of default list
+      }
     }
   }
 
@@ -119,6 +160,30 @@ export class OutgoingReports implements OnInit {
     this.pagedListFromChild = event.pagedList;
     this.currentPage = event.currentPage;
     this.pageSize = event.pageSize;
+  }
+
+
+  //for initial load and search result
+  formatOutgoingReportsData(res: any) {
+    // let totalCount = 0;
+    if (res.success === 'YES' && Array.isArray(res.data)) {
+      this.outgoingReportsData = res.data.map((item: OutgoingReportsData) => ({
+        uniqueid: item.uniqueid,
+        calldate: item.calldate || '-',
+        extension: item.extension,
+        phone: item.phone || '-',
+        campaign: item.campaign || '-',
+        ring_time: item.ring_time || '-',
+        duration: item.duration || '-',
+        status: item.status || '',
+        transfer: item.transfer ? 'Yes' : 'No',
+        disposition: item.disposition || '-'
+      }));
+    } else {
+      this.outgoingReportsData = [];
+    }
+
+    this.cdr.detectChanges();
   }
 
 }

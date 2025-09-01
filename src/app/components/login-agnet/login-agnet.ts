@@ -42,8 +42,6 @@ export class LoginAgnet {
     this.apiService.loginAgent(userId, password, extension).subscribe({
       next: (res: any) => {
         const parseedToken = JSON.parse(res.data)
-        console.log(parseedToken.token);
-        console.log(parseedToken);
         sessionStorage.setItem('user', JSON.stringify(parseedToken))
         sessionStorage.setItem('jwt', parseedToken.token)
         this.router.navigateByUrl('/agent/dashboard');
@@ -51,6 +49,7 @@ export class LoginAgnet {
       error: (err) => {
         console.error(err);
         this.errorMessage = 'Login failed. Please check credentials.';
+        window.alert(this.errorMessage)
       }
     });
   }
