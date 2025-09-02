@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 //comspnents
 import { PageHeader } from '../page-header/page-header';
 import { Paginator } from '../paginator/paginator';
+import { errorContext } from 'rxjs/internal/util/errorContext';
 
 export interface Break {
   queuename: string,
@@ -34,6 +35,7 @@ export class BreakReports implements OnInit {
 
   campains: any[] = [];
   breakReportList: any[] = [];
+  breakTypeList: any[] = [];
 
   constructor(
     private apiService: ApiService,
@@ -43,6 +45,7 @@ export class BreakReports implements OnInit {
   ngOnInit(): void {
     this.loadBreakReports()
     this.loadCampainList()
+    this.loadBreakType()
   }
 
   loadBreakReports() {
@@ -50,13 +53,43 @@ export class BreakReports implements OnInit {
     this.apiService.BreakReports(userAgent, this.limit, this.offset).subscribe({
       next: (res) => {
         this.formateBreakData(res);
-        console.log(res)
+        // console.log(res)
       },
       error: (err) => {
         console.log(err);
       }
     })
   }
+
+  loadBreakType() {
+    this.apiService.breakType().subscribe({
+      next: (res: any) => {
+        console.log(res)
+        const parseRes = JSON.parse(res.data);
+        console.log(parseRes.rows)
+        this.getBreakNameMapping(parseRes.rows)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+  }
+
+  getBreakNameMapping(breakTypeObjList: any[]) {
+    console.log('initital list', this.breakReportList);
+    // Step 1: create a map from breakType IDs to names
+    const breakTypeMap = new Map<number, string>();
+    breakTypeObjList.forEach(bt => breakTypeMap.set(bt.id, bt.name));
+
+    // Step 2: add breakName to each report
+    this.breakReportList = this.breakReportList.map(report => ({
+      ...report,
+      breakName: breakTypeMap.get(report.pause_code) || "Unknown Break"
+    }));
+
+    console.log('final list', this.breakReportList);
+  }
+
 
   getAgent(): string {
     const userInfo = sessionStorage.getItem('user')
@@ -112,7 +145,7 @@ export class BreakReports implements OnInit {
         this.campains = parseCampainData.rows;
       },
       error: (err) => {
-
+        console.log(err)
       }
     })
   }

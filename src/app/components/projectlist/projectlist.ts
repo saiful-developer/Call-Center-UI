@@ -74,7 +74,7 @@ export class Projectlist implements OnInit {
         this.campains = parseCampainData.rows;
       },
       error: (err) => {
-
+        console.log(err)
       }
     })
   }

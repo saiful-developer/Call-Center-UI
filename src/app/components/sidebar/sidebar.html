@@ -125,7 +125,7 @@
     </li>
 
     <!-- Live Dropdown -->
-         <li class="nav-item">
+    <li class="nav-item">
       <a class="nav-link" (click)="toggleMenu('live')">
         <span class="menu-title">Live</span>
         <i class="menu-arrow"></i>
@@ -150,12 +150,20 @@
       </ul>
     </li>
 
+    <!-- address book -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/agent/address-book" (click)="onToggleSidebar()">
+        <span class="menu-title">Address Book</span>
+        <i class="bi-person-lines-fill menu-icon"></i>
+      </a>
+    </li>
+
     <!-- About Dropdown -->
     <li class="nav-item">
       <a class="nav-link" (click)="toggleMenu('about')">
         <span class="menu-title">About</span>
         <i class="menu-arrow"></i>
-        <i class="mdi bi-person-lines-fill menu-icon"></i>
+        <i class="bi bi-info-circle menu-icon"></i>
       </a>
       <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'about'" [@slideInOut]>
         <li class="nav-item">
@@ -171,7 +179,7 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/agent/faq">
         <span class="menu-title">FAQ</span>
-        <i class="mdi mdi-alert-circle-outline menu-icon"></i>
+        <i class="bi bi-question-circle menu-icon"></i>
       </a>
     </li>
 

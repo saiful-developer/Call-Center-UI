@@ -1,1 +1,36 @@
-<p>extension-status-live works!</p>
+<div class="content-wrapper">
+    <app-page-header title="Active Extension" iconClass="bi bi-telephone-fill"></app-page-header>
+
+    <!-- outgoing table -->
+    <div class="d-md-block table-container">
+        <table class="table  table-hover  shadow-sm rounded">
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th>Extension</th>
+                    <th>IP & Port</th>
+                    <th>Status</th>
+                    <th>Datetime</th>
+                    <th>StatusText</th>
+                    <th>Context</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of extensionStatusData; let i = index">
+                    <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.Exten }}</td>
+                    <td>{{ report.Address }}</td>
+                    <td>{{ report.PeerStatus }}</td>
+                    <td>{{ report.datetime }}</td>
+                    <td>{{ report.StatusText }}</td>
+                    <td>{{ report.Context }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
+        (prev)="prevPage()"></app-paginator>
+
+</div>

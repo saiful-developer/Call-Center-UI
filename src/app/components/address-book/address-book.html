@@ -1,0 +1,34 @@
+<div class="content-wrapper">
+    <app-page-header title="Abandon Report" iconClass="mdi-format-list-checkbox"></app-page-header>
+
+    <!-- outgoing table -->
+    <div class="d-md-block table-container">
+        <table class="table  table-hover  shadow-sm rounded">
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Office Number</th>
+                    <th>Other Number</th>
+                    <th>Email</th>
+                    <th>Note</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of addressBookData; let i = index">
+                    <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.name }}</td>
+                    <td>{{ report.phone }}</td>
+                    <td>{{ report.office_number }}</td>
+                    <td>{{ report.other_number }}</td>
+                    <td>{{ report.email }}</td>
+                    <td>{{ report.description }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
+        (prev)="prevPage()"></app-paginator>
+</div>

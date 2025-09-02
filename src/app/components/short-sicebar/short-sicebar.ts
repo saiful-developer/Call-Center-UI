@@ -56,12 +56,18 @@ export class ShortSicebar {
     },
     {
       icon: 'bi-person-lines-fill',
+      link: 'agent/address-book',
+      hoverItems: ['Address Book'],
+      hoverItemsRouterLinks: ['agent/address-book']
+    },
+    {
+      icon: 'bi bi-info-circle',
       link: 'agent/aboutus',
       hoverItems: ['About Us', 'Timeline'],
       hoverItemsRouterLinks: ['agent/aboutus', 'agent/timeline']
     },
     {
-      icon: 'mdi-alert-circle-outline',
+      icon: 'bi bi-question-circle',
       link: 'agent/faq',
       hoverItems: ['FAQ'],
       hoverItemsRouterLinks: ['agent/faq']

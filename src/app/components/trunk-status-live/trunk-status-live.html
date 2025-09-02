@@ -1,1 +1,37 @@
-<p>trunk-status-live works!</p>
+<div class="content-wrapper">
+    <app-page-header title="Break Report" iconClass="mdi-format-list-checkbox"></app-page-header>
+
+    <div class="d-md-block table-container">
+        <table class="table  table-hover  shadow-sm rounded">
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th>Campaign</th>
+                    <th>Extension</th>
+                    <th>Break Type</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Duration (Second)</th>
+                    <th>Last Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of trunkStatusData; let i = index">
+                    <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.Username }}</td>
+                    <td>{{ report.Domain }}</td>
+                    <td>{{ report.Status }}</td>
+                    <td>{{ report.Event }}</td>
+                    <td>{{ report.Privilege }}</td>
+                    <td>{{ report.ChannelType }}</td>
+                    <td>{{ report.datetime }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
+        (prev)="prevPage()"></app-paginator>
+
+</div>

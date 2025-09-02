@@ -1,1 +1,40 @@
-<p>waiting-calls-live works!</p>
+<div class="content-wrapper">
+    <app-page-header title="Queue Waiting Calls" iconClass="bi bi-arrow-repeat"></app-page-header>
+
+    <div class="d-md-block table-container">
+        <table class="table  table-hover  shadow-sm rounded" >
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th>Campaign</th>
+                    <th>Extension</th>
+                    <th>Break Type</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Duration (Second)</th>
+                    <th>Last Response</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="witingCallData.length">
+                <tr *ngFor="let report of witingCallData; let i = index">
+                    <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.UniqueID }}</td>
+                    <td>{{ report.Calldate }}</td>
+                    <td>{{ report.Caller }}</td>
+                    <td>{{ report.Campaign }}</td>
+                    <td>{{ report.Channel }}</td>
+                    <td>{{ report.Position }}</td>
+                </tr>
+            </tbody>
+            <p *ngIf="!witingCallData.length" class="error-massage">
+                DATA NOT FOUND
+            </p>
+        </table>
+
+
+    </div>
+
+    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
+        (prev)="prevPage()"></app-paginator>
+
+</div>

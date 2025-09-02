@@ -83,6 +83,10 @@ export class ApiService {
     });
   }
 
+  breakType() {
+    return this.http.get<any[]>(`${this.baseUrl}/api/v1/agent/break/breaktype`);
+  }
+
   BreakReportsSearch(agent: string, campaign: string, fromDate: string, toDate: string, limit: number, offset: number, page: number) {
     return this.http.post<any>(`${this.baseUrl}/api/v1/agent/break/getAgentBreakOnFilter`, {
       agent: agent,
@@ -144,10 +148,36 @@ export class ApiService {
     })
   }
 
+
+  //*************** LIVE ***************
+
   abandonCallStatus(campaign: string[]) {
     return this.http.post<any>(`${this.baseUrl}/api/v1/agent/incoming/abandonCallOnCampaign`, {
       campaign: campaign
     });
   }
 
+  agentStatus() {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/live/agent`, {});
+  }
+
+  extensionStatus() {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/live/extension`, {});
+  }
+
+  trunkStatus() {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/live/trunk`, {})
+  }
+
+  waitingCalls() {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/live/queuewaitcall`, {})
+  }
+
+
+  // address book data
+  addressBook(campaign: string[]) {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/addressbook/listOnCampaignID`, {
+      campaign: campaign
+    });
+  }
 }

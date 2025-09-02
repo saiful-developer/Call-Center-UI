@@ -4,25 +4,22 @@ import { PageHeader } from '../page-header/page-header';
 import { CommonModule } from '@angular/common';
 import { Paginator } from '../paginator/paginator';
 
-export interface AbandonCallData {
-  uniqueid: string;
-  enterqueue_time: string;
-  src: string;
-  dst: string;
-  campaign: string;
-  queue_duration: number;
-  hangup_time: string;
-  callback: number;
+export interface AddressBookData {
+  name: string,
+  phone: string,
+  office_number: string,
+  other_number: string,
+  email: string,
+  description: string
 }
 
-
 @Component({
-  selector: 'app-abandon-calls-live',
+  selector: 'app-address-book',
   imports: [PageHeader, CommonModule, Paginator],
-  templateUrl: './abandon-calls-live.html',
-  styleUrl: './abandon-calls-live.css'
+  templateUrl: './address-book.html',
+  styleUrl: './address-book.css'
 })
-export class AbandonCallsLive implements OnInit {
+export class AddressBook implements OnInit {
   limit = 50;
   offset = 0;
   sl = 0;
@@ -30,7 +27,7 @@ export class AbandonCallsLive implements OnInit {
   totalCount = 0;
   hasMore = true;
 
-  abandonCallData: any[] = [];
+  addressBookData: AddressBookData[] = [];
   campains: string[] = [];
 
   constructor(
@@ -42,14 +39,12 @@ export class AbandonCallsLive implements OnInit {
     this.loadCampainList()
   }
 
-  loadAbandonCall() {
-    this.apiService.abandonCallStatus(this.campains).subscribe({
+  LoadAddressBook() {
+    this.apiService.addressBook(this.campains).subscribe({
       next: (res) => {
         console.log(this.campains)
-        console.log();
-        
-        console.log(res)
-        this.formateAbandonCallData(res);
+        console.log(res);
+        this.formateData(res);
       },
       error: (err) => {
         console.log(err)
@@ -62,7 +57,7 @@ export class AbandonCallsLive implements OnInit {
       next: (res: any) => {
         const parseCampainData = JSON.parse(res.data);
         this.campains = parseCampainData.rows.map((c: any) => c.campaign_id);
-        this.loadAbandonCall()
+        this.LoadAddressBook()
       },
       error: (err) => {
         console.log(err);
@@ -70,10 +65,10 @@ export class AbandonCallsLive implements OnInit {
     })
   }
 
-  formateAbandonCallData(res: any) {
+  formateData(res: any) {
     try {
       if (res.success === 'YES' && res.data) {
-        let rows: AbandonCallData[] = [];
+        let rows: AddressBookData[] = [];
         // this.totalCount = 0;
 
         // Check if res.data is a string (initial load)
@@ -82,7 +77,7 @@ export class AbandonCallsLive implements OnInit {
           if (parsedData && Array.isArray(parsedData.rows)) {
             rows = parsedData.rows;
             this.totalCount = parsedData.count;
-            
+
           }
         }
         // If res.data is already an array (search)
@@ -93,25 +88,23 @@ export class AbandonCallsLive implements OnInit {
         // console.log(totalCount)
 
         // Map to your table format
-        this.abandonCallData = rows.map((item: AbandonCallData) => ({
-          uniqueid: item.uniqueid || '',
-          enterqueue_time: item.enterqueue_time || '',
-          src: item.src || '',
-          dst: item.dst || '',
-          campaign: item.campaign || '',
-          queue_duration: item.queue_duration || 0,
-          hangup_time: item.hangup_time || '',
-          callback: item.callback || 0
+        this.addressBookData = rows.map((item: AddressBookData) => ({
+          name: item.name || '',
+          phone: item.phone || '',
+          office_number: item.office_number || '',
+          other_number: item.other_number || '',
+          email: item.email || '',
+          description: item.description || ''
         }));
         // Update paginator info
         this.hasMore = (this.offset + this.limit) < this.totalCount;
       } else {
-        this.abandonCallData = [];
+        this.addressBookData = [];
         this.hasMore = false;
       }
     } catch (error) {
       console.error(error);
-      this.abandonCallData = [];
+      this.addressBookData = [];
       this.hasMore = false;
     }
 
@@ -119,36 +112,21 @@ export class AbandonCallsLive implements OnInit {
   }
 
   nextPage() {
-  const nextOffset = this.offset + this.limit;
-
-  console.log('nextOffset: ', nextOffset);
-  console.log('offset: ', this.offset);
-  console.log('next offset: ', nextOffset);
-  console.log('limit: ', this.limit);
-  console.log('total count', this.totalCount);
-  
-  
-  // Check if next offset exceeds total count
-  if (nextOffset < this.totalCount) {
-    this.offset = nextOffset;
-    this.sl += this.limit;
-    this.loadAbandonCall();
-  }
+    const nextOffset = this.offset + this.limit;
+    // Check if next offset exceeds total count
+    if (nextOffset < this.totalCount) {
+      this.offset = nextOffset;
+      this.sl += this.limit;
+      this.LoadAddressBook();
+    }
   }
 
   prevPage() {
-
-
-  if (this.offset >= this.limit) {
-    this.offset -= this.limit;
-    this.sl -= this.limit;
-    this.loadAbandonCall();
-  }
-        console.log('offset: ', this.offset);
-  // console.log('next offset: ', nextOffset);
-  console.log('limit: ', this.limit);
-  console.log('total count', this.totalCount);
-
+    if (this.offset >= this.limit) {
+      this.offset -= this.limit;
+      this.sl -= this.limit;
+      this.LoadAddressBook();
+    }
   }
 
 }
