@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 //comspnents
 import { PageHeader } from '../page-header/page-header';
 import { Paginator } from '../paginator/paginator';
-import { errorContext } from 'rxjs/internal/util/errorContext';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 export interface Break {
   queuename: string,
@@ -21,7 +21,7 @@ export interface Break {
 
 @Component({
   selector: 'app-break-reports',
-  imports: [CommonModule, PageHeader, Paginator, ReactiveFormsModule],
+  imports: [CommonModule, PageHeader, Paginator, ReactiveFormsModule, StickyTableHeaderDirective],
   templateUrl: './break-reports.html',
   styleUrl: './break-reports.css'
 })
@@ -64,7 +64,7 @@ export class BreakReports implements OnInit {
   loadBreakType() {
     this.apiService.breakType().subscribe({
       next: (res: any) => {
-        console.log(res)
+        // console.log(res)
         const parseRes = JSON.parse(res.data);
         console.log(parseRes.rows)
         this.getBreakNameMapping(parseRes.rows)
@@ -77,9 +77,11 @@ export class BreakReports implements OnInit {
 
   getBreakNameMapping(breakTypeObjList: any[]) {
     console.log('initital list', this.breakReportList);
-    // Step 1: create a map from breakType IDs to names
+
+    //create a map from breakType IDs to names
     const breakTypeMap = new Map<number, string>();
     breakTypeObjList.forEach(bt => breakTypeMap.set(bt.id, bt.name));
+    console.log('new break map', breakTypeMap)
 
     // Step 2: add breakName to each report
     this.breakReportList = this.breakReportList.map(report => ({
@@ -100,7 +102,7 @@ export class BreakReports implements OnInit {
     }
     return '';
   }
-
+  today = new Date().toISOString().split('T')[0];  // "2025-09-03"
   searchFormBreak = new FormGroup({
     fromDate: new FormControl(''),
     toDate: new FormControl(''),
@@ -109,11 +111,20 @@ export class BreakReports implements OnInit {
 
   getBreakSearch() {
     this.isSearchMode = true;
-    console.log(this.searchFormBreak.value)
+
+    // Check fromDate
+    if (!this.searchFormBreak.get('fromDate')?.value) {
+      this.searchFormBreak.get('fromDate')?.setValue(this.today);
+    }
+
+    // Check toDate
+    if (!this.searchFormBreak.get('toDate')?.value) {
+      this.searchFormBreak.get('toDate')?.setValue(this.today);
+    }
 
     const fromDate = this.searchFormBreak.value.fromDate || ''
-    const toDate = this.searchFormBreak.value.toDate || ''
-    const campaign = this.searchFormBreak.value.campain || ''
+    const toDate = this.searchFormBreak.value.toDate || this.today
+    const campaign = this.searchFormBreak.value.campain || this.today
 
     const userAgent = this.getAgent();
 

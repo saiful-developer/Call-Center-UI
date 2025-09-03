@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { PageHeader } from '../page-header/page-header';
 import { CommonModule } from '@angular/common';
 import { Paginator } from '../paginator/paginator';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 export interface AddressBookData {
   name: string,
@@ -15,7 +16,7 @@ export interface AddressBookData {
 
 @Component({
   selector: 'app-address-book',
-  imports: [PageHeader, CommonModule, Paginator],
+  imports: [PageHeader, CommonModule, Paginator, StickyTableHeaderDirective],
   templateUrl: './address-book.html',
   styleUrl: './address-book.css'
 })

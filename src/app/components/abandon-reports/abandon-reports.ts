@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 
 //components
@@ -19,7 +20,7 @@ export interface AbandonReportsData {
 
 @Component({
   selector: 'app-abandon-reports',
-  imports: [PageHeader, Paginator, CommonModule],
+  imports: [PageHeader, Paginator, CommonModule, StickyTableHeaderDirective],
   templateUrl: './abandon-reports.html',
   styleUrl: './abandon-reports.css'
 })

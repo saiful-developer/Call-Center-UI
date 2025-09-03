@@ -1,0 +1,39 @@
+.loader-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(252, 177, 244, 0.258);
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 280ms ease-in-out;
+}
+
+.loader-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.loader-panel {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.55);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.loader-text {
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.loader-time {
+  font-size: 0.78rem;
+  opacity: 0.9;
+}
+
+

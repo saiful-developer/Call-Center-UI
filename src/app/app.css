@@ -1,6 +1,5 @@
 .page-body-wrapper {
-  display: flex;
-  width: 100%;
+
   /* height: 100vh; */
 }
 
@@ -21,13 +20,7 @@
   width: 4%;
 }
 
-/* Main panel styles */
-.main-panel {
-  transition: width 0.3s ease;
-  /* display: flex;
-  justify-content: space-between;
-  flex-direction: column; */
-}
+
 
 /* Shrink to 80% when sidebar is open */
 .panel-shrink {
@@ -37,15 +30,11 @@
 /* Full width = 96% when sidebar closed */
 .panel-wide {
   width: 96%;
+  background-color: #f2edf3;
 }
 
 /* Smooth scroll and height */
-.sidebar,
-.short-sidebar,
-.main-panel {
-  /* height: 100vh; */
-  /* overflow-y: auto; */
-}
+
 
 /* SIDEBAR SMOOTH SLIDE */
 .sidebar {
@@ -155,9 +144,8 @@
   }
 
   /* Main panel stays full width */
-  .main-panel {
-    width: 100% !important;
-  }
+
+  
 
   /* Optional: backdrop for mobile */
   .sidebar-backdrop {

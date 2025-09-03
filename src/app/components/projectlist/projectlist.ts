@@ -1,14 +1,14 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { OnInit, NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { errorContext } from 'rxjs/internal/util/errorContext';
+import { CommonModule } from '@angular/common';
 import { PageHeader } from '../page-header/page-header';
 import { Paginator } from '../paginator/paginator';
 import { ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
+
 export interface IncomingReportAPI {
   uniqueid: string;
   calldate?: string;
@@ -21,40 +21,57 @@ export interface IncomingReportAPI {
   transfer_to?: string;
   completecaller?: number;
   disposition?: string;
-  status: number
+  status: number;
 }
-
-
-
 
 @Component({
   selector: 'app-projectlist',
-  imports: [HttpClientModule, ReactiveFormsModule, PageHeader, Paginator, CommonModule],
+  imports: [
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    PageHeader,
+    Paginator,
+    StickyTableHeaderDirective //directive
+  ],
   templateUrl: './projectlist.html',
-  styleUrl: './projectlist.css'
+  styleUrls: ['./projectlist.css']
 })
 export class Projectlist implements OnInit {
   isSearchMode = false;
   sl = 0;
   incomingReportsData: IncomingReportAPI[] = [];
   campains: any[] = [];
-
   offset = 0;
   limit = 30;
   hasMore = true;
+  today = new Date().toISOString().split('T')[0];
+
+  searchFormIncoming = new FormGroup({
+    caller: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+    campain: new FormControl(''),
+    status: new FormControl('')
+  });
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private apiService: ApiService,
-  ) { }
+    private apiService: ApiService
+  ) {}
+
+  ngOnInit() {
+    this.getIncomingReport();
+    this.loadCampainList();
+    this.isSearchMode = false;
+  }
 
   getIncomingReport(): void {
-    //get loginid form the sesson storage
-
     let user = '';
-    const userInfo = sessionStorage.getItem('user')
+    const userInfo = sessionStorage.getItem('user');
     if (userInfo) {
-      const parsedUserInfo = JSON.parse(userInfo)
+      const parsedUserInfo = JSON.parse(userInfo);
       user = parsedUserInfo.loginid;
     }
 
@@ -69,31 +86,22 @@ export class Projectlist implements OnInit {
   loadCampainList() {
     this.apiService.loadCampaigns().subscribe({
       next: (res: any) => {
-
         const parseCampainData = JSON.parse(res.data);
         this.campains = parseCampainData.rows;
       },
       error: (err) => {
-        console.log(err)
+        console.log(err);
       }
-    })
-  }
-
-
-
-  ngOnInit() {
-    this.getIncomingReport()
-    this.loadCampainList()
-    this.getIncomingBySearch()
+    });
   }
 
   nextPage() {
     this.offset += this.limit;
     this.sl += this.limit;
     if (this.isSearchMode) {
-      this.getIncomingBySearch(); // fetch next page of search results
+      this.getIncomingBySearch();
     } else {
-      this.getIncomingReport(); // fetch next page of default list
+      this.getIncomingReport();
     }
   }
 
@@ -102,9 +110,9 @@ export class Projectlist implements OnInit {
       this.offset -= this.limit;
       this.sl -= this.limit;
       if (this.isSearchMode) {
-        this.getIncomingBySearch(); // fetch next page of search results
+        this.getIncomingBySearch();
       } else {
-        this.getIncomingReport(); // fetch next page of default list
+        this.getIncomingReport();
       }
     }
   }
@@ -117,60 +125,40 @@ export class Projectlist implements OnInit {
     this.getIncomingReport();
   }
 
-  //reactive form
-  searchFormIncoming = new FormGroup({
-    caller: new FormControl(''),
-    fromDate: new FormControl(''),
-    toDate: new FormControl(''),
-    campain: new FormControl(''),
-    status: new FormControl('')
-  });
-
   getIncomingBySearch() {
+    this.isSearchMode = true;
 
-    // this.sl = 0;
-    // this.offset = 0
-    this.isSearchMode = true
+    if (!this.searchFormIncoming.get('fromDate')?.value) {
+      this.searchFormIncoming.get('fromDate')?.setValue(this.today);
+    }
+
+    if (!this.searchFormIncoming.get('toDate')?.value) {
+      this.searchFormIncoming.get('toDate')?.setValue(this.today);
+    }
 
     let agent = '';
     const campain = this.searchFormIncoming.value.campain || '';
-    const fromDate = this.searchFormIncoming.value.fromDate || '';
-    const toDate = this.searchFormIncoming.value.toDate || '';
+    const fromDate = this.searchFormIncoming.value.fromDate || this.today;
+    const toDate = this.searchFormIncoming.value.toDate || this.today;
     const srcNameber = this.searchFormIncoming.value.caller || '';
     const status = this.searchFormIncoming.value.status || '';
 
-    const userInfo = sessionStorage.getItem('user')
+    const userInfo = sessionStorage.getItem('user');
     if (userInfo) {
-      const parsedUserInfo = JSON.parse(userInfo)
+      const parsedUserInfo = JSON.parse(userInfo);
       agent = parsedUserInfo.loginid;
     }
 
     this.apiService.incomingBySearch(agent, campain, fromDate, toDate, srcNameber, status, this.limit, this.offset, 1).subscribe({
       next: (res) => {
         this.formatIncomingReportsData(res);
-        console.log(res);
-        
       },
       error: (err) => {
-        console.log(err)
+        console.log(err);
       }
-    })
+    });
   }
 
-
-
-
-  pagedListFromChild: any[] = [];
-  currentPage: number = 1;
-  pageSize: number = 5;  // default page size, should match your paginator's pageSize
-
-  handlePageChange(event: { pagedList: any[], currentPage: number, pageSize: number }) {
-    this.pagedListFromChild = event.pagedList;
-    this.currentPage = event.currentPage;
-    this.pageSize = event.pageSize;
-  }
-
-  //for initial load and search result
   formatIncomingReportsData(res: any) {
     if (res.success === 'YES' && Array.isArray(res.data)) {
       this.incomingReportsData = res.data.map((item: IncomingReportAPI, index: number) => ({
@@ -195,4 +183,7 @@ export class Projectlist implements OnInit {
     this.cdr.detectChanges();
   }
 
+  trackByFn(index: number, report: IncomingReportAPI): string {
+    return report.uniqueid;
+  }
 }

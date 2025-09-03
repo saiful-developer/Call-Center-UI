@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { PageHeader } from '../page-header/page-header';
 import { CommonModule } from '@angular/common';
 import { Paginator } from '../paginator/paginator';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 export interface AbandonCallData {
   uniqueid: string;
@@ -18,7 +19,7 @@ export interface AbandonCallData {
 
 @Component({
   selector: 'app-abandon-calls-live',
-  imports: [PageHeader, CommonModule, Paginator],
+  imports: [PageHeader, CommonModule, Paginator, StickyTableHeaderDirective],
   templateUrl: './abandon-calls-live.html',
   styleUrl: './abandon-calls-live.css'
 })

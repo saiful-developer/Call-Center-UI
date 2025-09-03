@@ -5,6 +5,7 @@ import { ApiService } from '../../services/api.service';
 import { PageHeader } from '../page-header/page-header';
 import { Paginator } from '../paginator/paginator';
 import { CommonModule } from '@angular/common';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 export interface RNAReportsData {
   calldate: string,
@@ -15,7 +16,7 @@ export interface RNAReportsData {
 
 @Component({
   selector: 'app-rna-repots',
-  imports: [PageHeader, Paginator, ReactiveFormsModule, CommonModule],
+  imports: [PageHeader, Paginator, ReactiveFormsModule, CommonModule, StickyTableHeaderDirective],
   templateUrl: './rna-repots.html',
   styleUrl: './rna-repots.css'
 })
@@ -77,7 +78,7 @@ export class RNARepots implements OnInit {
   }
 
 
-
+  today = new Date().toISOString().split('T')[0];  // "2025-09-03"
 
   searchFormRNA = new FormGroup({
     fromDate: new FormControl(''),
@@ -87,7 +88,16 @@ export class RNARepots implements OnInit {
 
   getRnaSearch() {
     this.isSearchMode = true;
-    console.log(this.searchFormRNA.value)
+
+    // Check fromDate
+    if (!this.searchFormRNA.get('fromDate')?.value) {
+      this.searchFormRNA.get('fromDate')?.setValue(this.today);
+    }
+
+    // Check toDate
+    if (!this.searchFormRNA.get('toDate')?.value) {
+      this.searchFormRNA.get('toDate')?.setValue(this.today);
+    }
 
     const fromDate = this.searchFormRNA.value.fromDate || ''
     const toDate = this.searchFormRNA.value.toDate || ''
@@ -95,7 +105,7 @@ export class RNARepots implements OnInit {
 
     const userAgent = this.getAgent();
 
-    this.apiService.tingNoAnswerReportsSearch (userAgent, campaign, fromDate, toDate, this.limit, this.offset, 1).subscribe({
+    this.apiService.tingNoAnswerReportsSearch(userAgent, campaign, fromDate, toDate, this.limit, this.offset, 1).subscribe({
       next: (res) => {
         this.formateRnaData(res);
         console.log(res)

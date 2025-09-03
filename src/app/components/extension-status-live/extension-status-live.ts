@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 //components
 import { PageHeader } from '../page-header/page-header';
 import { Paginator } from '../paginator/paginator';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 export interface ExtensionStatusData {
   Exten: string,
@@ -16,7 +17,7 @@ export interface ExtensionStatusData {
 
 @Component({
   selector: 'app-extension-status-live',
-  imports: [CommonModule, PageHeader, Paginator],
+  imports: [CommonModule, PageHeader, Paginator, StickyTableHeaderDirective],
   templateUrl: './extension-status-live.html',
   styleUrl: './extension-status-live.css'
 })

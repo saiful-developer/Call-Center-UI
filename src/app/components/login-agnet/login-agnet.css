@@ -1,12 +1,41 @@
-
-
-.card {
-  background-color: #ffffff;
+/* Background */
+.fb-login-wrapper {
+  background-color: #fdfdfd;
 }
 
-.form-control:focus {
-  border-color: #bb71ff !important;
-  box-shadow: 0 0 0 0.2rem rgba(188, 186, 203, 0.25);
+/* Left Side */
+.fb-main-logo {
+  /* height: 80px; */
+  margin-left: 20px;
+  max-width: 18rem;
 }
 
+.fb-tagline {
+  font-size: 1.5rem;
+  font-weight: normal;
+  line-height: 1.3;
+  color: #1c1e21;
+  margin-left: 20px;
+}
 
+/* Right Side Login Box */
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 8px;
+}
+
+/* Buttons */
+
+
+.btn-success {
+  background-color: #42b72a;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #36a420;
+}
+.small {
+  color: #1bcfb4;
+}

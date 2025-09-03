@@ -53,7 +53,8 @@ export const AGENT_ROUTES: Routes = [
             { path: 'live/extension-status', component: ExtensionStatusLive, data: { breadcrumb: 'agent/live/extension status' } },
             { path: 'live/trunk-status', component: TrunkStatusLive, data: { breadcrumb: 'agent/live/trunk status' } },
             { path: 'live/waiting-calls', component: WaitingCallsLive, data: { breadcrumb: 'agent/live/waiting calls' } },
-            { path: 'address-book', component: AddressBook, data: { breadcrumb: 'agent/address book' } }
+            { path: 'address-book', component: AddressBook, data: { breadcrumb: 'agent/address book' } },
+            { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     }
 ];

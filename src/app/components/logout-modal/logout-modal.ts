@@ -24,6 +24,7 @@ export class LogoutModal {
   confirmLogout() {
     this.isVisible = false;
     sessionStorage.clear();
+    localStorage.clear()
     this.router.navigate(['/login']);
     console.log("User logged out!");
   }

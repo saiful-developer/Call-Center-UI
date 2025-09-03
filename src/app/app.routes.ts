@@ -29,14 +29,20 @@ export const routes: Routes = [
 
     // Supervisor
     {
-        path: 'supervisor', 
+        path: 'supervisor',
         loadChildren: () => import('./user-supervisor/supervisor.routes').then(m => m.Supervisor_ROUTES),
         canActivate: [authGuard]
     },
-    
+
     {
         path: 'login',
         component: LoginAgnet,
         canActivate: [guestGuardGuard]
+    },
+
+    {
+        path: '**',
+        redirectTo: 'login',
+        pathMatch: 'full'
     }
 ];

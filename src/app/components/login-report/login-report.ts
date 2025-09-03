@@ -4,6 +4,7 @@ import { Paginator } from '../paginator/paginator';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 
 export interface LoginReportData {
@@ -22,7 +23,7 @@ export interface LoginReportData {
 
 @Component({
   selector: 'app-login-report',
-  imports: [PageHeader, CommonModule, ReactiveFormsModule, Paginator],
+  imports: [PageHeader, CommonModule, ReactiveFormsModule, Paginator, StickyTableHeaderDirective],
   templateUrl: './login-report.html',
   styleUrl: './login-report.css'
 })
@@ -70,7 +71,7 @@ export class LoginReport implements OnInit {
       }
     })
   }
-
+  today = new Date().toISOString().split('T')[0];  // "2025-09-03"
   searchFormLoginReport = new FormGroup({
     fromDate: new FormControl(''),
     toDate: new FormControl(''),
@@ -79,7 +80,16 @@ export class LoginReport implements OnInit {
 
   getLoginReportSearch() {
     this.isSearchMode = true;
-    console.log(this.searchFormLoginReport.value)
+
+    // Check fromDate
+    if (!this.searchFormLoginReport.get('fromDate')?.value) {
+      this.searchFormLoginReport.get('fromDate')?.setValue(this.today);
+    }
+
+    // Check toDate
+    if (!this.searchFormLoginReport.get('toDate')?.value) {
+      this.searchFormLoginReport.get('toDate')?.setValue(this.today);
+    }
 
     const fromDate = this.searchFormLoginReport.value.fromDate || ''
     const toDate = this.searchFormLoginReport.value.toDate || ''

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 // components
 import { PageHeader } from '../page-header/page-header';
@@ -24,7 +25,7 @@ export interface OutgoingReportsData {
 
 @Component({
   selector: 'app-outgoing-reports',
-  imports: [PageHeader, ReactiveFormsModule, CommonModule, Paginator],
+  imports: [PageHeader, ReactiveFormsModule, CommonModule, Paginator, StickyTableHeaderDirective ],
   templateUrl: './outgoing-reports.html',
   styleUrl: './outgoing-reports.css'
 })
@@ -87,6 +88,7 @@ export class OutgoingReports implements OnInit {
     })
   }
 
+  today = new Date().toISOString().split('T')[0];  // "2025-09-03"
   searchFormOutgoing = new FormGroup({
     extension: new FormControl(''),
     fromDate: new FormControl(''),
@@ -98,10 +100,20 @@ export class OutgoingReports implements OnInit {
   getOutgoingSearch() {
     this.isSearchMode = true;
 
+    // Check fromDate
+    if (!this.searchFormOutgoing.get('fromDate')?.value) {
+      this.searchFormOutgoing.get('fromDate')?.setValue(this.today);
+    }
+
+    // Check toDate
+    if (!this.searchFormOutgoing.get('toDate')?.value) {
+      this.searchFormOutgoing.get('toDate')?.setValue(this.today);
+    }
+
     let agent = '';
     const campain = this.searchFormOutgoing.value.campain || '';
-    const fromDate = this.searchFormOutgoing.value.fromDate || '';
-    const toDate = this.searchFormOutgoing.value.toDate || '';
+    const fromDate = this.searchFormOutgoing.value.fromDate || this.today;
+    const toDate = this.searchFormOutgoing.value.toDate || this.today;
     const extension = this.searchFormOutgoing.value.extension || '';
     const status = this.searchFormOutgoing.value.status || '';
 

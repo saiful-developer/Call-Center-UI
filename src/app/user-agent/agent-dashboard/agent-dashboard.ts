@@ -40,7 +40,7 @@ export class AgentDashboard implements OnInit {
 
   ngOnInit() {
     // Load saved time from localStorage if exists
-    const savedSeconds = localStorage.getItem('timerSeconds');
+    const savedSeconds = sessionStorage.getItem('timerSeconds');
     if (savedSeconds) {
       this.secondsPassed = +savedSeconds;
       this.calculateTimeParts();
@@ -67,7 +67,7 @@ export class AgentDashboard implements OnInit {
         this.calculateTimeParts();
 
         // Save the updated time to localStorage
-        localStorage.setItem('timerSeconds', this.secondsPassed.toString());
+        sessionStorage.setItem('timerSeconds', this.secondsPassed.toString());
       }, 1000);
     });
   }

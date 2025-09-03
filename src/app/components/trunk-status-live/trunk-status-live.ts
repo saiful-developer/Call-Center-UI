@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 //comspnents
 import { PageHeader } from '../page-header/page-header';
 import { Paginator } from '../paginator/paginator';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 export interface TrunkStatusData {
   Username: string,
@@ -17,7 +18,7 @@ export interface TrunkStatusData {
 
 @Component({
   selector: 'app-trunk-status-live',
-  imports: [CommonModule, PageHeader, Paginator],
+  imports: [CommonModule, PageHeader, Paginator, StickyTableHeaderDirective],
   templateUrl: './trunk-status-live.html',
   styleUrl: './trunk-status-live.css'
 })

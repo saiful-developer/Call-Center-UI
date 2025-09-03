@@ -41,11 +41,21 @@ nav.navbar.default-layout-navbar.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row 
 }
 
 .main-panel {
-  width: 100%;
+  width: 100% !important;
+  transition: width 0.3s ease;
+  min-height: 100%;
+  /* Allow content to expand */
+  overflow-y: visible;
+  /* Prevent clipping of sticky elements */
 }
 
 .page-body-wrapper {
-  margin-top: 3.1rem;
+  /* margin-top: 3.1rem; */
+  display: flex;
+  min-height: calc(100vh - 3.5rem);
+  /* Account for navbar */
+  overflow-y: auto;
+  /* Enable page-level scrolling */
 }
 
 
@@ -113,11 +123,17 @@ nav.navbar.default-layout-navbar.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row 
 
 .custom-bg {
   background-color: #a46cf9 !important;
-  border-radius: 8px !important;
+  /* border-radius: 8px !important; */
+}
+/* faq */
+.accordion .card-header {
+    background-color: #f5eeff;
+    border-radius: 0 !important;
 }
 
 .content-wrapper {
-  padding: 1rem !important;
+  padding: 1rem;
+  min-height: 100%;
 }
 
 
@@ -223,12 +239,30 @@ body {
   vertical-align: middle;
 }
 
-.custom-bg {
-  background-color: red !important;
-}
+
 
 .modern-table thead tr {
   background-color: #f8f9fa;
+}
+
+.table thead {
+  position: sticky;
+  top: 0rem;
+  /* Matches navbar height from .container-fluid.page-body-wrapper { margin-top: 3.5rem } */
+  z-index: 1000;
+  /* High z-index to stay above other content */
+  background-color: #b46bff;
+  /* Maintain background color */
+  color: white;
+}
+
+.table th {
+  position: sticky;
+  top: 0rem;
+  /* Ensure individual th elements are sticky */
+  z-index: 1000;
+  background-color: #b46bff;
+  /* Ensure th retains background */
 }
 
 .modern-table tbody tr:hover {
@@ -246,16 +280,15 @@ body {
   border-radius: 0.4rem;
 }
 
-.table-container {
-  width: 100%;
-  overflow-x: auto;
+.table-scroll {}
+
+.table {
+  overflow-y: scroll;
+  height: 5rem !important;
 }
 
 .table-wrapper {
-  border-radius: 0.5rem;
   background-color: #fff;
-  padding: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 .table th,
@@ -281,7 +314,7 @@ td {
 }
 
 tbody {
-  background-color: #faf5ff ;
+  background-color: #faf5ff;
 }
 
 .description {
@@ -393,6 +426,7 @@ textarea.form-control:focus {
 
 .reset-btn {
   background: linear-gradient(135deg, #dc3545, #fe7c96);
+  color: white !important;
 }
 
 .red-bg {
@@ -414,4 +448,38 @@ textarea.form-control:focus {
     overflow: scroll;
   }
 
+}
+
+.navbar .navbar-brand-wrapper .navbar-brand {
+  padding-left: 1.4rem;
+}
+
+.date-color {
+  color: #7a00f5;
+  font-weight: 500;
+}
+
+.error-massage {
+  color: #dc3545 !important;
+}
+
+
+/* 11111111111111111111111111111111table header sticky behevious */
+.content-wrapper,
+.page-body-wrapper,
+.main-panel,
+.table-container {
+  overflow: visible !important;
+}
+
+.cloned-header {
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.cloned-header th {
+    border-top: 0;
+    /* border-bottom-width: 1px; */
+    font-family: "ubuntu-medium", sans-serif;
+    font-weight: initial;
 }

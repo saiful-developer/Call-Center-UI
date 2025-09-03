@@ -1,50 +1,63 @@
-<div class="login-container d-flex flex-column align-items-center justify-content-center">
-    <div class="card shadow-lg p-4 rounded-4" style="width: 100%; max-width: 400px;">
-        <div class="text-center mb-4">
-            <img src="assets/images/logo.png" alt="Logo" class="img-fluid" style="max-height: 80px;">
-        </div>
+<div class="fb-login-wrapper d-flex align-items-center justify-content-center vh-100">
+  <div class="row w-100 mx-0 px-3">
+    
+    <!-- Left Section -->
+    <div class="col-md-6 d-flex flex-column justify-content-center mb-5 mb-md-0">
+      <img src="assets/images/logo.png" alt="Logo" class="fb-main-logo mb-3">
+      <h2 class="fb-tagline">CallMaster there should be some some ramdon text about this site and some slogan</h2>
+    </div>
 
+    <!-- Right Section (Login Box) -->
+    <div class="col-md-6 d-flex justify-content-center align-items-center">
+      <div class="card shadow-lg p-4 rounded-4 bg-white login-card">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-            <!-- User ID Field -->
-            <div class="mb-3">
-                <label for="userId" class="form-label">Login ID</label>
-                <input id="userId" formControlName="userId" type="text" placeholder="Enter User ID"
-                    class="form-control" />
-                <div *ngIf="submitted && loginForm.get('userId')?.invalid" class="text-danger mt-1">
-                    User ID is required.fasdsfas
-                </div>
+          <!-- User ID Field -->
+          <div class="mb-3">
+            <input id="userId" formControlName="userId" type="text" placeholder="Login Id"
+              class="form-control form-control-lg" />
+            <div *ngIf="submitted && loginForm.get('userId')?.invalid" class="text-danger mt-1 small">
+              User ID is required
             </div>
+          </div>
 
-            <!-- Extension Field -->
-            <div class="mb-3">
-                <label for="extension" class="form-label">Extension</label>
-                <input id="extension" formControlName="extension" type="number" placeholder="Enter Extension"
-                    class="form-control" />
-                <div *ngIf="loginForm.get('extension')?.invalid && loginForm.get('extension')?.touched" class="text-danger mt-1">
-                    Extension is required.
-                </div>
+          <!-- Extension Field -->
+          <div class="mb-3">
+            <input id="extension" formControlName="extension" type="number" placeholder="Extension"
+              class="form-control form-control-lg" />
+            <div *ngIf="loginForm.get('extension')?.invalid && loginForm.get('extension')?.touched" class="text-danger mt-1 small">
+              Extension is required.
             </div>
+          </div>
 
-            <!-- Password Field -->
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input id="password" formControlName="password" type="password" placeholder="Enter Password"
-                    class="form-control" />
-                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger mt-1">
-                    Password is required.
-                </div>
+          <!-- Password Field -->
+          <div class="mb-3">
+            <input id="password" formControlName="password" type="password" placeholder="Password"
+              class="form-control form-control-lg" />
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger mt-1 small">
+              Password is required.
             </div>
+          </div>
 
-            <!-- Submit Button -->
-            <button type="submit" [disabled]="loginForm.invalid" class="btn w-100 py-2 fw-bold modern-btn">
-                Login
-            </button>
+          <!-- Submit Button -->
+           <!-- [disabled]="loginForm.invalid" -->
+          <button type="submit"  class="btn btn-gradient-primary w-100 fw-bold py-2 fs-5">
+            Log In
+          </button>
 
-            <!-- Error Message -->
-            <div *ngIf="errorMessage" class="text-danger text-center mt-3">
-                {{ errorMessage }}
-            </div>
+          <!-- Error Message -->
+          <div *ngIf="errorMessage" class="text-danger text-center mt-3">
+            {{ errorMessage }}
+          </div>
+
+          <hr>
+
+          <!-- Forgot Password -->
+          <div class="text-center mt-3">
+            <a href="#" class="text-decoration-none small">Forgotten password?</a>
+          </div>
         </form>
+      </div>
     </div>
+  </div>
 </div>

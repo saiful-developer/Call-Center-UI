@@ -4,6 +4,7 @@ import { ApiService } from '../../services/api.service';
 //comspnents
 import { PageHeader } from '../page-header/page-header';
 import { Paginator } from '../paginator/paginator';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 export interface WaitingCallData {
   UniqueID: string,
@@ -16,7 +17,7 @@ export interface WaitingCallData {
 
 @Component({
   selector: 'app-waiting-calls-live',
-  imports: [CommonModule, PageHeader, Paginator],
+  imports: [CommonModule, PageHeader, Paginator, StickyTableHeaderDirective],
   templateUrl: './waiting-calls-live.html',
   styleUrl: './waiting-calls-live.css'
 })

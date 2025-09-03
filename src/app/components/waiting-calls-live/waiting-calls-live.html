@@ -2,7 +2,7 @@
     <app-page-header title="Queue Waiting Calls" iconClass="bi bi-arrow-repeat"></app-page-header>
 
     <div class="d-md-block table-container">
-        <table class="table  table-hover  shadow-sm rounded" >
+        <table class="table  table-hover  shadow-sm rounded"  appStickyTableHeader [offsetElements]="['.navbar.fixed-top']">
             <thead class="">
                 <tr>
                     <th>#</th>

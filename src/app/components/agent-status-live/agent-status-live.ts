@@ -1,9 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 //components
 import { PageHeader } from '../page-header/page-header';
 import { Paginator } from '../paginator/paginator';
+import { StickyTableHeaderDirective } from '../../directives/sticky-table-header';
 
 export interface AgentStatusData {
   name: string,
@@ -18,7 +19,7 @@ export interface AgentStatusData {
 
 @Component({
   selector: 'app-agent-status-live',
-  imports: [CommonModule, PageHeader, Paginator],
+  imports: [CommonModule, PageHeader, Paginator, StickyTableHeaderDirective],
   templateUrl: './agent-status-live.html',
   styleUrl: './agent-status-live.css'
 })
