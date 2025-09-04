@@ -47,6 +47,7 @@ nav.navbar.default-layout-navbar.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row 
   /* Allow content to expand */
   overflow-y: visible;
   /* Prevent clipping of sticky elements */
+  background-color: #f2edf3;
 }
 
 .page-body-wrapper {

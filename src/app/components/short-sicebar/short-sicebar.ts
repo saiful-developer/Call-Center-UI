@@ -63,8 +63,8 @@ export class ShortSicebar {
     {
       icon: 'bi bi-info-circle',
       link: 'agent/aboutus',
-      hoverItems: ['About Us', 'Timeline'],
-      hoverItemsRouterLinks: ['agent/aboutus', 'agent/timeline']
+      hoverItems: ['About Us', 'Timeline', 'Contact Us'],
+      hoverItemsRouterLinks: ['agent/aboutus', 'agent/timeline', 'agent/contact']
     },
     {
       icon: 'bi bi-question-circle',

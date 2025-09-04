@@ -1,0 +1,21 @@
+h2 {
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive text alignment for smaller screens */
+@media (max-width: 767px) {
+  .text-md-start {
+    text-align: center !important;
+  }
+}
+.custom-class {
+    padding: 2rem;
+}

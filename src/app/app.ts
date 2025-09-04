@@ -1,8 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router, RouterOutlet, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Event } from '@angular/router';
-
 import { filter } from 'rxjs/operators';
-
 import { SidebarComponent } from './components/sidebar/sidebar';
 import { CommonModule } from '@angular/common';
 import { Header } from './components/header/header';
@@ -66,9 +64,4 @@ export class App implements OnInit {
       this.isSidebarVisible = isSidebarVisible;
     });
   }
-
-
-
-
 }
-

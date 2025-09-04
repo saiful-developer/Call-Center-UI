@@ -39,3 +39,8 @@
 .small {
   color: #1bcfb4;
 }
+
+.width {
+  width: 86%;
+  margin: auto;
+}

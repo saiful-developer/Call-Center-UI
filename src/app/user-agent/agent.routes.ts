@@ -25,6 +25,7 @@ import { ExtensionStatusLive } from "../components/extension-status-live/extensi
 import { TrunkStatusLive } from "../components/trunk-status-live/trunk-status-live";
 import { WaitingCallsLive } from "../components/waiting-calls-live/waiting-calls-live";
 import { AddressBook } from "../components/address-book/address-book";
+import { AgentContact } from "./agent-contact/agent-contact";
 
 export const AGENT_ROUTES: Routes = [
     {
@@ -54,6 +55,7 @@ export const AGENT_ROUTES: Routes = [
             { path: 'live/trunk-status', component: TrunkStatusLive, data: { breadcrumb: 'agent/live/trunk status' } },
             { path: 'live/waiting-calls', component: WaitingCallsLive, data: { breadcrumb: 'agent/live/waiting calls' } },
             { path: 'address-book', component: AddressBook, data: { breadcrumb: 'agent/address book' } },
+            { path: 'contact', component: AgentContact, data: { breadcrumb: 'agent/contact' } },
             { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     }

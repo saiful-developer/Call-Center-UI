@@ -1,11 +1,5 @@
 import { Routes } from '@angular/router';
-
-
-import { SupervisorDashbord } from './user-supervisor/supervisor-dashbord/supervisor-dashbord';
-import { SupervisorProfile } from './user-supervisor/supervisor-profile/supervisor-profile';
-import { SupervisorMessage } from './user-supervisor/supervisor-message/supervisor-message';
 import { LoginAgnet } from './components/login-agnet/login-agnet';
-
 import { authGuard } from './guard/auth-guard';
 import { guestGuardGuard } from './guard/guest-guard-guard';
 
