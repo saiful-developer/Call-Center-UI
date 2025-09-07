@@ -290,6 +290,7 @@ body {
 
 .table-wrapper {
   background-color: #fff;
+  overflow: scroll;
 }
 
 .table th,
@@ -327,6 +328,12 @@ tbody {
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+  .cloned-header {
+    display: none !important;
+  }
+  li.breadcrumb-item.active {
+    margin-right: 0px !important;
+  }
 
   .table th,
   .table td {
@@ -470,7 +477,7 @@ textarea.form-control:focus {
 .page-body-wrapper,
 .main-panel,
 .table-container {
-  overflow: visible !important;
+  /* overflow: visible !important; */
 }
 
 .cloned-header {

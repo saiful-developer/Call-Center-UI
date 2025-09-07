@@ -66,7 +66,6 @@ export class BreakReports implements OnInit {
       next: (res: any) => {
         // console.log(res)
         const parseRes = JSON.parse(res.data);
-        console.log(parseRes.rows)
         this.getBreakNameMapping(parseRes.rows)
       },
       error: (err) => {

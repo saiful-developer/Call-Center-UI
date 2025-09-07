@@ -11,16 +11,86 @@
       (click)="onToggleSidebar()">
       <span class="mdi mdi-menu"></span>
     </button>
-    <div class="search-field d-none d-md-block">
-      <form class="d-flex align-items-center h-100" action="#">
-        <div class="input-group">
-          <div class="input-group-prepend bg-transparent">
-            <i class="input-group-text border-0 mdi mdi-magnify"></i>
+
+
+    <!-- action -->
+    <div class="search-field d-none d-md-block" style="margin-right: 7px;">
+
+      <!-- Break and campain dropdowns  -->
+      <div class="header-action d-flex">
+        <!-- Break dropdown menu -->
+        <form class="d-flex align-items-center custom-form" [formGroup]="getBreakTypeForm" (ngSubmit)="saveBreakData()">
+          <select name="" id="" class="form-select ng-pristine ng-valid ng-touched custom-sele"
+            formControlName="breakId" style="font-size: 0.85rem; padding: 0.25rem 0.5rem;">
+            <option value="">Break Type</option>
+            <option *ngFor="let break of parseResData;" [value]="break.id">{{ break.name }}</option>
+          </select>
+          <button class="btn modern-btn custom-btn-head"
+            style="font-size: 0.85rem; padding: 0.25rem 0.5rem;">Break</button>
+        </form>
+
+        <!-- campain dropdiwn -->
+        <form class="d-flex align-items-center" *ngIf="!showActionUI" [formGroup]="getCampainForm"
+          (ngSubmit)="saveCampainData()">
+          <select name="" id="" class="form-select ng-pristine ng-valid ng-touched custom-sele"
+            style="font-size: 0.85rem; padding: 0.25rem 0.5rem;" formControlName="campainName">
+            <option value="">Campains</option>
+            <option *ngFor="let c of campainList;" [value]="c">{{ c }}</option>
+          </select>
+          <button class="btn modern-btn custom-btn-head" (click)="showActionUIFn()"
+            style="font-size: 0.85rem; padding: 0.25rem 0.5rem;">Campain</button>
+        </form>
+
+        <!-- action UI -->
+        <div class="d-flex align-items-center gap-2" *ngIf="showActionUI">
+
+          <!-- Hangup Button -->
+          <button class="btn text-white" (click)="hideActionUIFn()"
+            style="background: linear-gradient(90deg, #d96bff, #7b5cff); border-radius: 12px; font-size: 0.85rem; padding: 0.25rem 0.5rem;">
+            Hangup
+          </button>
+
+          <!-- Input -->
+          <input type="text" class="form-control text-center fw-semibold" placeholder="Input Number"
+            style="max-width: 200px; border-radius: 6px; font-size: 0.85rem; padding: 0.25rem 0.5rem;" />
+
+          <!-- BlindTrx -->
+          <button class="btn text-white"
+            style="background: linear-gradient(90deg, #d96bff, #7b5cff); border-radius: 8px; font-size: 0.85rem; padding: 0.25rem 0.5rem;">
+            BlindTrx
+          </button>
+
+          <!-- ATTrx -->
+          <button class="btn text-white"
+            style="background: linear-gradient(90deg, #d96bff, #7b5cff); border-radius: 8px; font-size: 0.85rem; padding: 0.25rem 0.5rem;">
+            ATTrx
+          </button>
+
+          <!-- Mute -->
+          <button class="btn text-white d-flex align-items-center gap-1"
+            style="background: linear-gradient(90deg, #cfd2d6, #9ca0a5); border-radius: 8px; font-size: 0.85rem; padding: 0.25rem 0.5rem;">
+            <i class="bi bi-mic-mute"></i> Mute
+          </button>
+
+          <!-- Hold -->
+          <button class="btn text-white d-flex align-items-center gap-1"
+            style="background: linear-gradient(90deg, #ffaf8b, #ff6f91); border-radius: 8px; font-size: 0.85rem; padding: 0.25rem 0.5rem;">
+            <i class="bi bi-hourglass-split"></i> Hold
+          </button>
+
+          <!-- Timer -->
+          <div class="px-2 py-1 text-success fw-bold text-white"
+            style="background: linear-gradient(90deg, #56f0a0, #3fc1a6); border-radius: 8px; font-size: 0.85rem; padding: 0.25rem 0.5rem;">
+            {{ formattedTime }}
           </div>
-          <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+
         </div>
-      </form>
+
+      </div>
+
     </div>
+
+
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item nav-profile dropdown">
         <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
@@ -34,8 +104,9 @@
           </div>
         </a>
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown" style="z-index: 1010;">
-          <a class="dropdown-item" href="#">
-            <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
+          <a class="dropdown-item">
+            <i class="bi-person-circle text-success" style="margin-right: 5px !important;"></i> {{
+            decodedToken?.extension }} </a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logoutModal.open()">
             <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>

@@ -32,6 +32,10 @@ export class AgentDashboard implements OnInit {
   seconds = 0;
   counterInterval: any;
 
+  currentTime: string = '';
+  clockInterval: any;
+
+
   constructor(
     private ngZone: NgZone,
     private apiService: ApiService,
@@ -39,14 +43,11 @@ export class AgentDashboard implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Load saved time from localStorage if exists
-    const savedSeconds = sessionStorage.getItem('timerSeconds');
-    if (savedSeconds) {
-      this.secondsPassed = +savedSeconds;
-      this.calculateTimeParts();
-    }
 
-    this.startCounter();
+    this.updateCurrentTime();
+    this.clockInterval = setInterval(() => {
+      this.updateCurrentTime();
+    }, 1000);
     // console.log(localStorage.getItem('auth_token'))
 
     // if (localStorage.getItem('auth_token')) {
@@ -59,23 +60,22 @@ export class AgentDashboard implements OnInit {
 
   }
 
-  startCounter() {
-    if (this.counterInterval) return;
-    this.ngZone.run(() => {
-      this.counterInterval = setInterval(() => {
-        this.secondsPassed++;
-        this.calculateTimeParts();
+  updateCurrentTime() {
+    const now = new Date();
+    let hrs = now.getHours();
+    const mins = String(now.getMinutes()).padStart(2, '0');
+    const secs = String(now.getSeconds()).padStart(2, '0');
 
-        // Save the updated time to localStorage
-        sessionStorage.setItem('timerSeconds', this.secondsPassed.toString());
-      }, 1000);
-    });
+    const ampm = hrs >= 12 ? 'PM' : 'AM';
+    hrs = hrs % 12;
+    hrs = hrs ? hrs : 12; // 0 should be 12 in 12h format
+
+    this.currentTime = `${hrs}h : ${mins}m : ${secs}s ${ampm}`;
   }
 
-  calculateTimeParts() {
-    this.houres = Math.floor(this.secondsPassed / 3600);
-    this.minutes = Math.floor((this.secondsPassed % 3600) / 60);
-    this.seconds = this.secondsPassed % 60;
+
+  ngOnDestroy() {
+    clearInterval(this.clockInterval);
   }
 
   //login to agent api 

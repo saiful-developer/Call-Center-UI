@@ -39,3 +39,44 @@
   }
 
 }
+
+.header-action {
+  padding-top: 8px;
+  width: 100%;
+}
+
+.custom-form{
+  margin-right: 8px;
+}
+
+.custom-sele {
+  border: 1px solid rgb(217 140 255);
+  margin-right: 5px;
+  border-radius: 0;
+  width: 8rem;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.custom-btn-head {
+  margin: 0 !important;
+}
+
+.navbar .navbar-menu-wrapper {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+
+.navbar .navbar-brand-wrapper {
+
+}
+
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item .nav-link {
+  margin-left: 0;
+  height: auto;
+}
+.navbar .navbar-menu-wrapper .navbar-toggler {
+  height: auto;
+  margin-bottom: 7px;
+}

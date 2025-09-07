@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AgentData, JwtPayload } from '../models/agent.model';
-import { BehaviorSubject } from 'rxjs';
-import { jwtDecode } from 'jwt-decode';
+import { JwtPayload } from '../models/agent.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   decodeToken(token: any): JwtPayload | null {
     if (!token) return null;
 

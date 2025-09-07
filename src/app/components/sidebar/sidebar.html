@@ -36,27 +36,27 @@
       </a>
       <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'profile'" [@slideInOut]>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/profile">View Profile</a>
+          <a class="nav-link" routerLink="/agent/profile" (click)="onToggleSidebar()">View Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/edit-profile">Edit Profile</a>
+          <a class="nav-link" routerLink="/agent/edit-profile" (click)="onToggleSidebar()">Edit Profile</a>
         </li>
       </ul>
     </li>
 
     <!-- Message Dropdown -->
     <li class="nav-item">
-      <a class="nav-link" (click)="toggleMenu('message')">
+      <a class="nav-link" (click)="toggleMenu('message');">
         <span class="menu-title">Message</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-message-text menu-icon"></i>
       </a>
       <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'message'" [@slideInOut]>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/message">Sent Message</a>
+          <a class="nav-link" routerLink="/agent/message" (click)="onToggleSidebar()">Sent Message</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/inbox">Inbox</a>
+          <a class="nav-link" routerLink="/agent/inbox" (click)="onToggleSidebar()">Inbox</a>
         </li>
       </ul>
     </li>
@@ -70,24 +70,24 @@
       </a>
       <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'forms'" [@slideInOut]>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/add-project">Add Project</a>
+          <a class="nav-link" routerLink="/agent/add-project" (click)="onToggleSidebar()">Add Project</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/multiple-forms">Multiple Forms</a>
+          <a class="nav-link" routerLink="/agent/multiple-forms" (click)="onToggleSidebar()">Multiple Forms</a>
         </li>
       </ul>
     </li>
 
     <!-- Charts Dropdown -->
     <li class="nav-item">
-      <a class="nav-link" (click)="toggleMenu('charts')">
+      <a class="nav-link" (click)="toggleMenu('charts');">
         <span class="menu-title">Charts</span>
         <i class="menu-arrow"></i>
         <i class="mdi mdi-chart-bar menu-icon"></i>
       </a>
       <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'charts'" [@slideInOut]>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/chartjs">ChartJs</a>
+          <a class="nav-link" routerLink="/agent/chartjs" (click)="onToggleSidebar()">ChartJs</a>
         </li>
       </ul>
     </li>
@@ -101,22 +101,22 @@
       </a>
       <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'reports'" [@slideInOut]>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/reports/incoming">Incoming</a>
+          <a class="nav-link" routerLink="/agent/reports/incoming" (click)="onToggleSidebar()">Incoming</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/reports/outgoing">Outgoing</a>
+          <a class="nav-link" routerLink="/agent/reports/outgoing" (click)="onToggleSidebar()" >Outgoing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/reports/break">Break</a>
+          <a class="nav-link" routerLink="agent/reports/break" (click)="onToggleSidebar()">Break</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/reports/login">Login</a>
+          <a class="nav-link" routerLink="agent/reports/login" (click)="onToggleSidebar()">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/reports/abandon">Abandon</a>
+          <a class="nav-link" routerLink="agent/reports/abandon" (click)="onToggleSidebar()">Abandon</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/reports/rna">Ring No Answer</a>
+          <a class="nav-link" routerLink="agent/reports/rna" (click)="onToggleSidebar()">Ring No Answer</a>
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a>
@@ -133,19 +133,19 @@
       </a>
       <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'live'" [@slideInOut]>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/live/abandon-call">Abandon Calls</a>
+          <a class="nav-link" routerLink="/agent/live/abandon-call" (click)="onToggleSidebar()">Abandon Calls</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/live/agent-status">Agent Status</a>
+          <a class="nav-link" routerLink="/agent/live/agent-status" (click)="onToggleSidebar()">Agent Status</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/live/extension-status">Extension Status</a>
+          <a class="nav-link" routerLink="agent/live/extension-status" (click)="onToggleSidebar()">Extension Status</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/live/trunk-status">Trunk Status</a>
+          <a class="nav-link" routerLink="agent/live/trunk-status" (click)="onToggleSidebar()">Trunk Status</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/live/waiting-calls">Waiting Calls</a>
+          <a class="nav-link" routerLink="agent/live/waiting-calls" (click)="onToggleSidebar()">Waiting Calls</a>
         </li>
       </ul>
     </li>
@@ -167,20 +167,20 @@
       </a>
       <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'about'" [@slideInOut]>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/aboutus">About Us</a>
+          <a class="nav-link" routerLink="/agent/aboutus" (click)="onToggleSidebar()">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/timeline">Timeline</a>
+          <a class="nav-link" routerLink="/agent/timeline" (click)="onToggleSidebar()">Timeline</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/contact">Contact Us</a>
+          <a class="nav-link" routerLink="agent/contact" (click)="onToggleSidebar()">Contact Us</a>
         </li>
       </ul>
     </li>
 
     <!-- FAQ -->
     <li class="nav-item">
-      <a class="nav-link" routerLink="/agent/faq">
+      <a class="nav-link" routerLink="/agent/faq" (click)="onToggleSidebar()">
         <span class="menu-title">FAQ</span>
         <i class="bi bi-question-circle menu-icon"></i>
       </a>
@@ -188,7 +188,7 @@
 
     <!-- settings -->
     <li class="nav-item">
-      <a class="nav-link" routerLink="/agent/settings">
+      <a class="nav-link" routerLink="/agent/settings" (click)="onToggleSidebar()">
         <span class="menu-title">Settings</span>
         <i class="bi-gear mdi menu-icon"></i>
       </a>

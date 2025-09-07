@@ -16,6 +16,7 @@ export class LoginAgnet {
   loginForm: FormGroup;
   submitted = false;
   errorMessage = '';
+  loginTime: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -52,5 +53,10 @@ export class LoginAgnet {
         window.alert(this.errorMessage)
       }
     });
+
+    //snapshort of login time
+    const now = new Date();
+    // store in sessionStorage if you want it after reload
+    sessionStorage.setItem('loginTime', now.getTime().toString());
   }
 }
