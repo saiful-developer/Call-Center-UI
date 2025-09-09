@@ -16,40 +16,40 @@ export class StickyTableHeaderDirective implements AfterViewInit {
   ngAfterViewInit() {
     const table = this.el.nativeElement as HTMLTableElement;
     this.originalHeader = table.querySelector('thead') as HTMLTableSectionElement | null;
-
     if (!this.originalHeader) {
       console.warn('StickyTableHeaderDirective: No thead found in table');
       return;
     }
 
+    // Find the scrollable parent or use window
     this.scrollContainer = this.findScrollableParent(table) || window;
     this.calculateOffset();
 
+    // Clone the header
     this.clonedHeader = this.originalHeader.cloneNode(true) as HTMLElement;
     this.renderer.addClass(this.clonedHeader, 'cloned-header');
     this.renderer.setStyle(this.clonedHeader, 'position', 'fixed');
     this.renderer.setStyle(this.clonedHeader, 'top', `${this.offsetTop}px`);
     this.renderer.setStyle(this.clonedHeader, 'width', `${table.getBoundingClientRect().width}px`);
-    this.renderer.setStyle(this.clonedHeader, 'zIndex', '5000');
+    this.renderer.setStyle(this.clonedHeader, 'zIndex', '10000'); // Increased z-index
     this.renderer.setStyle(this.clonedHeader, 'backgroundColor', '#b46bff');
     this.renderer.setStyle(this.clonedHeader, 'color', 'white');
     this.renderer.setStyle(this.clonedHeader, 'display', 'none');
     this.renderer.setStyle(this.clonedHeader, 'table-layout', 'fixed');
     this.renderer.setStyle(this.clonedHeader, 'borderCollapse', 'collapse');
     this.renderer.setStyle(this.clonedHeader, 'margin', '0');
+
     // Copy thead styles
     const originalTheadStyles = getComputedStyle(this.originalHeader);
-    this.renderer.setStyle(this.clonedHeader, 'padding', originalTheadStyles.padding);
-    this.renderer.setStyle(this.clonedHeader, 'border', originalTheadStyles.border);
-    this.renderer.setStyle(this.clonedHeader, 'fontSize', originalTheadStyles.fontSize);
-    this.renderer.setStyle(this.clonedHeader, 'fontWeight', originalTheadStyles.fontWeight);
-    this.renderer.setStyle(this.clonedHeader, 'lineHeight', originalTheadStyles.lineHeight);
+    ['padding', 'border', 'fontSize', 'fontWeight', 'lineHeight'].forEach(prop => {
+      this.renderer.setStyle(this.clonedHeader, prop, originalTheadStyles.getPropertyValue(prop));
+    });
 
     this.renderer.appendChild(document.body, this.clonedHeader);
-
     this.syncColumnWidths();
     this.onScroll();
 
+    // Listen for scroll on the scroll container
     if (this.scrollContainer !== window) {
       this.renderer.listen(this.scrollContainer, 'scroll', () => this.onScroll());
     }
@@ -84,9 +84,8 @@ export class StickyTableHeaderDirective implements AfterViewInit {
 
   private syncColumnWidths() {
     if (!this.clonedHeader || !this.originalHeader) return;
-
-    const originalThs = this.originalHeader.querySelectorAll('th');
-    const clonedThs = this.clonedHeader.querySelectorAll('th');
+    const originalThs = Array.from(this.originalHeader.querySelectorAll('th'));
+    const clonedThs = Array.from(this.clonedHeader.querySelectorAll('th'));
 
     if (originalThs.length !== clonedThs.length) {
       console.warn('StickyTableHeaderDirective: Mismatch in number of th elements');
@@ -99,33 +98,26 @@ export class StickyTableHeaderDirective implements AfterViewInit {
       this.renderer.setStyle(clonedThs[index], 'width', `${width}px`);
       this.renderer.setStyle(clonedThs[index], 'minWidth', `${width}px`);
       this.renderer.setStyle(clonedThs[index], 'boxSizing', 'border-box');
-      // Copy additional styles to match original th
-      this.renderer.setStyle(clonedThs[index], 'padding', thStyles.padding);
-      this.renderer.setStyle(clonedThs[index], 'fontSize', thStyles.fontSize);
-      this.renderer.setStyle(clonedThs[index], 'fontWeight', thStyles.fontWeight);
-      this.renderer.setStyle(clonedThs[index], 'lineHeight', thStyles.lineHeight);
-      this.renderer.setStyle(clonedThs[index], 'textAlign', thStyles.textAlign);
-      this.renderer.setStyle(clonedThs[index], 'border', thStyles.border);
-      this.renderer.setStyle(clonedThs[index], 'backgroundColor', thStyles.backgroundColor);
-      this.renderer.setStyle(clonedThs[index], 'color', thStyles.color);
+      ['padding', 'fontSize', 'fontWeight', 'lineHeight', 'textAlign', 'border', 'backgroundColor', 'color'].forEach(prop => {
+        this.renderer.setStyle(clonedThs[index], prop, thStyles.getPropertyValue(prop));
+      });
     });
   }
 
   @HostListener('window:scroll', [])
   onScroll() {
     if (!this.clonedHeader || !this.originalHeader) return;
-
     this.calculateOffset();
     const table = this.el.nativeElement as HTMLTableElement;
     const tableRect = table.getBoundingClientRect();
     const originalHeaderRect = this.originalHeader.getBoundingClientRect();
 
-    if (originalHeaderRect.top < this.offsetTop && tableRect.bottom > this.offsetTop) {
+    if (originalHeaderRect.top <= this.offsetTop && tableRect.bottom > this.offsetTop) {
       this.renderer.setStyle(this.clonedHeader, 'display', 'table');
       this.renderer.setStyle(this.clonedHeader, 'top', `${this.offsetTop}px`);
       this.renderer.setStyle(this.clonedHeader, 'left', `${tableRect.left}px`);
       this.renderer.setStyle(this.clonedHeader, 'width', `${tableRect.width}px`);
-      this.syncColumnWidths(); // Ensure styles are synced on scroll
+      this.syncColumnWidths();
     } else {
       this.renderer.setStyle(this.clonedHeader, 'display', 'none');
     }
@@ -133,12 +125,11 @@ export class StickyTableHeaderDirective implements AfterViewInit {
 
   @HostListener('window:resize', [])
   onResize() {
+    if (!this.clonedHeader || !this.originalHeader) return;
     const table = this.el.nativeElement as HTMLTableElement;
-    if (this.clonedHeader && this.originalHeader) {
-      this.calculateOffset();
-      this.renderer.setStyle(this.clonedHeader, 'top', `${this.offsetTop}px`);
-      this.renderer.setStyle(this.clonedHeader, 'width', `${table.getBoundingClientRect().width}px`);
-      this.syncColumnWidths();
-    }
+    this.calculateOffset();
+    this.renderer.setStyle(this.clonedHeader, 'top', `${this.offsetTop}px`);
+    this.renderer.setStyle(this.clonedHeader, 'width', `${table.getBoundingClientRect().width}px`);
+    this.syncColumnWidths();
   }
 }

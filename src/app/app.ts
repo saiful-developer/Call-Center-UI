@@ -1,15 +1,17 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { Router, RouterOutlet, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Event } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { SidebarComponent } from './components/sidebar/sidebar';
 import { CommonModule } from '@angular/common';
-import { Header } from './components/header/header';
-import { Footer } from './components/footer/footer';
-import { SidebarService } from './services/sidebar-service';
-import { ShortSicebar } from "./components/short-sicebar/short-sicebar";
-import { FloatingActionBtn } from './components/floating-action-btn/floating-action-btn';
-import { Loader } from './components/loader/loader';
+//components
+import { SidebarComponent } from './agent/shared/sidebar/sidebar';
+import { Header } from './agent/shared/header/header';
+import { Footer } from './agent/shared/footer/footer';
+import { SidebarService } from './agent/services/sidebar-service';
+import { ShortSicebar } from './agent/shared/short-sicebar/short-sicebar';
+import { FloatingActionBtn } from './agent/shared/floating-action-btn/floating-action-btn';
+import { Loader } from './shared/loader/loader';
 import { LoderService } from './services/loder.service';
+
 
 
 
@@ -17,6 +19,7 @@ import { LoderService } from './services/loder.service';
 // import { AgentBreadcrumbs } from './user-agent/agent-breadcrumbs/agent-breadcrumbs';
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [RouterOutlet, CommonModule, SidebarComponent, Header, Footer, ShortSicebar, FloatingActionBtn, Loader],
   templateUrl: './app.html',
   styleUrls: ['./app.css']

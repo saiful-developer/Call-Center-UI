@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { LoginAgnet } from './components/login-agnet/login-agnet';
-import { authGuard } from './guard/auth-guard';
-import { guestGuardGuard } from './guard/guest-guard-guard';
+import { Login } from './shared/login/login-agnet';
+import { authGuard } from './auth/guard/auth-guard';
+import { guestGuardGuard } from './auth/guard/guest-guard-guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -9,7 +9,7 @@ export const routes: Routes = [
     //Admin User
     {
         path: 'admin',
-        loadChildren: () => import('./user-admin/admin.routes').then(m => m.ADMIN_ROUTES),
+        loadChildren: () => import('./admin/admin.routes').then(m => m.ADMIN_ROUTES),
         canActivate: [authGuard]
     },
 
@@ -17,20 +17,20 @@ export const routes: Routes = [
     // Agents
     {
         path: 'agent',
-        loadChildren: () => import('./user-agent/agent.routes').then(m => m.AGENT_ROUTES),
+        loadChildren: () => import('./agent/routes/agent.routes').then(m => m.AGENT_ROUTES),
         canActivate: [authGuard]
     },
 
     // Supervisor
     {
         path: 'supervisor',
-        loadChildren: () => import('./user-supervisor/supervisor.routes').then(m => m.Supervisor_ROUTES),
+        loadChildren: () => import('./supervisor/routes/supervisor.routes').then(m => m.Supervisor_ROUTES),
         canActivate: [authGuard]
     },
 
     {
         path: 'login',
-        component: LoginAgnet,
+        component: Login,
         canActivate: [guestGuardGuard]
     },
 

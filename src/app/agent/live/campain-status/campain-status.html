@@ -1,0 +1,43 @@
+<div class="content-wrapper">
+    <app-page-header title="Campain Status" iconClass="bi-megaphone"></app-page-header>
+
+    <!-- outgoing table -->
+    <div class="d-md-block table-container">
+        <table class="table  table-hover  shadow-sm rounded" appStickyTableHeader
+            [offsetElements]="['.navbar.fixed-top']">
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th>Campain</th>
+                    <th>Agent</th>
+                    <th>Ready</th>
+                    <th>Break</th>
+                    <th>Busy</th>
+                    <th>In Call</th>
+                    <th>Out Call</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of campainStatus; let i = index">
+                    <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.campaign }}</td>
+                    <td>{{ report.agentCount }}</td>
+                    <td>{{ report.readyCount }}</td>
+                    <td>{{ report.breakCount }}</td>
+                    <td>{{ report.busyCount }}</td>
+                    <td>{{ report.inCallCount }}</td>
+                    <td>{{ report.outCallCount }}</td>
+                </tr>
+            </tbody>
+
+            <p *ngIf="!campainStatus.length" class="error-massage" style="color: red;">
+                DATA NOT FOUND
+            </p>
+
+        </table>
+    </div>
+
+    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
+        (prev)="prevPage()"></app-paginator>
+
+</div>
