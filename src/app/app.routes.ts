@@ -10,7 +10,10 @@ export const routes: Routes = [
     {
         path: 'admin',
         loadChildren: () => import('./admin/admin.routes').then(m => m.ADMIN_ROUTES),
-        canActivate: [authGuard]
+        canActivate: [authGuard],
+        data: {
+            role: 'admin'
+        }
     },
 
 
@@ -18,14 +21,20 @@ export const routes: Routes = [
     {
         path: 'agent',
         loadChildren: () => import('./agent/routes/agent.routes').then(m => m.AGENT_ROUTES),
-        canActivate: [authGuard]
+        canActivate: [authGuard],
+        data: {
+            role: 'agent'
+        }
     },
 
     // Supervisor
     {
         path: 'supervisor',
         loadChildren: () => import('./supervisor/routes/supervisor.routes').then(m => m.Supervisor_ROUTES),
-        canActivate: [authGuard]
+        canActivate: [authGuard],
+        data: {
+            role: 'supervisor'
+        }
     },
 
     {
@@ -40,3 +49,4 @@ export const routes: Routes = [
         pathMatch: 'full'
     }
 ];
+    

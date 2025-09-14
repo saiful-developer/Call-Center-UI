@@ -1,0 +1,44 @@
+/* Base styles */
+.sidebar-container, .main-container {
+  transition: all 0.5s ease;
+  border: 0px !important;
+}
+
+.container-fluid {
+  background-color: #f6f6f6;
+}
+
+/* Custom thin sidebar */
+.thin-sidebar {
+  width: 4%;
+  min-width: 50px;
+  max-width: 60px;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  background: white !important;
+  border-radius: 10px;
+}
+
+.col-11-main {
+  width: 95% !important;
+}
+
+.sidebar-container.bg-light.p-0.col-2.border-end {
+  margin-top: 1rem;
+}
+
+/* Responsive styles for screens <= 1200px */
+@media (max-width: 1200px) {
+  .sidebar-container {
+    display: none !important; /* Hide both sidebar and thin-sidebar */
+  }
+  .main-container {
+    width: 100% !important; /* Main content takes full width */
+  }
+  .col-11-main {
+    width: 100% !important;
+  }
+  .close-sidebar-btn {
+    display: none; /* Hide close button as sidebar is not visible */
+  }
+}

@@ -1,9 +1,9 @@
 <div class="fb-login-wrapper d-flex align-items-center justify-content-center vh-100">
   <div class="row width">
-    
+
     <!-- Left Section -->
     <div class="col-md-6 d-flex flex-column justify-content-center mb-5 mb-md-0">
-      <img src="assets/images/logo.png" alt="Logo" class="fb-main-logo mb-3">
+      <img src="assets/agent/images/logo.png" alt="Logo" class="fb-main-logo mb-3">
       <h2 class="fb-tagline">CallMaster there should be some some ramdon text about this site and some slogan</h2>
     </div>
 
@@ -25,7 +25,8 @@
           <div class="mb-3">
             <input id="extension" formControlName="extension" type="number" placeholder="Extension"
               class="form-control form-control-lg" />
-            <div *ngIf="loginForm.get('extension')?.invalid && loginForm.get('extension')?.touched" class="text-danger mt-1 small">
+            <div *ngIf="loginForm.get('extension')?.invalid && loginForm.get('extension')?.touched"
+              class="text-danger mt-1 small">
               Extension is required.
             </div>
           </div>
@@ -34,14 +35,28 @@
           <div class="mb-3">
             <input id="password" formControlName="password" type="password" placeholder="Password"
               class="form-control form-control-lg" />
-            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger mt-1 small">
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+              class="text-danger mt-1 small">
               Password is required.
             </div>
           </div>
 
+          <!-- Role Selection Dropdown -->
+          <div class="mb-3">
+            <select id="role" formControlName="role" class="form-select form-select-lg">
+              <option value="" disabled selected>Select Role</option>
+              <option value="agent">Agent</option>
+              <option value="supervisor">Supervisor</option>
+            </select>
+            <div *ngIf="submitted && loginForm.get('role')?.invalid" class="text-danger mt-1 small">
+              Role is required
+            </div>
+          </div>
+
+
           <!-- Submit Button -->
-           <!-- [disabled]="loginForm.invalid" -->
-          <button type="submit"  class="btn btn-gradient-primary w-100 fw-bold py-2 fs-5">
+          <!-- [disabled]="loginForm.invalid" -->
+          <button type="submit" class="btn btn-gradient-primary w-100 fw-bold py-2 fs-5">
             Log In
           </button>
 

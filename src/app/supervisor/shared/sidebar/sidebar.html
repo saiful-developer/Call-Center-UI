@@ -1,0 +1,126 @@
+<aside class="sidebar bg-white shadow-sm vh-100 rounded-3">
+	<div class="p-3">
+
+		<!-- Logo -->
+		<div class="logo-parent mb-4">
+			<div class="logo-div">
+				<img src="assets/supervisor/images/logo-letter.png" alt="logo">
+			</div>
+			<div class="logo-lg fs-36 fw-700">CRM<span class="text-primary">i</span></div>
+		</div>
+
+		<!-- User Profile -->
+		<div class="d-flex align-items-center mb-4">
+			<img src="assets/agent/images/faces/face1.jpg" alt="User" class="rounded-circle me-2" width="40"
+				height="40">
+			<div>
+				<h6 class="mb-0 fw-bold">Nil Yeager</h6>
+				<small class="text-muted">Supervisor</small>
+			</div>
+		</div>
+
+		<!-- Main Menu -->
+		<h6 class="text-muted small text-uppercase mb-2">Main Menu</h6>
+
+		<ul class="nav flex-column mb-3">
+
+			<!-- Dashboard -->
+			<li class="nav-item">
+				<a class="nav-link d-flex align-items-center custom-link" routerLink="/dashboard"
+					routerLinkActive="active">
+					<i class="bi bi-grid-1x2 me-2"></i> Dashboard
+				</a>
+			</li>
+
+			<!-- Reports Dropdown -->
+			<li class="nav-item custom">
+				<a class="nav-link d-flex align-items-center custom-link" (click)="toggleMenu('reports')">
+					<i class="bi bi-file-earmark-text me-2"></i>
+					Reports
+					<i class="bi bi-chevron-down ms-auto" [class.rotate]="openMenu === 'reports'"></i>
+				</a>
+
+				<!-- Keep the submenu always in DOM -->
+				<ul class="nav d-bock sub-menu" [@dropdownAnimation]="openMenu === 'reports' ? 'open' : 'closed'">
+					<li class="nav-item">
+						<a class="nav-link custom-link" routerLink="/supervisor/reports/incoming"
+							(click)="onToggleSidebar()">
+							<i class="bi bi-arrow-right sidebar-icon"></i> Incoming
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link custom-link" routerLink="/supervisor/reports/outgoing"
+							(click)="onToggleSidebar()">
+							<i class="bi bi-arrow-right sidebar-icon"></i> Outgoing
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link custom-link" routerLink="/supervisor/reports/break" (click)="onToggleSidebar()">
+							<i class="bi bi-arrow-right sidebar-icon"></i> Break
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link custom-link" routerLink="/supervisor/reports/login" (click)="onToggleSidebar()">
+							<i class="bi bi-arrow-right sidebar-icon"></i> Login
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link custom-link" routerLink="/supervisor/reports/abandon" (click)="onToggleSidebar()">
+							<i class="bi bi-arrow-right sidebar-icon"></i> Abandon
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link custom-link" routerLink="/supervisor/reports/rna" (click)="onToggleSidebar()">
+							<i class="bi bi-arrow-right sidebar-icon"></i> Ring No Answer
+						</a>
+					</li>
+				</ul>
+			</li>
+
+
+			<!-- Live Dropdown -->
+			<li class="nav-item custom">
+				<a class="nav-link d-flex align-items-center custom-link" (click)="toggleMenu('live')">
+					<i class="bi bi-broadcast me-1"></i> Live
+					<i class="bi bi-chevron-down ms-auto" [class.rotate]="openMenu === 'live'"></i>
+				</a>
+
+				<ul class="nav d-bock sub-menu" [@dropdownAnimation]="openMenu === 'live' ? 'open' : 'closed'">
+					<li class="nav-item">
+						<a class="nav-link" routerLink="/agent/live/abandon-call" (click)="onToggleSidebar()">Abandon
+							Calls</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="/agent/live/agent-status" (click)="onToggleSidebar()">Agent
+							Status</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="/agent/live/campain-status" (click)="onToggleSidebar()">Campain
+							Status</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="agent/live/extension-status"
+							(click)="onToggleSidebar()">Extension Status</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="agent/live/trunk-status" (click)="onToggleSidebar()">Trunk
+							Status</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="agent/live/waiting-calls" (click)="onToggleSidebar()">Waiting
+							Calls</a>
+					</li>
+				</ul>
+			</li>
+
+			<!-- Address Book -->
+			<li class="nav-item">
+				<a class="nav-link d-flex align-items-center custom-link" routerLink="/expenses"
+					routerLinkActive="active">
+					<i class="bi bi-wallet2 me-2"></i> Address book
+				</a>
+			</li>
+
+		</ul>
+	</div>
+</aside>

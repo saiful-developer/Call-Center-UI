@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { RouterModule, RouterLink } from '@angular/router';
-import { SidebarService } from '../../services/sidebar-service';
+import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule } from '@angular/common';
 
 import { trigger, style, animate, transition } from '@angular/animations';

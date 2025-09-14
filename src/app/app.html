@@ -1,18 +1,1 @@
-<div class="container-scroller">
-  <app-header *ngIf="!isAuthRoute"></app-header>
-  <div class="page-body-wrapper layout-main-contant main-page-layout">
-    <!-- Sidebar Wrapper -->
-    <div class="sidebar-container" [class.sidebar-open]="isSidebarVisible" [class.sidebar-closed]="!isSidebarVisible" *ngIf="!isAuthRoute">
-      <app-sidebar *ngIf="isSidebarVisible" class="sidebar"></app-sidebar>
-      <app-short-sicebar *ngIf="!isSidebarVisible" class="short-sidebar"></app-short-sicebar>
-    </div>
-
-    <!-- Main Panel -->
-    <div class="main-panel" [class.panel-shrink]="isSidebarVisible" [class.panel-wide]="!isSidebarVisible">
-      <app-loader></app-loader>
-      <router-outlet></router-outlet>
-      <app-footer *ngIf="!isAuthRoute"></app-footer>
-    </div>
-    <app-floating-action-btn *ngIf="!isAuthRoute"></app-floating-action-btn>
-  </div>
-</div>
+<router-outlet></router-outlet>

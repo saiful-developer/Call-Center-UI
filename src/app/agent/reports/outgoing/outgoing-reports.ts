@@ -25,7 +25,7 @@ export interface OutgoingReportsData {
 
 @Component({
   selector: 'app-outgoing-reports',
-  imports: [PageHeader, ReactiveFormsModule, CommonModule, Paginator, StickyTableHeaderDirective ],
+  imports: [PageHeader, ReactiveFormsModule, FormsModule, CommonModule, Paginator, StickyTableHeaderDirective ],
   templateUrl: './outgoing-reports.html',
   styleUrl: './outgoing-reports.css'
 })

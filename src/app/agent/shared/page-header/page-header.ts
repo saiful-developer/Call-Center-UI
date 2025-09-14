@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { AgentBreadcrumbs } from '../../../shared/breadcrumbs/agent-breadcrumbs';
+import { Breadcrumbs } from '../../../shared/breadcrumbs/breadcrumbs';
 import { NgClass } from '@angular/common';
 
 
 @Component({
   selector: 'app-page-header',
-  imports: [AgentBreadcrumbs, NgClass],
+  imports: [NgClass, Breadcrumbs],
   templateUrl: './page-header.html',
   styleUrl: './page-header.css'
 })

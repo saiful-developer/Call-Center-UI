@@ -1,70 +1,13 @@
-import { Component, NgModule, OnInit } from '@angular/core';
-import { Router, RouterOutlet, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Event } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
-//components
-import { SidebarComponent } from './agent/shared/sidebar/sidebar';
-import { Header } from './agent/shared/header/header';
-import { Footer } from './agent/shared/footer/footer';
-import { SidebarService } from './agent/services/sidebar-service';
-import { ShortSicebar } from './agent/shared/short-sicebar/short-sicebar';
-import { FloatingActionBtn } from './agent/shared/floating-action-btn/floating-action-btn';
-import { Loader } from './shared/loader/loader';
-import { LoderService } from './services/loder.service';
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
 
-
-
-
-
-// import { AgentBreadcrumbs } from './user-agent/agent-breadcrumbs/agent-breadcrumbs';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, SidebarComponent, Header, Footer, ShortSicebar, FloatingActionBtn, Loader],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
-export class App implements OnInit {
+export class App {
 
-  isSidebarVisible = false;
-  currentRoute = '';
-
-  constructor(
-    private SidebarService: SidebarService,
-    private router: Router,
-    private loader: LoderService
-
-  ) {
-    //router subscription
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.currentRoute = event.urlAfterRedirects;
-    });
-    //table header fixed
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationStart) {
-        this.loader.show();
-      } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
-        this.loader.hide(300); // hold for smooth fade
-      }
-    });
-
-
-
-  }
-
-  // ADD this getter method
-  get isAuthRoute(): boolean {
-    return this.currentRoute === '/login' ||
-      this.currentRoute === '/logout' ||
-      this.currentRoute === '/';
-  }
-
-  ngOnInit(): void {
-    this.SidebarService.sidebarVisible$.subscribe((isSidebarVisible) => {
-      console.log('Sidebar visibility:', isSidebarVisible);
-      this.isSidebarVisible = isSidebarVisible;
-    });
-  }
 }

@@ -4,7 +4,7 @@
     <li class="nav-item nav-profile active">
       <a href="#" class="nav-link custom-profile-section">
         <div class="nav-profile-image">
-          <img src="assets/images/faces/face1.jpg" alt="profile" />
+          <img src="assets/agent/images/faces/face1.jpg" alt="profile" />
           <span class="login-status online"></span>
         </div>
         <div class="nav-profile-text d-flex flex-column">
@@ -23,7 +23,7 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/agent/dashboard" (click)="onToggleSidebar()">
         <span class="menu-title">Dashboard</span>
-        <i class="mdi mdi-home menu-icon"></i>
+        <i class="bi bi-grid menu-icon"></i>
       </a>
     </li>
 
@@ -31,8 +31,8 @@
     <li class="nav-item">
       <a class="nav-link" (click)="toggleMenu('profile')">
         <span class="menu-title">Profile</span>
-        <i class="menu-arrow"></i>
-        <i class="mdi mdi-account menu-icon"></i>
+        <i class="bi bi-chevron-down " style="text-align: right;"></i>
+        <i class="bi bi-person menu-icon"></i>
       </a>
       <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'profile'" [@slideInOut]>
         <li class="nav-item">
@@ -107,7 +107,7 @@
           <a class="nav-link" routerLink="/agent/reports/outgoing" (click)="onToggleSidebar()">Outgoing</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/reports/break" (click)="onToggleSidebar()">Break</a>
+          <a class="nav-link" routerLink="agent/breakreports/" (click)="onToggleSidebar()">Break</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="agent/reports/login" (click)="onToggleSidebar()">Login</a>

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ApiService } from '../../agent/services/api.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/jwt-decode.service';
+import { NgZone } from '@angular/core';
 
 
 @Component({
@@ -22,12 +23,14 @@ export class Login {
     private fb: FormBuilder,
     private apiService: ApiService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private zone: NgZone
   ) {
     this.loginForm = this.fb.group({
       userId: ['', [Validators.required]],
       extension: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      role: ['', Validators.required]
     });
   }
 
@@ -37,20 +40,43 @@ export class Login {
 
     if (this.loginForm.invalid) return;
 
-    const { userId, extension, password } = this.loginForm.value;
+    const { userId, extension, password, role } = this.loginForm.value;
+    sessionStorage.setItem('role', role);
+
+    // console.log(role)
 
     //getting data
     this.apiService.loginAgent(userId, password, extension).subscribe({
       next: (res: any) => {
-        const parseedToken = JSON.parse(res.data)
-        sessionStorage.setItem('user', JSON.stringify(parseedToken))
-        sessionStorage.setItem('jwt', parseedToken.token)
-        this.router.navigateByUrl('/agent/dashboard');
+        try {
+          const parsedToken = JSON.parse(res.data);
+          console.log((parsedToken.token));
+
+
+          if (parsedToken.token) {
+            sessionStorage.setItem('user', JSON.stringify(parsedToken));
+            sessionStorage.setItem('jwt', parsedToken.token);
+            console.log('inside if')
+
+            this.zone.run(() => {
+              this.router.navigate(['/agent/dashboard']);
+            });
+
+          } else {
+            this.errorMessage = 'Invalid login response.';
+            window.alert(this.errorMessage);
+          }
+        } catch (e) {
+          this.errorMessage = 'Login failed. Invalid response format.';
+          window.alert(this.errorMessage);
+        }
       },
       error: (err) => {
         console.error(err);
+        sessionStorage.removeItem('jwt');
+        sessionStorage.removeItem('user');
         this.errorMessage = 'Login failed. Please check credentials.';
-        window.alert(this.errorMessage)
+        window.alert(this.errorMessage);
       }
     });
 

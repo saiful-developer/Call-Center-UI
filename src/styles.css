@@ -126,10 +126,11 @@ nav.navbar.default-layout-navbar.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row 
   background-color: #a46cf9 !important;
   /* border-radius: 8px !important; */
 }
+
 /* faq */
 .accordion .card-header {
-    background-color: #f5eeff;
-    border-radius: 0 !important;
+  background-color: #f5eeff;
+  border-radius: 0 !important;
 }
 
 .content-wrapper {
@@ -301,10 +302,15 @@ body {
 
 }
 
+
 th {
-  background-color: #b46bff !important;
+  background-color: #909090 !important ;
   /* linear-gradient(135deg, #d98bff,#9f59ff) ; */
   color: white !important;
+}
+
+.supervisor_th {
+  backdrop-filter: red !important;
 }
 
 table tr:nth-child(even) {
@@ -331,6 +337,7 @@ tbody {
   .cloned-header {
     display: none !important;
   }
+
   li.breadcrumb-item.active {
     margin-right: 0px !important;
   }
@@ -437,6 +444,10 @@ textarea.form-control:focus {
   color: white !important;
 }
 
+.export-btn {
+  background-image: radial-gradient(circle 404px at 20.3% 15.9%, rgba(0, 79, 255, 1) 0%, rgba(0, 240, 255, 1) 90%);
+}
+
 .red-bg {
   background: linear-gradient(135deg, #fe7c96, #b66dff);
   color: white;
@@ -486,8 +497,192 @@ textarea.form-control:focus {
 }
 
 .cloned-header th {
-    border-top: 0;
-    /* border-bottom-width: 1px; */
-    font-family: "ubuntu-medium", sans-serif;
-    font-weight: initial;
+  border-top: 0;
+  /* border-bottom-width: 1px; */
+  font-family: "ubuntu-medium", sans-serif;
+  font-weight: initial;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* **********************layout design******************************* */
+
+
+/* Sidebar Container */
+.sidebar-container {
+  transition: width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sidebar open = 20% */
+.sidebar-open {
+  width: 20%;
+}
+
+/* Sidebar closed = 4% */
+.sidebar-closed {
+  width: 4%;
+}
+
+
+
+/* Shrink to 80% when sidebar is open */
+.panel-shrink {
+  width: 80%;
+}
+
+/* Full width = 96% when sidebar closed */
+.panel-wide {
+  width: 96%;
+  background-color: #f2edf3;
+}
+
+/* Smooth scroll and height */
+
+
+/* SIDEBAR SMOOTH SLIDE */
+.sidebar {
+  width: 100%;
+  height: 100vh;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.sidebar.slide-out {
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 1200px) {
+  .short-sidebar {
+    /* display: none; */
+    width: 3.5rem !important;
+  }
+
+  nav.short-sidebar {
+    width: 100% !important;
+  }
+
+  .sidebar-closed {
+    width: 5.5%;
+  }
+
+  .sidebar .nav .nav-item {
+    padding: 0px !important;
+  }
+}
+
+@media (max-width: 1000px) {
+  .sidebar-closed {
+    width: 6%;
+  }
+
+  .piegraph-custom {
+    /* width: auto !important; */
+    height: 10rem !important;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .sidebar-closed {
+    width: 6.5%;
+  }
+
+}
+
+
+@media (max-width: 990px) {
+
+  /* Sidebar container covers full screen width when open */
+  .sidebar-container {
+    width: 30%;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateX(-100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: #fff;
+    z-index: 9999;
+  }
+
+  @media (max-width: 800px) {
+    .sidebar-container {
+      width: 50% !important;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .sidebar-container {
+      width: 60% !important;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .sidebar-container {
+      width: 70% !important;
+    }
+
+    nav#sidebar {
+      padding: 1.5rem;
+    }
+  }
+
+
+  .short-sidebar {
+    display: none;
+  }
+
+
+
+  /* When sidebar is open */
+  .sidebar-container.sidebar-open {
+    transform: translateX(0);
+  }
+
+  /* Prevent background scroll when sidebar is open */
+  body.sidebar-active {
+    overflow: hidden;
+  }
+
+  /* Main panel stays full width */
+
+
+
+  /* Optional: backdrop for mobile */
+  .sidebar-backdrop {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 9998;
+  }
+}
+
+.auth-layout {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+}
+
+.custom-toggle-btn {
+  font-size: 18px;
 }

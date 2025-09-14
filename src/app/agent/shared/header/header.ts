@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, signal } from '@angular/core';
-import { SidebarService } from '../../services/sidebar-service';
+import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule, NgClass } from '@angular/common';
 import { JwtPayload } from '../../../models/jwtpayload.model';
 import { ApiService } from '../../services/api.service';

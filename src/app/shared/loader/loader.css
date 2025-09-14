@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(252, 177, 244, 0.258);
+  background: rgba(123, 123, 123, 0.258);
   z-index: 2000;
   opacity: 0;
   pointer-events: none;

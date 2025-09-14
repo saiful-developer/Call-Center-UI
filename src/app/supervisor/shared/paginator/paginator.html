@@ -1,0 +1,4 @@
+<div class="pagination-controls">
+  <button (click)="prev.emit()" [disabled]="offset === 0" class="btn paginatior-btn">Previous</button>
+  <button (click)="next.emit()" [disabled]="!hasMore" class="btn paginatior-btn">Next</button>
+</div>

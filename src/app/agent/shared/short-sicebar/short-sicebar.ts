@@ -1,98 +1,93 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-short-sicebar',
-  imports: [RouterLink, RouterModule],
+  imports: [RouterLink, RouterModule, CommonModule],
   templateUrl: './short-sicebar.html',
   styleUrl: './short-sicebar.css'
 })
 
 export class ShortSicebar {
 
+
   shorBartlist = [
     {
       icon: 'mdi-home',
-      link: '/agent/dashboard',
+      link: 'dashboard',
       hoverItems: ['Dashboard'],
-      hoverItemsRouterLinks: ['/agent/dashboard']
+      hoverItemsRouterLinks: ['dashboard']
     },
     {
       icon: 'mdi mdi-account',
-      link: '/agent/profile',
+      link: 'profile',
       hoverItems: ['View Profile', 'Edit Profile'],
-      hoverItemsRouterLinks: ['/agent/profile', '/agent/edit-profile']
+      hoverItemsRouterLinks: ['profile', 'edit-profile']
     },
     {
       icon: 'mdi-message-text',
-      link: '/agent/message',
+      link: 'message',
       hoverItems: ['Send Message', 'Inbox'],
-      hoverItemsRouterLinks: ['/agent/message', '/agent/inbox']
+      hoverItemsRouterLinks: ['message', 'inbox']
     },
-    // /mdi mdi-format-list-bulleted menu-icon
     {
       icon: 'mdi-format-list-bulleted',
-      link: '/agent/add-project',
+      link: 'add-project',
       hoverItems: ['Add Projects', 'Multiple Forms'],
-      hoverItemsRouterLinks: ['/agent/add-project', '/agent/multiple-forms']
+      hoverItemsRouterLinks: ['add-project', 'multiple-forms']
     },
     {
       icon: 'mdi-chart-bar',
-      link: '/agent/chartjs',
+      link: 'chartjs',
       hoverItems: ['Charts'],
-      hoverItemsRouterLinks: ['/agent/chartjs']
+      hoverItemsRouterLinks: ['chartjs']
     },
-    { 
+    {
       icon: 'mdi-table-large',
-      link: 'agent/reports/incoming',
+      link: 'reports/incoming',
       hoverItems: ['Incoming Report', 'Outgoing Report', 'Break', 'Login', 'Abandon', 'Ring No Answer'],
-      hoverItemsRouterLinks: ['agent/reports/incoming', 'agent/reports/outgoing', 'agent/reports/break', 'agent/reports/login', 'agent/reports/abandon', 'agent/reports/rna']//need to add path respectivly
+      hoverItemsRouterLinks: ['reports/incoming', 'reports/outgoing', 'reports/break', 'reports/login', 'reports/abandon', 'reports/rna']
     },
     {
       icon: 'bi bi-broadcast me-1',
-      link: 'agent/live/abandon',
+      link: 'live/abandon',
       hoverItems: ['Abandon Calls', 'Agent Status', 'Campain Status', 'Extension Status', 'Trunk Status', 'Waiting Calls'],
-      hoverItemsRouterLinks: ['agent/live/abandon-call', 'agent/live/agent-status', 'agent/live/campain-status',  'agent/live/extension-status', 'agent/live/trunk-status', 'agent/live/waiting-calls']
+      hoverItemsRouterLinks: ['live/abandon-call', 'live/agent-status', 'live/campain-status', 'live/extension-status', 'live/trunk-status', 'live/waiting-calls']
     },
     {
       icon: 'bi-person-lines-fill',
-      link: 'agent/address-book',
+      link: 'address-book',
       hoverItems: ['Address Book'],
-      hoverItemsRouterLinks: ['agent/address-book']
+      hoverItemsRouterLinks: ['address-book']
     },
     {
       icon: 'bi bi-info-circle',
-      link: 'agent/aboutus',
+      link: 'aboutus',
       hoverItems: ['About Us', 'Timeline', 'Contact Us'],
-      hoverItemsRouterLinks: ['agent/aboutus', 'agent/timeline', 'agent/contact']
+      hoverItemsRouterLinks: ['aboutus', 'timeline', 'contact']
     },
     {
       icon: 'bi bi-question-circle',
-      link: 'agent/faq',
+      link: 'faq',
       hoverItems: ['FAQ'],
-      hoverItemsRouterLinks: ['agent/faq']
+      hoverItemsRouterLinks: ['faq']
     },
     {
       icon: 'mdi-plus',
-      link: 'agent/add-project',
+      link: 'add-project',
       hoverItems: ['Add Project'],
-      hoverItemsRouterLinks: ['agent/add-project']
+      hoverItemsRouterLinks: ['add-project']
     },
     {
       icon: 'bi-gear',
-      link: '/agent/settings',
+      link: 'settings',
       hoverItems: ['Settings'],
-      hoverItemsRouterLinks: ['/agent/settings']
+      hoverItemsRouterLinks: ['settings']
     },
-    // {
-    //   icon: 'bi-box-arrow-right',
-    //   link: '/agent/logout ',
-    //   hoverItems: ['Logout'],
-    //   hoverItemsRouterLinks: ['/']  
-    // }
   ]
 
 
 
 }
-// /mdi-alert-circle-outline

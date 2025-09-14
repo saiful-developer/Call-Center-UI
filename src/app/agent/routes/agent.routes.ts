@@ -27,10 +27,13 @@ import { WaitingCallsLive } from "../live/waiting-calls/waiting-calls-live";
 import { AddressBook } from "../reports/address-book/address-book";
 import { AgentContact } from "../pages/contact/agent-contact";
 import { CampainStatus } from "../live/campain-status/campain-status";
+//agent layout
+import { AgentLayout } from "../layouts/agent-layout/agent-layout";
 
 export const AGENT_ROUTES: Routes = [
     {
         path: '',
+        component: AgentLayout,
         children: [
             { path: 'dashboard', component: AgentDashboard, data: { breadcrumb: 'agent/dashboard' } },
             { path: 'profile', component: AgentProfile, data: { breadcrumb: 'agent/profile/view' } },

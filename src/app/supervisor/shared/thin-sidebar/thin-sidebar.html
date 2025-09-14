@@ -1,0 +1,20 @@
+<nav class="short-sidebar">
+    <img src="assets/supervisor/images/logo-letter.png" alt="logo" class="small-logo-img" />
+    <ul class="nav flex-column">
+        <li class="nav-item hover-group" *ngFor="let item of shorBartlist; let i = index" id="{{i}}">
+            <a class="nav-link" [routerLink]="item.link || '#'">
+                <i class="{{item.icon}} color"></i>
+            </a>
+
+            <!-- Hover menu -->
+            <ul class="nav hover-menu">
+                <li *ngFor="let hoverItem of item.hoverItems; let j = index">
+                    <a [routerLink]="item.hoverItemsRouterLinks[j] || '#'">
+                        <i class="bi bi-arrow-right custom-arrow"></i>
+                        {{ hoverItem }}
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>

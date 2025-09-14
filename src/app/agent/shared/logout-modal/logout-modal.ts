@@ -23,6 +23,8 @@ export class LogoutModal {
 
   confirmLogout() {
     this.isVisible = false;
+    sessionStorage.removeItem('jwt');
+    sessionStorage.removeItem('user');
     sessionStorage.clear();
     localStorage.clear()
     this.router.navigate(['/login']);
