@@ -25,6 +25,7 @@
 
 .sidebar-container.bg-light.p-0.col-2.border-end {
   margin-top: 1rem;
+  /* z-index: 5000; */
 }
 
 /* Responsive styles for screens <= 1200px */
@@ -41,4 +42,11 @@
   .close-sidebar-btn {
     display: none; /* Hide close button as sidebar is not visible */
   }
+}
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20000;
 }

@@ -32,3 +32,7 @@
 .d-bock {
   display: block !important;
 }
+
+.p-3 {
+  padding: 20px !important;
+}

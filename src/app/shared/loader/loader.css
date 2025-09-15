@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   background: rgba(123, 123, 123, 0.258);
-  z-index: 2000;
+  z-index: 3000;
   opacity: 0;
   pointer-events: none;
   transition: opacity 280ms ease-in-out;

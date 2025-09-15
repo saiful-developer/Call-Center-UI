@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="search-bar-wrapper">
             <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchFormIncoming"
-                (ngSubmit)="getIncomingBySearch()">
+                (ngSubmit)="getIncomingDataOnFilter()">
                 <!-- Your existing search form code -->
                 <div>
                     <label for="caller-naem">Caller</label>
@@ -31,7 +31,7 @@
                         <label for="">Campaign</label>
                         <select class="form-select" aria-label="Default select example" formControlName="campain">
                             <option selected value="">Select Campaign</option>
-                            <option *ngFor="let c of campains" [value]="c.campaign_id">{{ c.campaign_name }}</option>
+                            <option *ngFor="let c of campains" [value]="c">{{ c }}</option>
                         </select>
                     </div>
                     <div>
@@ -49,9 +49,11 @@
                 <button type="reset" class="btn modern-btn reset-btn" (click)="resetSearch()">
                     <i class="bi bi-arrow-counterclockwise"></i> Reset
                 </button>
-                <button type="reset" class="btn modern-btn export-btn" (click)="resetSearch()">
+
+                <button type="reset" class="btn modern-btn export-btn" (click)="getExportedData()">
                     <i class="bi bi-box-arrow-up"></i> Export
                 </button>
+
                 <div *ngIf="isSearchMode">
                     <small style="color: #7a00f5;">
                         Search between
@@ -87,22 +89,22 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- <tr *ngFor="let report of incomingReportsData; let i = index;">
+                <tr *ngFor="let report of incomingReportsData; let i = index;">
                     <td>{{ sl + i + 1 }}</td>
                     <td>{{ report.uniqueid }}</td>
-                    <td>{{ report.calldate ?? '-' }}</td>
+                    <td>{{ report.calldate }}</td>
                     <td>{{ report.src }}</td>
-                    <td>{{ report.dst ?? '-' }}</td>
-                    <td>{{ report.campaign ?? '-' }}</td>
-                    <td>{{ report.caller_queue_time ?? '-' }}</td>
-                    <td>{{ report.connect_ring_time ?? '-' }}</td>
-                    <td>{{ report.caller_agent_talk_time ?? '-' }}</td>
-                    <td>{{ report.transfer_to ?? '-' }}</td>
-                    <td [ngClass]="{'green-bg' : report.completecaller}">{{ report.completecaller ? 'Caller Finished' :
-                        'Agent Finished' }}</td>
-                    <td>{{ report.disposition ?? '-' }}</td>
-                    <td>{{ report.status }}</td>
-                </tr> -->
+                    <td>{{ report.dst }}</td>
+                    <td>{{ report.agent }}</td>
+                    <td>{{ report.campaign }}</td>
+                    <td>{{ report.caller_queue_time }}</td>
+                    <td>{{ report.connect_ring_time }}</td>
+                    <td>{{ report.caller_agent_talk_time }}</td>
+                    <td>{{ report.transfer_to }}</td>
+                    <td>{{ report.completeagent }}</td>
+                    <td>{{ report.disposition }}</td>
+                    <td>{{ '-' }}</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -112,3 +114,65 @@
 
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const tableContainer = document.querySelector('.table-container');
+    if (!tableContainer) {
+        console.error('Table container not found. Ensure .table-container exists in the DOM.');
+        return;
+    }
+
+    let isDragging = false;
+    let startX, scrollLeft;
+
+    // Mouse events
+    tableContainer.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        tableContainer.classList.add('grabbing');
+        startX = e.pageX - tableContainer.offsetLeft;
+        scrollLeft = tableContainer.scrollLeft;
+        e.preventDefault(); // Prevent default behavior like text selection
+    });
+
+    tableContainer.addEventListener('mouseleave', () => {
+        isDragging = false;
+        tableContainer.classList.remove('grabbing');
+    });
+
+    tableContainer.addEventListener('mouseup', () => {
+        isDragging = false;
+        tableContainer.classList.remove('grabbing');
+    });
+
+    tableContainer.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - tableContainer.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust scroll speed
+        tableContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch events for mobile
+    tableContainer.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        tableContainer.classList.add('grabbing');
+        startX = e.touches[0].pageX - tableContainer.offsetLeft;
+        scrollLeft = tableContainer.scrollLeft;
+        e.preventDefault(); // Prevent default touch behavior
+    });
+
+    tableContainer.addEventListener('touchend', () => {
+        isDragging = false;
+        tableContainer.classList.remove('grabbing');
+    });
+
+    tableContainer.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - tableContainer.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust scroll speed
+        tableContainer.scrollLeft = scrollLeft - walk;
+        e.preventDefault(); // Prevent default touch scrolling
+    });
+});
+</script>

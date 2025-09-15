@@ -47,12 +47,15 @@
                 </div>
 
                 <!-- Search Button -->
-                <button type="submit" class="btn modern-btn">
+                <button type="submit" class="btn modern-btn bg-gradient-primary">
                     <i class="bi bi-search me-1"></i> Search
                 </button>
                 <button type="reset" class="btn modern-btn reset-btn" (click)="resetSearch()">
                     <i class="bi bi-arrow-counterclockwise"></i>
                     Reset
+                </button>
+                <button type="reset" class="btn modern-btn export-btn" (click)="resetSearch()">
+                    <i class="bi bi-box-arrow-up"></i> Export
                 </button>
                 <br>
                 <div *ngIf="isSearchMode">

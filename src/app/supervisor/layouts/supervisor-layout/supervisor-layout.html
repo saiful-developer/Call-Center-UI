@@ -1,5 +1,7 @@
-<div class="container-fluid">
+<div class="chold-transition light-skin sidebar-mini theme-primary">
+  <app-loader></app-loader>
   <div class="row vh-100">
+    
 
     <!-- Sidebar -->
     <div class="sidebar-container bg-light p-0"
@@ -13,7 +15,7 @@
 
     <!-- Main Content -->
     <div class="main-container" [ngClass]="isSidebarOpen ? 'col-10' : 'col-11-main'">
-      <app-loader></app-loader>
+
       <app-header [isSidebarOpen]="isSidebarOpen" (toggleSidebar)="toggleSidebar()">
       </app-header>
 

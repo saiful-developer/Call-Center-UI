@@ -29,6 +29,7 @@ body {
   font-weight: initial;
   line-height: normal;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 
@@ -268,12 +269,12 @@ body {
 }
 
 .modern-table tbody tr:hover {
-  background-color: #7a00f5;
+  /* background-color: #7a00f5; */
   transition: background-color 0.2s ease;
 }
 
 .modern-table tbody tr:nth-child(even) {
-  background-color: #fb0cff !important;
+  /* background-color: #fb0cff !important; */
 }
 
 .badge {
@@ -304,11 +305,14 @@ body {
 
 
 th {
-  background-color: #909090 !important ;
+  background-color: #ebedf2 !important ;
   /* linear-gradient(135deg, #d98bff,#9f59ff) ; */
-  color: white !important;
+  color: #566f9e !important;
 }
 
+.table > :not(:last-child) > :last-child > * {
+  border-bottom-color: aliceblue !important;
+}
 .supervisor_th {
   backdrop-filter: red !important;
 }

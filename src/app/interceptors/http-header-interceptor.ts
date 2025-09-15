@@ -11,6 +11,7 @@ export const httpHeaderInterceptor: HttpInterceptorFn = (req, next) => {
   //requred values for http hea
   const apiKey = "fba2cda8265247f2f4dd9de8e4db35c5";
   const encodedKey = btoa(apiKey);
+  
   const xBrandKey = 'KOTHACallMaster007';
   const encodedBrandKey = btoa(xBrandKey);
 

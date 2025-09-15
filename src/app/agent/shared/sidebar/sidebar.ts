@@ -4,7 +4,7 @@ import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule } from '@angular/common';
 
 import { trigger, style, animate, transition } from '@angular/animations';
-import { JwtPayload } from '../../../models/jwtpayload.model';
+import { JwtPayload } from '../../../interfaces/jwtpayload';
 import { UserService } from '../../../services/jwt-decode.service';
 
 @Component({

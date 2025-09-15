@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Sidebar } from '../../shared/sidebar/sidebar';
 import { ThinSidebar } from '../../shared/thin-sidebar/thin-sidebar';
 import { Header } from '../../shared/header/header';
-import { RouterOutlet } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Loader } from '../../../shared/loader/loader';
 import { ThemeService } from '../../../services/theme.service';
+import { LoderService } from '../../../services/loder.service';
 
 @Component({
   selector: 'app-supervisor-layout',
@@ -17,7 +18,22 @@ export class SupervisorLayout implements OnInit {
   isSidebarOpen: boolean = false;
   isMobile: boolean = false;
 
-  constructor(private themeService: ThemeService) {}
+  constructor(
+    private themeService: ThemeService,
+    private router: Router,
+    private loader: LoderService
+  ) {
+
+    //for showing app loader
+    //subscribed to router.events so the loader will triggere
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.loader.show();
+      } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
+        this.loader.hide(500); // hold for smooth fade
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.themeService.loadTheme('supervisor');

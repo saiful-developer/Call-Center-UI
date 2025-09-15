@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { RouterModule, RouterLink } from '@angular/router';
+
+import { JwtPayload } from '../../../interfaces/jwtpayload';
+import { UserService } from '../../../services/jwt-decode.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -28,11 +31,21 @@ import { RouterModule, RouterLink } from '@angular/router';
     ])
   ]
 })
-export class Sidebar {
+export class Sidebar implements OnInit {
+
+  decodedToken: JwtPayload | null = null;
 
   openMenu: string | null = null; // currently open menu
 
-  constructor(private sidebarService: SidebarService) { }
+  constructor(
+    private sidebarService: SidebarService,
+    private userService: UserService
+  ) { }
+
+  ngOnInit(): void {
+      this.decodedToken = this.userService.decodeToken(sessionStorage.getItem('jwt'));
+      console.log(this.decodedToken)
+  }
 
   toggleMenu(menu: string) {
     this.openMenu = this.openMenu === menu ? null : menu;

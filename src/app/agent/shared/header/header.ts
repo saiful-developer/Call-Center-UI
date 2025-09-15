@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output, signal } from '@angular/core';
 import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule, NgClass } from '@angular/common';
-import { JwtPayload } from '../../../models/jwtpayload.model';
+import { JwtPayload } from '../../../interfaces/jwtpayload';
 import { ApiService } from '../../services/api.service';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 //components

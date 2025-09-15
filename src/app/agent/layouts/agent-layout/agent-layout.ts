@@ -42,12 +42,13 @@ export class AgentLayout implements OnInit {
       this.currentRoute = event.urlAfterRedirects;
     });
 
-    //table header fixed
+    //for showing app loader
+    //subscribed to router.events so the loader will triggered
     this.router.events.subscribe(event => {
       if (event instanceof NavigationStart) {
         this.loader.show();
       } else if (event instanceof NavigationEnd || event instanceof NavigationCancel || event instanceof NavigationError) {
-        this.loader.hide(300); // hold for smooth fade
+        this.loader.hide(500); // hold for smooth fade
       }
     });
   }

@@ -187,3 +187,26 @@ export class Incoming implements OnInit {
     return report.uniqueid;
   }
 }
+
+
+
+
+// //interface 
+// interface IncomingRecords {
+//     id: number;
+//     uniqueid: string;
+//     calldate: string;
+//     callerid: string;
+//     dst: string; // hunting
+//     agent: string;
+//     campaign: string;
+//     caller_queue_time: number; // queue Time
+//     connect_ring_time: number; // ring Time
+//     caller_agent_talk_time: number; // talk Time
+//     transfer_to: string;
+//     completeagent: number; // finished By: 1 if agent finished, 0 if caller finished
+//     disposition: string;
+
+//     // can not find record in the incoming res
+//     recording?: string;
+//   }
