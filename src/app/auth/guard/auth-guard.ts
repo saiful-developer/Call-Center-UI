@@ -6,31 +6,18 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   if (typeof window !== 'undefined' && window.sessionStorage) {
     const token = sessionStorage.getItem('jwt');
-    const userRole = sessionStorage.getItem('role'); // role stored at login
+    const userRole = sessionStorage.getItem('user_role');
 
     if (!token) {
       router.navigate(['/login']);
       return false;
     }
+    // Allow navigation to correct dashboard or other allowed routes
+    if (userRole === 'AGENT' && state.url.startsWith('/agent')) return true;
+    if (userRole === 'SUPERVISOR' && state.url.startsWith('/supervisor')) return true;
+    if (userRole === 'admin' && state.url.startsWith('/admin')) return true;
 
-    // Check if this route expects a role
-    const expectedRole = route.data?.['role'];
-    
-    if (expectedRole && expectedRole !== userRole) {
-      // Redirect user to their correct dashboard
-      if (userRole === 'agent') router.navigate(['/agent/dashboard']);
 
-      else if (userRole === 'supervisor') router.navigate(['/supervisor/dashboard']);
-
-      else router.navigate(['/login']);
-      
-      return false;
-    }
-
-    return true; // Token exists and role matches
-
-  }  else {
-    router.navigate(['/login']);
-    return false;
   }
+  return false;
 };

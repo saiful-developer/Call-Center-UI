@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <ul class="nav custom-nav">
     <!-- Profile Section -->
-    <li class="nav-item nav-profile active">
+    <li class="nav-item nav-profile active " *ngIf="isOpen">
       <a href="#" class="nav-link custom-profile-section">
         <div class="nav-profile-image">
           <img src="assets/agent/images/faces/face1.jpg" alt="profile" />
@@ -17,24 +17,31 @@
       </a>
     </li>
 
-
-
     <!-- Dashboard -->
-    <li class="nav-item">
+    <li class="nav-item " [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" routerLink="/agent/dashboard" (click)="onToggleSidebar()">
-        <span class="menu-title">Dashboard</span>
+        <span class="menu-title" *ngIf="isOpen">Dashboard</span>
         <i class="bi bi-grid menu-icon"></i>
       </a>
+
+      <ul class="nav flex-column sub-menu">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/dashboard"> Dashboard </a>
+        </li>
+      </ul>
+
     </li>
 
     <!-- Profile Dropdown -->
-    <li class="nav-item">
+    <li class="nav-item " [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" (click)="toggleMenu('profile')">
-        <span class="menu-title">Profile</span>
-        <i class="bi bi-chevron-down " style="text-align: right;"></i>
+        <span class="menu-title" *ngIf="isOpen">Profile</span>
+        <i class=" bi bi-chevron-down custom-dropdown " [class.rotate]="openMenu === 'profile'"
+          style="text-align: right;" *ngIf="isOpen"></i>
         <i class="bi bi-person menu-icon"></i>
       </a>
-      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'profile'" [@slideInOut]>
+
+      <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'profile'}" [@slideInOut]>
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/profile" (click)="onToggleSidebar()">View Profile</a>
         </li>
@@ -42,16 +49,18 @@
           <a class="nav-link" routerLink="/agent/edit-profile" (click)="onToggleSidebar()">Edit Profile</a>
         </li>
       </ul>
+
     </li>
 
     <!-- Message Dropdown -->
-    <li class="nav-item">
+    <li class="nav-item " [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" (click)="toggleMenu('message');">
-        <span class="menu-title">Message</span>
-        <i class="menu-arrow"></i>
-        <i class="mdi mdi-message-text menu-icon"></i>
+        <span class="menu-title" *ngIf="isOpen">Message</span>
+        <i class=" bi bi-chevron-down custom-dropdown" [class.rotate]="openMenu === 'message'"
+          style="text-align: right;" *ngIf="isOpen"></i>
+        <i class="bi bi-chat mdi menu-icon"></i>
       </a>
-      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'message'" [@slideInOut]>
+      <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'message'}">
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/message" (click)="onToggleSidebar()">Sent Message</a>
         </li>
@@ -62,13 +71,14 @@
     </li>
 
     <!-- Forms Dropdown -->
-    <li class="nav-item">
+    <li class="nav-item " [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" (click)="toggleMenu('forms')">
-        <span class="menu-title">Forms</span>
-        <i class="menu-arrow"></i>
-        <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+        <span class="menu-title" *ngIf="isOpen">Forms</span>
+        <i class=" bi bi-chevron-down custom-dropdown" [class.rotate]="openMenu === 'forms'" style="text-align: right;"
+          *ngIf="isOpen"></i>
+        <i class="mdi bi bi-envelope menu-icon"></i>
       </a>
-      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'forms'" [@slideInOut]>
+      <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'forms'}">
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/add-project" (click)="onToggleSidebar()">Add Project</a>
         </li>
@@ -79,13 +89,14 @@
     </li>
 
     <!-- Charts Dropdown -->
-    <li class="nav-item">
+    <li class="nav-item" [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" (click)="toggleMenu('charts');">
-        <span class="menu-title">Charts</span>
-        <i class="menu-arrow"></i>
-        <i class="mdi mdi-chart-bar menu-icon"></i>
+        <span class="menu-title" *ngIf="isOpen">Charts</span>
+        <i class=" bi bi-chevron-down custom-dropdown" [class.rotate]="openMenu === 'charts'" style="text-align: right;"
+          *ngIf="isOpen"></i>
+        <i class="mdi bi bi-bar-chart menu-icon"></i>
       </a>
-      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'charts'" [@slideInOut]>
+      <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'charts'}">
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/chartjs" (click)="onToggleSidebar()">ChartJs</a>
         </li>
@@ -93,13 +104,14 @@
     </li>
 
     <!-- Reports Dropdown -->
-    <li class="nav-item">
+    <li class="nav-item" [ngClass]="!isOpen ? 'li-hover' : ''">
       <a class="nav-link" (click)="toggleMenu('reports')">
-        <span class="menu-title">Reports</span>
-        <i class="menu-arrow"></i>
-        <i class="mdi mdi-table-large menu-icon"></i>
+        <span class="menu-title" *ngIf="isOpen">Reports</span>
+        <i class=" bi bi-chevron-down custom-dropdown" [class.rotate]="openMenu === 'reports'"
+          style="text-align: right;" *ngIf="isOpen"></i>
+        <i class="mdi bi bi-clipboard-data menu-icon"></i>
       </a>
-      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'reports'" [@slideInOut]>
+      <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'reports'}">
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/reports/incoming" (click)="onToggleSidebar()">Incoming</a>
         </li>
@@ -118,20 +130,18 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/reports/rna" (click)="onToggleSidebar()">Ring No Answer</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a>
-        </li> -->
       </ul>
     </li>
 
     <!-- Live Dropdown -->
-    <li class="nav-item">
+    <li class="nav-item" [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" (click)="toggleMenu('live')">
-        <span class="menu-title">Live</span>
-        <i class="menu-arrow"></i>
+        <span class="menu-title" *ngIf="isOpen">Live</span>
+        <i class=" bi bi-chevron-down custom-dropdown" [class.rotate]="openMenu === 'live'" style="text-align: right;"
+          *ngIf="isOpen"></i>
         <i class="bi bi-broadcast me-1 menu-icon"></i>
       </a>
-      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'live'" [@slideInOut]>
+      <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'live'}">
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/live/abandon-call" (click)="onToggleSidebar()">Abandon Calls</a>
         </li>
@@ -142,33 +152,40 @@
           <a class="nav-link" routerLink="/agent/live/campain-status" (click)="onToggleSidebar()">Campain Status</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/live/extension-status" (click)="onToggleSidebar()">Extension Status</a>
+          <a class="nav-link" routerLink="/agent/live/extension-status" (click)="onToggleSidebar()">Extension Status</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/live/trunk-status" (click)="onToggleSidebar()">Trunk Status</a>
+          <a class="nav-link" routerLink="/agent/live/trunk-status" (click)="onToggleSidebar()">Trunk Status</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="agent/live/waiting-calls" (click)="onToggleSidebar()">Waiting Calls</a>
+          <a class="nav-link" routerLink="/agent/live/waiting-calls" (click)="onToggleSidebar()">Waiting Calls</a>
         </li>
       </ul>
     </li>
 
     <!-- address book -->
-    <li class="nav-item">
+    <li class="nav-item" [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" routerLink="/agent/address-book" (click)="onToggleSidebar()">
-        <span class="menu-title">Address Book</span>
+        <span class="menu-title" *ngIf="isOpen">Address Book</span>
         <i class="bi-person-lines-fill menu-icon"></i>
       </a>
+
+      <ul class="nav flex-column sub-menu">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/address-book">Address Book</a>
+        </li>
+      </ul>
     </li>
 
     <!-- About Dropdown -->
-    <li class="nav-item">
+    <li class="nav-item" [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" (click)="toggleMenu('about')">
-        <span class="menu-title">About</span>
-        <i class="menu-arrow"></i>
+        <span class="menu-title" *ngIf="isOpen">About</span>
+        <i class=" bi bi-chevron-down custom-dropdown" [class.rotate]="openMenu === 'about'" style="text-align: right;"
+          *ngIf="isOpen"></i>
         <i class="bi bi-info-circle menu-icon"></i>
       </a>
-      <ul class="nav flex-column sub-menu" *ngIf="openMenu === 'about'" [@slideInOut]>
+      <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'about'}">
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/aboutus" (click)="onToggleSidebar()">About Us</a>
         </li>
@@ -182,28 +199,34 @@
     </li>
 
     <!-- FAQ -->
-    <li class="nav-item">
+    <li class="nav-item" [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" routerLink="/agent/faq" (click)="onToggleSidebar()">
-        <span class="menu-title">FAQ</span>
+        <span class="menu-title" *ngIf="isOpen">FAQ</span>
         <i class="bi bi-question-circle menu-icon"></i>
       </a>
+
+      <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'faq'}">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/faq" (click)="onToggleSidebar()">FAQ</a>
+        </li>
+      </ul>
     </li>
 
     <!-- settings -->
-    <li class="nav-item">
+    <li class="nav-item" [ngClass]="!isOpen? 'li-hover' : '' ">
       <a class="nav-link" routerLink="/agent/settings" (click)="onToggleSidebar()">
-        <span class="menu-title">Settings</span>
+        <span class="menu-title" *ngIf="isOpen">Settings</span>
         <i class="bi-gear mdi menu-icon"></i>
       </a>
     </li>
 
     <!-- Sidebar Actions -->
-    <li class="nav-item sidebar-actions">
+    <li class="nav-item sidebar-actions" *ngIf="isOpen">
       <span class="nav-link">
         <div class="border-bottom">
           <h6 class="font-weight-normal mb-3">Projects</h6>
         </div>
-        <div class="d-grid gap-2">
+        <div class="d-grid gap-2 ">
           <button class="btn btn-block btn-lg btn-gradient-primary mt-4" routerLink="/agent/add-project">
             + Add a project
           </button>

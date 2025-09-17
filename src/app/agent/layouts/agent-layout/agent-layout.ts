@@ -23,8 +23,11 @@ import { ThemeService } from '../../../services/theme.service';
 })
 export class AgentLayout implements OnInit {
 
+  isSidebarVisible = true;
+  isMobileSidebarVisible = false;
+  isMobile = false;
 
-  isSidebarVisible = false;
+
   currentRoute = '';
 
   constructor(
@@ -68,11 +71,28 @@ export class AgentLayout implements OnInit {
       this.isSidebarVisible = isSidebarVisible;
     });
 
+    //detect mobile screen size
+    this.checkDevice();
+    window.addEventListener('resize', () => this.checkDevice());
+
+
     this.themeService.loadTheme('agent');
   }
 
   ngOnDestroy(): void {
     this.themeService.clearTheme();
+  }
+
+  //check screen size for mobile
+  checkDevice() {
+    this.isMobile = window.innerWidth <= 992;
+  }
+
+  onMobileToggleSidebar() {
+    this.isMobileSidebarVisible = !this.isMobileSidebarVisible;
+
+    // Prevent background scroll when mobile sidebar is open
+    document.body.classList.toggle('sidebar-active', this.isMobileSidebarVisible);
   }
 
 }

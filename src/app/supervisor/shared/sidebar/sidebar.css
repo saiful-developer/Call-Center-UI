@@ -10,9 +10,7 @@
 }
 
   /* Smooth rotate for chevron */
-  .bi-chevron-down {
-    transition: transform 0.3s ease;
-  }
+
 
 .sub-menu {
   overflow: hidden;      /* Keeps text inside animated container */
@@ -24,10 +22,7 @@
   transition: color 0.3s;
 }
 
-.bi-chevron-down.rotate {
-  transform: rotate(180deg);
-  transition: transform 0.3s ease-in-out;
-}
+
 
 .d-bock {
   display: block !important;
@@ -35,4 +30,11 @@
 
 .p-3 {
   padding: 20px !important;
+}
+
+
+
+/* hover item for sidebar */
+ul.nav.sub-menu.ng-tns-c1904267516-0.ng-trigger.ng-trigger-dropdownAnimation.ng-star-inserted {
+    flex-direction: column;
 }

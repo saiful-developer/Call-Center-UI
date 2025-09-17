@@ -1,26 +1,24 @@
 <div class="chold-transition light-skin sidebar-mini theme-primary">
   <app-loader></app-loader>
   <div class="row vh-100">
-    
+
 
     <!-- Sidebar -->
-    <div class="sidebar-container bg-light p-0"
-      [ngClass]="isSidebarOpen ? 'col-2 border-end' : 'thin-sidebar border-0'">
-
-      <app-sidebar *ngIf="isSidebarOpen"></app-sidebar>
-      <app-thin-sidebar *ngIf="!isSidebarOpen"></app-thin-sidebar>
-
+    <div class="custom-sidebar-container bg-light p-0" [ngClass]="{
+       'sidebar-container': isSidebarOpen || isMobileSidebarVisible,
+       'thin-sidebar-saiful': !isSidebarOpen && !isMobileSidebarVisible,
+       'mobile-overlay': isMobile && isMobileSidebarVisible
+     }">
+      <app-sidebar [isOpen]="isSidebarOpen || isMobileSidebarVisible"></app-sidebar>
     </div>
-
 
     <!-- Main Content -->
-    <div class="main-container" [ngClass]="isSidebarOpen ? 'col-10' : 'col-11-main'">
-
-      <app-header [isSidebarOpen]="isSidebarOpen" (toggleSidebar)="toggleSidebar()">
-      </app-header>
-
+    <div [ngClass]="isSidebarOpen ? 'small-main-container-saiful' : 'main-container'"
+      [class.body-width-full]="isMobile">
+      <app-header [isSidebarOpen]="isSidebarOpen" (toggleSidebar)="toggleSidebar()"></app-header>
       <router-outlet></router-outlet>
     </div>
+
 
   </div>
 </div>

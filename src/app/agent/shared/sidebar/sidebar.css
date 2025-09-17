@@ -121,5 +121,71 @@ nav {
 }
 .sub-menu {
   overflow: hidden;
-  padding-left: 15px;
+  /* padding-left: 15px; */
+}
+
+
+/* ////////////////////make hover effect////////////////////////// */
+.li-hover {
+      padding: 0 !important;
+    padding-right: 1.5rem !important;
+}
+
+
+/* Hide submenu by default */
+.sidebar .sub-menu {
+  display: none;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* Expanded mode (Angular adds 'show') */
+.sidebar .sub-menu.show {
+  display: block;
+  position: relative;
+  background: transparent;
+  box-shadow: none;
+  padding-left: 1rem;
+}
+
+/* Collapsed mode (hover) */
+.sidebar .nav-item.li-hover:hover > .sub-menu {
+  display: block;
+  position: absolute;
+/*start at middle of parent */
+  transform: translateY(-100%); /* shift up by half its height */
+  left: 55px;               /* align beside sidebar */
+  background: #ffffff;
+  min-width: 200px;
+  /* border-radius: 6px; */
+  z-index: 9999;
+  padding: 7px 0;
+  /* box-shadow: 0 4px 12px rgba(0,0,0,0.2); */
+}
+
+/* Submenu links */
+.sidebar .sub-menu .nav-link {
+  display: block;
+  padding: 8px 16px;
+  color: #999797;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.sidebar .sub-menu .nav-link:hover {
+  background: #efefef;
+}
+
+.custom-dropdown {
+  font-size: 10px;
+  margin-left: 5px;
+  color: rgba(187, 168, 191, 0.9607843137) !important;
+}
+
+
+
+.sidebar .nav.sub-menu .nav-item .nav-link:before {
+  display: none !important;
 }

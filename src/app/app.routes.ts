@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Login } from './shared/login/login-agnet';
+import { Login } from './shared/login/login';
 import { authGuard } from './auth/guard/auth-guard';
 import { guestGuardGuard } from './auth/guard/guest-guard-guard';
 

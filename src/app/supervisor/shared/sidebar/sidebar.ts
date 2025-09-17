@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -6,6 +6,7 @@ import { RouterModule, RouterLink } from '@angular/router';
 
 import { JwtPayload } from '../../../interfaces/jwtpayload';
 import { UserService } from '../../../services/jwt-decode.service';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -31,7 +32,10 @@ import { UserService } from '../../../services/jwt-decode.service';
     ])
   ]
 })
+
 export class Sidebar implements OnInit {
+  @Input() isOpen: boolean = false;
+
 
   decodedToken: JwtPayload | null = null;
 
@@ -43,17 +47,24 @@ export class Sidebar implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      this.decodedToken = this.userService.decodeToken(sessionStorage.getItem('jwt'));
-      console.log(this.decodedToken)
+    this.decodedToken = this.userService.decodeToken(sessionStorage.getItem('jwt'));
+    console.log(this.decodedToken)
+
+
   }
+
+  
+
+
 
   toggleMenu(menu: string) {
     this.openMenu = this.openMenu === menu ? null : menu;
   }
 
-  onToggleSidebar() {
-    if (window.innerWidth <= 1000) {
-      this.sidebarService.toggleSidebar();
-    }
+onLinkClick() {
+  if (window.innerWidth <= 1000) {
+    this.sidebarService.closeSidebar();
   }
+}
+
 }

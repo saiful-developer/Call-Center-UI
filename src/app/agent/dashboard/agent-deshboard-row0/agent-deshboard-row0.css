@@ -19,11 +19,7 @@
     }
 
     .card .card-body {
-        padding: 1.5rem;
-    }
-
-    .card .card-body {
-        padding: 1.5rem !important;
+        padding: 0.9rem !important;
     }
 
     .card-body h4 {

@@ -10,8 +10,8 @@ import { NgZone } from '@angular/core';
 @Component({
   selector: 'app-login-agnet',
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './login-agnet.html',
-  styleUrl: './login-agnet.css'
+  templateUrl: './login.html',
+  styleUrl: './login.css'
 })
 export class Login {
   loginForm: FormGroup;
@@ -29,8 +29,7 @@ export class Login {
     this.loginForm = this.fb.group({
       userId: ['', [Validators.required]],
       extension: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      role: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -40,10 +39,8 @@ export class Login {
 
     if (this.loginForm.invalid) return;
 
-    const { userId, extension, password, role } = this.loginForm.value;
-    sessionStorage.setItem('role', role);
+    const { userId, extension, password } = this.loginForm.value;
 
-    // console.log(role)
 
     //getting data
     this.apiService.loginAgent(userId, password, extension).subscribe({
@@ -55,11 +52,18 @@ export class Login {
 
           if (parsedToken.token) {
             sessionStorage.setItem('user', JSON.stringify(parsedToken));
+            sessionStorage.setItem('user_role', parsedToken.user_type);
+            console.log(sessionStorage.getItem('user_role'))
             sessionStorage.setItem('jwt', parsedToken.token);
-            console.log('inside if')
 
             this.zone.run(() => {
-              this.router.navigate(['/agent/dashboard']);
+              if (parsedToken.user_type === 'AGENT') {
+                this.router.navigate(['/agent/dashboard']);
+              } else if (parsedToken.user_type === 'SUPERVISOR') {
+                this.router.navigate(['/supervisor/dashboard']);
+              } else {
+                this.router.navigate(['/login']);
+              }
             });
 
           } else {

@@ -1,8 +1,4 @@
-/* Base styles */
-.sidebar-container, .main-container {
-  transition: all 0.5s ease;
-  border: 0px !important;
-}
+
 
 .container-fluid {
   background-color: #f6f6f6;
@@ -21,32 +17,4 @@
 
 .col-11-main {
   width: 95% !important;
-}
-
-.sidebar-container.bg-light.p-0.col-2.border-end {
-  margin-top: 1rem;
-  /* z-index: 5000; */
-}
-
-/* Responsive styles for screens <= 1200px */
-@media (max-width: 1200px) {
-  .sidebar-container {
-    display: none !important; /* Hide both sidebar and thin-sidebar */
-  }
-  .main-container {
-    width: 100% !important; /* Main content takes full width */
-  }
-  .col-11-main {
-    width: 100% !important;
-  }
-  .close-sidebar-btn {
-    display: none; /* Hide close button as sidebar is not visible */
-  }
-}
-
-.loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 20000;
 }

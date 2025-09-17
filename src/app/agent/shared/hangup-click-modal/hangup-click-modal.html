@@ -1,0 +1,55 @@
+<!-- Modal -->
+<div class="modal fade" [ngClass]="{'show d-block': isVisible}" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="formModalLabel">Default Form</h4>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+
+            <div class="modal-body">
+                <p class="card-description">Basic form layout</p>
+
+                <form class="forms-sample" [formGroup]="hangupClickForm" (ngSubmit)="onSubmit()">
+
+                    <div class="mb-3">
+                        <label for="exampleInputUsername1" class="form-label">Field Name<span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control" formControlName="field1" id="exampleInputUsername1"
+                            placeholder="Username">
+                        <div *ngIf="hangupClickForm.get('field1')?.invalid && hangupClickForm.get('field1')?.touched" class="text-danger mt-1 small">
+                            User ID is required
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Field Name</label>
+                        <input type="text" class="form-control" formControlName="field2" id="exampleInputEmail1" placeholder="Email">
+                    </div>
+
+                    <!-- <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputConfirmPassword1" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="exampleInputConfirmPassword1"
+                            placeholder="Password">
+                    </div> -->
+                    <!-- <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div> -->
+                    <button type="submit" class="btn btn-gradient-primary me-2">Conform</button>
+                    <!-- <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button> -->
+                    <div class="text-danger">
+                        {{ errorMassage }}
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-hangup-success #hangupSuccess></app-hangup-success>

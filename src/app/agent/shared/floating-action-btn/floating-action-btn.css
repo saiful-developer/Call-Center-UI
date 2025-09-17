@@ -32,7 +32,7 @@
 
 .fab-btn:hover {
     transform: scale(1.1);
-    background-color: #cbaef5;
+    background-color: #ebe0ff;
     color: #9a52ff;
 }
 
@@ -67,4 +67,9 @@
     .fab-container {
         display: none;
     }
+}
+
+
+.icon-color {
+    color: #beabc2;
 }

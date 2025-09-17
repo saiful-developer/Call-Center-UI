@@ -10,7 +10,7 @@
   <div class="navbar-menu-wrapper d-flex align-items-stretch" [ngClass]="{'add-width' : sidebaropen}">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize"
       (click)="onToggleSidebar()">
-      <span class="navbar-toggler-icon custom-toggle-btn"></span>
+      <span class="mdi menu-icon navbar-toggler-icon custom-toggle-btn"></span>
     </button>
 
     <!-- Toggle Button for Action Section -->
@@ -26,7 +26,7 @@
         <!-- Break Dropdown Menu -->
         <form class="d-flex align-items-center custom-form" [formGroup]="getBreakTypeForm" (ngSubmit)="saveBreakData()">
           <select name="" id="" class="form-select ng-pristine ng-valid ng-touched custom-sele"
-            formControlName="breakId" style="font-size: 0.85rem; padding: 0.25rem 0.5rem;">
+            formControlName="breakId" style="font-size: 0.8rem !important; padding: 0.25rem 0.5rem !important">
             <option value="">Break Type</option>
             <option *ngFor="let break of parseResData;" [value]="break.id">{{ break.name }}</option>
           </select>
@@ -38,18 +38,19 @@
         <form class="d-flex align-items-center" *ngIf="!showActionUI" [formGroup]="getCampainForm"
           (ngSubmit)="saveCampainData()">
           <select name="" id="" class="form-select ng-pristine ng-valid ng-touched custom-sele"
-            style="font-size: 0.85rem; padding: 0.25rem 0.5rem;" formControlName="campainName">
+        style="font-size: 0.85rem !important; padding: 0.25rem 0.5rem !important;" formControlName="campainName">
             <option value="">Campaigns</option>
             <option *ngFor="let c of campainList;" [value]="c">{{ c }}</option>
           </select>
           <button class="btn modern-btn custom-btn-head" (click)="showActionUIFn()"
-            style="font-size: 0.85rem; padding: 0.25rem 0.5rem;">Campaign</button>
+            style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">Campaign</button>
         </form>
 
         <!-- Action UI -->
         <div class="d-flex align-items-center gap-2 flex-wrap" *ngIf="showActionUI">
+
           <!-- Hangup Button -->
-          <button class="btn text-white" (click)="hideActionUIFn()"
+          <button class="btn text-white" (click)="modalAction()"
             style="background: linear-gradient(90deg, #d96bff, #7b5cff); border-radius: 12px; font-size: 0.85rem; padding: 0.25rem 0.5rem;">
             Hangup
           </button>
@@ -106,22 +107,26 @@
             <img src="assets/agent/images/faces/face1.jpg" alt="image">
             <span class="availability-status online"></span>
           </div>
-          <div class="nav-profile-text">
-            <p class="mb-1 text-black">{{ decodedToken?.name }}</p>
+          <div class="nav-profile-text" *ngIf="sidebaropen">
+            <p class="mb-1 text-black" >{{ decodedToken?.name }}</p>
           </div>
         </a>
+
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown" style="z-index: 1010;">
           <a class="dropdown-item">
             <i class="bi-person-circle text-success" style="margin-right: 5px !important;"></i> {{
             decodedToken?.extension }} </a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logoutModal.open()">
-            <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
+            <i class="mdi mdi-logout me-2 text-primary"></i>
+            Signout
+          </a>
         </div>
+
       </li>
       <li class="nav-item d-none d-lg-block full-screen-link">
         <a class="nav-link" (click)="toggleFullscreen()" style="cursor: pointer;">
-          <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+          <i class="mdi mid-icon bi bi-arrows-fullscreen" id="fullscreen-button"></i>
         </a>
       </li>
       <li class="nav-item dropdown">
@@ -221,14 +226,17 @@
         </a>
       </li>
     </ul>
+    <!-- form mobile toggle -->
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
       data-toggle="offcanvas" (click)="onToggleSidebar()">
       <span class="navbar-toggler-icon custom-toggle-btn"></span>
     </button>
+    
   </div>
 </nav>
 
 <app-logout-modal #logoutModal></app-logout-modal>
+<app-hangup-click-modal #hangupClickModal ></app-hangup-click-modal>
 
 <style>
   @media (max-width: 767px) {

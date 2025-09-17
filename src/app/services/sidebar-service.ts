@@ -20,4 +20,8 @@ export class SidebarService {
   toggleSidebar() {
     this.sidebarVisible.next(!this.sidebarVisible.value);
   }
+
+    closeSidebar() {
+    this.sidebarVisible.next(false);
+  }
 }

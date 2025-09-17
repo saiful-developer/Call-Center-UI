@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, signal } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, signal, ViewChild } from '@angular/core';
 import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule, NgClass } from '@angular/common';
 import { JwtPayload } from '../../../interfaces/jwtpayload';
@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angul
 //components
 import { UserService } from '../../../services/jwt-decode.service';
 import { LogoutModal } from '../logout-modal/logout-modal';
+import { HangupClickModal } from '../hangup-click-modal/hangup-click-modal';
 
 
 
@@ -14,11 +15,13 @@ import { LogoutModal } from '../logout-modal/logout-modal';
 
 @Component({
   selector: 'app-header',
-  imports: [NgClass, CommonModule, LogoutModal, FormsModule, ReactiveFormsModule],
+  imports: [NgClass, CommonModule, LogoutModal, FormsModule, ReactiveFormsModule, HangupClickModal],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
 export class Header implements OnInit, OnDestroy {
+
+  @ViewChild('hangupClickModal') hangupClickModal!: HangupClickModal;
 
   isFullscreen: boolean = false;
   decodedToken: JwtPayload | null = null;
@@ -123,6 +126,26 @@ export class Header implements OnInit, OnDestroy {
     this.showActionUI = true;
     sessionStorage.setItem('showActionUI', 'true'); // persist state
   }
+
+  /** show modal and close hangupClickModal automatic after 30s **/
+  isModal: boolean = false;
+  modalAction() {
+
+    this.hangupClickModal.open()
+    this.closeModal();
+
+    if(this.isModal) {
+      this.hideActionUIFn();
+    }
+  }
+
+  closeModal() {
+    setTimeout(() => {
+      this.isModal = true
+      this.hangupClickModal.close()
+    }, 30000);
+  }
+
 
   hideActionUIFn() {
     console.log(sessionStorage.getItem('timerSeconds'))

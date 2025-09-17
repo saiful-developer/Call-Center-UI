@@ -36,6 +36,7 @@
 .btn-success:hover {
   background-color: #36a420;
 }
+
 .small {
   color: #1bcfb4;
 }
@@ -43,4 +44,12 @@
 .width {
   width: 86%;
   margin: auto;
+}
+
+
+
+
+.btn-gradient-primary {
+  background: #3a75ae;
+  color: white;
 }

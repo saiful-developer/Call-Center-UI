@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { RouterLink, RouterModule } from '@angular/router';
+import { SidebarService } from '../../../services/sidebar-service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrls: ['./header.css'],
   standalone: true,
   imports: [CommonModule, RouterModule],
-    animations: [
+  animations: [
     trigger('dropdownAnimation', [
       state('open', style({
         height: '*',
@@ -32,6 +33,12 @@ export class Header {
 
   isMobile: boolean = false;
 
+  constructor(
+    private sidebarService: SidebarService
+  ) {
+
+  }
+
   taggleMobileSidebar() {
     this.isMobile = !this.isMobile
   }
@@ -42,11 +49,12 @@ export class Header {
   }
 
 
-  @Input() isSidebarOpen: boolean = false;
-  @Output() toggleSidebar = new EventEmitter<void>();
+@Input() isMobileSidebarVisible: boolean = false; // add this
+@Input() isSidebarOpen: boolean = false;
+@Output() toggleSidebar = new EventEmitter<void>();
 
-  onToggleSidebar() {
-    console.log('Header: Emitting toggleSidebar event');
-    this.toggleSidebar.emit();
-  }
+
+onToggleSidebar() {
+  this.toggleSidebar.emit();
+}
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 import { RouterModule, RouterLink } from '@angular/router';
 import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ import { UserService } from '../../../services/jwt-decode.service';
   imports: [RouterModule, CommonModule, RouterLink],
   templateUrl: './sidebar.html',
   styleUrls: ['./sidebar.css'],
-  animations: [
+animations: [
     trigger('slideInOut', [
       transition(':enter', [
         style({ height: '0', opacity: 0 }),
@@ -26,6 +26,8 @@ import { UserService } from '../../../services/jwt-decode.service';
   ],
 })
 export class SidebarComponent implements OnInit {
+  @Input() isOpen: boolean = false;
+
   openMenu: string | null = null; // currently open menu
   decodedToken: JwtPayload | null = null;
 

@@ -10,6 +10,7 @@
     <!-- Right Section (Login Box) -->
     <div class="col-md-6 d-flex justify-content-center align-items-center">
       <div class="card shadow-lg p-4 rounded-4 bg-white login-card">
+        
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
           <!-- User ID Field -->
@@ -42,7 +43,7 @@
           </div>
 
           <!-- Role Selection Dropdown -->
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <select id="role" formControlName="role" class="form-select form-select-lg">
               <option value="" disabled selected>Select Role</option>
               <option value="agent">Agent</option>
@@ -51,7 +52,7 @@
             <div *ngIf="submitted && loginForm.get('role')?.invalid" class="text-danger mt-1 small">
               Role is required
             </div>
-          </div>
+          </div> -->
 
 
           <!-- Submit Button -->

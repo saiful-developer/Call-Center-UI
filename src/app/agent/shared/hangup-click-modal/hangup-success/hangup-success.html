@@ -1,0 +1,28 @@
+<!-- Success Modal -->
+<div class="modal fade custom-width" [ngClass]="{'show d-block': isVisible}" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-xl custom-dialog" role="document">
+    <div class="modal-content border-0 shadow-lg rounded-4 p-5 text-center custom-modal">
+      
+      <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+        <!-- Success Icon -->
+        <div class="mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="#28a745" class="bi bi-check-circle" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.97 11.03a.75.75 0 0 0 1.08 0l3.992-3.992a.75.75 0 1 0-1.06-1.06L7.5 9.439 6.03 7.97a.75.75 0 1 0-1.06 1.06l1.998 1.998z"/>
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <h2 class="fw-bold text-success mb-3">Success!</h2>
+
+        <!-- Description -->
+        <p class="text-muted mb-4 fs-4">Your action has been completed successfully.</p>
+
+        <!-- Close Button -->
+        <!-- <button type="button" class="btn btn-success btn-lg px-5 py-3 fw-bold" (click)="close()">
+          OK
+        </button> -->
+
+      </div>
+    </div>
+  </div>
+</div>

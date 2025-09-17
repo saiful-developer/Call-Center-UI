@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './logout-modal.css'
 })
 export class LogoutModal {
-  isVisible = false;
+  isVisible: boolean = false;
 
   constructor(private router: Router) { }
 

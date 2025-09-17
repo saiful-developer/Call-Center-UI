@@ -140,9 +140,7 @@ nav.navbar.default-layout-navbar.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row 
 }
 
 
-li.breadcrumb-item.active {
-  margin-right: 3rem;
-}
+
 
 html,
 body {
@@ -305,14 +303,15 @@ body {
 
 
 th {
-  background-color: #ebedf2 !important ;
+  background-color: #ebedf2 !important;
   /* linear-gradient(135deg, #d98bff,#9f59ff) ; */
   color: #566f9e !important;
 }
 
-.table > :not(:last-child) > :last-child > * {
+.table> :not(:last-child)> :last-child>* {
   border-bottom-color: aliceblue !important;
 }
+
 .supervisor_th {
   backdrop-filter: red !important;
 }
@@ -651,10 +650,7 @@ textarea.form-control:focus {
 
 
 
-  /* When sidebar is open */
-  .sidebar-container.sidebar-open {
-    transform: translateX(0);
-  }
+  
 
   /* Prevent background scroll when sidebar is open */
   body.sidebar-active {
@@ -689,4 +685,227 @@ textarea.form-control:focus {
 
 .custom-toggle-btn {
   font-size: 18px;
+}
+
+
+
+/* ********************************************common layout styling ********************************************************/
+/* make sidebar thin */
+.thin-sidebar-saiful {
+  width: 4% !important; 
+}
+
+.sidebar-container {
+  width: 18% !important;
+}
+.main-container {
+  width: 94% !important;
+  margin-left: auto;
+}
+
+.small-main-container-saiful {
+  width: 80% !important;
+  margin-left: auto;  
+}
+
+/* Base styles */
+.sidebar-container, .main-container {
+  transition: all 0.5s ease !important;
+  border: 0px !important;
+}
+
+.custom-sidebar-container {
+  margin-top: 0.8rem !important;
+  margin-left: 1.4rem !important;
+}
+@media (max-width: 990px) {
+  .custom-sidebar-container {
+    margin: 0 !important;
+
+  }
+}
+
+
+
+/* Supervisor Sidebar change style based on open or close */
+.pe-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.make-appare {
+  position: relative;
+}
+
+.martion-top {
+  margin-top: 3rem;
+}
+
+/* make sub link appare in the thin sidebar */
+
+aside {
+  width: 100% !important;
+  background-color: white;
+}
+
+/* Thin sidebar */
+.thin-sidebar-saiful {
+  width: 60px; /* adjust as needed */
+  overflow: visible; /* important for hover */
+  position: relative;
+}
+
+/* Hover submenu for thin sidebar */
+.thin-hover-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: white;
+  box-shadow: 0 0 8px rgba(0,0,0,0.15);
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+   z-index: 9999;
+}
+
+.sidebar,
+.hover-group {
+  position: relative;
+  z-index: 1001;
+}
+
+.main-panel, .content-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Show submenu on hover */
+.hover-group:hover .thin-hover-menu {
+  display: block;
+}
+
+/* agent layout padding */
+.content-wrapper {
+  padding: 1rem !important;
+}
+
+/* **************drop-down icon  */
+.rotate {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
+}
+  .bi-chevron-down {
+    transition: transform 0.3s ease;
+  }
+
+
+  /* ********************************** agent mobile sidebar design************************ */
+/* Mobile overlay */
+.mobile-overlay.sidebar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px !important;
+  height: 100%;
+  background: #fff;
+  z-index: 1100;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+.mobile-overlay.thin-sidebar-saiful {
+  transform: translateX(-100%);
+}
+
+
+.body-width-full {
+    width: 98% !important;
+    position: absolute;
+    left: 0;
+
+    
+}
+
+/* ********************************** Supervisor Layout Sidebar ************************ */
+/* Desktop expanded sidebar */
+.sidebar-container-supervisor {
+  width: 250px;
+  min-width: 250px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  transition: width 0.3s ease;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Desktop collapsed sidebar (thin) */
+.thin-sidebar-saiful-supervisor {
+  width: 80px;
+  min-width: 80px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+  transition: width 0.3s ease;
+  position: relative;
+  z-index: 1000;
+}
+
+/* Mobile overlay sidebar */
+.mobile-overlay {
+  position: fixed;    /* float on top */
+  top: 0;
+  left: 0;
+  width: 260px;       /* sidebar width */
+  height: 100%;
+  background: #fff;
+  z-index: 1100;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+/* Hide mobile sidebar when not visible */
+.mobile-overlay-supervisor:not(.active) {
+  transform: translateX(-100%);
+}
+
+/* Desktop main content */
+.main-container {
+  width: calc(100% - 250px);
+  transition: width 0.3s ease;
+}
+
+.small-main-container-saiful {
+  width: calc(100% - 80px);
+  transition: width 0.3s ease;
+}
+
+/* Mobile main content full width */
+.main-container-mobile {
+  width: 100%;
+  transition: width 0.3s ease;
+}
+
+
+
+
+@media (max-width: 1000px) {
+.thin-sidebar-saiful {
+  overflow: hidden;
+}
+}
+
+
+
+/* **************agent panal desing */
+.page-title {
+  display: flex !important;
+  align-items: center !important; 
+  justify-content: center !important;
+}
+.form-select {
+  padding: 0.8rem !important;
+  border-radius: 0px !important;
 }

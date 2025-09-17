@@ -17,6 +17,7 @@ import { LoderService } from '../../../services/loder.service';
 export class SupervisorLayout implements OnInit {
   isSidebarOpen: boolean = false;
   isMobile: boolean = false;
+  isMobileSidebarVisible = false;
 
   constructor(
     private themeService: ThemeService,
@@ -46,9 +47,11 @@ export class SupervisorLayout implements OnInit {
     }
 
     // Detect mobile screen size
-    this.checkScreenSize();
-    window.addEventListener('resize', this.checkScreenSize.bind(this));
+    this.checkDevice();
+    window.addEventListener('resize', () => this.checkDevice());
   }
+
+
 
   checkScreenSize(): void {
     this.isMobile = window.innerWidth <= 576;
@@ -58,13 +61,27 @@ export class SupervisorLayout implements OnInit {
     }
   }
 
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
+toggleSidebar(): void {
+  if (this.isMobile) {
+    this.isMobileSidebarVisible = !this.isMobileSidebarVisible; // overlay on mobile
+  } else {
+    this.isSidebarOpen = !this.isSidebarOpen; // desktop toggle
     sessionStorage.setItem('isSidebarOpen', JSON.stringify(this.isSidebarOpen));
   }
+}
 
   ngOnDestroy(): void {
     this.themeService.clearTheme();
     window.removeEventListener('resize', this.checkScreenSize.bind(this));
   }
+
+checkDevice() {
+  this.isMobile = window.innerWidth <= 992;
+  if (this.isMobile) {
+    this.isSidebarOpen = false; // collapse desktop sidebar on mobile
+    this.isMobileSidebarVisible = false;
+  }
+}
+
+
 }
