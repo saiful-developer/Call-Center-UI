@@ -39,11 +39,11 @@ export class SupervisorLayout implements OnInit {
   ngOnInit(): void {
     this.themeService.loadTheme('supervisor');
 
-    const storedValue = sessionStorage.getItem('isSidebarOpen');
+    const storedValue = sessionStorage.getItem('isSidebarOpen-supervisor');
     this.isSidebarOpen = storedValue ? JSON.parse(storedValue) : false;
 
     if (!storedValue) {
-      sessionStorage.setItem('isSidebarOpen', JSON.stringify(this.isSidebarOpen));
+      sessionStorage.setItem('isSidebarOpen-supervisor', JSON.stringify(this.isSidebarOpen));
     }
 
     // Detect mobile screen size
@@ -54,10 +54,10 @@ export class SupervisorLayout implements OnInit {
 
 
   checkScreenSize(): void {
-    this.isMobile = window.innerWidth <= 576;
+    this.isMobile = window.innerWidth <= 1000;
     if (this.isMobile) {
       this.isSidebarOpen = false; // Collapse sidebar on mobile by default
-      sessionStorage.setItem('isSidebarOpen', JSON.stringify(this.isSidebarOpen));
+      sessionStorage.setItem('isSidebarOpen-supervisor', JSON.stringify(this.isSidebarOpen));
     }
   }
 
@@ -66,7 +66,7 @@ toggleSidebar(): void {
     this.isMobileSidebarVisible = !this.isMobileSidebarVisible; // overlay on mobile
   } else {
     this.isSidebarOpen = !this.isSidebarOpen; // desktop toggle
-    sessionStorage.setItem('isSidebarOpen', JSON.stringify(this.isSidebarOpen));
+    sessionStorage.setItem('isSidebarOpen-supervisor', JSON.stringify(this.isSidebarOpen));
   }
 }
 

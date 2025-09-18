@@ -5,14 +5,13 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-loader',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './loader.html',
-  styleUrl: './loader.css'
+  styleUrls: ['./loader.css']
 })
 export class Loader implements OnDestroy {
   isLoading = false;
-  elapsedMs = 0;
-
   private sub = new Subscription();
 
   constructor(private loader: LoderService) {

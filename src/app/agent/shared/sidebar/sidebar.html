@@ -19,14 +19,14 @@
 
     <!-- Dashboard -->
     <li class="nav-item " [ngClass]="!isOpen? 'li-hover' : '' ">
-      <a class="nav-link" routerLink="/agent/dashboard" (click)="onToggleSidebar()">
+      <a class="nav-link" routerLink="/agent/dashboard">
         <span class="menu-title" *ngIf="isOpen">Dashboard</span>
         <i class="bi bi-grid menu-icon"></i>
       </a>
 
       <ul class="nav flex-column sub-menu">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/agent/dashboard"> Dashboard </a>
+          <a class="nav-link" routerLink="/agent/dashboard" (click)="onToggleSidebar()"> Dashboard </a>
         </li>
       </ul>
 

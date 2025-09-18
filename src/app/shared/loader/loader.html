@@ -1,7 +1,10 @@
-<div class="loader-backdrop" [class.show]="isLoading">
-
-<div class="spinner-border" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-
+<div class="loader-backdrop" *ngIf="isLoading">
+  <div class="loader-content">
+    <img src="assets/agent/images/logo.png" alt="App Logo" class="loader-logo" />
+    <div class="loader-spinner">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+  </div>
 </div>

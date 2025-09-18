@@ -58,7 +58,9 @@
 
   <!-- Table with Directive -->
   <div class="d-md-block table-container">
-    <table class="table modern-table table-hover shadow-sm rounded" appStickyTableHeader [offsetElements]="['.navbar']">
+    <table class="table modern-table table-hover shadow-sm rounded" appStickyTableHeader 
+         [scrollContainerSelector]="'#table-wrapper'" 
+         [offsetElements]="['app-header']">
       <thead>
         <tr>
           <th>#</th>

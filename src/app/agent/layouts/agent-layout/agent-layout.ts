@@ -23,9 +23,9 @@ import { ThemeService } from '../../../services/theme.service';
 })
 export class AgentLayout implements OnInit {
 
-  isSidebarVisible = true;
-  isMobileSidebarVisible = false;
-  isMobile = false;
+  isSidebarOpen: boolean = false;
+  isMobileSidebarVisible: boolean = false;
+  isMobile: boolean = false;
 
 
   currentRoute = '';
@@ -39,11 +39,11 @@ export class AgentLayout implements OnInit {
   ) {
     //router subscription
     //store the current route
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.currentRoute = event.urlAfterRedirects;
-    });
+    // this.router.events.pipe(
+    //   filter(event => event instanceof NavigationEnd)
+    // ).subscribe((event: NavigationEnd) => {
+    //   this.currentRoute = event.urlAfterRedirects;
+    // });
 
     //for showing app loader
     //subscribed to router.events so the loader will triggered
@@ -59,17 +59,24 @@ export class AgentLayout implements OnInit {
   // getter method
   //for blocking header and footer
   //check the currentRoute true block header and footer becase login page dose not need header and footer
-  get isAuthRoute(): boolean {
-    return this.currentRoute === '/login' ||
-      this.currentRoute === '/logout' ||
-      this.currentRoute === '/';
-  }
+  // get isAuthRoute(): boolean {
+  //   return this.currentRoute === '/login' ||
+  //     this.currentRoute === '/logout' ||
+  //     this.currentRoute === '/';
+  // }
 
   ngOnInit(): void {
-    this.SidebarService.sidebarVisible$.subscribe((isSidebarVisible) => {
-      console.log('Sidebar visibility:', isSidebarVisible);
-      this.isSidebarVisible = isSidebarVisible;
-    });
+    // this.SidebarService.sidebarVisible$.subscribe((isSidebarVisible) => {
+    //   console.log('Sidebar visibility:', isSidebarVisible);
+    //   this.isSidebarVisible = isSidebarVisible;
+    // });
+
+    const storedValue = sessionStorage.getItem('isSidebarOpen-agent');
+    this.isSidebarOpen = storedValue ? JSON.parse(storedValue) : false;
+
+    if (!storedValue) {
+      sessionStorage.setItem('isSidebarOpen-agent', JSON.stringify(this.isSidebarOpen));
+    }
 
     //detect mobile screen size
     this.checkDevice();
@@ -85,14 +92,27 @@ export class AgentLayout implements OnInit {
 
   //check screen size for mobile
   checkDevice() {
-    this.isMobile = window.innerWidth <= 992;
+    this.isMobile = window.innerWidth <= 1000;
+    if (this.isMobile) {
+      this.isSidebarOpen = false; // Collapse sidebar on mobile by default
+      sessionStorage.setItem('isSidebarOpen-agent', JSON.stringify(this.isSidebarOpen));
+    }
   }
 
-  onMobileToggleSidebar() {
-    this.isMobileSidebarVisible = !this.isMobileSidebarVisible;
-
-    // Prevent background scroll when mobile sidebar is open
-    document.body.classList.toggle('sidebar-active', this.isMobileSidebarVisible);
+  toggleSidebar(): void {
+    if (this.isMobile) {
+      this.isMobileSidebarVisible = !this.isMobileSidebarVisible; // overlay on mobile
+    } else {
+      this.isSidebarOpen = !this.isSidebarOpen; // desktop toggle
+      sessionStorage.setItem('isSidebarOpen-agent', JSON.stringify(this.isSidebarOpen));
+    }
   }
+
+  // onMobileToggleSidebar() {
+  //   this.isMobileSidebarVisible = !this.isMobileSidebarVisible;
+
+  //   // Prevent background scroll when mobile sidebar is open
+  //   document.body.classList.toggle('sidebar-active', this.isMobileSidebarVisible);
+  // }
 
 }

@@ -1,9 +1,85 @@
 <div class="content-wrapper">
     <app-page-header title="Active Agent" iconClass="bi bi-check2-square"></app-page-header>
 
-    <!-- outgoing table -->
+
+
+    <!-- Search Bar -->
+    <div class="container-fluid">
+        <div class="search-bar-wrapper">
+            <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchActiveAgent"
+                (ngSubmit)="onSearchUi()">
+
+                <!-- Name -->
+                <div>
+                    <label for="agent-name">Name</label>
+                    <input type="text" class="form-control modern-input" placeholder="Name" formControlName="name"
+                        id="agent-name" />
+                </div>
+
+                <!-- Agent ID -->
+                <div>
+                    <label for="agent-id">Agent ID</label>
+                    <input type="text" class="form-control modern-input" placeholder="Agent ID"
+                        formControlName="agentId" id="agent-id" />
+                </div>
+
+                <!-- Extension -->
+                <div>
+                    <label for="extension">Extension</label>
+                    <input type="number" class="form-control modern-input" placeholder="Extension"
+                        formControlName="extension" id="extension" />
+                </div>
+
+                <!-- Toggle for extra fields on mobile -->
+                <button id="filterToggleBtn" class="btn d-lg-none small-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#moreSearchFields" aria-expanded="false" aria-controls="moreSearchFields">
+                    More <span id="toggleIcon" class="bi bi-chevron-down"></span>
+                </button>
+
+                <!-- Extra fields -->
+                <div class="collapse d-lg-flex gap-2 align-items-center" id="moreSearchFields">
+
+                    <!-- Campaign Dropdown -->
+                    <div>
+                        <label for="campaign-select">Campaign</label>
+                        <select class="form-select" formControlName="campaign" id="campaign-select">
+                            <option selected value="">Campaign</option>
+                            <option *ngFor="let c of campains" [value]="c">{{ c }}</option>
+                        </select>
+                    </div>
+
+                    <!-- Status Dropdown -->
+                    <div>
+                        <label for="status-select">Status</label>
+                        <select class="form-select" formControlName="status" id="status-select">
+                            <option selected value="">Status</option>
+                            <option value="READY">READY</option>
+                            <option value="BREAK">BREAK</option>
+                            <option value="BUSY">BUSY</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Action Buttons -->
+                <button type="submit" class="btn modern-btn">
+                    <i class="bi bi-search me-1"></i> Search
+                </button>
+                <button type="button" class="btn modern-btn reset-btn" (click)="resetSearch()">
+                    <i class="bi bi-arrow-counterclockwise"></i> Reset
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <!-- Active Agent table -->
     <div class="d-md-block table-container">
-        <table class="table  table-hover  shadow-sm rounded" appStickyTableHeader [offsetElements]="['.navbar.fixed-top']">
+        <table class="table  table-hover  shadow-sm rounded" appStickyTableHeader
+            [offsetElements]="['.navbar.fixed-top']">
             <thead class="">
                 <tr>
                     <th>#</th>

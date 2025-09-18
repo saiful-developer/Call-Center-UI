@@ -1,27 +1,27 @@
 <app-loader></app-loader>
 <div class="container-scroller">
   <!-- Header -->
-  <app-header *ngIf="!isAuthRoute"></app-header>
+  <app-header *ngIf="true" (toggleSidebar)="toggleSidebar()" ></app-header>
   <div class="page-body-wrapper layout-main-contant main-page-layout">
 
 
     <!-- sidebar for pc and  mobile  -->
     <div class="for-sidebar" [ngClass]="{
-       'sidebar-container': isSidebarVisible || isMobileSidebarVisible,
-       'thin-sidebar-saiful': !isSidebarVisible && !isMobileSidebarVisible,
+       'sidebar-container': isSidebarOpen || isMobileSidebarVisible,
+       'thin-sidebar-saiful': !isSidebarOpen && !isMobileSidebarVisible,
        'mobile-overlay': isMobile
      }">
-      <app-sidebar [isOpen]="isSidebarVisible || isMobileSidebarVisible"></app-sidebar>
+      <app-sidebar [isOpen]="isSidebarOpen || isMobileSidebarVisible"></app-sidebar>
     </div>
 
 
     <!-- Main Panel -->
-    <div class="main-panel" [class.panel-shrink]="isSidebarVisible" [class.panel-wide]="!isSidebarVisible"
+    <div class="main-panel" [class.panel-shrink]="isSidebarOpen" [class.panel-wide]="!isSidebarOpen"
       [class.body-width-full]="isMobile">
 
       <router-outlet></router-outlet>
-      <app-footer *ngIf="!isAuthRoute"></app-footer>
+      <app-footer></app-footer>
     </div>
-    <app-floating-action-btn *ngIf="!isAuthRoute"></app-floating-action-btn>
+    <app-floating-action-btn></app-floating-action-btn>
   </div>
 </div>

@@ -23,6 +23,8 @@ export class Header implements OnInit, OnDestroy {
 
   @ViewChild('hangupClickModal') hangupClickModal!: HangupClickModal;
 
+  sidebaropen: boolean = true;
+
   isFullscreen: boolean = false;
   decodedToken: JwtPayload | null = null;
 
@@ -49,6 +51,10 @@ export class Header implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    //initialize from sessionStorage
+    const storedValue = sessionStorage.getItem('isSidebarOpen-agent');
+    this.sidebaropen = storedValue ? JSON.parse(storedValue) : false;
+
     document.addEventListener('fullscreenchange', () => {
       this.isFullscreen = !!document.fullscreenElement;
       console.log('Fullscreen changed:', this.isFullscreen);
@@ -133,15 +139,10 @@ export class Header implements OnInit, OnDestroy {
 
     this.hangupClickModal.open()
     this.closeModal();
-
-    if(this.isModal) {
-      this.hideActionUIFn();
-    }
   }
 
   closeModal() {
     setTimeout(() => {
-      this.isModal = true
       this.hangupClickModal.close()
     }, 30000);
   }
@@ -150,6 +151,7 @@ export class Header implements OnInit, OnDestroy {
   hideActionUIFn() {
     console.log(sessionStorage.getItem('timerSeconds'))
     this.showActionUI = false;
+
     sessionStorage.setItem('showActionUI', 'false'); // persist state
 
     clearInterval(this.intervalId);
@@ -217,20 +219,20 @@ export class Header implements OnInit, OnDestroy {
     }
   }
 
-  @Output() toggleSidebar = new EventEmitter<void>();
+  @Output() toggleSidebar = new EventEmitter<boolean>();
 
-  sidebaropen: boolean = true;
 
   onToggleSidebar() {
-
+    // Flip state
     this.sidebaropen = !this.sidebaropen;
 
-    // if(this.sidebaropen) {
-    //   document.getElementById('bigLogo')?.classList.add('removeLogo');
-    // }
+    // (Optional) still notify parent component
+    this.toggleSidebar.emit(this.sidebaropen);
 
-    console.log('Toggle clicked'); // Debug log
-    this.sidebarService.toggleSidebar()
+    // Save to sessionStorage
+    sessionStorage.setItem('isSidebarOpen-agent', JSON.stringify(this.sidebaropen));
+
+
   }
 
   toggleActionSection(): void {

@@ -3,4 +3,5 @@
 }
 .main-panel {
     transition: all 0.3s !important;
+    overflow: hidden;
 }

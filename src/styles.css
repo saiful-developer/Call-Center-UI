@@ -29,7 +29,7 @@ body {
   font-weight: initial;
   line-height: normal;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
 
@@ -284,7 +284,7 @@ body {
 .table-scroll {}
 
 .table {
-  overflow-y: scroll;
+  overflow-x: scroll;
   height: 5rem !important;
 }
 
@@ -908,4 +908,13 @@ aside {
 .form-select {
   padding: 0.8rem !important;
   border-radius: 0px !important;
+}
+
+
+
+
+
+#table-wrapper {
+  max-height: 500px; /* adjust */
+  overflow-y: auto;
 }

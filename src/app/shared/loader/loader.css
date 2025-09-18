@@ -4,36 +4,46 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(123, 123, 123, 0.258);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(3px);
   z-index: 3000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 280ms ease-in-out;
 }
 
-.loader-backdrop.show {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.loader-panel {
+.loader-content {
   display: flex;
-  gap: 0.6rem;
+  flex-direction: column;
   align-items: center;
-  padding: 1rem 1.2rem;
-  border-radius: 10px;
-  background: rgba(0,0,0,0.55);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  gap: 2.5rem; /* increase spacing between logo and dots */
 }
 
-.loader-text {
-  color: #fff;
-  font-size: 0.95rem;
-}
-
-.loader-time {
-  font-size: 0.78rem;
-  opacity: 0.9;
+/* Bigger static logo */
+.loader-logo {
+  width: 250px;
+  max-width: 60vw;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 1rem; /* push logo upward from dots */
 }
 
 
+/* Bouncing dots loader */
+.loader-spinner {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #007bff; /* brand color */
+  animation: bounce 0.6s infinite alternate;
+}
+
+.circle:nth-child(2) { animation-delay: 0.2s; }
+.circle:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  from { transform: translateY(0); opacity: 0.7; }
+  to { transform: translateY(-10px); opacity: 1; }
+}
