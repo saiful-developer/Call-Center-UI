@@ -139,6 +139,7 @@ export class Header implements OnInit, OnDestroy {
 
     this.hangupClickModal.open()
     this.closeModal();
+    this.hideActionUIFn();
   }
 
   closeModal() {
