@@ -38,3 +38,7 @@
 ul.nav.sub-menu.ng-tns-c1904267516-0.ng-trigger.ng-trigger-dropdownAnimation.ng-star-inserted {
     flex-direction: column;
 }
+
+.sub-menu {
+  flex-direction: column !important;
+}
