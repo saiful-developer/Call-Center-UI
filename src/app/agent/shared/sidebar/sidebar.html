@@ -40,7 +40,6 @@
           style="text-align: right;" *ngIf="isOpen"></i>
         <i class="bi bi-person menu-icon"></i>
       </a>
-
       <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'profile'}" [@slideInOut]>
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/profile" (click)="onToggleSidebar()">View Profile</a>
@@ -111,12 +110,16 @@
           style="text-align: right;" *ngIf="isOpen"></i>
         <i class="mdi bi bi-clipboard-data menu-icon"></i>
       </a>
+
       <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'reports'}">
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/reports/incoming" (click)="onToggleSidebar()">Incoming</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/reports/outgoing" (click)="onToggleSidebar()">Outgoing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/reports/agent-detail" (click)="onToggleSidebar()">Agent Detail</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/reports/break" (click)="onToggleSidebar()">Break</a>
@@ -130,6 +133,18 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/reports/rna" (click)="onToggleSidebar()">Ring No Answer</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/reports/transfer-call" (click)="onToggleSidebar()">Transfer Call</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/reports/deposition" (click)="onToggleSidebar()">Deposition</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/reports/agent-summary" (click)="onToggleSidebar()">Agent Summary</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/reports/call-back" (click)="onToggleSidebar()">Call Back</a>
+        </li>
       </ul>
     </li>
 
@@ -141,6 +156,7 @@
           *ngIf="isOpen"></i>
         <i class="bi bi-broadcast me-1 menu-icon"></i>
       </a>
+
       <ul class="nav flex-column sub-menu" [ngClass]="{'show': isOpen && openMenu === 'live'}">
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/live/abandon-call" (click)="onToggleSidebar()">Abandon Calls</a>
@@ -159,6 +175,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/agent/live/waiting-calls" (click)="onToggleSidebar()">Waiting Calls</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/agent/live/active-calls" (click)="onToggleSidebar()">Active Calls</a>
         </li>
       </ul>
     </li>

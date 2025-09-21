@@ -11,44 +11,84 @@
 
         <!-- Left side: Picture and basic info -->
         <div class="text-center" style="min-width: 200px;">
-          <img src="assets/images/faces/face1.jpg" alt="Agent Profile Picture"
+          <img src="assets/agent/images/faces/face1.jpg" alt="Agent Profile Picture"
             class="rounded-circle shadow mb-3 mb-md-0" width="140" height="140" style="object-fit: cover;">
-          <h4 class="mt-2" style="color: #5a3e99; font-weight: 700;">Agent Name</h4>
-          <p class="text-muted mb-0">Agent</p>
+          <h4 class="mt-2" style="color: #5a3e99; font-weight: 700;">{{ profileDetails.agentName }}</h4>
+          <p class="text-muted mb-0">{{ profileDetails.user_type }}</p>
         </div>
 
         <!-- Right side: Info Details -->
         <div class="flex-grow-1 w-100">
 
           <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Name</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.agentName }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">LoginID</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.loginid }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
             <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Email</label>
-            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">agent#sdf.com</p>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.email }}</p>
           </div>
 
           <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
-            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Phone</label>
-            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">+123 456 7890</p>
-          </div>
-
-          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
-            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Department</label>
-            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">Customer Support</p>
-          </div>
-
-          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
-            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Address</label>
-            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">123 Main Street, City, Country
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Mobile</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.mobile }}
             </p>
           </div>
 
           <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
-            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Type</label>
-            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">Agent</p>
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Extension</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.extension }}</p>
           </div>
 
           <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
-            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Status</label>
-            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">Active</p>
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">UserType</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.user_type }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Gender</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.gender === '1'? 'Male' : 'Female' }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">NWD Call</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.nwd_call }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">ISD Call</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.isd_call }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Longin Time</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ `${loginTime} || ${lgoinDate}` }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Login IP</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ publicIp }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Session ID</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.sessionid }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Campains</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.campaigns }}</p>
+          </div>
+
+          <div class="mb-3 d-flex flex-column flex-sm-row align-items-sm-center">
+            <label class="form-label fw-bold me-sm-3" style="color: #5a3e99; min-width: 100px;">Departments</label>
+            <p class="form-control-plaintext bg-light rounded-pill p-2 flex-grow-1 mb-0">{{ profileDetails.department }}</p>
           </div>
 
         </div>

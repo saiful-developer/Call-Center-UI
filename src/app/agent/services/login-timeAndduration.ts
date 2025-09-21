@@ -3,7 +3,20 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class SessionService {
+export class LoginTimeAndDuration {
+
+  saveLoginDate() {
+    const now = new Date();
+
+    // format year, month, and day
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // add leading zero
+    const day = String(now.getDate()).padStart(2, '0');       // add leading zero
+
+    const formattedDate = `${year}-${month}-${day}`;
+    
+    sessionStorage.setItem('loginDate', formattedDate);
+  }
 
   getLoginTime(): number | null {
     const loginTime = sessionStorage.getItem('loginTime');

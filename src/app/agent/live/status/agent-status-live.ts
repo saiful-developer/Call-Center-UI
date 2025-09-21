@@ -172,7 +172,6 @@ export class AgentStatusLive implements OnInit {
 
     if (jsonString) {
       const obj = JSON.parse(jsonString);
-      console.log(obj.campaigns);
       this.campains = obj.campaigns;
     }
   }

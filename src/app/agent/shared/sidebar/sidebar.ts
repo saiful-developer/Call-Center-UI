@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, signal } from '@angular/core';
-import { RouterModule, RouterLink } from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output, signal } from '@angular/core';
+import { RouterModule, RouterLink, Router, NavigationEnd } from '@angular/router';
 import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule } from '@angular/common';
 
 import { trigger, style, animate, transition } from '@angular/animations';
 import { JwtPayload } from '../../../interfaces/jwtpayload';
-import { UserService } from '../../../services/jwt-decode.service';
+import { DecodeToken } from '../../../services/jwt-decode.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +13,7 @@ import { UserService } from '../../../services/jwt-decode.service';
   imports: [RouterModule, CommonModule, RouterLink],
   templateUrl: './sidebar.html',
   styleUrls: ['./sidebar.css'],
-animations: [
+  animations: [
     trigger('slideInOut', [
       transition(':enter', [
         style({ height: '0', opacity: 0 }),
@@ -36,25 +36,33 @@ export class SidebarComponent implements OnInit {
 
   constructor(
     private sidebarService: SidebarService,
-    private userService: UserService
+    private decodeToken: DecodeToken,
+    private router: Router
   ) {
 
   }
 
   ngOnInit(): void {
     this.sidebarService.sidebarVisible$.subscribe((isSidebarVisible) => {
-      console.log('Sidebar visibility:', isSidebarVisible); // Debug log
+      console.log('Sidebar visibility:', isSidebarVisible); // debug log
       this.isSidebarVisible = !isSidebarVisible;
     });
 
-    this.decodedToken = this.userService.decodeToken(sessionStorage.getItem('jwt'));
+    this.decodedToken = this.decodeToken.decodeToken(sessionStorage.getItem('jwt'));
+
+    // close sidebar for every route change in mobile device
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationEnd && window.innerWidth <= 1000) {
+        this.sidebarService.closeSidebar();
+      }
+    });
   }
 
   onToggleSidebar() {
-    if (window.innerWidth <= 1000) {
-      console.log('Toggle clicked'); // Debug log
-      this.sidebarService.toggleSidebar();
-    }
+    // if (window.innerWidth <= 1000) {
+    //   console.log('Toggle clicked'); // Debug log
+    //   this.sidebarService.closeSidebar();
+    // }
   }
 
   toggleMenu(menu: string) {

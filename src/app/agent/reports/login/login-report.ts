@@ -44,7 +44,7 @@ export class LoginReport implements OnInit {
 
   ngOnInit(): void {
     this.loadLoginReports();
-    this.loadCampainList()
+    this.campainListFromSesson()
   }
 
   loadLoginReports() {
@@ -60,17 +60,17 @@ export class LoginReport implements OnInit {
     })
   }
 
-  loadCampainList() {
-    this.apiService.loadCampaigns().subscribe({
-      next: (res: any) => {
-        const parseCampainData = JSON.parse(res.data);
-        this.campains = parseCampainData.rows;
-      },
-      error: (err) => {
+  // get campain form sesson
+  campainListFromSesson() {
+    const jsonString = sessionStorage.getItem('user')
 
-      }
-    })
+    if (jsonString) {
+      const obj = JSON.parse(jsonString);
+      console.log(obj.campaigns);
+      this.campains = obj.campaigns;
+    }
   }
+
   today = new Date().toISOString().split('T')[0];  // "2025-09-03"
   searchFormLoginReport = new FormGroup({
     fromDate: new FormControl(''),

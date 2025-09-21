@@ -2,6 +2,7 @@ import { Injectable, Signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { from } from 'rxjs';
+import { formatCurrency } from '@angular/common';
 
 
 
@@ -20,6 +21,11 @@ export class ApiService {
       password: password,
       extension: extension
     });
+  }
+
+  //get public Ip
+  getPublicIp(){
+    return this.http.get<{ ip: string }>('https://ipapi.co/json/');
   }
 
   loadCampaigns() {
@@ -133,6 +139,16 @@ export class ApiService {
       agent: agent,
       limit: limit,
       offset: offset
+    })
+  }
+
+  disposition(agent: string, fromDate: string, limit: number, offset: number, toDate: string) {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/report/agentDisposition`, {
+      agent: agent,
+      fromDate: fromDate,
+      limit: limit,
+      offset: offset,
+      toDate: toDate
     })
   }
 

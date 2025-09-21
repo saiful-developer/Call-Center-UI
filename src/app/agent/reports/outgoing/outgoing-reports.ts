@@ -25,7 +25,7 @@ export interface OutgoingReportsData {
 
 @Component({
   selector: 'app-outgoing-reports',
-  imports: [PageHeader, ReactiveFormsModule, FormsModule, CommonModule, Paginator, StickyTableHeaderDirective ],
+  imports: [PageHeader, ReactiveFormsModule, FormsModule, CommonModule, Paginator, StickyTableHeaderDirective],
   templateUrl: './outgoing-reports.html',
   styleUrl: './outgoing-reports.css'
 })
@@ -34,19 +34,21 @@ export class OutgoingReports implements OnInit {
   campains: any[] = [];
   isSearchMode = false;
 
+  ngOnInit(): void {
+    this.loadOutgoingData();
+    this.campainListFromSesson()
+  }
 
-  loadCampainList() {
-    this.apiService.loadCampaigns().subscribe({
-      next: (res: any) => {
 
-        const parseCampainData = JSON.parse(res.data);
-        this.campains = parseCampainData.rows;
+  // get campain form sesson
+  campainListFromSesson() {
+    const jsonString = sessionStorage.getItem('user')
 
-      },
-      error: (err) => {
-
-      }
-    })
+    if (jsonString) {
+      const obj = JSON.parse(jsonString);
+      console.log(obj.campaigns);
+      this.campains = obj.campaigns;
+    }
   }
 
   constructor(
@@ -54,11 +56,6 @@ export class OutgoingReports implements OnInit {
     private cdr: ChangeDetectorRef,
   ) {
 
-  }
-
-  ngOnInit(): void {
-    this.loadOutgoingData();
-    this.loadCampainList()
   }
 
   outgoingReportsData: OutgoingReportsData[] = [];

@@ -20,7 +20,14 @@
 .custom-dialog {
   max-width: 80% !important;
   width: 80% !important;
-  height: 80vh; /* takes 80% of screen height */
+  height: 80vh; 
+  margin: auto;
+}
+
+@media (max-width: 800px) {
+  .custom-dialog {
+    height: auto;
+  }
 }
 
 .custom-modal {

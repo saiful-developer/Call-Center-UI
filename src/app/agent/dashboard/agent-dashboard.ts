@@ -1,6 +1,4 @@
-import { Component, OnInit, NgZone } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { UserService } from '../../services/jwt-decode.service';
+import { Component, OnInit } from '@angular/core';
 //components
 import { AgentDashboardRow1 } from './agent-dashboard-row1/agent-dashboard-row1';
 import { AgentDashboardRow2 } from './agent-dashboard-row2/agent-dashboard-row2';

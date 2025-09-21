@@ -1,11 +1,11 @@
 <div class="content-wrapper">
-    <app-page-header title="Longin Report" iconClass="bi bi-box-arrow-in-right"></app-page-header>
+    <app-page-header title="Deposition" iconClass="bi bi-journal-text   "></app-page-header>
 
-    <!-- search option -->
+        <!-- search option -->
     <div class="container-fluid">
         <div class="search-bar-wrapper">
-            <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center"
-                [formGroup]="searchFormLoginReport" (ngSubmit)="getLoginReportSearch()">
+            <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchForm"
+                (ngSubmit)="getSearchResult()">
                 <div>
                     <label for="form-date">From Date</label>
                     <input type="date" class="form-control modern-input" placeholder="ID" formControlName="fromDate"
@@ -45,56 +45,53 @@
                 <div *ngIf="isSearchMode">
                     <small style="color: #7a00f5;">
                         Search between
-                        <span class="date-color">{{ searchFormLoginReport.value.fromDate | date:'d MMM yyyy'}}</span>
+                        <span class="date-color">{{ searchForm.value.fromDate | date:'d MMM yyyy'}}</span>
                         to
-                        <span class="date-color">{{ searchFormLoginReport.value.toDate | date:'d MMM yyyy' }}</span>
+                        <span class="date-color">{{ searchForm.value.toDate | date:'d MMM yyyy' }}</span>
                     </small>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- login table -->
-    <div class="d-md-block table-container">
-        <table class="table  table-hover  shadow-sm rounded" appStickyTableHeader [offsetElements]="['.navbar.fixed-top']">
-            <thead class="">
-                <tr>
-                    <th>#</th>
-                    <th>Campaign</th>
-                    <th>Extension</th>
-                    <th>Status</th>
-                    <th>ReportLogin</th>
-                    <th>ReportLogout</th>
-                    <th>ReportSec</th>
-                    <th>AgentLogin</th>
-                    <th>AgentLogout</th>
-                    <th>AgentSec</th>
-                    <th>Last Response</th>
-                    <th>LoginIP</th>
-                </tr>
-            </thead>
+    <div class="content-wrapper">
+        <app-page-header title="Queue Waiting Calls" iconClass="bi bi-arrow-repeat"></app-page-header>
 
-            <tbody>
-                <tr *ngFor="let report of loginReportsData; let i = index">
-                    <td>{{ sl + i + 1 }}</td>
-                    <td>{{ report.campaign }}</td>
-                    <td>{{ report.extension }}</td>
-                    <td>{{ report.agent_status }}</td>
-                    <td>{{ report.report_login_time }}</td>
-                    <td>{{ report.report_logout_time }}</td>
-                    <td>{{ report.report_duration }}</td>
-                    <td>{{ report.login_time }}</td>
-                    <td>{{ report.logout_time }}</td>
-                    <td>{{ report.login_sec }}</td>
-                    <td>{{ report.last_response_time }}</td>
-                    <td>{{ report.agent_ip }}</td>
-                </tr>
-            </tbody>
+        <div class="d-md-block table-container">
+            <table class="table  table-hover  shadow-sm rounded">
+                <thead class="">
+                    <tr>
+                        <th>#</th>
+                        <th>UniqueID</th>
+                        <th>Calldate</th>
+                        <th>Caller</th>
+                        <th>Campaign</th>
+                        <th>Disposition</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="dispositionData.length">
+                    <tr *ngFor="let report of dispositionData; let i = index">
+                        <td>{{ sl + i + 1 }}</td>
+                        <td>{{ report.uniqueid }}</td>
+                        <td>{{ report.Calldate }}</td>
+                        <td>{{ report.Caller }}</td>
+                        <td>{{ report.campaign }}</td>
+                        <td>{{ report.dispos }}</td>
+                        <td>{{ report.remarks }}</td>
+                    </tr>
+                </tbody>
+                <p *ngIf="!dispositionData.length" class="error-massage">
+                    DATA NOT FOUND
+                </p>
+            </table>
 
-        </table>
+
+        </div>
+
+        <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
+            (prev)="prevPage()"></app-paginator>
+
     </div>
-
-    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
-        (prev)="prevPage()"></app-paginator>
 
 </div>

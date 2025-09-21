@@ -16,12 +16,16 @@ export class SidebarService {
 
   private sidebarVisible = new BehaviorSubject<boolean>(false);
   sidebarVisible$ = this.sidebarVisible.asObservable();
-  
+
   toggleSidebar() {
     this.sidebarVisible.next(!this.sidebarVisible.value);
   }
 
-    closeSidebar() {
+  openSidebar() {
+    this.sidebarVisible.next(true);
+  }
+
+  closeSidebar() {
     this.sidebarVisible.next(false);
   }
 }

@@ -3,8 +3,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../../agent/services/api.service';
 import { Router } from '@angular/router';
-import { UserService } from '../../services/jwt-decode.service';
+import { DecodeToken } from '../../services/jwt-decode.service';
 import { NgZone } from '@angular/core';
+import { LoginTimeAndDuration } from '../../agent/services/login-timeAndduration';
 
 
 @Component({
@@ -23,8 +24,9 @@ export class Login {
     private fb: FormBuilder,
     private apiService: ApiService,
     private router: Router,
-    private userService: UserService,
-    private zone: NgZone
+    private decodeToken: DecodeToken,
+    private zone: NgZone,
+    private loginTimeAndDuration: LoginTimeAndDuration
   ) {
     this.loginForm = this.fb.group({
       userId: ['', [Validators.required]],
@@ -88,5 +90,9 @@ export class Login {
     const now = new Date();
     // store in sessionStorage if you want it after reload
     sessionStorage.setItem('loginTime', now.getTime().toString());
+    this.loginTimeAndDuration.saveLoginDate();
+
+    //save public ip in sesson
+
   }
 }

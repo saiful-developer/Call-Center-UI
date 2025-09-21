@@ -63,7 +63,7 @@ export class Incoming implements OnInit {
 
   ngOnInit() {
     this.getIncomingReport();
-    this.loadCampainList();
+    this.campainListFromSesson();
     this.isSearchMode = false;
   }
 
@@ -83,16 +83,15 @@ export class Incoming implements OnInit {
     });
   }
 
-  loadCampainList() {
-    this.apiService.loadCampaigns().subscribe({
-      next: (res: any) => {
-        const parseCampainData = JSON.parse(res.data);
-        this.campains = parseCampainData.rows;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+  // get campain form sesson
+  campainListFromSesson() {
+    const jsonString = sessionStorage.getItem('user')
+
+    if (jsonString) {
+      const obj = JSON.parse(jsonString);
+      console.log(obj.campaigns);
+      this.campains = obj.campaigns;
+    }
   }
 
   nextPage() {

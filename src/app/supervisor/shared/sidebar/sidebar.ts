@@ -5,7 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { RouterModule, RouterLink } from '@angular/router';
 
 import { JwtPayload } from '../../../interfaces/jwtpayload';
-import { UserService } from '../../../services/jwt-decode.service';
+import { DecodeToken } from '../../../services/jwt-decode.service';
 
 
 @Component({
@@ -43,11 +43,11 @@ export class Sidebar implements OnInit {
 
   constructor(
     private sidebarService: SidebarService,
-    private userService: UserService
+    private decodeToken: DecodeToken
   ) { }
 
   ngOnInit(): void {
-    this.decodedToken = this.userService.decodeToken(sessionStorage.getItem('jwt'));
+    this.decodedToken = this.decodeToken.decodeToken(sessionStorage.getItem('jwt'));
     console.log(this.decodedToken)
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from '../../services/session.service';
+import { LoginTimeAndDuration } from '../../services/login-timeAndduration';
 
 
 @Component({
@@ -13,11 +13,11 @@ export class AgentDashboardRow1 implements OnInit {
   private intervalId: any;
   showLoginTime: string | null = null;
 
-  constructor(private sessionService: SessionService) { }
+  constructor(private loginTimeAndDuration: LoginTimeAndDuration) { }
 
 
   ngOnInit() {
-    this.showLoginTime = this.sessionService.getFormattedLoginTime();
+    this.showLoginTime = this.loginTimeAndDuration.getFormattedLoginTime();
 
 
 
@@ -34,7 +34,7 @@ export class AgentDashboardRow1 implements OnInit {
   }
 
   private updateDuration() {
-    this.loginDuration = this.sessionService.getLoginDuration();
+    this.loginDuration = this.loginTimeAndDuration.getLoginDuration();
   }
 
 

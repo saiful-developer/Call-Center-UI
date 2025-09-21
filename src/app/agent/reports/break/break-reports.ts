@@ -44,7 +44,7 @@ export class BreakReports implements OnInit {
 
   ngOnInit(): void {
     this.loadBreakReports()
-    this.loadCampainList()
+    this.campainListFromSesson()
     this.loadBreakType()
   }
 
@@ -148,16 +148,15 @@ export class BreakReports implements OnInit {
     this.loadBreakReports();
   }
 
-  loadCampainList() {
-    this.apiService.loadCampaigns().subscribe({
-      next: (res: any) => {
-        const parseCampainData = JSON.parse(res.data);
-        this.campains = parseCampainData.rows;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
+  // get campain form sesson
+  campainListFromSesson() {
+    const jsonString = sessionStorage.getItem('user')
+
+    if (jsonString) {
+      const obj = JSON.parse(jsonString);
+      console.log(obj.campaigns);
+      this.campains = obj.campaigns;
+    }
   }
 
   // for initial load and search result

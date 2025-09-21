@@ -5,9 +5,10 @@ import { JwtPayload } from '../../../interfaces/jwtpayload';
 import { ApiService } from '../../services/api.service';
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 //components
-import { UserService } from '../../../services/jwt-decode.service';
+import { DecodeToken } from '../../../services/jwt-decode.service';
 import { LogoutModal } from '../logout-modal/logout-modal';
 import { HangupClickModal } from '../hangup-click-modal/hangup-click-modal';
+import { RouterLink } from '@angular/router';
 
 
 
@@ -15,7 +16,7 @@ import { HangupClickModal } from '../hangup-click-modal/hangup-click-modal';
 
 @Component({
   selector: 'app-header',
-  imports: [NgClass, CommonModule, LogoutModal, FormsModule, ReactiveFormsModule, HangupClickModal],
+  imports: [NgClass, CommonModule, LogoutModal, FormsModule, ReactiveFormsModule, HangupClickModal, RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css'
 })
@@ -43,7 +44,7 @@ export class Header implements OnInit, OnDestroy {
 
   constructor(
     private sidebarService: SidebarService,
-    private userService: UserService,
+    private decodeToken: DecodeToken,
     private apiService: ApiService
   ) {
 
@@ -60,7 +61,7 @@ export class Header implements OnInit, OnDestroy {
       console.log('Fullscreen changed:', this.isFullscreen);
     });
 
-    this.decodedToken = this.userService.decodeToken(sessionStorage.getItem('jwt'));
+    this.decodedToken = this.decodeToken.decodeToken(sessionStorage.getItem('jwt'));
     console.log(sessionStorage.getItem('jwt'));
 
 
@@ -227,7 +228,7 @@ export class Header implements OnInit, OnDestroy {
     // Flip state
     this.sidebaropen = !this.sidebaropen;
 
-    // (Optional) still notify parent component
+    // still notify parent component
     this.toggleSidebar.emit(this.sidebaropen);
 
     // Save to sessionStorage

@@ -4,7 +4,7 @@ import { JwtPayload } from '../interfaces/jwtpayload';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class DecodeToken {
   decodeToken(token: any): JwtPayload | null {
     if (!token) return null;
 

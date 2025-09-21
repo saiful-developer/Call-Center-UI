@@ -16,11 +16,11 @@
     <!-- Toggle Button for Action Section -->
     <button class="btn text-white d-md-none" (click)="toggleActionSection()"
       style="background: linear-gradient(90deg, #d96bff, #7b5cff); border-radius: 50%; width: 30px; height: 30px; padding: 0; margin-right: 15px; display: flex; align-items: center; justify-content: center;    margin-top: 12px;">
-      <i class="mdi" [ngClass]="{'mdi-eye-outline': !showActionSection, 'mdi-eye-off-outline': showActionSection}"></i>
+      <i class="mdi" [ngClass]="{'bi bi-eye': !showActionSection, 'bi bi-eye-slash': showActionSection}"></i>
     </button>
 
     <!-- Action Section -->
-    <div class="search-field" [ngClass]="{'d-none': !showActionSection, 'd-md-block': true}" style="margin-right: 7px;">
+    <div class="search-field active-section" [ngClass]="{'d-none': !showActionSection, 'd-md-block': true}" style="margin-right: 0px;">
       <!-- Break and Campaign Dropdowns -->
       <div class="header-action d-flex flex-wrap gap-2">
         <!-- Break Dropdown Menu -->
@@ -107,18 +107,20 @@
             <img src="assets/agent/images/faces/face1.jpg" alt="image">
             <span class="availability-status online"></span>
           </div>
-          <div class="nav-profile-text" *ngIf="!sidebaropen">
+          <!-- !sidebaropen -->
+          <div class="nav-profile-text" *ngIf="true">
             <p class="mb-1 text-black" >{{ decodedToken?.name }}</p>
           </div>
         </a>
 
         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown" style="z-index: 1010;">
-          <a class="dropdown-item">
-            <i class="bi-person-circle text-success" style="margin-right: 5px !important;"></i> {{
-            decodedToken?.extension }} </a>
+          <a class="dropdown-item" routerLink="/agent/profile">
+            <i class="bi-person-circle me-2 text-success" style="margin-right: 5px !important;"></i>
+            Profile
+          </a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logoutModal.open()">
-            <i class="mdi mdi-logout me-2 text-primary"></i>
+            <i class="bi bi-box-arrow-right me-2 text-danger"></i>
             Signout
           </a>
         </div>
@@ -221,6 +223,7 @@
         </div>
       </li>
     </ul>
+
     <!-- form mobile toggle -->
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
       data-toggle="offcanvas" (click)="onToggleSidebar()">

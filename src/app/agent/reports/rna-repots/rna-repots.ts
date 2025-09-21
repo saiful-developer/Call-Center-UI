@@ -38,7 +38,7 @@ export class RNARepots implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadCampainList();
+    this.campainListFromSesson();
     this.loadRnaReports();
   }
 
@@ -55,16 +55,14 @@ export class RNARepots implements OnInit {
     })
   }
 
-  loadCampainList() {
-    this.apiService.loadCampaigns().subscribe({
-      next: (res: any) => {
-        const parseCampainData = JSON.parse(res.data);
-        this.campains = parseCampainData.rows;
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
+  // get campain form sesson
+  campainListFromSesson() {
+    const jsonString = sessionStorage.getItem('user')
+
+    if (jsonString) {
+      const obj = JSON.parse(jsonString);
+      this.campains = obj.campaigns;
+    }
   }
 
   getAgent(): string {

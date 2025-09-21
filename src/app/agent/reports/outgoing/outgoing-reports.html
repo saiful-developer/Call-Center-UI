@@ -33,14 +33,18 @@
                     <div>
                         <label for="">Campain</label>
                         <select class="form-select" aria-label="Default select example" formControlName="campain">
-                            <option selected value="">Select Campaign</option>
-                            <option *ngFor="let c of campains" [value]="c.campaign_id">{{ c.campaign_name }}</option>
+                            <option selected value="">Campaign</option>
+                            <option *ngFor="let c of campains" [value]="c">{{ c }}</option>
                         </select>
                     </div>
                     <div>
                         <label for="form-date">Status</label>
-                        <input type="text" class="form-control modern-input" placeholder="Status"
-                            formControlName="status" id="status" />
+
+                        <select class="form-select" aria-label="Default select example" formControlName="status">
+                            <option selected value="">Status</option>
+                            <option value="answer">Answer</option>
+                            <option value="failed">Failed</option>
+                        </select>
                     </div>
                 </div>
 
