@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+  import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { Paginator } from '../../shared/paginator/paginator';
 import { StickyTableHeaderDirective } from '../../../directives/sticky-table-header';

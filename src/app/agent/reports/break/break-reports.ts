@@ -33,9 +33,8 @@ export class BreakReports implements OnInit {
   isSearchMode = false;
   hasMore = true;
 
-  campains: any[] = [];
+  campains: string[] = [];
   breakReportList: any[] = [];
-  breakTypeList: any[] = [];
 
   constructor(
     private apiService: ApiService,
@@ -159,6 +158,8 @@ export class BreakReports implements OnInit {
     }
   }
 
+
+
   // for initial load and search result
   formateBreakData(res: any) {
     try {
@@ -174,13 +175,13 @@ export class BreakReports implements OnInit {
             totalCount = parsedData.count;
           }
         }
-        // If res.data is already an array (search)
+        // If res.data is already an array
         else if (Array.isArray(res.data)) {
           rows = res.data;
           totalCount = res.count;
         }
 
-        // Map to your table format
+        // map  table format
         this.breakReportList = rows.map((item: Break) => ({
           queuename: item.queuename || '-',
           extension: item.extension || '-',

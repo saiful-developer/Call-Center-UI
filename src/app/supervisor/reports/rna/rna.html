@@ -1,1 +1,87 @@
-<p>rna works!</p>
+<div class="container-full">
+
+    <app-page-header title="RNA Report" iconClass="bi bi-slash-circle"></app-page-header>
+
+    <!-- search option -->
+    <div class="container-fluid">
+        <div class="search-bar-wrapper">
+            <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchFormRNA">
+                <div>
+                    <label for="form-date">From Date</label>
+                    <input type="date" class="form-control modern-input" placeholder="ID" formControlName="fromDate"
+                        id="form-date" />
+                </div>
+                <div>
+                    <label for="form-date">To Date</label>
+                    <input type="date" class="form-control modern-input" placeholder="Role" formControlName="toDate"
+                        id="to-date" />
+                </div>
+                <!-- Toggle Button for dropdown inputs (only on small screens) -->
+                <button id="filterToggleBtn" class="btn  d-lg-none small-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#moreSearchFields" aria-expanded="false" aria-controls="moreSearchFields">
+                    More <span id="toggleIcon" class="bi bi-chevron-down"></span>
+                </button>
+
+                <!-- Collapsible Search Inputs -->
+                <div class="collapse d-lg-flex gap-2 align-items-center" id="moreSearchFields">
+                    <div>
+                        <label for="">Campain</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="campain">
+                            <option selected value="">Campaign</option>
+                            <option *ngFor="let c of campaignList" [value]="c">{{ c }}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Search Button -->
+                <button (click)="getRNAOnFilter()" type="submit" class="btn modern-btn bg-gradient-primary">
+                    <i class="bi bi-search me-1"></i> Search
+                </button>
+                <button type="reset" class="btn modern-btn reset-btn" (click)="resetSearch()">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                    Reset
+                </button>
+                <br>
+                <div *ngIf="isSearchMode">
+                    <small style="color: #7a00f5;">
+                        Search between
+                        <span class="date-color">{{ searchFormRNA.value.fromDate | date:'d MMM yyyy'}}</span>
+                        to
+                        <span class="date-color">{{ searchFormRNA.value.toDate | date:'d MMM yyyy' }}</span>
+                    </small>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- RNA table -->
+    <div class="d-md-block table-container">
+        <table class="table  table-hover  shadow-sm rounded" appStickyTableHeader
+            [offsetElements]="['.navbar.fixed-top']">
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th>Calldate</th>
+                    <th>Campaign</th>
+                    <th>DurationSec</th>
+                    <th>UniqueID</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of RNAReportList; let i = index">
+                    <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.calldate }}</td>
+                    <td>{{ report.campaign }}</td>
+                    <td>{{ report.duration }}</td>
+                    <td>{{ report.uniqueid }}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+
+    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
+        (prev)="prevPage()"></app-paginator>
+</div>

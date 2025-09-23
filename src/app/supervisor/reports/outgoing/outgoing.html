@@ -4,13 +4,12 @@
     <!-- search option -->
     <div class="container-fluid">
         <div class="search-bar-wrapper">
-            <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchFormOutgoing"
-                (ngSubmit)="getOutgoingSearch()">
+            <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchFormOutgoing">
                 <!-- Always visible inputs -->
                 <div>
                     <label for="caller-naem">Number</label>
                     <input type="text" class="form-control modern-input" placeholder="Destination Number"
-                        formControlName="extension" id="caller-naem" />
+                        formControlName="destNumber" id="caller-naem" />
                 </div>
                 <div>
                     <label for="form-date">From Date</label>
@@ -33,28 +32,29 @@
                     <div>
                         <label for="">Campain</label>
                         <select class="form-select" aria-label="Default select example" formControlName="campain">
-                            <option selected value="">Select Campaign</option>
-                            <option *ngFor="let c of campains" [value]="c.campaign_id">{{ c.campaign_name }}</option>
+                            <option selected value="">Campaign</option>
+                            <option *ngFor="let c of campains" [value]="c">{{ c }}</option>
                         </select>
                     </div>
                     <div>
-                        <label for="form-date">Status</label>
-                        <select class="form-select" aria-label="Default select example" formControlName="campain">
-                            <option selected value="">Select Status</option>
-                            <option *ngFor="let c of campains" [value]="c.campaign_id">{{ c.campaign_name }}</option>
+                        <label for="">Status</label>
+                        <select class="form-select" aria-label="Default select example" formControlName="status">
+                            <option selected value="">Status</option>
+                            <option value="answer">Answered</option>
+                            <option value="failed">Failed</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- Search Button -->
-                <button type="submit" class="btn modern-btn bg-gradient-primary">
+                <button type="submit" class="btn modern-btn bg-gradient-primary" (click)="getOutgoingOnFilter(true)">
                     <i class="bi bi-search me-1"></i> Search
                 </button>
                 <button type="reset" class="btn modern-btn reset-btn" (click)="resetSearch()">
                     <i class="bi bi-arrow-counterclockwise"></i>
                     Reset
                 </button>
-                <button type="reset" class="btn modern-btn export-btn" (click)="resetSearch()">
+                <button type="" class="btn modern-btn export-btn" (click)="exportOutgoing()">
                     <i class="bi bi-box-arrow-up"></i> Export
                 </button>
                 <br>
@@ -94,16 +94,16 @@
                 <tr *ngFor="let report of outgoingReportsData; let i = index">
                     <td>{{ sl + i + 1 }}</td>
                     <td>{{ report.uniqueid }}</td>
-                    <td>{{ report.calldate }}</td>
                     <td>{{ report.extension }}</td>
                     <td>{{ report.phone }}</td>
                     <td>{{ report.campaign }}</td>
-                    <td>{{ report.ring_time }}</td>
-                    <td>{{ report.duration }}</td>
+                    <td>{{ report.calldate }}</td>
+                    <td>{{ report.ring_duration }}</td>
+                    <td>{{ report.cdr_billsec }}</td>
                     <td>{{ report.status }}</td>
-                    <td>{{ report.transfer }}</td>
+                    <td>{{ report.transfer_to }}</td>
                     <td>{{ report.disposition}}</td>
-                    <td>{{ report.recording}}</td>
+                    <td>{{ report.recordingfile}}</td>
                 </tr>
 
 

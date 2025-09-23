@@ -1,11 +1,11 @@
 <div class="container-full">
-    <app-page-header title="Abandon No Callback Report of last 50" iconClass="bi bi-telephone-x"></app-page-header>
+    <app-page-header title="Abandon No Callback Report" iconClass="bi bi-telephone-x"></app-page-header>
 
     <!-- search option -->
     <div class="container-fluid">
         <div class="search-bar-wrapper">
             <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center"
-                [formGroup]="searchFormAbandonReport" (ngSubmit)="getAbandonReportSearch()">
+                [formGroup]="searchFormAbandonReport" (ngSubmit)="getAbandonReportOnFilter()">
                 <div>
                     <label for="form-date">From Date</label>
                     <input type="date" class="form-control modern-input" placeholder="ID" formControlName="fromDate"
@@ -27,8 +27,8 @@
                     <div>
                         <label for="">Campain</label>
                         <select class="form-select" aria-label="Default select example" formControlName="campain">
-                            <option selected value="">Select Campaign</option>
-                            <option *ngFor="let c of campains" [value]="c.campaign_id">{{ c.campaign_name }}</option>
+                            <option selected value="">Campaign</option>
+                            <option *ngFor="let c of campaignList" [value]="c">{{ c }}</option>
                         </select>
                     </div>
                 </div>
@@ -75,10 +75,11 @@
                 <tr *ngFor="let report of abandonReportsData; let i = index">
                     <td>{{ sl + i + 1 }}</td>
                     <td>{{ report.uniqueid }}</td>
-                    <td>{{ report.enterqueue_time }}</td>
+                    <td>{{ report.calldate }}</td>
                     <td>{{ report.src }}</td>
                     <td>{{ report.dst }}</td>
                     <td>{{ report.campaign }}</td>
+                    <td>{{ report.enterqueue_time }}</td>
                     <td>{{ report.caller_queue_time }}</td>
                     <td>{{ report.hangup_time }}</td>
                 </tr>

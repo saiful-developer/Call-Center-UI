@@ -38,24 +38,24 @@
       themes[role].forEach(href => this.addStyle(href));
 
       // Only inject JS if Supervisor
-      if (role === 'supervisor') {
-        const jsFiles = [
-          'assets/supervisor/js/vendors.min.js',
-          'assets/supervisor/js/chat-popup.js',
-          'assets/supervisor/js/feather.min.js',
-          'assets/supervisor/js/apexcharts.js',
-          'assets/supervisor/js/progressbar.js',
-          'https://cdn.amcharts.com/lib/4/core.js',
-          'https://cdn.amcharts.com/lib/4/charts.js',
-          'https://cdn.amcharts.com/lib/4/themes/animated.js',
-          'https://cdn.amcharts.com/lib/4/maps.js',
-          'https://cdn.amcharts.com/lib/4/geodata/worldLow.js',
-          'assets/supervisor/js/template.js',
-          'assets/supervisor/js/dashboard.js'
-        ];
+      // if (role === 'supervisor') {
+      //   const jsFiles = [
+      //     'assets/supervisor/js/vendors.min.js',
+      //     'assets/supervisor/js/chat-popup.js',
+      //     'assets/supervisor/js/feather.min.js',
+      //     'assets/supervisor/js/apexcharts.js',
+      //     'assets/supervisor/js/progressbar.js',
+      //     'https://cdn.amcharts.com/lib/4/core.js',
+      //     'https://cdn.amcharts.com/lib/4/charts.js',
+      //     'https://cdn.amcharts.com/lib/4/themes/animated.js',
+      //     'https://cdn.amcharts.com/lib/4/maps.js',
+      //     'https://cdn.amcharts.com/lib/4/geodata/worldLow.js',
+      //     'assets/supervisor/js/template.js',
+      //     'assets/supervisor/js/dashboard.js'
+      //   ];
 
-        jsFiles.forEach(src => this.addScript(src));
-      }
+      //   jsFiles.forEach(src => this.addScript(src));
+      // }
     }
 
     /** Remove all injected styles and scripts */

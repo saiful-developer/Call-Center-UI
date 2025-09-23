@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="search-bar-wrapper">
             <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchFormIncoming"
-                (ngSubmit)="getIncomingDataOnFilter()">
+                >
                 <!-- Your existing search form code -->
                 <div>
                     <label for="caller-naem">Caller</label>
@@ -30,27 +30,29 @@
                     <div>
                         <label for="">Campaign</label>
                         <select class="form-select" aria-label="Default select example" formControlName="campain">
-                            <option selected value="">Select Campaign</option>
+                            <option selected value="">Campaign</option>
                             <option *ngFor="let c of campains" [value]="c">{{ c }}</option>
                         </select>
                     </div>
                     <div>
                         <label for="">Status</label>
                         <select class="form-select" aria-label="Default select example" formControlName="status">
-                            <option selected value="">Select Status</option>
+                            <option selected value="">Status</option>
                             <option value="answer">Answered</option>
                             <option value="failed">Failed</option>
                         </select>
                     </div>
                 </div>
-                <button type="submit" class="btn modern-btn bg-gradient-primary">
+
+                <button type="submit" class="btn modern-btn bg-gradient-primary" (click)="getIncomingDataOnFilter(true)">
                     <i class="bi bi-search me-1"></i> Search
                 </button>
+
                 <button type="reset" class="btn modern-btn reset-btn" (click)="resetSearch()">
                     <i class="bi bi-arrow-counterclockwise"></i> Reset
                 </button>
 
-                <button type="reset" class="btn modern-btn export-btn" (click)="getExportedData()">
+                <button type="submit" class="btn modern-btn export-btn" (click)="exportIncoming()">
                     <i class="bi bi-box-arrow-up"></i> Export
                 </button>
 
@@ -114,7 +116,7 @@
 
 
 </div>
-
+<!-- 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
     const tableContainer = document.querySelector('.table-container');
@@ -175,4 +177,4 @@
         e.preventDefault(); // Prevent default touch scrolling
     });
 });
-</script>
+</script> -->

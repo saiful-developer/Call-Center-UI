@@ -7,10 +7,13 @@ import { CommonModule } from '@angular/common';
 import { Loader } from '../../../shared/loader/loader';
 import { ThemeService } from '../../../services/theme.service';
 import { LoderService } from '../../../services/loder.service';
+import { Footer } from '../../shared/footer/footer';
+
+
 
 @Component({
   selector: 'app-supervisor-layout',
-  imports: [Sidebar, ThinSidebar, Header, RouterOutlet, CommonModule, Loader],
+  imports: [Sidebar, ThinSidebar, Header, RouterOutlet, CommonModule, Loader, Footer],
   templateUrl: './supervisor-layout.html',
   styleUrl: './supervisor-layout.css'
 })

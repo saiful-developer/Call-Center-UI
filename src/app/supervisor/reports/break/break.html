@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="search-bar-wrapper">
             <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchFormBreak"
-                (ngSubmit)="getBreakSearch()">
+                >
                 <div>
                     <label for="form-date">From Date</label>
                     <input type="date" class="form-control modern-input" placeholder="ID" formControlName="fromDate"
@@ -27,14 +27,14 @@
                     <div>
                         <label for="">Campain</label>
                         <select class="form-select" aria-label="Default select example" formControlName="campain">
-                            <option selected value="">Select Campaign</option>
-                            <option *ngFor="let c of campains" [value]="c.campaign_id">{{ c.campaign_name }}</option>
+                            <option selected value="">Campaign</option>
+                            <option *ngFor="let c of campaignList" [value]="c">{{ c }}</option>
                         </select>
                     </div>
                 </div>
 
                 <!-- Search Button -->
-                <button type="submit" class="btn modern-btn bg-gradient-primary">
+                <button (click)="getBreakOnFilter()" type="submit" class="btn modern-btn bg-gradient-primary">
                     <i class="bi bi-search me-1"></i> Search
                 </button>
                 <button type="reset" class="btn modern-btn reset-btn" (click)="resetSearch()">
@@ -54,12 +54,13 @@
         </div>
     </div>
 
-        <!-- outgoing table -->
+        <!-- break table -->
     <div class="d-md-block table-container">
         <table class="table  table-hover  shadow-sm rounded" appStickyTableHeader [offsetElements]="['.navbar.fixed-top']">
             <thead class="" >
                 <tr>
                     <th>#</th>
+                    <th>Agent</th>
                     <th>Campaign</th>
                     <th>Extension</th>
                     <th>Break Type</th>
@@ -72,9 +73,10 @@
             <tbody>
                 <tr *ngFor="let report of breakReportList; let i = index">
                     <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.agent }}</td>
                     <td>{{ report.queuename }}</td>
                     <td>{{ report.extension }}</td>
-                    <td>{{ report.breakName }}</td>
+                    <td>{{ report.pause_code }}</td>
                     <td>{{ report.pause_time }}</td>
                     <td>{{ report.unpause_time }}</td>
                     <td>{{ report.unpause_sec }}</td>

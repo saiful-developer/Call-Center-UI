@@ -41,8 +41,9 @@ export class Incoming implements OnInit {
   sl: number = 0;
   offset: number = 0;
   limit: number = 50;
-  hasMore: any;
+  hasMore: boolean = true;
   page: number = 1;
+  count: number = 0;
   today = new Date().toISOString().split('T')[0];
 
   constructor(
@@ -52,26 +53,21 @@ export class Incoming implements OnInit {
   ngOnInit(): void {
     this.getIncoming();
     this.getUserName();
-    this.getCampains();
     this.isSearchMode = false;
   }
-
-
-  searchFormIncoming = new FormGroup({
-    caller: new FormControl(''),
-    fromDate: new FormControl(''),
-    toDate: new FormControl(''),
-    campain: new FormControl(''),
-    status: new FormControl('')
-  });
-
-
+  
   getIncoming() {
 
     let user: string = '';
 
+    console.log('my ui limit', this.limit);
+    
     this.api.incomingReport(user, this.campains, this.limit, this.offset, false).subscribe({
       next: (res) => {
+        console.log(res)
+        this.count = res.count;
+        console.log(this.count);
+
         this.formateData(res);
       },
       error: (err) => {
@@ -81,8 +77,39 @@ export class Incoming implements OnInit {
 
   }
 
-  getIncomingDataOnFilter() {
-    this.isSearchMode = true;
+
+
+  /*
+   *search functionality 
+   */
+  searchFormIncoming = new FormGroup({
+    caller: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+    campain: new FormControl(''),
+    status: new FormControl('')
+  });
+
+  private buildSearchParams() {
+    return {
+      agent: '',
+      campain: this.searchFormIncoming.value.campain || '',
+      fromDate: this.searchFormIncoming.value.fromDate || this.today,
+      toDate: this.searchFormIncoming.value.toDate || this.today,
+      srcNumber: this.searchFormIncoming.value.caller || '',
+      status: this.searchFormIncoming.value.status || '',
+      campainList: this.getCampains()
+    };
+  }
+
+  getIncomingDataOnFilter(isNewSearch: boolean = false) {
+
+    if (isNewSearch) {
+      this.isSearchMode = true;
+      this.offset = 0;
+      this.sl = 0;
+    }
+
     console.log(this.searchFormIncoming.value);
 
     //if user do not selece any date
@@ -94,48 +121,65 @@ export class Incoming implements OnInit {
       this.searchFormIncoming.get('toDate')?.setValue(this.today);
     }
 
-    const agent: string =  '';
-    const campain = this.searchFormIncoming.value.campain || '';
-    const fromDate = this.searchFormIncoming.value.fromDate || this.today;
-    const toDate = this.searchFormIncoming.value.toDate || this.today;
-    const srcNameber = this.searchFormIncoming.value.caller || '';
-    const status = this.searchFormIncoming.value.status || '';
-    const campainList = this.getCampains();
-    const isExport: boolean = false;
+    // const agent: string = '';
+    // const campain = this.searchFormIncoming.value.campain || '';
+    // const fromDate = this.searchFormIncoming.value.fromDate || this.today;
+    // const toDate = this.searchFormIncoming.value.toDate || this.today;
+    // const srcNameber = this.searchFormIncoming.value.caller || '';
+    // const status = this.searchFormIncoming.value.status || '';
+    // const campainList = this.getCampains();
 
-    this.api.incomingReportOnFilter(agent, campain, campainList, isExport, fromDate, this.limit, this.offset, this.page, srcNameber, status, toDate).subscribe({
+    const { agent, campain, fromDate, toDate, srcNumber, status, campainList } = this.buildSearchParams();
+
+    this.api.incomingReportOnFilter(agent, campain, campainList, false, fromDate, this.limit, this.offset, this.page, srcNumber, status, toDate).subscribe({
       next: (res) => {
-        console.log(res)
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-
-
-
-  }
-
-  getExportedData() {
-
-
-    console.log('export')
-    let user: string = this.getUserName();
-
-    this.api.incomingReport(user, this.campains, this.limit, this.offset, true).subscribe({
-      next: (res) => {
-        this.formateData(res);
+        this.count = res.count;
+        this.formateData(res)
       },
       error: (err) => {
         console.log(err);
       }
     })
   }
+
+  /*
+  * export functionality
+  */
+  exportIncoming() {
+    if (this.isSearchMode) {
+      const { agent, campain, fromDate, toDate, srcNumber, status, campainList } = this.buildSearchParams();
+
+      this.api.incomingReportOnFilter(agent, campain, campainList, true, fromDate, this.limit, this.offset, this.page, srcNumber, status, toDate).subscribe({
+        next: (res) => {
+          if (res.success === 'YES' && res.data) {
+            this.downloadCSV(res.data, 'incoming-report.csv');
+          } else {
+            console.log('No data to export from search');
+          }
+        },
+        error: (err) => console.error(err)
+      });
+
+    } else {
+      console.log('all data');
+
+      //export already loaded data initial or after reset case
+      this.api.incomingReport(
+        '', this.campains,
+        this.limit, this.offset,
+        true //  export mode
+      ).subscribe(res => this.downloadCSV(res.data, 'incoming-report.csv'));
+    }
+  }
+
+
 
 
 
   formateData(res: any) {
     if (res.success === 'YES' && Array.isArray(res.data)) {
+      this.incomingReportsData = [];
+
       this.incomingReportsData = res.data.map((item: IncomingRecords, index: number) => ({
         sl: this.offset + index + 1,
         uniqueid: item.uniqueid || '-',
@@ -155,19 +199,54 @@ export class Incoming implements OnInit {
       this.incomingReportsData = [];
     }
 
-    console.log(this.incomingReportsData)
+    this.hasMore = this.offset + this.limit < this.count;
   }
+
+
+
 
   resetSearch() {
-
+    this.searchFormIncoming.reset();
+    this.offset = 0;
+    this.sl = 0;
+    this.count = 0;
+    this.isSearchMode = false;
+    this.getIncoming();
   }
 
+  /*****pagination section v */
   nextPage() {
-    throw new Error('Method not implemented.');
+    this.offset += this.limit;
+    this.sl += this.limit;
+    if (this.isSearchMode) {
+      this.getIncomingDataOnFilter();
+    } else {
+      this.getIncoming();
+
+    }
   }
   prevPage() {
-    throw new Error('Method not implemented.');
+    if (this.offset >= this.limit) {
+      this.offset -= this.limit;
+      this.sl -= this.limit;
+      if (this.isSearchMode) {
+        this.getIncomingDataOnFilter();
+      } else {
+        this.getIncoming();
+      }
+    }
   }
+  //for disable next btn
+  get isNextDisabled(): boolean {
+    return this.offset + this.limit >= this.count;
+  }
+
+  //for disable previous btn
+  get isPrevDisabled(): boolean {
+    return this.offset === 0;
+  }
+  /*****pagination end ^ */
+
 
   getUserName() {
     const userInfo = sessionStorage.getItem('user');
@@ -186,6 +265,36 @@ export class Incoming implements OnInit {
     }
 
     return;
+  }
+
+  //export
+  downloadCSV(data: any[], filename: string = 'incoming-report.csv') {
+    if (!data || data.length === 0) {
+      console.log('No data to export');
+      return;
+    }
+
+    // Extract headers from the object keys
+    const header = Object.keys(data[0]);
+
+    // Build CSV rows
+    const replacer = (key: string, value: any) => (value === null || value === undefined ? '' : value);
+    const csv = [
+      header.join(','), // header row
+      ...data.map(row =>
+        header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(',')
+      )
+    ].join('\r\n');
+
+    // Create and download file
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   }
 
 

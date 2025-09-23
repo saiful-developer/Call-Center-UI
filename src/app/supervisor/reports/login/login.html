@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="search-bar-wrapper">
             <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center"
-                [formGroup]="searchFormLoginReport" (ngSubmit)="getLoginReportSearch()">
+                [formGroup]="searchFormLoginReport" (ngSubmit)="getLoginReportOnFilter()">
                 <div>
                     <label for="form-date">From Date</label>
                     <input type="date" class="form-control modern-input" placeholder="ID" formControlName="fromDate"
@@ -27,8 +27,8 @@
                     <div>
                         <label for="">Campain</label>
                         <select class="form-select" aria-label="Default select example" formControlName="campain">
-                            <option selected value="">Select Campaign</option>
-                            <option *ngFor="let c of campains" [value]="c.campaign_id">{{ c.campaign_name }}</option>
+                            <option selected value="">Campaign</option>
+                            <option *ngFor="let c of campaignList" [value]="c">{{ c }}</option>
                         </select>
                     </div>
                 </div>

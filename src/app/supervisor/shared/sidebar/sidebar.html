@@ -1,4 +1,5 @@
-<aside style="width: 100% !important;" class="sidebar bg-white shadow-sm vh-100 rounded-3 thin-sidebar-click thin-sidebar-saiful">
+<aside style="width: 100% !important;"
+  class="sidebar bg-white shadow-sm vh-100 rounded-3 thin-sidebar-click thin-sidebar-saiful">
   <div class="p-3">
 
     <!-- Logo -->
@@ -6,7 +7,8 @@
       <div class="logo-div" [ngClass]="isOpen ? '' : 'me-0'">
         <img src="assets/supervisor/images/logo-letter.png" alt="logo">
       </div>
-      <div [ngClass]="isOpen ? 'd-block' : 'd-none'" class="logo-lg fs-36 fw-700">CRM<span class="text-primary">i</span></div>
+      <div [ngClass]="isOpen ? 'd-block' : 'd-none'" class="logo-lg fs-36 fw-700">CRM<span class="text-primary">i</span>
+      </div>
     </div>
 
     <!-- User Profile -->
@@ -25,7 +27,8 @@
 
       <!-- Dashboard -->
       <li class="nav-item hover-group position-relative">
-        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link" routerLink="/supervisor/dashboard">
+        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link"
+          routerLink="/supervisor/dashboard" (click)="onLinkClick()">
           <i class="bi bi-grid-1x2 me-2 hover-icon"></i>
           <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Dashboard</span>
         </a>
@@ -37,7 +40,8 @@
 
       <!-- Reports -->
       <li class="nav-item hover-group position-relative">
-        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link" (click)="toggleMenu('reports')">
+        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link"
+          (click)="toggleMenu('reports')">
           <i class="bi bi-file-earmark-text me-2"></i>
           <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Reports</span>
           <i class="bi bi-chevron-down ms-auto" [class.rotate]="openMenu === 'reports'" *ngIf="isOpen"></i>
@@ -45,12 +49,18 @@
 
         <!-- Normal submenu for expanded sidebar -->
         <ul class="nav sub-menu" [@dropdownAnimation]="openMenu === 'reports' ? 'open' : 'closed'" *ngIf="isOpen">
-          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/incoming" (click)="onLinkClick()">Incoming</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/outgoing" (click)="onLinkClick()">Outgoing</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/break" (click)="onLinkClick()">Break</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/login" (click)="onLinkClick()">Login</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/abandon" (click)="onLinkClick()">Abandon</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/rna" (click)="onLinkClick()">Ring No Answer</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/incoming"
+              (click)="onLinkClick()">Incoming</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/outgoing"
+              (click)="onLinkClick()">Outgoing</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/break"
+              (click)="onLinkClick()">Break</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/login"
+              (click)="onLinkClick()">Login</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/abandon"
+              (click)="onLinkClick()">Abandon</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/rna" (click)="onLinkClick()">Ring No
+              Answer</a></li>
         </ul>
 
         <!-- Hover submenu for thin sidebar -->
@@ -66,7 +76,8 @@
 
       <!-- Live -->
       <li class="nav-item hover-group position-relative">
-        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link" (click)="toggleMenu('live')">
+        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link"
+          (click)="toggleMenu('live')">
           <i class="bi bi-broadcast me-1"></i>
           <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Live</span>
           <i class="bi bi-chevron-down ms-auto" [class.rotate]="openMenu === 'live'" *ngIf="isOpen"></i>
@@ -74,36 +85,39 @@
 
         <!-- Expanded sidebar submenu -->
         <ul class="nav sub-menu" [@dropdownAnimation]="openMenu === 'live' ? 'open' : 'closed'" *ngIf="isOpen">
-          <li class="nav-item"><a class="nav-link" routerLink="/agent/live/abandon-call">Abandon Calls</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/agent/live/agent-status">Agent Status</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/agent/live/campain-status">Campain Status</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/agent/live/extension-status">Extension Status</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/agent/live/trunk-status">Trunk Status</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/agent/live/waiting-calls">Waiting Calls</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/live/agent-status">Agent Status</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/live/campain-status">Campain Status</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/live/extension-status">Extension</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/live/trunk-status">Trunk Status</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/live/waiting-calls">Waiting Calls</a></li>
         </ul>
 
         <!-- Hover submenu for thin sidebar -->
         <ul class="thin-hover-menu" *ngIf="!isOpen">
-          <li><a class="nav-link" routerLink="/agent/live/abandon-call">Abandon Calls</a></li>
-          <li><a class="nav-link" routerLink="/agent/live/agent-status">Agent Status</a></li>
-          <li><a class="nav-link" routerLink="/agent/live/campain-status">Campain Status</a></li>
-          <li><a class="nav-link" routerLink="/agent/live/extension-status">Extension Status</a></li>
-          <li><a class="nav-link" routerLink="/agent/live/trunk-status">Trunk Status</a></li>
-          <li><a class="nav-link" routerLink="/agent/live/waiting-calls">Waiting Calls</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/agent-status">Agent Status</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/campain-status">Campain Status</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/extension-status">Extension</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/trunk-status">Trunk Status</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/waiting-calls">Waiting Calls</a></li>
         </ul>
       </li>
 
       <!-- Address Book -->
       <li class="nav-item hover-group position-relative">
-        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link" routerLink="/expenses">
+        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link"
+          routerLink="/supervisor/address-book" (click)="onLinkClick()">
           <i class="bi bi-wallet2 me-2"></i>
           <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Address book</span>
         </a>
         <ul class="thin-hover-menu" *ngIf="!isOpen">
-          <li><a class="nav-link" routerLink="/expenses">View Address Book</a></li>
+          <li><a class="nav-link" routerLink="/supervisor/address-book">View Address Book</a></li>
         </ul>
       </li>
 
     </ul>
   </div>
 </aside>
+
+
+
+
