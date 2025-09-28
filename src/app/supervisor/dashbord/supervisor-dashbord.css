@@ -2,27 +2,35 @@
     margin-left: 1rem;
     margin-right: 1rem;
 }
+
 .box {
-      border-radius: 0.5rem;
-      overflow: hidden;
-      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-      background-color: white;
-      color: #172b4c !important;
-    }
-    .progressbar-placeholder {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      /* background: conic-gradient(#ffffff 0% 75%, rgba(255, 255, 255, 0.2) 75%); */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      color: #172b4c;
-    }
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    background-color: white;
+    color: #172b4c !important;
+}
+
+.box-body {
+    padding: 1rem !important;
+}
+
+.progressbar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    /* background: conic-gradient(#ffffff 0% 75%, rgba(255, 255, 255, 0.2) 75%); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: #172b4c;
+}
+
 .denger-bg {
     background-color: rgb(247, 210, 210);
 }
+
 .icon-div {
     padding: 0.8rem 1rem;
     border-radius: 49%;
@@ -49,11 +57,26 @@ section {
     padding-top: 1rem !important;
 
 }
+
 .page-header {
     display: flex;
     justify-content: space-between;
 }
+
 .page-title-icon {
     padding: 3px 6px;
     border-radius: 6px;
+}
+
+
+.rounded-circle {
+  position: relative !important;
+  height: 60px !important;
+  width: 60px !important;
+}
+i.custom-design-icon {
+font-size: 0.6em !important;
+    position: absolute;
+    top: -20%;
+    left: 30%;
 }

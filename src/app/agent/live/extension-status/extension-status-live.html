@@ -1,9 +1,10 @@
 <div class="content-wrapper">
     <app-page-header title="Active Extension" iconClass="bi bi-telephone-fill"></app-page-header>
 
-    <!-- outgoing table -->
+    <!-- extentation table -->
     <div class="d-md-block table-container">
-        <table class="table  table-hover  shadow-sm rounded" appStickyTableHeader [offsetElements]="['.navbar.fixed-top']">
+        <table class="table  table-hover  shadow-sm rounded" appStickyTableHeader
+            [offsetElements]="['.navbar.fixed-top']">
             <thead class="">
                 <tr>
                     <th>#</th>
@@ -20,7 +21,15 @@
                     <td>{{ sl + i + 1 }}</td>
                     <td>{{ report.Exten }}</td>
                     <td>{{ report.Address }}</td>
-                    <td>{{ report.PeerStatus }}</td>
+                    <td>
+                        <span class="badge" [ngClass]="{
+                                        'reset-btn': report.PeerStatus === 'UNKNOWN',
+                                        'bg-gradient-primary': report.PeerStatus === 'Registered',
+                                        'bg-warning': report.PeerStatus === 'BUSY'
+                                }" style="font-weight: 500 !important;">
+                            {{ report.PeerStatus }}
+                        </span>
+                    </td>
                     <td>{{ report.datetime }}</td>
                     <td>{{ report.StatusText }}</td>
                     <td>{{ report.Context }}</td>

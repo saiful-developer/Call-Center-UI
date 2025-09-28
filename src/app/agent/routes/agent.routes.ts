@@ -35,6 +35,9 @@ import { CallBack } from "../reports/call-back/call-back";
 import { ActiveCalls } from "../reports/active-calls/active-calls";
 //agent layout
 import { AgentLayout } from "../layouts/agent-layout/agent-layout";
+import { TestWebsocketAgent } from "../shared/test-websocket-agent/test-websocket-agent";
+
+
 
 export const AGENT_ROUTES: Routes = [
     {
@@ -73,6 +76,7 @@ export const AGENT_ROUTES: Routes = [
             { path: 'live/active-calls', component: ActiveCalls, data: { breadcrumb: 'agent/live/active-calls' } },
             { path: 'address-book', component: AddressBook, data: { breadcrumb: 'agent/address book' } },
             { path: 'contact', component: AgentContact, data: { breadcrumb: 'agent/contact' } },
+            { path: 'test', component: TestWebsocketAgent },
             { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
         ]
     }

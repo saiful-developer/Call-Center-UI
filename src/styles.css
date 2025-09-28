@@ -918,3 +918,12 @@ aside {
   max-height: 500px; /* adjust */
   overflow-y: auto;
 }
+
+
+/* supervisor container for all content */
+.container-full {
+  margin-right: 1rem;
+}
+
+
+

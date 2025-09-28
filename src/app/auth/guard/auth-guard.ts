@@ -15,7 +15,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     // Allow navigation to correct dashboard or other allowed routes
     if (userRole === 'AGENT' && state.url.startsWith('/agent')) return true;
     if (userRole === 'SUPERVISOR' && state.url.startsWith('/supervisor')) return true;
-    if (userRole === 'admin' && state.url.startsWith('/admin')) return true;
+    if (userRole === 'ADMIN' && state.url.startsWith('/admin')) return true;
 
 
   }

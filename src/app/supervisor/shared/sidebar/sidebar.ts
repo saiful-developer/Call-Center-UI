@@ -67,4 +67,8 @@ onLinkClick() {
   }
 }
 
+login() {
+  sessionStorage.clear()
+}
+
 }

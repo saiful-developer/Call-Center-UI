@@ -5,7 +5,7 @@ import { StickyTableHeaderDirective } from '../../../directives/sticky-table-hea
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../services/api.service';
 
-interface CampainStatusData {
+export interface CampainStatusData {
   campaign: string,
   agentCount: number,
   readyCount: number,

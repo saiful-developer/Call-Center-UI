@@ -158,6 +158,11 @@ export class AgentStatus implements OnInit {
     }
   }
 
+  onPageChange(newOffset: number) {
+  this.offset = newOffset;
+  this.getAgentStatus();
+}
+
   // for initial load and search result
   formateAgentStatusData(res: any) {
     if (res.success === 'YES' && res.data) {
@@ -176,7 +181,7 @@ export class AgentStatus implements OnInit {
         rows = res.data;
       }
 
-      console.log(rows);
+      console.log(rows.length);
 
 
       // map  table format
@@ -201,13 +206,10 @@ export class AgentStatus implements OnInit {
       }));
 
 
-      // update paginator info
-      this.hasMore = rows.length === this.limit;
       this.allAgentStatusData = [...this.agentStatusList];
 
     } else {
       this.agentStatusList = [];
-      this.hasMore = false;
     }
   }
 
@@ -222,4 +224,28 @@ export class AgentStatus implements OnInit {
     }
   }
 
+}
+
+
+interface CallCenterStats {
+  offeredCalls: number;
+  receivedCalls: number;
+  completedCaller: number;
+  completedAgent: number;
+  abandonedCalls: number;
+  ringNoAnswer: number;
+
+  averageQueueTime: string;
+  averageSpeedOfAnswer: string;
+  averageTalkTime: string;
+  averageAbandonTime: string;
+  maximumTalkTime: string;
+  maxQueueWaitTime: string;
+  firstResponseTime: string;
+  averageRingTime: string;
+  oldestCall: string;
+
+  answerCallRatio: string;
+  abandonCallRatio: string;
+  serviceLevel20Sec: string;
 }

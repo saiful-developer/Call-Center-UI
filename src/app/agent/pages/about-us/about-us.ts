@@ -13,7 +13,7 @@ export class AboutUs {
     {
       name: 'John Doe',
       role: 'CEO & Founder',
-      img: 'assets/images/about 1.jpg',
+      img: 'assets/agent/images/about 1.jpg',
       linkedin: 'https://linkedin.com/in/alicejohnson',
       twitter: 'https://twitter.com/alicejohnson',
       facebook: 'https://facebook.com/alicejohnson',
@@ -21,7 +21,7 @@ export class AboutUs {
     {
       name: 'Jane Smith',
       role: 'Chief Technology Officer',
-      img: 'assets/images/about 2.jpg',
+      img: 'assets/agent/images/about 2.jpg',
       linkedin: 'https://linkedin.com/in/alicejohnson',
       twitter: 'https://twitter.com/alicejohnson',
       facebook: 'https://facebook.com/alicejohnson',
@@ -29,7 +29,7 @@ export class AboutUs {
     {
       name: 'Mike Johnson',
       role: 'Lead Developer',
-      img: 'assets/images/about 3.jpg',
+      img: 'assets/agent/images/about 3.jpg',
       linkedin: 'https://linkedin.com/in/alicejohnson',
       twitter: 'https://twitter.com/alicejohnson',
       facebook: 'https://facebook.com/alicejohnson',
@@ -37,7 +37,7 @@ export class AboutUs {
     {
       name: 'Emily Davis',
       role: 'Product Manager',
-      img: 'assets/images/about 4.webp',
+      img: 'assets/agent/images/about 4.webp',
       linkedin: 'https://linkedin.com/in/alicejohnson',
       twitter: 'https://twitter.com/alicejohnson',
       facebook: 'https://facebook.com/alicejohnson',

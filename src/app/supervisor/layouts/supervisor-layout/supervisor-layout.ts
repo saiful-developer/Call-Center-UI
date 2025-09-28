@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Sidebar } from '../../shared/sidebar/sidebar';
-import { ThinSidebar } from '../../shared/thin-sidebar/thin-sidebar';
 import { Header } from '../../shared/header/header';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -13,7 +12,7 @@ import { Footer } from '../../shared/footer/footer';
 
 @Component({
   selector: 'app-supervisor-layout',
-  imports: [Sidebar, ThinSidebar, Header, RouterOutlet, CommonModule, Loader, Footer],
+  imports: [Sidebar, Header, RouterOutlet, CommonModule, Footer],
   templateUrl: './supervisor-layout.html',
   styleUrl: './supervisor-layout.css'
 })

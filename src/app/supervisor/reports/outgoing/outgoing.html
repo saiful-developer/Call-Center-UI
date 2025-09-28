@@ -100,7 +100,19 @@
                     <td>{{ report.calldate }}</td>
                     <td>{{ report.ring_duration }}</td>
                     <td>{{ report.cdr_billsec }}</td>
-                    <td>{{ report.status }}</td>
+                    <!-- <td>{{ report.status }}</td> -->
+
+                    <td>
+
+                        <span class="badge" [ngClass]="{
+                                        'bg-gradient-primary': report.status === 'answer',
+                                        'reset-btn': report.status === 'failed'
+                                }" style="font-weight: 500;">
+                            {{ report.status === 'answer'? 'Answer': 'Failed'  }}
+                        </span>
+                    </td>
+
+
                     <td>{{ report.transfer_to }}</td>
                     <td>{{ report.disposition}}</td>
                     <td>{{ report.recordingfile}}</td>
@@ -112,7 +124,11 @@
         </table>
     </div>
 
-    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
-        (prev)="prevPage()"></app-paginator>
+    <app-paginator 
+        [offset]="offset" 
+        [limit]="50" 
+        [totalCount]="count" 
+        (pageChange)="onPageChange($event)">
+    </app-paginator>
 
 </div>

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, numberAttribute } from '@angular/core';
-import { TimeScale } from 'chart.js';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +8,28 @@ export class ApiService {
 
   baseUrl = 'http://callmaster.kotha.com.bd:3090';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  incomingSummary(agent: string, campaignList: string[], calldate: string) {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/supervisor/dashboard/incomingSummary`, {
+      agent: agent,
+      campaignList: campaignList,
+      calldate:calldate
+    })
+  }
 
   /** Reports **/
 
   incomingReport(agent: string, campaignList: string[], offset: number, limit: number, isexport: boolean) {
+    
+    
     return this.http.post<any>(`${this.baseUrl}/api/v1/supervisor/incoming/incomingCalls`, {
       agent: agent,
       campaignList: campaignList,
       offset: offset,
       limit: limit,
-      export: isexport
+      isexport: isexport
+      
     })
   }
 
@@ -59,7 +69,7 @@ export class ApiService {
       fromDate: fromDate,
       limit: limit,
       offset: offset,
-      page: page, 
+      page: page,
       status: status,
       toDate: toDate
     });
@@ -147,7 +157,7 @@ export class ApiService {
     return this.http.post<any>(`${this.baseUrl}/api/v1/supervisor/incoming/RNAOnFilter`, {
       agent: agent,
       campaign: campaign,
-      campaignList: campaignList, 
+      campaignList: campaignList,
       fromDate: fromDate,
       limit: limit,
       offset: offset,
@@ -160,13 +170,28 @@ export class ApiService {
 
   /** Live **/
 
-
   agentStatus() {
     return this.http.post<any>(`${this.baseUrl}/api/v1/agent/live/agent`, {
-      
+
     })
   }
 
+  activeExtentation() {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/live/extension `, {});
+  }
+
+  activeTrunk() {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/live/trunk`, {});
+  }
+
+  queueWaitingCalls() {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/live/queuewaitcall`, {});
+  }
+
+  addressBook(campaigns: string[]) {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/agent/live/addressbook`, {});
+
+  }
 
 
 }

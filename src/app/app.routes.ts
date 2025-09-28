@@ -21,7 +21,7 @@ export const routes: Routes = [
     {
         path: 'agent',
         loadChildren: () => import('./agent/routes/agent.routes').then(m => m.AGENT_ROUTES),
-        canActivate: [authGuard],
+        canActivate: [],
         data: {
             role: 'agent'
         }
@@ -31,7 +31,7 @@ export const routes: Routes = [
     {
         path: 'supervisor',
         loadChildren: () => import('./supervisor/routes/supervisor.routes').then(m => m.Supervisor_ROUTES),
-        canActivate: [authGuard],
+        canActivate: [],
         data: {
             role: 'supervisor'
         }
@@ -45,7 +45,7 @@ export const routes: Routes = [
 
     {
         path: '**',
-        redirectTo: 'login',
+        redirectTo: 'supervisor/dashboard',
         pathMatch: 'full'
     }
 ];

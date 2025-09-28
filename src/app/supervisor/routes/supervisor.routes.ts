@@ -1,10 +1,8 @@
 import { Routes } from "@angular/router";
-//components - supervisor
+import { SupervisorLayout } from "../layouts/supervisor-layout/supervisor-layout";
 import { SupervisorDashbord } from "../dashbord/supervisor-dashbord";
 import { SupervisorProfile } from "../pages/supervisor-profile/supervisor-profile";
 import { SupervisorMessage } from "../pages/supervisor-message/supervisor-message";
-// supervisor layout
-import { SupervisorLayout } from "../layouts/supervisor-layout/supervisor-layout";
 import { Incoming } from "../reports/incoming/incoming";
 import { Outgoing } from "../reports/outgoing/outgoing";
 import { Break } from "../reports/break/break";
@@ -16,6 +14,8 @@ import { Extension } from "../live/extension/extension";
 import { AgentStatus } from "../live/agent-status/agent-status";
 import { TrunkStatus } from "../live/trunk-status/trunk-status";
 import { CallWaiting } from "../live/call-waiting/call-waiting";
+import { AddressBook } from "../reports/address-book/address-book";
+import { TestWebsocketSupervisor } from "../shared/test-websocket-supervisor/test-websocket-supervisor";
 
 export const Supervisor_ROUTES: Routes = [
     {
@@ -33,11 +33,15 @@ export const Supervisor_ROUTES: Routes = [
             { path: 'reports/abandon', component: Abandon, data: { breadcrumb: 'supervisor/report/abandon' } },
             { path: 'reports/rna', component: Rna, data: { breadcrumb: 'supervisor/report/rna' } },
             //live
-            { path: 'live/agent-status', component: AgentStatus, data: { breadcrumb: 'supervisor/live/agent-status' } },
-            { path: 'live/campain-status', component: CampaignStatus, data: { breadcrumb: 'supervisor/live/campain-status' } },
-            { path: 'live/extension-status', component: Extension, data: { breadcrumb: 'supervisor/live/campain-status' } },
-            { path: 'live/trunk-status', component: TrunkStatus, data: { breadcrumb: 'supervisor/live/trunk-status' } },
-            { path: 'live/waiting-calls', component: CallWaiting, data: { breadcrumb: 'supervisor/live/trunk-status' } },
+            { path: 'live/agent-status', component: AgentStatus, data: { breadcrumb: 'supervisor/live/agent status' } },
+            { path: 'live/campain-status', component: CampaignStatus, data: { breadcrumb: 'supervisor/live/campain status' } },
+            { path: 'live/extension-status', component: Extension, data: { breadcrumb: 'supervisor/live/extension status' } },
+            { path: 'live/trunk-status', component: TrunkStatus, data: { breadcrumb: 'supervisor/live/trunk status' } },
+            { path: 'live/waiting-calls', component: CallWaiting, data: { breadcrumb: 'supervisor/live/waiting calls' } },
+
+            { path: 'live/address-book', component: AddressBook, data: { dreadcrumb: 'supervisor/live/address book' } },
+
+            { path: 'test', component: TestWebsocketSupervisor },
 
             { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
         ]

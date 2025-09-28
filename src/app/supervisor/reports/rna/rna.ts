@@ -28,7 +28,6 @@ export class Rna implements OnInit {
   isSearchMode: boolean = false;
   offset: number = 0;
   limit: number = 50;
-  hasMore: boolean = true;
   sl: number = 0;
   page: number = 1;
   count: number = 0;
@@ -86,7 +85,7 @@ export class Rna implements OnInit {
     this.api.RNAOnFilter('', campaign, this.campaignList, fromDate, this.limit, this.offset, this.page, toDate).subscribe({
       next: (res) => {
         console.log(res);
-        this.formateRNAData(res); 
+        this.formateRNAData(res);
       },
       error: (res) => {
         console.log(res);
@@ -106,27 +105,9 @@ export class Rna implements OnInit {
     this.getRNAReport();
   }
 
-  nextPage() {
-    this.page++;
-    this.offset += this.limit;
-    this.sl += this.limit;
-    if (this.isSearchMode) {
-      this.getRNAOnFilter();
-    } else {
-      this.getRNAReport();
-
-    }
-  }
-  prevPage() {
-    if (this.offset >= this.limit) {
-      this.offset -= this.limit;
-      this.sl -= this.limit;
-      if (this.isSearchMode) {
-        this.getRNAOnFilter();
-      } else {
-        this.getRNAReport();
-      }
-    }
+  onPageChange(newOffset: number) {
+    this.offset = newOffset;
+    this.isSearchMode ? this.getRNAOnFilter() : this.getRNAReport(); //load data based on serch or not
   }
 
   getCampainsAndAgent() {
@@ -145,6 +126,7 @@ export class Rna implements OnInit {
   formateRNAData(res: any) {
     if (res.success === 'YES' && res.data) {
       let rows: RNARecords[] = [];
+      this.sl = this.offset;
 
       // Check if res.data is a string (initial load)
       if (typeof res.data === 'string') {
@@ -171,50 +153,44 @@ export class Rna implements OnInit {
         uniqueid: item.uniqueid || '-'
       }));
 
-      // update paginator info
-      this.hasMore = this.offset + this.limit < this.count;
     } else {
       this.RNAReportList = [];
-      this.hasMore = false;
     }
   }
 
-    // for initial load and search result
-    formateAbandonCallData(res: any) {
-      if (res.success === 'YES' && res.data) {
-        let rows: RNARecords[] = [];
-  
-        // Check if res.data is a string (initial load)
-        if (typeof res.data === 'string') {
-          const parsedData = JSON.parse(res.data); // { count, rows }
-          if (parsedData && Array.isArray(parsedData.rows)) {
-            rows = parsedData.rows;
-            this.count = parsedData.count;
-          }
+  // for initial load and search result
+  formateAbandonCallData(res: any) {
+    if (res.success === 'YES' && res.data) {
+      let rows: RNARecords[] = [];
+
+      // Check if res.data is a string (initial load)
+      if (typeof res.data === 'string') {
+        const parsedData = JSON.parse(res.data); // { count, rows }
+        if (parsedData && Array.isArray(parsedData.rows)) {
+          rows = parsedData.rows;
+          this.count = parsedData.count;
         }
-        // If res.data is already an array
-        else if (Array.isArray(res.data)) {
-          rows = res.data;
-          this.count = res.count;
-        }
-  
-        console.log(rows);
-  
-  
-        // map  table format
-        this.RNAReportList = rows.map((item: RNARecords) => ({
-          calldate: item.calldate || '-',
-          campaign: item.campaign || '-',
-          duration: item.duration || 0,
-          uniqueid: item.uniqueid || '-'
-        }));
-  
-        // update paginator info
-        this.hasMore = this.offset + this.limit < this.count;
-      } else {
-        this.RNAReportList = [];
-        this.hasMore = false;
       }
+      // If res.data is already an array
+      else if (Array.isArray(res.data)) {
+        rows = res.data;
+        this.count = res.count;
+      }
+
+      console.log(rows);
+
+
+      // map  table format
+      this.RNAReportList = rows.map((item: RNARecords) => ({
+        calldate: item.calldate || '-',
+        campaign: item.campaign || '-',
+        duration: item.duration || 0,
+        uniqueid: item.uniqueid || '-'
+      }));
+
+    } else {
+      this.RNAReportList = [];
     }
+  }
 
 }

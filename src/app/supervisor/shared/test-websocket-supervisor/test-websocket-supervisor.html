@@ -1,0 +1,27 @@
+<br><br><br>
+<h1>. Testing Socket</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <!-- Input and Button Group -->
+            <div class="input-group mb-3">
+                <input type="text" [(ngModel)]="notificationSupervisor" class="form-control" placeholder="sent notification" aria-label="User input">
+                <button class="btn btn-primary" type="button" (click)="sendNotification()">sent</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div style="background-color: white; padding: 1rem; border: 1px solid;">
+    <h3>show notification from supervisor</h3>
+
+    <ul>
+        <li *ngFor="let notification of getNotificatioinListSupervisor">
+            {{ notification }}
+        </li>
+    </ul>
+
+
+</div>

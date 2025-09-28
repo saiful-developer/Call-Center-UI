@@ -1,1 +1,43 @@
-<p>campaign-status works!</p>
+<div class="container-full">
+    <app-page-header title="Campain Status" iconClass="bi bi-megaphone"></app-page-header>
+
+    <!-- camapin status table -->
+    <div class="d-md-block table-container">
+        <table class="table  table-hover  shadow-sm rounded" appStickyTableHeader
+            [offsetElements]="['.navbar.fixed-top']">
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th>Campain</th>
+                    <th>Agent</th>
+                    <th>Ready</th>
+                    <th>Break</th>
+                    <th>Busy</th>
+                    <th>In Call</th>
+                    <th>Out Call</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of campainStatus; let i = index">
+                    <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.campaign }}</td>
+                    <td>{{ report.agentCount }}</td>
+                    <td>{{ report.readyCount }}</td>
+                    <td>{{ report.breakCount }}</td>
+                    <td>{{ report.busyCount }}</td>
+                    <td>{{ report.inCallCount }}</td>
+                    <td>{{ report.outCallCount }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p *ngIf="!campainStatus.length" class="error-massage" style="color: red;">
+            DATA NOT FOUND
+        </p>
+    </div>
+
+    <app-paginator [offset]="offset" [limit]="50" [totalCount]="campainStatus.length"
+        (pageChange)="onPageChange($event)">
+    </app-paginator>
+
+</div>

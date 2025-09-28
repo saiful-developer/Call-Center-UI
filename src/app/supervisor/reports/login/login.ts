@@ -53,7 +53,11 @@ export class Login implements OnInit {
   }
 
   getLogin() {
-    this.api.getLoginReport(this.agent, this.campaign, this.campaignList, this.limit, this.offset).subscribe({
+    /**
+     * passing large value as limit because I am not getting count in the response 
+     * so I am going to get the count using array length
+     */
+    this.api.getLoginReport(this.agent, this.campaign, this.campaignList, 10000, this.offset).subscribe({ 
       next: (res) => {
         console.log(res);
         this.formateLoginData(res)
@@ -94,7 +98,7 @@ export class Login implements OnInit {
     const campaign = this.searchFormLoginReport.value.campain || ''
     let agent = '';
 
-    this.api.LoginReportOnFilter(agent, campaign, this.campaignList, fromDate, this.limit, this.offset, this.page, toDate).subscribe({
+    this.api.LoginReportOnFilter(agent, campaign, this.campaignList, fromDate, 10000, this.offset, 1, toDate).subscribe({
       next: (res) => {
         //I am getting json data
         console.log(res);
@@ -150,6 +154,12 @@ export class Login implements OnInit {
     }
   }
 
+  //new paginatin format
+  onPageChange(newOffset: number) {
+    this.offset = newOffset;
+    this.isSearchMode ? this.getLoginReportOnFilter() : this.getLogin(); //load data based on serch or not
+  }
+
 
   // for initial load and search result
   formateLoginData(res: any) {
@@ -160,16 +170,18 @@ export class Login implements OnInit {
       if (typeof res.data === 'string') {
         const parsedData = JSON.parse(res.data); // { rows } **no count here
         console.log(parsedData);
+        console.log(parsedData.length);
+
 
         if (parsedData && Array.isArray(parsedData)) {
           rows = parsedData;
-          // this.count = parsedData.count;
+
         }
       }
       // If res.data is already an array
       else if (Array.isArray(res.data)) {
         rows = res.data;
-        this.count = res.count;
+        // this.count = res.count;// no count in the response
       }
 
       console.log(rows);
@@ -190,7 +202,7 @@ export class Login implements OnInit {
         agent_ip: item.agent_ip || '-',
       }));
 
-      this.hasMore = this.loginReportsData.length < 50? false : true;
+      this.hasMore = this.loginReportsData.length < 50 ? false : true;
 
       // update paginator info
       // this.hasMore = this.offset + this.limit < this.count;

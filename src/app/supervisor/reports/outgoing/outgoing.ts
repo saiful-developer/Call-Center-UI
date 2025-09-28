@@ -160,6 +160,9 @@ export class Outgoing implements OnInit {
 
   formateData(res: any) {
     if (res.success === 'YES' && Array.isArray(res.data)) {
+      this.outgoingReportsData = [];
+      this.sl = this.offset;
+
       this.outgoingReportsData = res.data.map((item: OutgoingRecords, index: number) => ({
         sl: this.offset + index + 1,
         uniqueid: item.uniqueid || '-',
@@ -206,6 +209,12 @@ export class Outgoing implements OnInit {
         this.getOutgoing();
       }
     }
+  }
+
+  //new paginatin format
+  onPageChange(newOffset: number) {
+    this.offset = newOffset;
+    this.isSearchMode ? this.getOutgoingOnFilter() : this.getOutgoing(); //load data based on serch or not
   }
 
 

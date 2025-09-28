@@ -1,1 +1,49 @@
-<p>trunk-status works!</p>
+<div class="container-full">
+
+    <app-page-header title="Trunk Status" iconClass="bi bi-diagram-3"></app-page-header>
+
+    <div class="d-md-block table-container">
+        <table class="table  table-hover  shadow-sm rounded">
+            <thead class="">
+                <tr>
+                    <th>#</th>
+                    <th>Username</th>
+                    <th>Domain</th>
+                    <th>Status</th>
+                    <th>Event</th>
+                    <th>Privilege</th>
+                    <th>ChannelType</th>
+                    <th>Datetime</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let report of trunkStatusData; let i = index">
+                    <td>{{ sl + i + 1 }}</td>
+                    <td>{{ report.Username }}</td>
+                    <td>{{ report.Domain }}</td>
+                    <td>
+                        <span class="badge " [ngClass]="{
+                                        'reset-btn': report.Status === 'No Authentication',
+                                        'bg-gradient-primary': report.Status === 'Registered',
+                                        'bg-warning': report.Status === 'BUSY'
+                                }" style="font-weight: 500;">
+                            {{ report.Status }}
+                        </span>
+                    </td>
+                    <td>{{ report.Event }}</td>
+                    <td>{{ report.Privilege }}</td>
+                    <td>{{ report.ChannelType }}</td>
+                    <td>{{ report.datetime }}</td>
+                </tr>
+            </tbody>
+            <p *ngIf="!trunkStatusData.length" class="error-massage">
+                DATA NOT FOUND
+            </p>
+        </table>
+    </div>
+    
+
+    <app-paginator [offset]="offset" [limit]="50" [totalCount]="totalCount" (pageChange)="onPageChange($event)">
+    </app-paginator>
+
+</div>

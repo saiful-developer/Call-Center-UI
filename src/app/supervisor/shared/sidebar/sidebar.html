@@ -34,7 +34,6 @@
         </a>
         <ul class="thin-hover-menu" *ngIf="!isOpen">
           <li><a class="nav-link" routerLink="/supervisor/dashboard">Dashboard Home</a></li>
-          <li><a class="nav-link" routerLink="/supervisor/dashboard/stats">Stats</a></li>
         </ul>
       </li>
 
@@ -105,13 +104,20 @@
       <!-- Address Book -->
       <li class="nav-item hover-group position-relative">
         <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link"
-          routerLink="/supervisor/address-book" (click)="onLinkClick()">
+          routerLink="/supervisor/live/address-book" (click)="onLinkClick()">
           <i class="bi bi-wallet2 me-2"></i>
           <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Address book</span>
         </a>
         <ul class="thin-hover-menu" *ngIf="!isOpen">
-          <li><a class="nav-link" routerLink="/supervisor/address-book">View Address Book</a></li>
+          <li><a class="nav-link" routerLink="/supervisor/live/address-book">View Address Book</a></li>
         </ul>
+      </li>
+
+
+      <li style="margin: auto; position: absolute; bottom: 20px;">
+        <a class="text-danger" routerLink="/" (click)="login()">
+          <i  class="bi bi-box-arrow-right"></i>
+        </a>
       </li>
 
     </ul>

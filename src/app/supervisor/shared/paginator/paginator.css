@@ -1,13 +1,26 @@
-.paginatior-btn {
-  margin-right: 10px;
-  white-space: nowrap;
-  background: linear-gradient(45deg, #7047ee, #3596f7);
-  border: none;
+.pagination-controls {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.paginator-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.paginator-btn.active {
+  font-weight: bold;
+  background-color: #0d6efd;
   color: white;
-  font-weight: 500;
-  border-radius: 0.5rem 8px;
-  box-shadow: 0 4px 12px rgba(78, 115, 223, 0.3);
-  transition: background 0.3s ease, transform 0.2s ease;
-  padding: 0.5rem 1.2rem;
-  margin-top: 22px;
+}
+
+.dots {
+  padding: 5px 10px;
+}
+
+.paginator-btn,
+.dots,
+.pagination-controls button {
+  transition: none !important;
 }

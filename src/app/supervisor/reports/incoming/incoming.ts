@@ -55,18 +55,17 @@ export class Incoming implements OnInit {
     this.getUserName();
     this.isSearchMode = false;
   }
-  
+
   getIncoming() {
 
     let user: string = '';
 
-    console.log('my ui limit', this.limit);
-    
-    this.api.incomingReport(user, this.campains, this.limit, this.offset, false).subscribe({
+    this.api.incomingReport(user, this.campains,this.offset, this.limit, false).subscribe({
       next: (res) => {
-        console.log(res)
         this.count = res.count;
         console.log(this.count);
+        
+        
 
         this.formateData(res);
       },
@@ -110,7 +109,7 @@ export class Incoming implements OnInit {
       this.sl = 0;
     }
 
-    console.log(this.searchFormIncoming.value);
+    
 
     //if user do not selece any date
     if (!this.searchFormIncoming.get('fromDate')?.value) {
@@ -179,6 +178,7 @@ export class Incoming implements OnInit {
   formateData(res: any) {
     if (res.success === 'YES' && Array.isArray(res.data)) {
       this.incomingReportsData = [];
+      this.sl = this.offset;
 
       this.incomingReportsData = res.data.map((item: IncomingRecords, index: number) => ({
         sl: this.offset + index + 1,
@@ -192,7 +192,7 @@ export class Incoming implements OnInit {
         connect_ring_time: item.connect_ring_time || '-',
         caller_agent_talk_time: item.caller_agent_talk_time || '-',
         transfer_to: item.transfer_to || '-',
-        completeagent: item.completeagent ? 'Agent Finished' : 'Caller Finished',
+        completeagent: item.completeagent,
         disposition: item.disposition || '-',
       }))
     } else {
@@ -200,6 +200,7 @@ export class Incoming implements OnInit {
     }
 
     this.hasMore = this.offset + this.limit < this.count;
+    
   }
 
 
@@ -215,27 +216,32 @@ export class Incoming implements OnInit {
   }
 
   /*****pagination section v */
-  nextPage() {
-    this.offset += this.limit;
-    this.sl += this.limit;
-    if (this.isSearchMode) {
-      this.getIncomingDataOnFilter();
-    } else {
-      this.getIncoming();
+nextPage() {
+  if (!this.isNextDisabled) {
+    this.page += 1;
+    this.offset = (this.page - 1) * this.limit;
+    this.sl = this.offset;
+    this.isSearchMode ? this.getIncomingDataOnFilter() : this.getIncoming();
+  }
+}
 
-    }
+prevPage() {
+  if (!this.isPrevDisabled) {
+    this.page -= 1;
+    this.offset = (this.page - 1) * this.limit;
+    this.sl = this.offset;
+    this.isSearchMode ? this.getIncomingDataOnFilter() : this.getIncoming();
   }
-  prevPage() {
-    if (this.offset >= this.limit) {
-      this.offset -= this.limit;
-      this.sl -= this.limit;
-      if (this.isSearchMode) {
-        this.getIncomingDataOnFilter();
-      } else {
-        this.getIncoming();
-      }
-    }
-  }
+}
+
+//new paginatin format
+onPageChange(newOffset: number) {
+  this.offset = newOffset;
+  this.isSearchMode ? this.getIncomingDataOnFilter() : this.getIncoming(); //load data based on serch or not
+}
+
+
+
   //for disable next btn
   get isNextDisabled(): boolean {
     return this.offset + this.limit >= this.count;

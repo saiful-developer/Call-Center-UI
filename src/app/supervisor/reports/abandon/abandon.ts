@@ -132,11 +132,17 @@ export class Abandon implements OnInit {
     }
   }
 
+  onPageChange(newOffset: number) {
+  this.offset = newOffset;
+  this.isSearchMode ? this.getAbandonReportOnFilter() : this.getAbandonCall(); //load data based on serch or not
+}
+
 
   // for initial load and search result
   formateAbandonCallData(res: any) {
     if (res.success === 'YES' && res.data) {
       let rows: AbandonCallRecords[] = [];
+      this.sl = this.offset;
 
       // Check if res.data is a string (initial load)
       if (typeof res.data === 'string') {
@@ -167,8 +173,6 @@ export class Abandon implements OnInit {
         hangup_time: item.hangup_time || '-'
       }));
 
-      // update paginator info
-      this.hasMore = this.offset + this.limit < this.count;
     } else {
       this.abandonReportsData = [];
       this.hasMore = false;

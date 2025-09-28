@@ -4,8 +4,7 @@
     <!-- Search Bar -->
     <div class="container-fluid">
         <div class="search-bar-wrapper">
-            <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchFormIncoming"
-                >
+            <form class="search-project d-lg-flex flex-wrap gap-2 align-items-center" [formGroup]="searchFormIncoming">
                 <!-- Your existing search form code -->
                 <div>
                     <label for="caller-naem">Caller</label>
@@ -44,7 +43,8 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn modern-btn bg-gradient-primary" (click)="getIncomingDataOnFilter(true)">
+                <button type="button" class="btn modern-btn bg-gradient-primary"
+                    (click)="getIncomingDataOnFilter(true)">
                     <i class="bi bi-search me-1"></i> Search
                 </button>
 
@@ -52,7 +52,7 @@
                     <i class="bi bi-arrow-counterclockwise"></i> Reset
                 </button>
 
-                <button type="submit" class="btn modern-btn export-btn" (click)="exportIncoming()">
+                <button type="button" class="btn modern-btn export-btn" (click)="exportIncoming()">
                     <i class="bi bi-box-arrow-up"></i> Export
                 </button>
 
@@ -103,7 +103,17 @@
                     <td>{{ report.connect_ring_time }}</td>
                     <td>{{ report.caller_agent_talk_time }}</td>
                     <td>{{ report.transfer_to }}</td>
-                    <td>{{ report.completeagent }}</td>
+                    <!-- <td>{{ report.completeagent }}</td> -->
+
+                    <td>
+                        <span class="badge" [ngClass]="{
+                                        'reset-btn': report.completeagent === 0,
+                                        'bg-gradient-primary': report.completeagent === 1
+                                }" style="font-weight: 500;">
+                            {{ report.completeagent? 'Agent Finished' : 'Abandon' }}
+                        </span>
+                    </td>
+
                     <td>{{ report.disposition }}</td>
                     <td>{{ '-' }}</td>
                 </tr>
@@ -111,70 +121,13 @@
         </table>
     </div>
 
-    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
-        (prev)="prevPage()"></app-paginator>
+    <app-paginator 
+    [offset]="offset" 
+    [limit]="50" 
+    [totalCount]="count" 
+    (pageChange)="onPageChange($event)">
+    </app-paginator>
+
 
 
 </div>
-<!-- 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const tableContainer = document.querySelector('.table-container');
-    if (!tableContainer) {
-        console.error('Table container not found. Ensure .table-container exists in the DOM.');
-        return;
-    }
-
-    let isDragging = false;
-    let startX, scrollLeft;
-
-    // Mouse events
-    tableContainer.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        tableContainer.classList.add('grabbing');
-        startX = e.pageX - tableContainer.offsetLeft;
-        scrollLeft = tableContainer.scrollLeft;
-        e.preventDefault(); // Prevent default behavior like text selection
-    });
-
-    tableContainer.addEventListener('mouseleave', () => {
-        isDragging = false;
-        tableContainer.classList.remove('grabbing');
-    });
-
-    tableContainer.addEventListener('mouseup', () => {
-        isDragging = false;
-        tableContainer.classList.remove('grabbing');
-    });
-
-    tableContainer.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        e.preventDefault();
-        const x = e.pageX - tableContainer.offsetLeft;
-        const walk = (x - startX) * 2; // Adjust scroll speed
-        tableContainer.scrollLeft = scrollLeft - walk;
-    });
-
-    // Touch events for mobile
-    tableContainer.addEventListener('touchstart', (e) => {
-        isDragging = true;
-        tableContainer.classList.add('grabbing');
-        startX = e.touches[0].pageX - tableContainer.offsetLeft;
-        scrollLeft = tableContainer.scrollLeft;
-        e.preventDefault(); // Prevent default touch behavior
-    });
-
-    tableContainer.addEventListener('touchend', () => {
-        isDragging = false;
-        tableContainer.classList.remove('grabbing');
-    });
-
-    tableContainer.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        const x = e.touches[0].pageX - tableContainer.offsetLeft;
-        const walk = (x - startX) * 2; // Adjust scroll speed
-        tableContainer.scrollLeft = scrollLeft - walk;
-        e.preventDefault(); // Prevent default touch scrolling
-    });
-});
-</script> -->

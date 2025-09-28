@@ -30,7 +30,6 @@ export class Break implements OnInit {
   isSearchMode: boolean = false;
   offset: number = 0;
   limit: number = 50;
-  hasMore: boolean = true;
   sl: number = 0;
   page: number = 1;
   count: number = 0;
@@ -50,6 +49,8 @@ export class Break implements OnInit {
 
     this.api.breakReports(agent, this.campaignList, this.limit, this.offset).subscribe({
       next: (res) => {
+        console.log(res);
+        
         this.formateBreakData(res)
       },
       error: (err) => {
@@ -84,7 +85,7 @@ export class Break implements OnInit {
     const campaign = this.searchFormBreak.value.campain || '';
     let agent = '';
 
-    this.api.breakReportOnFilter(agent, campaign, this.campaignList, fromDate, this.limit, this.offset, this.page, toDate).subscribe({
+    this.api.breakReportOnFilter(agent, campaign, this.campaignList, fromDate, this.limit, this.offset, 1 , toDate).subscribe({
       next: (res) => {
         this.formateBreakData(res);
         console.log(res)
@@ -106,34 +107,12 @@ export class Break implements OnInit {
     this.getBreak();
   }
 
-  nextPage() {
-    this.page++;
-    this.offset += this.limit;
-    this.sl += this.limit;
-    if (this.isSearchMode) {
-      this.getBreakOnFilter();
-    } else {
-      this.getBreak();
-
-    }
-  }
-  prevPage() {
-    if (this.offset >= this.limit) {
-      this.offset -= this.limit;
-      this.sl -= this.limit;
-      if (this.isSearchMode) {
-        this.getBreakOnFilter();
-      } else {
-        this.getBreak();
-      }
-    }
-  }
-
 
   // for initial load and search result
   formateBreakData(res: any) {
     if (res.success === 'YES' && res.data) {
       let rows: BreakRecords[] = [];
+      this.sl = this.offset;
 
       // Check if res.data is a string (initial load)
       if (typeof res.data === 'string') {
@@ -164,12 +143,22 @@ export class Break implements OnInit {
         last_response_time: item.last_response_time || '-'
       }));
 
-      // update paginator info
-      this.hasMore = this.offset + this.limit < this.count;
     } else {
       this.breakReportList = [];
-      this.hasMore = false;
     }
+  }
+
+  //new paginatin format
+  onPageChange(newOffset: number) {
+
+    this.offset = newOffset;
+    console.log(this.offset);
+
+    this.page = Math.floor(this.offset / this.limit) + 1; // page in sync
+    console.log("offset:", this.offset, "page:", this.page);
+
+
+    this.isSearchMode ? this.getBreakOnFilter() : this.getBreak(); //load data based on serch or not
   }
 
   getCampains() {

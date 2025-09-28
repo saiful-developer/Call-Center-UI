@@ -88,7 +88,11 @@
     </div>
 
 
-    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
-        (prev)="prevPage()"></app-paginator>
+        <app-paginator 
+        [offset]="offset" 
+        [limit]="50" 
+        [totalCount]="count" 
+        (pageChange)="onPageChange($event)">
+    </app-paginator>
 
 </div>

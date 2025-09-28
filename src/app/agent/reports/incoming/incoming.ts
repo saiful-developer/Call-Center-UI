@@ -22,6 +22,7 @@ export interface IncomingReportAPI {
   completecaller?: number;
   disposition?: string;
   status: number;
+  totalCount: number
 }
 
 @Component({
@@ -55,6 +56,7 @@ export class Incoming implements OnInit {
     campain: new FormControl(''),
     status: new FormControl('')
   });
+totalCount: any;
 
   constructor(
     private cdr: ChangeDetectorRef,

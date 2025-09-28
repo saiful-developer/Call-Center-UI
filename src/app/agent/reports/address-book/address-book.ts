@@ -38,9 +38,10 @@ export class AddressBook implements OnInit {
 
   ngOnInit(): void {
     this.loadCampainList()
+    this.loadAddressBook()
   }
 
-  LoadAddressBook() {
+  loadAddressBook() {
     this.apiService.addressBook(this.campains).subscribe({
       next: (res) => {
         console.log(this.campains)
@@ -58,7 +59,7 @@ export class AddressBook implements OnInit {
       next: (res: any) => {
         const parseCampainData = JSON.parse(res.data);
         this.campains = parseCampainData.rows.map((c: any) => c.campaign_id);
-        this.LoadAddressBook()
+        this.loadAddressBook()
       },
       error: (err) => {
         console.log(err);
@@ -118,7 +119,7 @@ export class AddressBook implements OnInit {
     if (nextOffset < this.totalCount) {
       this.offset = nextOffset;
       this.sl += this.limit;
-      this.LoadAddressBook();
+      this.loadAddressBook();
     }
   }
 
@@ -126,7 +127,7 @@ export class AddressBook implements OnInit {
     if (this.offset >= this.limit) {
       this.offset -= this.limit;
       this.sl -= this.limit;
-      this.LoadAddressBook();
+      this.loadAddressBook();
     }
   }
 

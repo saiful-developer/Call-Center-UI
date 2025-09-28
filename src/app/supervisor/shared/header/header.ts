@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { RouterLink, RouterModule } from '@angular/router';
 import { SidebarService } from '../../../services/sidebar-service';
+import { DecodeToken } from '../../../services/jwt-decode.service';
+import { JwtPayload } from '../../../interfaces/jwtpayload';
 
 @Component({
   selector: 'app-header',
@@ -28,13 +30,25 @@ import { SidebarService } from '../../../services/sidebar-service';
     ])
   ]
 })
-export class Header {
+export class Header implements OnInit {
+
+
+  decodedToken: JwtPayload | null = null;
+
+  ngOnInit(): void {
+    this.decodedToken = this.decodeToken.decodeToken(sessionStorage.getItem('jwt'));
+  }
+
+
+
+
   openMenu: string | null = null; // currently open menu
 
   isMobile: boolean = false;
 
   constructor(
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private decodeToken: DecodeToken
   ) {
 
   }
@@ -49,12 +63,21 @@ export class Header {
   }
 
 
-@Input() isMobileSidebarVisible: boolean = false; // add this
-@Input() isSidebarOpen: boolean = false;
-@Output() toggleSidebar = new EventEmitter<void>();
+  @Input() isMobileSidebarVisible: boolean = false; // add this
+  @Input() isSidebarOpen: boolean = false;
+  @Output() toggleSidebar = new EventEmitter<void>();
 
 
-onToggleSidebar() {
-  this.toggleSidebar.emit();
-}
+  onToggleSidebar() {
+    this.toggleSidebar.emit();
+  }
+
+  // toggle menu 
+  toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
 }

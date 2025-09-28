@@ -1,7 +1,7 @@
 /****************************/
 /** Imports Plugin css **/
 /****************************/
-@import url(bootstrap.css);
+/* @import url(bootstrap.css);
 @import url(perfect-scrollbar.css);
 @import url(morris.css);
 @import url(owl.carousel.css);
@@ -44,6 +44,6 @@
 @import url(pace.min.css);
 @import url(fullcalendar.min.css);
 @import "fullcalendar.print.min.css" print;
-@import url(weather-icons.css);
+@import url(weather-icons.css); */
 
 /*# sourceMappingURL=vendors_css.css.map */

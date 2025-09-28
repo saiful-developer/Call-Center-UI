@@ -6,8 +6,6 @@ import { CommonModule } from '@angular/common';
 import { SidebarComponent } from '../../shared/sidebar/sidebar';
 import { Header } from '../../shared/header/header';
 import { Footer } from '../../shared/footer/footer';
-import { SidebarService } from '../../../services/sidebar-service';
-import { ShortSicebar } from '../../shared/short-sicebar/short-sicebar';
 import { FloatingActionBtn } from '../../shared/floating-action-btn/floating-action-btn';
 import { Loader } from '../../../shared/loader/loader';
 import { LoderService } from '../../../services/loder.service';
@@ -17,7 +15,7 @@ import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-agent-layout',
-  imports: [RouterOutlet, CommonModule, SidebarComponent, Header, Footer, ShortSicebar, FloatingActionBtn, Loader],
+  imports: [RouterOutlet, CommonModule, SidebarComponent, Header, Footer, FloatingActionBtn],
   templateUrl: './agent-layout.html',
   styleUrl: './agent-layout.css'
 })
@@ -31,7 +29,6 @@ export class AgentLayout implements OnInit {
   currentRoute = '';
 
   constructor(
-    private SidebarService: SidebarService,
     private router: Router,
     private loader: LoderService,
     private themeService: ThemeService

@@ -1,4 +1,26 @@
-<div class="pagination-controls">
+<!-- <div class="pagination-controls">
   <button (click)="prev.emit()" [disabled]="offset === 0" class="btn paginatior-btn">Previous</button>
   <button (click)="next.emit()" [disabled]="!hasMore" class="btn paginatior-btn">Next</button>
+</div> -->
+
+
+
+
+<div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="currentPage === 1" class="btn bg-gradient-primary">Previous</button>
+
+  <div *ngFor="let page of pages">
+    <button 
+      *ngIf="page !== '...'; else dots"
+      (click)="goToPage(page)" 
+      [class.active]="page === currentPage"
+      class="btn paginator-btn">
+      {{ page }}
+    </button>
+    <ng-template #dots>
+      <span class="dots">...</span>
+    </ng-template>
+  </div>
+
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages" class="btn bg-gradient-primary">Next</button>
 </div>

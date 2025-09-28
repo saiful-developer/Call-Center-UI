@@ -15,8 +15,8 @@
                 <!-- Agent ID -->
                 <div>
                     <label for="agent-id">Agent Id</label>
-                    <input type="text" class="form-control modern-input" placeholder="Agent Id" formControlName="agentId"
-                        id="agent-id" />
+                    <input type="text" class="form-control modern-input" placeholder="Agent Id"
+                        formControlName="agentId" id="agent-id" />
                 </div>
 
                 <!-- Extension -->
@@ -46,7 +46,7 @@
                     </div>
 
                     <!-- status -->
-                    <div>
+                    <div class="status-input-div">
                         <label for="status-select">Status</label>
                         <select class="form-select" aria-label="Default select example" formControlName="status"
                             id="status-select">
@@ -67,7 +67,7 @@
                     <i class="bi bi-arrow-counterclockwise"></i>
                     Reset
                 </button>
-                
+
             </form>
         </div>
     </div>
@@ -119,15 +119,16 @@
                     <td>{{ report.lastCall }}</td>
                 </tr>
             </tbody>
-            <p *ngIf="!agentStatusList.length" class="error-massage">
-                Data Not Found
-            </p>
         </table>
+        <p *ngIf="!agentStatusList.length" class="error-massage">
+            Data Not Found
+        </p>
 
     </div>
 
 
-    <app-paginator [offset]="offset" [limit]="limit" [hasMore]="hasMore" (next)="nextPage()"
-        (prev)="prevPage()"></app-paginator>
+    <app-paginator [offset]="offset" [limit]="50" [totalCount]="agentStatusList.length"
+        (pageChange)="onPageChange($event)">
+    </app-paginator>
 
 </div>
