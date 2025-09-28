@@ -11,6 +11,13 @@
 npm-debug.log
 yarn-error.log
 
+# Ignore all node_modules
+node_modules/
+
+# But track server package files
+!server/package.json
+!server/package-lock.json
+
 # IDEs and editors
 .idea/
 .project
