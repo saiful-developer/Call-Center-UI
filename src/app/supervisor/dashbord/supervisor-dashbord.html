@@ -52,7 +52,7 @@
               <div>
                 <h6 class="mt-0">Received Calls</h6>
                 <h3 class="fw-500 my-0">
-                  {{ incomingSummaryList[0]?.connect || 0  }}
+                  {{ incomingSummaryList[0]?.connect  }}
                 </h3>
               </div>
             </div>
@@ -90,7 +90,7 @@
               <div>
                 <h6 class="mt-0">Completed Agent</h6>
                 <h3 class="fw-500 my-0">
-                  {{ incomingSummaryList[0]?.completeagent || 0 }}
+                  {{ incomingSummaryList[0].completeagent || 0 }}
                 </h3>
               </div>
             </div>
@@ -137,9 +137,9 @@
       </div>
 
       <!-- Box 6 -->
-      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
+      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12 ">
         <div class="box">
-          <div class="box-body">
+          <div class="box-body bg-danger-light">
             <div class="d-flex align-items-center justify-content-between">
               <div class="w-60 h-60 rounded-circle bg-primary-light fs-40 text-center l-h-85">
                 <i class="bi bi-clock custom-design-icon text-primary"></i>
@@ -147,7 +147,7 @@
               <div>
                 <h6 class="mt-0">Average Queue Time</h6>
                 <h3 class="fw-500 my-0">
-                  {{ incomingSummaryList[0]?.queue_duration || '00:00' }}
+                  {{ convertSecondsToMMSS(incomingSummaryList[0]?.queue_duration) || '00:00' }}
                 </h3>
               </div>
             </div>
@@ -158,14 +158,16 @@
       <!-- Box 6 -->
       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
         <div class="box">
-          <div class="box-body">
+          <div class="box-body bg-danger-light">
             <div class="d-flex align-items-center justify-content-between">
               <div class="w-60 h-60 rounded-circle bg-primary-light fs-40 text-center l-h-85">
                 <i class="bi bi-speedometer2 custom-design-icon text-primary"></i>
               </div>
               <div>
                 <h6 class="mt-0">Average Speed of Answer</h6>
-                <h3 class="fw-500 my-0">00 : 00</h3>
+                <h3 class="fw-500 my-0">
+                  {{ convertSecondsToMMSS(incomingSummaryList[0].AnsQueueDuration) || '00:00'}}
+                </h3>
               </div>
             </div>
           </div>
@@ -175,7 +177,7 @@
       <!-- Box 6 -->
       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
         <div class="box">
-          <div class="box-body">
+          <div class="box-body bg-danger-light">
             <div class="d-flex align-items-center justify-content-between">
               <div class="w-60 h-60 rounded-circle bg-primary-light fs-40 text-center l-h-85">
                 <i class="bi bi-mic custom-design-icon text-primary"></i>
@@ -183,7 +185,7 @@
               <div>
                 <h6 class="mt-0">Average Talk Time</h6>
                 <h3 class="fw-500 my-0">
-                  {{ incomingSummaryList[0]?.cdr_billsec || '00:00' }}
+                  {{ convertSecondsToMMSS(incomingSummaryList[0]?.duration) || '00:00' }}
                 </h3>
               </div>
             </div>
@@ -201,7 +203,9 @@
               </div>
               <div>
                 <h6 class="mt-0">Average Abandon Time</h6>
-                <h3 class="fw-500 my-0">00 : 00</h3>
+                <h3 class="fw-500 my-0">
+                  {{ convertSecondsToMMSS(incomingSummaryList[0].AbandonQueueDuration) || '00:00' }}
+                </h3>
               </div>
             </div>
           </div>
@@ -218,7 +222,11 @@
               </div>
               <div>
                 <h6 class="mt-0">Maximum Talk Time</h6>
-                <h3 class="fw-500 my-0">00 : 00</h3>
+                <h3 class="fw-500 my-0">
+                  {{
+                    convertSecondsToMMSS(incomingSummaryList[0].maxTalkTime) || '00:00'
+                  }}
+                </h3>
               </div>
             </div>
           </div>
@@ -235,7 +243,11 @@
               </div>
               <div>
                 <h6 class="mt-0">Max Queue Wait Time</h6>
-                <h3 class="fw-500 my-0">00 : 00</h3>
+                <h3 class="fw-500 my-0">
+                  {{
+                    convertSecondsToMMSS(incomingSummaryList[0].maxQueueTime) || '00:00'
+                  }}
+                </h3>
               </div>
             </div>
           </div>
@@ -245,14 +257,18 @@
       <!-- Box 6 -->
       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
         <div class="box">
-          <div class="box-body">
+          <div class="box-body bg-danger-light">
             <div class="d-flex align-items-center justify-content-between">
               <div class="w-60 h-60 rounded-circle bg-primary-light fs-40 text-center l-h-85">
                 <i class="bi bi-1-circle custom-design-icon text-primary"></i>
               </div>
               <div>
                 <h6 class="mt-0">First Response Time</h6>
-                <h3 class="fw-500 my-0">00 : 00</h3>
+                <h3 class="fw-500 my-0">
+                  {{
+                    convertSecondsToMMSS(incomingSummaryList[0].AnsQueueDuration) || '00:00'
+                  }}
+                </h3>
               </div>
             </div>
           </div>
@@ -262,14 +278,18 @@
       <!-- Box 6 -->
       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-12">
         <div class="box">
-          <div class="box-body">
+          <div class="box-body bg-danger-light">
             <div class="d-flex align-items-center justify-content-between">
               <div class="w-60 h-60 rounded-circle bg-primary-light fs-40 text-center l-h-85">
                 <i class="bi bi-bell custom-design-icon text-primary"></i>
               </div>
               <div>
                 <h6 class="mt-0">Average Ring Time</h6>
-                <h3 class="fw-500 my-0">00 : 00</h3>
+                <h3 class="fw-500 my-0">
+                  {{
+                    convertSecondsToMMSS(incomingSummaryList[0].connect_ring_time) || '00:00'
+                  }}
+                </h3>
               </div>
             </div>
           </div>
@@ -286,7 +306,7 @@
               </div>
               <div>
                 <h6 class="mt-0">Oldest Call</h6>
-                <h3 class="fw-500 my-0">00:00:00</h3>
+                <h3 class="fw-500 my-0">{{ oldestCall }}</h3>
               </div>
             </div>
           </div>
@@ -303,7 +323,11 @@
               </div>
               <div>
                 <h6 class="mt-0">Answer Call Ratio</h6>
-                <h3 class="fw-500 my-0"></h3>
+                <h3 class="fw-500 my-0">
+                  {{
+                    answerCallRatio
+                  }}%
+                </h3>
               </div>
             </div>
           </div>
@@ -320,7 +344,11 @@
               </div>
               <div>
                 <h6 class="mt-0">Abandon Call Ratio</h6>
-                <h3 class="fw-500 my-0"></h3>
+                <h3 class="fw-500 my-0">
+                  {{
+                    abandonCallRatio
+                  }}
+                </h3>
               </div>
             </div>
           </div>
@@ -338,7 +366,7 @@
               <div>
                 <h6 class="mt-0">Service Level < 20 Sec</h6>
                 <h3 class="fw-500 my-0">
-                  {{ incomingSummaryList[0]?.ServiceLevel || 0 }}%
+                  {{ serviceLevel.toFixed(2) }}%
                 </h3>
               </div>
             </div>

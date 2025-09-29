@@ -57,7 +57,7 @@ export class Login implements OnInit {
      * passing large value as limit because I am not getting count in the response 
      * so I am going to get the count using array length
      */
-    this.api.getLoginReport(this.agent, this.campaign, this.campaignList, 10000, this.offset).subscribe({ 
+    this.api.getLoginReport(this.agent, this.campaign, this.campaignList, 50, this.offset).subscribe({ 
       next: (res) => {
         console.log(res);
         this.formateLoginData(res)
@@ -98,7 +98,7 @@ export class Login implements OnInit {
     const campaign = this.searchFormLoginReport.value.campain || ''
     let agent = '';
 
-    this.api.LoginReportOnFilter(agent, campaign, this.campaignList, fromDate, 10000, this.offset, 1, toDate).subscribe({
+    this.api.LoginReportOnFilter(agent, campaign, this.campaignList, fromDate, 50, this.offset, 1, toDate).subscribe({
       next: (res) => {
         //I am getting json data
         console.log(res);
@@ -123,36 +123,6 @@ export class Login implements OnInit {
     this.getLogin();
   }
 
-  nextPage() {
-    console.log('in side method', this.isSearchMode);
-
-
-    this.page++;
-    this.offset += this.limit;
-    this.sl += this.limit;
-    if (this.isSearchMode) {
-      console.log("inside if", this.isSearchMode);
-
-      this.getLoginReportOnFilter();
-    } else {
-      console.log("inside else", this.isSearchMode);
-
-      this.getLogin();
-
-    }
-  }
-  prevPage() {
-    this.page--;
-    if (this.offset >= this.limit) {
-      this.offset -= this.limit;
-      this.sl -= this.limit;
-      if (this.isSearchMode) {
-        this.getLoginReportOnFilter();
-      } else {
-        this.getLogin();
-      }
-    }
-  }
 
   //new paginatin format
   onPageChange(newOffset: number) {
@@ -170,18 +140,17 @@ export class Login implements OnInit {
       if (typeof res.data === 'string') {
         const parsedData = JSON.parse(res.data); // { rows } **no count here
         console.log(parsedData);
-        console.log(parsedData.length);
+        this.count = parsedData.count;
 
 
         if (parsedData && Array.isArray(parsedData)) {
           rows = parsedData;
-
         }
       }
       // If res.data is already an array
       else if (Array.isArray(res.data)) {
         rows = res.data;
-        // this.count = res.count;// no count in the response
+        this.count = res.count;
       }
 
       console.log(rows);

@@ -1,5 +1,6 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
+import { FaqSection1 } from '../../agent/pages/faq/faq-section-1/faq-section-1';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
@@ -12,10 +13,18 @@ export const authGuard: CanActivateFn = (route, state) => {
       router.navigate(['/login']);
       return false;
     }
-    // Allow navigation to correct dashboard or other allowed routes
-    if (userRole === 'AGENT' && state.url.startsWith('/agent')) return true;
-    if (userRole === 'SUPERVISOR' && state.url.startsWith('/supervisor')) return true;
-    if (userRole === 'ADMIN' && state.url.startsWith('/admin')) return true;
+
+
+
+    if (userRole) {
+      // Allow navigation to correct dashboard or other allowed routes
+      if (userRole === 'AGENT' && state.url.startsWith('/agent')) return true;
+      if (userRole === 'SUPERVISOR' && state.url.startsWith('/supervisor')) return true;
+      if (userRole === 'ADMIN' && state.url.startsWith('/admin')) return true;
+    } else {
+      router.navigate(['/login']);
+      return false;
+    }
 
 
   }

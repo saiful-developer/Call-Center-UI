@@ -166,6 +166,18 @@ export class ApiService {
     });
   }
 
+  //disposition
+  dispositionReport(campaigns: string[], fromDate: string, limit: number, offset: number, toDate: string, campaign?: string) {
+    return this.http.post<any>(`${this.baseUrl}/api/v1/supervisor/report/disposition/lists`, {
+      campaign: campaign,
+      campaigns: campaigns,
+      fromDate: fromDate,
+      limit: limit,
+      offset: offset,
+      toDate: toDate
+    })
+  }
+
 
 
   /** Live **/

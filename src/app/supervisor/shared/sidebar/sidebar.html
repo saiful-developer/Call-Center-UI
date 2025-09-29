@@ -60,6 +60,7 @@
               (click)="onLinkClick()">Abandon</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/rna" (click)="onLinkClick()">Ring No
               Answer</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/disposition" (click)="onLinkClick()">Disposition</a></li>
         </ul>
 
         <!-- Hover submenu for thin sidebar -->
@@ -70,6 +71,7 @@
           <li><a class="nav-link" routerLink="/supervisor/reports/login">Login</a></li>
           <li><a class="nav-link" routerLink="/supervisor/reports/abandon">Abandon</a></li>
           <li><a class="nav-link" routerLink="/supervisor/reports/rna">Ring No Answer</a></li>
+          <li><a class="nav-link" routerLink="/supervisor/reports/disposition">Disposition</a></li>
         </ul>
       </li>
 
@@ -93,11 +95,16 @@
 
         <!-- Hover submenu for thin sidebar -->
         <ul class="thin-hover-menu" *ngIf="!isOpen">
-          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/agent-status">Agent Status</a></li>
-          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/campain-status">Campain Status</a></li>
-          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/extension-status">Extension</a></li>
-          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/trunk-status">Trunk Status</a></li>
-          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link" routerLink="/supervisor/live/waiting-calls">Waiting Calls</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link"
+              routerLink="/supervisor/live/agent-status">Agent Status</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link"
+              routerLink="/supervisor/live/campain-status">Campain Status</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link"
+              routerLink="/supervisor/live/extension-status">Extension</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link"
+              routerLink="/supervisor/live/trunk-status">Trunk Status</a></li>
+          <li class="nav-item" (click)="onLinkClick()"><a class="nav-link"
+              routerLink="/supervisor/live/waiting-calls">Waiting Calls</a></li>
         </ul>
       </li>
 
@@ -116,14 +123,10 @@
 
       <li style="margin: auto; position: absolute; bottom: 20px;">
         <a class="text-danger" routerLink="/" (click)="login()">
-          <i  class="bi bi-box-arrow-right"></i>
+          <i class="bi bi-box-arrow-right"></i>
         </a>
       </li>
 
     </ul>
   </div>
 </aside>
-
-
-
-

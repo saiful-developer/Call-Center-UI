@@ -16,6 +16,7 @@ import { TrunkStatus } from "../live/trunk-status/trunk-status";
 import { CallWaiting } from "../live/call-waiting/call-waiting";
 import { AddressBook } from "../reports/address-book/address-book";
 import { TestWebsocketSupervisor } from "../shared/test-websocket-supervisor/test-websocket-supervisor";
+import { Disposition } from "../reports/disposition/disposition";
 
 export const Supervisor_ROUTES: Routes = [
     {
@@ -32,6 +33,7 @@ export const Supervisor_ROUTES: Routes = [
             { path: 'reports/login', component: Login, data: { breadcrumb: 'supervisor/report/login' } },
             { path: 'reports/abandon', component: Abandon, data: { breadcrumb: 'supervisor/report/abandon' } },
             { path: 'reports/rna', component: Rna, data: { breadcrumb: 'supervisor/report/rna' } },
+            { path: 'reports/disposition', component: Disposition, data: { breadcrumb: 'supervisor/report/disposition' } },
             //live
             { path: 'live/agent-status', component: AgentStatus, data: { breadcrumb: 'supervisor/live/agent status' } },
             { path: 'live/campain-status', component: CampaignStatus, data: { breadcrumb: 'supervisor/live/campain status' } },

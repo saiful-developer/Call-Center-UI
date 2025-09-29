@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AgentDashboardRow2 } from '../../agent/dashboard/agent-dashboard-row2/agent-dashboard-row2';
 import { ApiService } from '../services/api.service';
-// components
 
 interface CallCenterStats {
   enterqueue: number | null;
@@ -26,48 +25,26 @@ interface CallCenterStats {
   ServiceLevel: number | null;
 }
 
-
-
 @Component({
   selector: 'app-supervisor-dashbord',
   imports: [AgentDashboardRow2],
   templateUrl: './supervisor-dashbord.html',
-  styleUrl: './supervisor-dashbord.css'
+  styleUrls: ['./supervisor-dashbord.css']
 })
 export class SupervisorDashbord {
-  secondsPassed = 0;
-  houres = 0;
-  minutes = 0;
-  seconds = 0;
   currentTime: string = '';
   clockInterval: any;
 
   agent = '';
   campaignList: string[] = [];
   currentDate: string = new Date().toISOString().split("T")[0];
-  incomingSummaryList: CallCenterStats[] = [{
-    enterqueue: null,
-    connect: null,
-    abandon: null,
-    duration: null,
-    cdr_duration: null,
-    cdr_billsec: null,
-    queue_duration: null,
-    connect_ring_time: null,
-    completecaller: null,
-    completeagent: null,
-    AnsQueueDuration: null,
-    AbandonQueueDuration: null,
-    allrna: null,
-    rna: null,
-    enterqueue_time: null,
-    connect_time: null,
-    maxTalkTime: null,
-    maxQueueTime: null,
-    maxRingTime: null,
-    ServiceLevel: null
-  }];
+  incomingSummaryList: CallCenterStats[] = [];
 
+  // Calculated fields
+  answerCallRatio: number = 0;
+  abandonCallRatio: number = 0;
+  serviceLevel: number = 0;
+  oldestCall: string = "00:00:00";
 
   constructor(private api: ApiService) { }
 
@@ -75,28 +52,14 @@ export class SupervisorDashbord {
     this.campainListFromSesson();
     this.getIncomingSummary();
 
-
     this.updateCurrentTime();
     this.clockInterval = setInterval(() => {
       this.updateCurrentTime();
     }, 1000);
-
-
-
-
   }
 
-  getIncomingSummary() {
-    this.api.incomingSummary(this.agent, this.campaignList, this.currentDate).subscribe({
-      next: (res) => {
-        console.log(res);
-
-      },
-      error: (err) => {
-        console.log(err);
-
-      }
-    })
+  ngOnDestroy() {
+    clearInterval(this.clockInterval);
   }
 
   updateCurrentTime() {
@@ -107,58 +70,110 @@ export class SupervisorDashbord {
 
     const ampm = hrs >= 12 ? 'PM' : 'AM';
     hrs = hrs % 12;
-    hrs = hrs ? hrs : 12; // 0 should be 12 in 12h format
+    hrs = hrs ? hrs : 12;
 
     this.currentTime = `${hrs}h : ${mins}m : ${secs}s ${ampm}`;
   }
 
-
-  ngOnDestroy() {
-    clearInterval(this.clockInterval);
-  }
-
-  // get campain form sesson
   campainListFromSesson() {
-    const jsonString = sessionStorage.getItem('user')
-
+    const jsonString = sessionStorage.getItem('user');
     if (jsonString) {
       const obj = JSON.parse(jsonString);
       this.campaignList = obj.campaigns;
     }
   }
 
-  formateAgentStatusData(res: any) {
-
-    if (res.success === "YES" && res.data) {
-      const item: CallCenterStats = {
-        enterqueue: res.data.enterqueue || 0,
-        connect: res.data.connect || 0,
-        abandon: res.data.abandon || 0,
-        duration: res.data.duration || 0,
-        cdr_duration: res.data.cdr_duration || 0,
-        cdr_billsec: res.data.cdr_billsec || 0,
-        queue_duration: res.data.queue_duration || 0,
-        connect_ring_time: res.data.connect_ring_time || 0,
-        completecaller: res.data.completecaller || 0,
-        completeagent: res.data.completeagent || 0,
-        AnsQueueDuration: res.data.AnsQueueDuration || 0,
-        AbandonQueueDuration: res.data.AbandonQueueDuration || 0,
-        allrna: res.data.allrna || 0,
-        rna: res.data.rna || 0,
-        enterqueue_time: res.data.enterqueue_time || "00:00:00",
-        connect_time: res.data.connect_time || "00:00:00",
-        maxTalkTime: res.data.maxTalkTime || 0,
-        maxQueueTime: res.data.maxQueueTime || 0,
-        maxRingTime: res.data.maxRingTime || 0,
-        ServiceLevel: res.data.ServiceLevel || 0,
-      };
-
-      this.incomingSummaryList = [item]; // wrap in array if your table expects an array
-    } else {
-      this.incomingSummaryList = [];
-    }
-
-
+  getIncomingSummary() {
+    this.api.incomingSummary(this.agent, this.campaignList, this.currentDate).subscribe({
+      next: (res) => this.formateAgentStatusData(res),
+      error: (err) => console.log(err)
+    });
   }
 
+  formateAgentStatusData(res: any) {
+    if (res.success === "YES" && res.data) {
+      const item: CallCenterStats = {
+        enterqueue: Number(res.data.enterqueue) || 0,
+        connect: Number(res.data.connect) || 0,
+        abandon: Number(res.data.abandon) || 0,
+        duration: Number(res.data.duration) || 0,
+        cdr_duration: Number(res.data.cdr_duration) || 0,
+        cdr_billsec: Number(res.data.cdr_billsec) || 0,
+        queue_duration: Number(res.data.queue_duration) || 0,
+        connect_ring_time: Number(res.data.connect_ring_time) || 0,
+        completecaller: Number(res.data.completecaller) || 0,
+        completeagent: Number(res.data.completeagent) || 0,
+        AnsQueueDuration: Number(res.data.AnsQueueDuration) || 0,
+        AbandonQueueDuration: Number(res.data.AbandonQueueDuration) || 0,
+        allrna: Number(res.data.allrna) || 0,
+        rna: Number(res.data.rna) || 0,
+        enterqueue_time: res.data.enterqueue_time || "00:00:00",
+        connect_time: res.data.connect_time || "00:00:00",
+        maxTalkTime: Number(res.data.maxTalkTime) || 0,
+        maxQueueTime: Number(res.data.maxQueueTime) || 0,
+        maxRingTime: Number(res.data.maxRingTime) || 0,
+        ServiceLevel: Number(res.data.ServiceLevel) || 0,
+      };
+
+      this.incomingSummaryList = [item];
+
+      const summary = this.incomingSummaryList[0];
+      const threshold = 20;
+
+      this.answerCallRatio = summary.enterqueue
+        ? +((summary.connect! / summary.enterqueue!) * 100).toFixed(2)
+        : 0;
+
+      this.abandonCallRatio = summary.enterqueue
+        ? +((summary.abandon! / summary.enterqueue!) * 100).toFixed(2)
+        : 0;
+
+      this.serviceLevel = summary.connect
+        ? (summary.ServiceLevel! / summary.connect!) * 100
+        : 0;
+
+
+
+      this.oldestCall = this.getOldestCall(summary.enterqueue_time!);
+    } else {
+      this.incomingSummaryList = [];
+      this.answerCallRatio = 0;
+      this.abandonCallRatio = 0;
+      this.serviceLevel = 0;
+      this.oldestCall = "00:00:00";
+    }
+  }
+
+  convertSecondsToMMSS(input: number | string | null | undefined): string {
+    if (!input) return '00:00';
+    const seconds = typeof input === 'string' ? parseInt(input, 10) : input;
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  }
+
+
+
+  getOldestCall(enterqueueTime: string): string {
+    const entered = new Date(enterqueueTime).getTime();
+    const now = new Date().getTime();
+
+    if (isNaN(entered)) return "Invalid";
+
+    let diff = Math.floor((now - entered) / 1000); // seconds
+    const h = Math.floor(diff / 3600);
+    const m = Math.floor((diff % 3600) / 60);
+    const s = diff % 60;
+
+    return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  }
+
+  getServiceLevel(connect: number, avgQueueDuration: number, threshold = 20): string {
+    if (connect === 0) return "0.00%";
+
+    const answeredWithin = avgQueueDuration <= threshold ? connect : 0;
+    const percent = (answeredWithin / connect) * 100;
+
+    return percent.toFixed(2) + "%";
+  }
 }

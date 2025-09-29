@@ -152,10 +152,8 @@ export class Break implements OnInit {
   onPageChange(newOffset: number) {
 
     this.offset = newOffset;
-    console.log(this.offset);
 
     this.page = Math.floor(this.offset / this.limit) + 1; // page in sync
-    console.log("offset:", this.offset, "page:", this.page);
 
 
     this.isSearchMode ? this.getBreakOnFilter() : this.getBreak(); //load data based on serch or not
