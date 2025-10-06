@@ -52,7 +52,7 @@
               <div>
                 <h6 class="mt-0">Received Calls</h6>
                 <h3 class="fw-500 my-0">
-                  {{ incomingSummaryList[0]?.connect  }}
+                  {{ incomingSummaryList[0].connect  }}
                 </h3>
               </div>
             </div>
@@ -71,7 +71,7 @@
               <div>
                 <h6 class="mt-0">Completed Caller</h6>
                 <h3 class="fw-500 my-0">
-                  {{ incomingSummaryList[0]?.completecaller || 0 }}
+                  {{ incomingSummaryList[0].completecaller || 0 }}
                 </h3>
               </div>
             </div>
@@ -109,7 +109,7 @@
               <div>
                 <h6 class="mt-0">Abandoned Calls</h6>
                 <h3 class="fw-500 my-0">
-                  {{ incomingSummaryList[0]?.abandon || 0 }}
+                  {{ incomingSummaryList[0].abandon || 0 }}
                 </h3>
               </div>
             </div>
@@ -128,7 +128,7 @@
               <div>
                 <h6 class="mt-0">Ring No Answer</h6>
                 <h3 class="fw-500 my-0">
-                  {{ incomingSummaryList[0]?.rna || 0 }}
+                  {{ incomingSummaryList[0].rna || 0 }}
                 </h3>
               </div>
             </div>
@@ -147,7 +147,7 @@
               <div>
                 <h6 class="mt-0">Average Queue Time</h6>
                 <h3 class="fw-500 my-0">
-                  {{ convertSecondsToMMSS(incomingSummaryList[0]?.queue_duration) || '00:00' }}
+                  {{ convertSecondsToMMSS(incomingSummaryList[0].queue_duration) || '00:00' }}
                 </h3>
               </div>
             </div>
@@ -185,7 +185,7 @@
               <div>
                 <h6 class="mt-0">Average Talk Time</h6>
                 <h3 class="fw-500 my-0">
-                  {{ convertSecondsToMMSS(incomingSummaryList[0]?.duration) || '00:00' }}
+                  {{ convertSecondsToMMSS(incomingSummaryList[0].duration) || '00:00' }}
                 </h3>
               </div>
             </div>

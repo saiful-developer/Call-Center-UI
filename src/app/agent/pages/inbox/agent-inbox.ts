@@ -1,24 +1,37 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 // components
 import { PageHeader } from '../../shared/page-header/page-header';
-import { MessageList } from './message-list/message-list';
-import { MessageDetails } from './message-details/message-details';
-import { SentInput } from './sent-input/sent-input';
+
+//service for socket
+import { IncomingMessage, SocketService } from '../../../services/socket.service';
+
+interface Supervisor {
+  id: string,
+  name: string
+}
 
 
 @Component({
   selector: 'app-agent-inbox',
-  imports: [MessageList, MessageDetails, PageHeader, SentInput],
+  imports: [PageHeader],
   templateUrl: './agent-inbox.html',
   styleUrl: './agent-inbox.css'
 })
-export class AgentInbox {
+export class AgentInbox implements OnInit {
 
-  selectedMessage: any = null;
+  messages: IncomingMessage[] = [];
+  supervisors: Supervisor[] = [];
+  selectedSupervisorId: string | null = null;
 
-  onMessageSelected(message: any) {
-    this.selectedMessage = message;
+
+  constructor(
+    private socketService: SocketService        
+  ) { }
+
+
+  ngOnInit(): void {
+
   }
 
 }

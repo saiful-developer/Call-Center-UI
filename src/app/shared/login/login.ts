@@ -5,7 +5,7 @@ import { ApiService } from '../../agent/services/api.service';
 import { Router } from '@angular/router';
 import { DecodeToken } from '../../services/jwt-decode.service';
 import { NgZone } from '@angular/core';
-import { LoginTimeAndDuration } from '../../agent/services/login-timeAndduration';
+import { LoginTimeAndDuration } from '../../services/login-timeAndduration';
 
 
 @Component({

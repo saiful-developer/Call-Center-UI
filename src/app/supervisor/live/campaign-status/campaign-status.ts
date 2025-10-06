@@ -6,6 +6,9 @@ import { StickyTableHeaderDirective } from '../../../directives/sticky-table-hea
 
 import { ApiService } from '../../services/api.service';
 
+import { SocketService } from '../../../services/socket.service';
+import { Router } from '@angular/router';
+
 export interface CampainStatusData {
   campaign: string,
   agentCount: number,
@@ -33,18 +36,46 @@ export class CampaignStatus implements OnInit {
   campainStatus: CampainStatusData[] = []
 
   constructor(
-    private api: ApiService
+    private api: ApiService,
+    private router: Router,
+    private socketServer: SocketService
   ) { }
 
+
+  //call back function
+  continuousMessageHandler = (msg: string) => {
+    console.log('Continuous:', msg);
+  }
+
   ngOnInit(): void {
+
+    // listen to continuous messages
+    this.socketServer.onContinousMessage(this.continuousMessageHandler);
+
+    // tell server the supervisor is on this route
+    this.socketServer.emitSupervisorRoute(this.router.url);
+
+
+
+
     this.calculateCampainStatus()
     this.api.activeExtentation().subscribe({
       next: (res) => console.log(res),
       error: (err) => console.log(err)
 
 
-    })
+    });
   }
+
+
+
+  // destroy when i leave the route 
+  ngOnDestroy() {
+    this.socketServer.offContinousMessage(this.continuousMessageHandler)
+    // this.socketServer.emitSupervisorRoute('');
+  }
+
+
 
   calculateCampainStatus() {
     this.api.agentStatus().subscribe({

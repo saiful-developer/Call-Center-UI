@@ -1,36 +1,17 @@
 <header class="main-header">
-    <!-- <div class="d-flex align-items-center logo-box justify-content-start d-md-none d-block">
 
-        <a  class="logo">
-
-            <div class="logo-mini w-30">
-                <span class="light-logo"><img src="assets/supervisor/images/logo-letter.png" alt="logo"></span>
-                <span class="dark-logo"><img src="assets/supervisor/images/logo-letter-white.png" alt="logo"></span>
-            </div>
-            <div class="logo-lg">
-                <span class="light-logo"><img src="assets/supervisor/images/logo-dark-text.png" alt="logo"></span>
-                <span class="dark-logo"><img src="assets/supervisor/images/logo-light-text.png" alt="logo"></span>
-            </div>
-        </a>
-    </div> -->
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
         <div class="app-menu">
             <ul class="header-megamenu nav">
                 <li class="btn-group nav-item">
-                    <!-- <a  class="waves-effect waves-light nav-link push-btn btn-primary-light"
-                        data-toggle="push-menu" role="button">
-                        <i class="icon-Menu"><span class="path1"></span><span class="path2"></span></i>
-                    </a> -->
-
-
                     <button class="waves-effect waves-light nav-link push-btn btn-primary-light fullscreen-toggle-btn"
                         data-toggle="push-menu" (click)="toggleSidebar.emit()">
                         <i class="icon-Menu bi-list"><span class="path1"></span><span class="path2"></span></i>
                     </button>
-
                 </li>
+
                 <li class="btn-group d-lg-inline-flex d-none">
                     <div class="app-menu">
                         <div class="search-bx mx-5">
@@ -50,9 +31,6 @@
             </ul>
         </div>
 
-
-
-
         <div class="navbar-custom-menu r-side">
             <ul class="nav navbar-nav">
 
@@ -68,7 +46,6 @@
                         <small class="text-muted">{{ decodedToken?.extension }}</small>
                     </div>
                 </li>
-
 
                 <!-- notification -->
                 <li class="dropdown notifications-menu btn-group nav-item">
@@ -98,9 +75,9 @@
                     </a>
                 </li>
 
-
             </ul>
         </div>
+
         <!-- form mobile -->
         <button
             class="mobile-toggle-btn waves-effect waves-light nav-link push-btn btn-primary-light mobile-toggle-button"
@@ -110,10 +87,6 @@
                 <span class="path2"></span>
             </i>
         </button>
-
-
-
-
 
     </nav>
 </header>

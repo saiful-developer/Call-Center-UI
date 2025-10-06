@@ -1,21 +1,74 @@
-<div class="custom" style="">
-  <h2 class="mb-4 text-center text-teal">Agent Profile</h2>
+<div class="container-full">
+  <app-page-header title="Profile" iconClass="bi bi-person"></app-page-header>
 
-  <div class="card border-0 shadow p-4 rounded-4">
-    <div class="row">
-      <div class="col-md-4 text-center">
-        <img src="https://template.canva.com/EAF-FAvfD1E/2/0/1600w-IYcgPnJtx3Q.jpg" class="rounded-circle shadow" width="120" />
-        <h5 class="mt-3 text-teal">supervisor Name</h5>
-        <p class="text-muted">Support Agent</p>
+  <div class="card profile-card border-0 shadow p-4 rounded-4">
+    <div class="row g-4">
+      <!-- Profile Picture & Name -->
+      <div class="col-12 col-md-4 text-center profile-picture-section">
+        <div class="profile-picture-wrapper mx-auto mb-3">
+          <img src="https://template.canva.com/EAF-FAvfD1E/2/0/1600w-IYcgPnJtx3Q.jpg"
+            class="rounded-circle shadow profile-picture" alt="User Profile" />
+        </div>
+        <h5 class="mt-2 profile-name">{{ profileDetails.fullName || 'Supervisro Name' }}</h5>
+        <p class="text-muted profile-role">{{ profileDetails.user_type || 'User Type' }}</p>
       </div>
-      <div class="col-md-8">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item border-0"><strong>Email:</strong> agentemail.com</li>
-          <li class="list-group-item border-0"><strong>Phone:</strong> 0123456789</li>
-          <li class="list-group-item border-0"><strong>Address:</strong> Gulshan, Dhaka</li>
-          <li class="list-group-item border-0"><strong>Type:</strong> Support</li>
-          <li class="list-group-item border-0"><strong>Status:</strong> Active</li>
-        </ul>
+
+      <!-- User Details Table -->
+      <div class="col-12 col-md-8">
+        <div class="table-responsive">
+          <table class="table table-borderless modern-table">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <td>{{ profileDetails.fullName || 'Supervisro Name' }}</td>
+              </tr>
+              <tr>
+                <th>LoginID</th>
+                <td>{{ profileDetails.loginid || 'Login Id' }}</td>
+              </tr>
+              <tr>
+                <th>Email</th>
+                <td>{{ profileDetails.email || 'user@email.com' }}</td>
+              </tr>
+              <tr>
+                <th>Mobile</th>
+                <td>{{ profileDetails.mobile || '000 000 000 00' }}</td>
+              </tr>
+              <tr>
+                <th>Extension</th>
+                <td>{{ profileDetails.extension|| 00 }}</td>
+              </tr>
+              <tr>
+                <th>UserType</th>
+                <td>{{ profileDetails.user_type || 'user' }}</td>
+              </tr>
+              <tr>
+                <th>Gender</th>
+                <td>{{ profileDetails.gender === '1'? 'Male' : 'Female' }}</td>
+              </tr>
+              <tr>
+                <th>NWD Call</th>
+                <td>{{ profileDetails.nwd_call || 0 }}</td>
+              </tr>
+              <tr>
+                <th>ISD Call</th>
+                <td>{{ profileDetails.isd_call || 0 }}</td>
+              </tr>
+              <tr>
+                <th>Transfer Call</th>
+                <td>{{ profileDetails.transfer_call || 0}}</td>
+              </tr>
+              <tr>
+                <th>LoginTime</th>
+                <td>{{ loginTime || '00:00' }} || {{ lgoinDate || '00:00' }}</td>
+              </tr>
+              <tr>
+                <th>LoginIP</th>
+                <td>{{ profileDetails.remoteIP || '000. 00. 00' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

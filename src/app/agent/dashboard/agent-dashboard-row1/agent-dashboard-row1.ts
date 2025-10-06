@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginTimeAndDuration } from '../../services/login-timeAndduration';
+import { LoginTimeAndDuration } from '../../../services/login-timeAndduration';
 
 
 @Component({

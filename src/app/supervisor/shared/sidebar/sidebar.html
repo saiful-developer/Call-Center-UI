@@ -33,7 +33,7 @@
           <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Dashboard</span>
         </a>
         <ul class="thin-hover-menu" *ngIf="!isOpen">
-          <li><a class="nav-link" routerLink="/supervisor/dashboard">Dashboard Home</a></li>
+          <li><a class="nav-link" routerLink="/supervisor/dashboard">Dashboard</a></li>
         </ul>
       </li>
 
@@ -60,7 +60,8 @@
               (click)="onLinkClick()">Abandon</a></li>
           <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/rna" (click)="onLinkClick()">Ring No
               Answer</a></li>
-          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/disposition" (click)="onLinkClick()">Disposition</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/reports/disposition"
+              (click)="onLinkClick()">Disposition</a></li>
         </ul>
 
         <!-- Hover submenu for thin sidebar -->
@@ -111,20 +112,77 @@
       <!-- Address Book -->
       <li class="nav-item hover-group position-relative">
         <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link"
-          routerLink="/supervisor/live/address-book" (click)="onLinkClick()">
+          routerLink="/supervisor/address-book" (click)="onLinkClick()">
           <i class="bi bi-wallet2 me-2"></i>
           <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Address book</span>
         </a>
         <ul class="thin-hover-menu" *ngIf="!isOpen">
-          <li><a class="nav-link" routerLink="/supervisor/live/address-book">View Address Book</a></li>
+          <li><a class="nav-link" routerLink="/supervisor/address-book">Address Book</a></li>
+        </ul>
+      </li>
+
+      <!-- Broadcast message -->
+      <li class="nav-item hover-group position-relative">
+        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link"
+          routerLink="/supervisor/broadcast" (click)="onLinkClick()">
+          <i class="bi bi-send me-2"></i>
+          <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Broadcast Message</span>
+        </a>
+        <ul class="thin-hover-menu" *ngIf="!isOpen">
+          <li><a class="nav-link" routerLink="/supervisor/broadcast">Broadcast Message</a></li>
         </ul>
       </li>
 
 
-      <li style="margin: auto; position: absolute; bottom: 20px;">
-        <a class="text-danger" routerLink="/" (click)="login()">
-          <i class="bi bi-box-arrow-right"></i>
+      <!-- Profile section -->
+      <li class="nav-item hover-group position-relative">
+        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link"
+          (click)="toggleMenu('profile')">
+          <i class="bi bi-person me-2"></i>
+          <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Profile</span>
+          <i class="bi bi-chevron-down ms-auto" [class.rotate]="openMenu === 'profile'" *ngIf="isOpen"></i>
         </a>
+
+        <!-- Normal submenu for expanded sidebar -->
+        <ul class="nav sub-menu" [@dropdownAnimation]="openMenu === 'profile' ? 'open' : 'closed'" *ngIf="isOpen">
+          <li class="nav-item"><a class="nav-link" routerLink="/supervisor/profile"
+              (click)="onLinkClick()">View Profile</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink=""
+              (click)="onLinkClick()">Edit Profile </a></li>
+        </ul>
+
+        <!-- Hover submenu for thin sidebar -->
+        <ul class="thin-hover-menu" *ngIf="!isOpen">
+          <li><a class="nav-link" routerLink="/supervisor/profile">View Profile</a></li>
+          <li><a class="nav-link" routerLink="">Edit Profile</a></li>
+        </ul>
+      </li>
+
+
+
+      <!-- logout -->
+      <!-- <li class="nav-item sidebar-actions" *ngIf="isOpen" style="">
+        <span class="nav-link">
+          <div class="d-grid">
+            <button class="btn btn-danger d-flex align-items-center ali " style="font-size: 500 !important;"
+              (click)="logOut()">
+              <i class="bi bi-box-arrow-right me-2"></i> Logout
+            </button>
+          </div>
+        </span>
+      </li>
+ -->
+
+            <!-- Dashboard -->
+      <li class="nav-item hover-group position-relative">
+        <a [ngClass]="isOpen ? '' : 'pe-0'" class="nav-link d-flex align-items-center custom-link text-danger"
+          routerLink="/supervisor/dashboard" (click)="logOut ()">
+          <i class="bi bi-box-arrow-right me-2 hover-icon " ></i>
+          <span [ngClass]="isOpen ? 'd-block' : 'd-none'">Logout</span>
+        </a>
+        <ul class="thin-hover-menu" *ngIf="!isOpen">
+          <li><a class="nav-link text-danger" routerLink="/supervisor/dashboard" (click)="logOut()">Logout</a></li>
+        </ul>
       </li>
 
     </ul>

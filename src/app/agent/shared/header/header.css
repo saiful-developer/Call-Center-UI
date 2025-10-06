@@ -121,3 +121,96 @@
   }
 
 }
+
+
+
+/* 
+***********notification dropdown desing*************
+*/
+.notification-container {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1050;
+  transition: all 0.3s ease-in-out;
+}
+
+.notification-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notification-container::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.custom-notification {
+  position: absolute;
+  top: 9px;
+  color: #dc3545;
+  font-size: 10px;
+  border-radius: 50%;
+  margin: 0 !important;
+  padding: 0 in !important;
+  right: -5px;
+}
+
+
+
+/* Remove dropdown arrows for navbar profile and other dropdowns */
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item.dropdown .dropdown-toggle:after,
+.navbar .navbar-menu-wrapper .navbar-nav .nav-item.nav-profile .nav-link.dropdown-toggle:after,
+.dropdown .dropdown-toggle:after {
+  content: none !important;
+}
+
+.custom-notification-li {
+  background-color: #f8f0ff;         /* Softer purple background */
+  padding: 12px 16px;                /* Slightly larger padding */
+  margin: 10px 0;
+  border-radius: 12px;               /* More rounded corners */
+  box-shadow: 0 4px 8px rgba(119, 49, 188, 0.2); /* Softer shadow */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 500;
+  color: #5a2fa0;                    /* Darker purple for text */
+  display: inline-block;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Hover effect for interactivity */
+.timestamp-box:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(119, 49, 188, 0.3);
+}
+.notification-data {
+  text-align: right;
+  font-size: 9px;
+}
+
+@media (max-width: 576px) {
+  .custom-notification {
+    top: 8px;
+    right: 10px;
+  }
+
+  .notification-container {
+    width: 100vw;
+    right: -258%;
+    top: 93%;
+    /* text-align: right;*/
+  }
+
+  .notification-btn {
+    text-align: right !important;
+    margin: 0 !important;
+  }
+
+  .custom-notification-li {
+    display: block;
+  }
+}
+
+

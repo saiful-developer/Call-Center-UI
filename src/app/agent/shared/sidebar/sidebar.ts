@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { JwtPayload } from '../../../interfaces/jwtpayload';
 import { DecodeToken } from '../../../services/jwt-decode.service';
+import { LogoutModal } from "../logout-modal/logout-modal";
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterModule, CommonModule, RouterLink],
+  imports: [RouterModule, CommonModule, RouterLink, LogoutModal],
   templateUrl: './sidebar.html',
   styleUrls: ['./sidebar.css'],
   animations: [
@@ -67,5 +68,10 @@ export class SidebarComponent implements OnInit {
 
   toggleMenu(menu: string) {
     this.openMenu = this.openMenu === menu ? null : menu;
+  }
+
+  logout() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

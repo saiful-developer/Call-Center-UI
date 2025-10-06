@@ -63,27 +63,27 @@ export class SupervisorLayout implements OnInit {
     }
   }
 
-toggleSidebar(): void {
-  if (this.isMobile) {
-    this.isMobileSidebarVisible = !this.isMobileSidebarVisible; // overlay on mobile
-  } else {
-    this.isSidebarOpen = !this.isSidebarOpen; // desktop toggle
-    sessionStorage.setItem('isSidebarOpen-supervisor', JSON.stringify(this.isSidebarOpen));
+  toggleSidebar(): void {
+    if (this.isMobile) {
+      this.isMobileSidebarVisible = !this.isMobileSidebarVisible; // overlay on mobile
+    } else {
+      this.isSidebarOpen = !this.isSidebarOpen; // desktop toggle
+      sessionStorage.setItem('isSidebarOpen-supervisor', JSON.stringify(this.isSidebarOpen));
+    }
   }
-}
 
   ngOnDestroy(): void {
     this.themeService.clearTheme();
     window.removeEventListener('resize', this.checkScreenSize.bind(this));
   }
 
-checkDevice() {
-  this.isMobile = window.innerWidth <= 992;
-  if (this.isMobile) {
-    this.isSidebarOpen = false; // collapse desktop sidebar on mobile
-    this.isMobileSidebarVisible = false;
+  checkDevice() {
+    this.isMobile = window.innerWidth <= 992;
+    if (this.isMobile) {
+      this.isSidebarOpen = false; // collapse desktop sidebar on mobile
+      this.isMobileSidebarVisible = false;
+    }
   }
-}
 
 
 }

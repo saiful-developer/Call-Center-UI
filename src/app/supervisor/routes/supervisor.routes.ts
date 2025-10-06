@@ -17,6 +17,7 @@ import { CallWaiting } from "../live/call-waiting/call-waiting";
 import { AddressBook } from "../reports/address-book/address-book";
 import { TestWebsocketSupervisor } from "../shared/test-websocket-supervisor/test-websocket-supervisor";
 import { Disposition } from "../reports/disposition/disposition";
+import { MessageBroadcast } from "../pages/message-broadcast/message-broadcast";
 
 export const Supervisor_ROUTES: Routes = [
     {
@@ -41,9 +42,11 @@ export const Supervisor_ROUTES: Routes = [
             { path: 'live/trunk-status', component: TrunkStatus, data: { breadcrumb: 'supervisor/live/trunk status' } },
             { path: 'live/waiting-calls', component: CallWaiting, data: { breadcrumb: 'supervisor/live/waiting calls' } },
 
-            { path: 'live/address-book', component: AddressBook, data: { dreadcrumb: 'supervisor/live/address book' } },
+            { path: 'address-book', component: AddressBook, data: { breadcrumb: 'supervisor/address book' } },
 
             { path: 'test', component: TestWebsocketSupervisor },
+
+            { path: 'broadcast', component: MessageBroadcast, data: { breadcrumb: 'supervisor/broadcast' } },
 
             { path: '**', redirectTo: 'dashboard', pathMatch: 'full' }
         ]

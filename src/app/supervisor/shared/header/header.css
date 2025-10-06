@@ -20,7 +20,7 @@
   }
 }
 
-.logo-parent.mb-4{
+.logo-parent.mb-4 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,6 +30,7 @@
 .d-block {
   display: block !important;
 }
+
 .sub-link {
   display: block !important;
   /* display: flex;
@@ -38,15 +39,84 @@
 }
 
 aside.sidebar {
-    position: fixed;
-    top: 88px;
-    left: 0;
-    z-index: 4000;
-    margin: 0;
-    /* height: 100vh; */
+  position: fixed;
+  top: 88px;
+  left: 0;
+  z-index: 4000;
+  margin: 0;
+  /* height: 100vh; */
 }
 
 
 
 
 
+/* Profile container */
+.nav-item.d-none.d-lg-flex {
+  display: flex !important;
+  /* show on all screens */
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Profile picture */
+.nav-item img.rounded-circle {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border: 2px solid #e5e5e5;
+}
+
+/* Name and extension */
+.nav-item .d-flex.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item .fw-semibold {
+  font-size: 0.9rem;
+  line-height: 1rem;
+}
+
+.nav-item small.text-muted {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: #6c757d;
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+  .nav-item.d-none.d-lg-flex {
+    gap: 0.4rem;
+  }
+
+  .nav-item img.rounded-circle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-item .fw-semibold {
+    font-size: 0.85rem;
+  }
+
+  .nav-item small.text-muted {
+    font-size: 0.7rem;
+  }
+
+  .main-header .push-btn,
+  .main-header .svg-bt-icon {
+    width: auto !important;
+    padding: 0 !important;
+    height: auto;
+  }
+    .main-header .push-btn,
+  .main-header .svg-bt-icon :hover {
+    background-color: white;
+  }
+
+  a.waves-effect.waves-light.nav-link.btn-primary-light.svg-bt-icon {
+    padding-top: 10px !important;
+  }
+
+
+}

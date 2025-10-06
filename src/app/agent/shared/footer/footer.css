@@ -2,3 +2,9 @@ footer {
     display: flex;
     justify-content: space-between;
 }
+
+@media (max-width: 576px) {
+    footer {
+        display: block;
+    }
+}

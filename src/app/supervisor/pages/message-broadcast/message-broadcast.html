@@ -1,0 +1,41 @@
+<div class="container-full">
+    <app-page-header title="Broadcast" iconClass="bi bi-send"></app-page-header>
+
+    <!-- Modernized Campaign Selector & Message Form -->
+<div class="container mt-4" style="max-width: 600px;">
+  <!-- Campaign Selector -->
+  <div class="mb-3">
+    <label for="campaignSelect" class="form-label fw-semibold">Select Campaign:</label>
+    <select 
+      id="campaignSelect" 
+      class="form-select form-select-lg" 
+      [(ngModel)]="selectedCampaign">
+      <option *ngFor="let c of campaignList" [value]="c">{{ c }}</option>
+    </select>
+  </div>
+
+  <!-- Message Input & Send Button -->
+  <div class=" mb-3">
+    
+    <textarea
+      class="form-control form-control-lg"
+      rows="3"
+      placeholder="Type your message"
+      [(ngModel)]="message"
+      aria-label="Message input">
+    </textarea>
+
+    <button
+      class="btn btn-primary btn-lg mt-4"
+      type="button"
+      (click)="sendMessage()">
+      Broadcast
+    </button>
+  </div>
+
+
+
+</div>
+
+
+</div>

@@ -241,7 +241,7 @@
 
     <!-- Sidebar Actions -->
     <li class="nav-item sidebar-actions" *ngIf="isOpen">
-      <span class="nav-link">
+      <span class="nav-link" style="margin: 0; padding: 0;">
         <div class="border-bottom">
           <h6 class="font-weight-normal mb-3">Projects</h6>
         </div>
@@ -252,5 +252,19 @@
         </div>
       </span>
     </li>
+
+    <!-- logout -->
+    <li class="nav-item sidebar-actions" *ngIf="isOpen">
+      <span class="nav-link">
+        <div class="d-grid">
+          <button (click)="logoutModal.open()" class="btn btn-danger d-flex align-items-center ali " style="font-size: 500 !important;" (click)="logout()">
+            <i class="bi bi-box-arrow-right me-2"></i> Logout
+          </button>
+        </div>
+      </span>
+    </li>
+
+
   </ul>
 </nav>
+<app-logout-modal #logoutModal></app-logout-modal>

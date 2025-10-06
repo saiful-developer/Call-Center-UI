@@ -1,6 +1,5 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { Router, RouterOutlet, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Event } from '@angular/router';
-import { filter } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 //components
 import { SidebarComponent } from '../../shared/sidebar/sidebar';
@@ -12,6 +11,8 @@ import { LoderService } from '../../../services/loder.service';
 
 //them loder service
 import { ThemeService } from '../../../services/theme.service';
+import { SocketService, IncomingMessage } from '../../../services/socket.service';
+import { MessageSnackbarService } from '../../services/message-snackbar.service';
 
 @Component({
   selector: 'app-agent-layout',
@@ -25,22 +26,20 @@ export class AgentLayout implements OnInit {
   isMobileSidebarVisible: boolean = false;
   isMobile: boolean = false;
 
+  campaingList: string[] = [];
+  message: IncomingMessage[] = [];
+
 
   currentRoute = '';
 
   constructor(
     private router: Router,
     private loader: LoderService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private socketService: SocketService,
+    private snackbar: MessageSnackbarService
 
   ) {
-    //router subscription
-    //store the current route
-    // this.router.events.pipe(
-    //   filter(event => event instanceof NavigationEnd)
-    // ).subscribe((event: NavigationEnd) => {
-    //   this.currentRoute = event.urlAfterRedirects;
-    // });
 
     //for showing app loader
     //subscribed to router.events so the loader will triggered
@@ -53,20 +52,16 @@ export class AgentLayout implements OnInit {
     });
   }
 
-  // getter method
-  //for blocking header and footer
-  //check the currentRoute true block header and footer becase login page dose not need header and footer
-  // get isAuthRoute(): boolean {
-  //   return this.currentRoute === '/login' ||
-  //     this.currentRoute === '/logout' ||
-  //     this.currentRoute === '/';
-  // }
-
   ngOnInit(): void {
-    // this.SidebarService.sidebarVisible$.subscribe((isSidebarVisible) => {
-    //   console.log('Sidebar visibility:', isSidebarVisible);
-    //   this.isSidebarVisible = isSidebarVisible;
-    // });
+
+    this.getCampainList();
+    this.listenMessage();
+
+
+
+
+
+
 
     const storedValue = sessionStorage.getItem('isSidebarOpen-agent');
     this.isSidebarOpen = storedValue ? JSON.parse(storedValue) : false;
@@ -111,5 +106,46 @@ export class AgentLayout implements OnInit {
   //   // Prevent background scroll when mobile sidebar is open
   //   document.body.classList.toggle('sidebar-active', this.isMobileSidebarVisible);
   // }
+
+
+
+
+
+  // socket connection
+
+  getCampainList(): void {
+    const user = sessionStorage.getItem('user');
+
+    if (user) {
+      const parsedUser = JSON.parse(user);
+      this.campaingList = parsedUser.campaigns;
+
+      this.joinMyCampaings();
+
+    }
+  }
+
+
+  joinMyCampaings() {
+    this.socketService.joinCampaings(this.campaingList);
+    console.log('inside join');
+
+  }
+
+
+  //listen to incoming message
+  listenMessage() {
+    this.socketService.onMessage((msg) => {
+      this.displayMessage(msg);
+    });
+  }
+
+
+  displayMessage(msg: IncomingMessage) {
+    this.message.push(msg);
+    this.snackbar.showMessage(`${msg.sender}:  ${msg.message}`);
+    // sessionStorage.setItem('message', JSON.stringify(this.message));
+  }
+
 
 }

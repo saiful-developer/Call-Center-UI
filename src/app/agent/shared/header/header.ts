@@ -9,7 +9,8 @@ import { DecodeToken } from '../../../services/jwt-decode.service';
 import { LogoutModal } from '../logout-modal/logout-modal';
 import { HangupClickModal } from '../hangup-click-modal/hangup-click-modal';
 import { RouterLink } from '@angular/router';
-
+import { IncomingMessage } from '../../../services/socket.service';
+import { SocketService } from '../../../services/socket.service';
 
 
 
@@ -34,6 +35,14 @@ export class Header implements OnInit, OnDestroy {
 
   showActionSection: boolean = false;
 
+  messages: IncomingMessage[] = []; //incoming
+  counter: number = 0;
+
+
+  replyMessage: string = '';
+  selectedSupervisorId: string | null = null; // store which supervisor to reply
+
+
   //get user data using behaviorsubject 
 
 
@@ -45,13 +54,24 @@ export class Header implements OnInit, OnDestroy {
   constructor(
     private sidebarService: SidebarService,
     private decodeToken: DecodeToken,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private socketService: SocketService
   ) {
 
     // console.log(this.agentData$)
   }
 
   ngOnInit() {
+
+
+    const saved = sessionStorage.getItem('message');
+    if (saved) {
+      this.messages = JSON.parse(saved); // show old messages
+      this.messageCounter();
+    }
+
+    this.listenMessage();
+
     //initialize from sessionStorage
     const storedValue = sessionStorage.getItem('isSidebarOpen-agent');
     this.sidebaropen = storedValue ? JSON.parse(storedValue) : false;
@@ -86,9 +106,6 @@ export class Header implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    clearInterval(this.intervalId);
-  }
 
 
 
@@ -242,6 +259,58 @@ export class Header implements OnInit, OnDestroy {
   }
 
 
+  /**
+   * *******************get message and show like notification
+   */
+
+  listenMessage() {
+    this.socketService.onMessage((msg) => {
+      this.messages.push(msg);
+      console.log(msg);
+
+      // Save all messages to sessionStorage
+      sessionStorage.setItem('message', JSON.stringify(this.messages));
+      this.messageCounter();
+    });
+  }
+
+
+  messageCounter() {
+    this.counter = this.messages.length; // take length of current messages
+  }
+
+
+  showNotification = false;
+
+  toggleNotification() {
+    this.showNotification = !this.showNotification;
+  }
+
+  clearMessages() {
+    this.messages = [];
+    sessionStorage.removeItem('message'); // clear session storage
+    this.counter = 0; // reset counter
+    this.toggleNotification();
+  }
+
+
+  /**
+   * Reply to the message to specific person(supervisor)
+   */
+  sendReply() {
+    if (this.replyMessage.trim()) {
+      console.log('Reply:', this.replyMessage);
+      this.replyMessage = '';
+    }
+  }
+
+
+
+
+
+  ngOnDestroy(): void {
+    clearInterval(this.intervalId);
+  }
 
 
 }

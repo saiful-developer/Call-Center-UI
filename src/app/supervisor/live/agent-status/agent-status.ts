@@ -6,6 +6,9 @@ import { Paginator } from "../../shared/paginator/paginator";
 import { StickyTableHeaderDirective } from '../../../directives/sticky-table-header';
 import { PageHeader } from '../../shared/page-header/page-header';
 
+//socket server service
+import { SocketService } from '../../../services/socket.service';
+
 export interface AgentStatusList {
   monitor: string;              // Not present in response → need to map manually
   agent: string;                //  agentName
@@ -83,15 +86,24 @@ export class AgentStatus implements OnInit {
   searchFormBreak: any;
 
   constructor(
-    private api: ApiService
+    private api: ApiService,
+    private socketServer: SocketService
   ) { }
 
 
+
+  statusHandler = (msg: string) => console.log(msg);
+
+
   ngOnInit(): void {
+
     this.getAgentStatus()
     this.campainListFromSesson()
 
   }
+
+
+
 
   getAgentStatus() {
     this.api.agentStatus().subscribe({
@@ -159,9 +171,9 @@ export class AgentStatus implements OnInit {
   }
 
   onPageChange(newOffset: number) {
-  this.offset = newOffset;
-  this.getAgentStatus();
-}
+    this.offset = newOffset;
+    this.getAgentStatus();
+  }
 
   // for initial load and search result
   formateAgentStatusData(res: any) {

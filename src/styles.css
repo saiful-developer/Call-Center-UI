@@ -894,6 +894,7 @@ aside {
 @media (max-width: 1000px) {
 .thin-sidebar-saiful {
   overflow: hidden;
+  width: 0px !important;
 }
 }
 
@@ -926,4 +927,27 @@ aside {
 }
 
 
+/* notification snackbar */
+
+.custom-snackbar {
+  background: #1e1e2f !important; /* modern dark navy tone */
+  color: #fff !important;
+  font-weight: 500;
+  border-radius: 10px !important;
+  padding: 12px 20px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Make sure it looks good on small screens */
+@media (max-width: 600px) {
+  .custom-snackbar {
+    width: 90vw !important;
+    left: 5vw !important;
+    bottom: 10px !important;
+    border-radius: 8px !important;
+  }
+}
 

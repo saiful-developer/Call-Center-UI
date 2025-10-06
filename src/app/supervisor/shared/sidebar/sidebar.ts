@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { SidebarService } from '../../../services/sidebar-service';
 import { CommonModule } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { RouterModule, RouterLink } from '@angular/router';
+import { RouterModule, RouterLink, Router } from '@angular/router';
 
 import { JwtPayload } from '../../../interfaces/jwtpayload';
 import { DecodeToken } from '../../../services/jwt-decode.service';
@@ -43,7 +43,8 @@ export class Sidebar implements OnInit {
 
   constructor(
     private sidebarService: SidebarService,
-    private decodeToken: DecodeToken
+    private decodeToken: DecodeToken,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -67,8 +68,10 @@ onLinkClick() {
   }
 }
 
-login() {
-  sessionStorage.clear()
+logOut() {
+  sessionStorage.clear();
+  this.router.navigate(['/login']);
+  // sessionStorage.removeItem()
 }
 
 }

@@ -189,3 +189,16 @@ nav {
 .sidebar .nav.sub-menu .nav-item .nav-link:before {
   display: none !important;
 }
+
+.btn-logout {
+  border-radius: 0.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+  margin: 0 !important;
+  padding: 0;
+}
+
+.btn-logout:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}

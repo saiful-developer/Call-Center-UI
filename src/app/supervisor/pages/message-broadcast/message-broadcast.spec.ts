@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidebarComponent } from './sidebar';
+import { MessageBroadcast } from './message-broadcast';
 
-describe('Sidebar', () => {
-  let component: SidebarComponent;
-  let fixture: ComponentFixture<SidebarComponent>;
+describe('MessageBroadcast', () => {
+  let component: MessageBroadcast;
+  let fixture: ComponentFixture<MessageBroadcast>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SidebarComponent]
+      imports: [MessageBroadcast]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SidebarComponent);
+    fixture = TestBed.createComponent(MessageBroadcast);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

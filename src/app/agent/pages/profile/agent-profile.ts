@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageHeader } from '../../shared/page-header/page-header';
 
 //services
-import { LoginTimeAndDuration } from '../../services/login-timeAndduration';
+import { LoginTimeAndDuration } from '../../../services/login-timeAndduration';
 import { ApiService } from '../../services/api.service';
 import { DecodeToken } from '../../../services/jwt-decode.service';
 
